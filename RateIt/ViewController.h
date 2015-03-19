@@ -7,8 +7,9 @@
 
 
 #import <UIKit/UIKit.h>
-// Pizzo scema
+
 @interface ViewController : UIViewController
 
 
 @end
+
