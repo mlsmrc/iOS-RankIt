@@ -1,4 +1,4 @@
-//
+//  Ciao!
 //  ViewController.h
 //  RateIt
 //
