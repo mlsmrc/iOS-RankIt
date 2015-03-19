@@ -1,4 +1,4 @@
-//  Ciao!
+//
 //  ViewController.h
 //  RateIt
 //
@@ -12,4 +12,4 @@
 
 
 @end
-// soca loca
+
