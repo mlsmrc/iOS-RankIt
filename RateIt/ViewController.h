@@ -4,7 +4,6 @@
 //
 //  Created by Valentina Pizzo on 19/03/15.
 //  Copyright (c) 2015 DFMPSS_2015. All rights reserved.
-//  Lubamba
 
 #import <UIKit/UIKit.h>
 
@@ -12,4 +11,3 @@
 
 
 @end
-
