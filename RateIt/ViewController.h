@@ -1,4 +1,4 @@
-//  Ciao
+//
 //  ViewController.h
 //  RateIt
 //
@@ -13,4 +13,3 @@
 
 @end
 
-// ciao
