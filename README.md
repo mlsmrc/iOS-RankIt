@@ -1,4 +1,1 @@
-# Primo commit
-<<<<<<< HEAD
-# Test Valentina 
->>>>>>> origin/master
+Ok ora va bene così!
