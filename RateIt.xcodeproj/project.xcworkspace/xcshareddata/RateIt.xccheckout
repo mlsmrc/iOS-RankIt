@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3A833F02-C6F2-4D5A-A538-3BA093ABB16E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RateIt</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</key>
+		<string>https://github.com/mlsmrc/Panizzi-DePinto2015.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RateIt.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mlsmrc/Panizzi-DePinto2015.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Panizzi-DePinto2015</string>
+		</dict>
+	</array>
+</dict>
+</plist>
