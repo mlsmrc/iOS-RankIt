@@ -28,15 +28,15 @@
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem title="Home" image="home-25.png" selectedImage="home-25.png" id="6IG-Fg-eOJ"/>
+                                    <tabBarItem title="Home" image="home-25.png" id="gno-jJ-fPy"/>
                                     <tabBarItem title="I Miei Sondaggi" image="mine-25.png" id="380-v5-l5W"/>
                                     <tabBarItem title="Votati" image="checkmark-25.png" id="PK0-la-q2V"/>
                                     <tabBarItem title="Impostazioni" image="settings-25.png" id="Fx5-Uj-I1G"/>
                                 </items>
                             </tabBar>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQl-ac-YLa">
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Cerca tra i sondaggi" translatesAutoresizingMaskIntoConstraints="NO" id="cQl-ac-YLa">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q86-Xd-GnU">
                                 <rect key="frame" x="0.0" y="108" width="320" height="411"/>
@@ -46,9 +46,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="Home" destination="6IG-Fg-eOJ" id="dys-Cc-L9Z"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
