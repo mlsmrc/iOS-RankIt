@@ -42,16 +42,45 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q86-Xd-GnU">
-                                <rect key="frame" x="0.0" y="108" width="320" height="411"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9uV-rD-pe8">
+                                <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                <color key="color" red="0.34111847579999999" green="0.34064838559999999" blue="0.3488596907" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Server non raggiungibile Controllare la propria connessione" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hyt-eH-9Op">
+                                <rect key="frame" x="25" y="254" width="270" height="59"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cTD-ee-9Y6">
+                                <rect key="frame" x="0.0" y="108" width="326" height="411"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WQI-gD-gKd" appends="YES" id="gcQ-up-95K"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="AddPoll" destination="5KA-pt-7t9" id="EfL-hh-Y1P"/>
+                        <outlet property="CheckingInternet" destination="9uV-rD-pe8" id="IMl-zM-lUf"/>
+                        <outlet property="Home" destination="gno-jJ-fPy" id="Qgs-ux-1n7"/>
+                        <outlet property="Impostazioni" destination="Fx5-Uj-I1G" id="vKz-sw-vp0"/>
+                        <outlet property="MieiSondaggi" destination="380-v5-l5W" id="krt-aw-1Ws"/>
+                        <outlet property="TableView" destination="cTD-ee-9Y6" id="Lcs-nX-jJy"/>
+                        <outlet property="Votati" destination="PK0-la-q2V" id="BMz-nM-MW5"/>
+                        <outlet property="WarningInternet" destination="Hyt-eH-9Op" id="ico-9J-4L0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="WQI-gD-gKd">
+                    <connections>
+                        <action selector="downScroll:" destination="vXZ-lx-hvc" id="Dku-xI-L9N"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
         </scene>
         <!--View Controller-->
