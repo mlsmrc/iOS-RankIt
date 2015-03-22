@@ -20,4 +20,5 @@ NSString const *URL_GET_RESULTS = @"http://www.sapienzaapps.it/rateitapp/getresu
 NSString const *URL_DUMP_POLL = @"http://www.sapienzaapps.it/rateitapp/dumppoll.php?pollid=_POLL_ID";
 NSString const *URL_RESET_POLL = @"http://www.sapienzaapps.it/rateitapp/resetpoll.php?pollid=_POLL_ID";
 NSString const *URL_ADD_POLL = @"http://www.sapienzaapps.it/rateitapp/addpoll.php?newpoll=_NEW_POLL_";
+
 @end

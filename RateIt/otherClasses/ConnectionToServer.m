@@ -14,29 +14,23 @@
 
 {
 
-    NSString *url=URLGETPOLLS;
-     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSString *url=URL_GET_POLLS;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSDictionary *dizionario;
 
     if(response!=nil)
     {
-        dizionario= [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+        dizionario = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
     }
 
     response=nil;
     
-    
-    
-    for(NSString *pollid in dizionario)
+    for(NSDictionary *pollid in dizionario)
     {
-
-        NSArray *results = [dizionario valueForKey:pollid];
-
-        NSLog([results valueForKey:@"pollname"]);
-        
+        NSLog(@"%@",[pollid valueForKey:@"pollid"]);
+        NSLog(@"%@",[pollid valueForKey:@"pollname"]);
     }
-    
 }
 
 @end
