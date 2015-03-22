@@ -18,27 +18,30 @@
 
 - (void)viewDidLoad {
     
+    ConnectionToServer *connectionToServer =[[ConnectionToServer alloc]init];
+    [connectionToServer scaricaPolls];
+    
     /*  Prima che viene fatto il check sulla rete, la TableView *
      *  viene messa invisibile e gli altri elementi vengono     *
      *  settati come non abilitati e il bottone Home viene      *
      *  settato come abilitato                                  */
-    [TabBar setSelectedItem:Home];
+   /* [TabBar setSelectedItem:Home];
     [TableView setHidden:YES];
     [self setEnabledAllButton:NO];
     
     /* La scritta che ti notifica il server non raggiungibile   *
      * viene messa ad invisibile                                */
-    [WarningInternet setHidden:YES];
+   /* [WarningInternet setHidden:YES];
     
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.*/
 }
 
 /*  Funzione che viene eseguita quando tutti gli elementi       *
  *  della view vengono caricati                                 */
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self HomePolls];
+    //[self HomePolls];
 }
 
 /*  Funzione che prova a scaricare tutti i poll.                *

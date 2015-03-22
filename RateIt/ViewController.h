@@ -7,6 +7,7 @@
 
 
 #import <UIKit/UIKit.h>
+#import "ConnectionToServer.h"
 
 @interface ViewController : UIViewController
 {

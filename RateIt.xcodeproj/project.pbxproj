@@ -20,6 +20,8 @@
 		A96B65E01ABC6CDD00E968E3 /* settings-25.png in Resources */ = {isa = PBXBuildFile; fileRef = A96B65DF1ABC6CDD00E968E3 /* settings-25.png */; };
 		A96B65E31ABC6D4E00E968E3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96B65E11ABC6D4E00E968E3 /* LaunchScreen.xib */; };
 		A96B65ED1ABC72E800E968E3 /* home-25.png in Resources */ = {isa = PBXBuildFile; fileRef = A96B65EC1ABC72E800E968E3 /* home-25.png */; };
+		ED911DC61ABF17650049A7D5 /* ApiUrls.m in Sources */ = {isa = PBXBuildFile; fileRef = ED911DC31ABF17650049A7D5 /* ApiUrls.m */; };
+		ED911DC71ABF17650049A7D5 /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED911DC51ABF17650049A7D5 /* ConnectionToServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		A96B65DF1ABC6CDD00E968E3 /* settings-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-25.png"; sourceTree = "<group>"; };
 		A96B65E21ABC6D4E00E968E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A96B65EC1ABC72E800E968E3 /* home-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25.png"; sourceTree = "<group>"; };
+		ED911DC21ABF17650049A7D5 /* ApiUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiUrls.h; sourceTree = "<group>"; };
+		ED911DC31ABF17650049A7D5 /* ApiUrls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiUrls.m; sourceTree = "<group>"; };
+		ED911DC41ABF17650049A7D5 /* ConnectionToServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionToServer.h; sourceTree = "<group>"; };
+		ED911DC51ABF17650049A7D5 /* ConnectionToServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionToServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,7 @@
 		A78233D01ABAF93900B145EE /* RateIt */ = {
 			isa = PBXGroup;
 			children = (
+				ED911DC11ABF17650049A7D5 /* otherClasses */,
 				A96B65CE1ABC68E400E968E3 /* Images */,
 				A78233D51ABAF93900B145EE /* AppDelegate.h */,
 				A78233D61ABAF93900B145EE /* AppDelegate.m */,
@@ -147,6 +154,17 @@
 				A96B65DF1ABC6CDD00E968E3 /* settings-25.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		ED911DC11ABF17650049A7D5 /* otherClasses */ = {
+			isa = PBXGroup;
+			children = (
+				ED911DC21ABF17650049A7D5 /* ApiUrls.h */,
+				ED911DC31ABF17650049A7D5 /* ApiUrls.m */,
+				ED911DC41ABF17650049A7D5 /* ConnectionToServer.h */,
+				ED911DC51ABF17650049A7D5 /* ConnectionToServer.m */,
+			);
+			path = otherClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,9 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED911DC61ABF17650049A7D5 /* ApiUrls.m in Sources */,
 				A93D142F1ABF06D500AB2B5D /* util.m in Sources */,
 				A930F4751ABCAEAA002BA5E8 /* Poll.m in Sources */,
 				A78233DA1ABAF93900B145EE /* ViewController.m in Sources */,
+				ED911DC71ABF17650049A7D5 /* ConnectionToServer.m in Sources */,
 				A78233D71ABAF93900B145EE /* AppDelegate.m in Sources */,
 				A78233D41ABAF93900B145EE /* main.m in Sources */,
 			);
