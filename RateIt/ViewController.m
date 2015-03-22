@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "ConnectionToServer.h"
+#import "ApiUrls.h"
+
 #define ARC4RANDOM_MAX      0x100000000
 
 @interface ViewController ()
@@ -16,11 +19,10 @@
 
 @synthesize TableView,Home,MieiSondaggi,Votati,Impostazioni,AddPoll,WarningInternet,CheckingInternet,TabBar;
 
-- (void)viewDidLoad {
-    
-    //ConnectionToServer *connectionToServer =[[ConnectionToServer alloc]init];
-    //[connectionToServer scaricaPolls];
-    
+/*  Funzione che viene eseguita prima che la schermata appaia   *
+ *  (funzione di default per iOS)                               */
+- (void)viewDidLoad
+{
     /*  Prima che viene fatto il check sulla rete, la TableView *
      *  viene messa invisibile e gli altri elementi vengono     *
      *  settati come non abilitati e il bottone Home viene      *
@@ -38,7 +40,8 @@
 }
 
 /*  Funzione che viene eseguita quando tutti gli elementi       *
- *  della view vengono caricati                                 */
+ *  della view vengono caricati                                 *
+ *  (funzione di default per iOS)                               */
 - (void)viewDidAppear:(BOOL)animated
 {
     [self HomePolls];
@@ -108,7 +111,7 @@
     [self HomePolls];
 }
 
-/*  Funzione che setta tutti i bottoni a attivi o disattivi ed  */
+/*  Funzione che setta tutti i bottoni a attivi o disattivi     */
 - (void) setEnabledAllButton:(BOOL)enabled
 {
     [Home setEnabled:enabled];
@@ -118,6 +121,7 @@
     [AddPoll setEnabled:enabled];
 }
 
+/*  (funzione di default per iOS)                               */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

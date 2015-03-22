@@ -9,6 +9,7 @@
 #import "Poll.h"
 #import <Foundation/Foundation.h>
 
+// CLASSE PER ORA MAI USATA
 @implementation Poll
 
 

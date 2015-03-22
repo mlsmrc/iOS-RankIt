@@ -12,6 +12,6 @@
 @interface ConnectionToServer : NSObject <NSURLConnectionDelegate>
 
 - (NSMutableDictionary*) getDizionarioPolls;
--(void) scaricaPollsWithPollId:(int)pollId andUserId:(NSString*) userId andStart:(int) start;
+-(void) scaricaPollsWithPollId:(NSString*)pollId andUserId:(NSString*) userId andStart:(NSString*) start;
 
 @end
