@@ -16,8 +16,10 @@
     __weak IBOutlet UITabBarItem *Votati;
     __weak IBOutlet UITabBarItem *Impostazioni;
     __weak IBOutlet UIBarButtonItem *AddPoll;
+    __weak IBOutlet UITabBar *TabBar;
 }
 
+@property (weak, nonatomic) IBOutlet UITabBar *TabBar;
 @property (weak, nonatomic) IBOutlet UITableView *TableView;
 @property (weak, nonatomic) IBOutlet UITabBarItem *Home;
 @property (weak, nonatomic) IBOutlet UITabBarItem *MieiSondaggi;

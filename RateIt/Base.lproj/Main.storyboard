@@ -22,7 +22,7 @@
                                     <navigationItem title="Rate It" id="FKt-Ji-VEP">
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5KA-pt-7t9">
                                             <connections>
-                                                <segue destination="mFy-eK-mwg" kind="presentation" modalTransitionStyle="coverVertical" id="rD3-vf-UBB"/>
+                                                <segue destination="mFy-eK-mwg" kind="presentation" identifier="addSondaggioSegue" modalTransitionStyle="flipHorizontal" id="rD3-vf-UBB"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -70,6 +70,7 @@
                         <outlet property="Home" destination="gno-jJ-fPy" id="Qgs-ux-1n7"/>
                         <outlet property="Impostazioni" destination="Fx5-Uj-I1G" id="vKz-sw-vp0"/>
                         <outlet property="MieiSondaggi" destination="380-v5-l5W" id="krt-aw-1Ws"/>
+                        <outlet property="TabBar" destination="nkd-Tj-u7W" id="I2a-co-N5y"/>
                         <outlet property="TableView" destination="cTD-ee-9Y6" id="Lcs-nX-jJy"/>
                         <outlet property="Votati" destination="PK0-la-q2V" id="BMz-nM-MW5"/>
                         <outlet property="WarningInternet" destination="Hyt-eH-9Op" id="ico-9J-4L0"/>
