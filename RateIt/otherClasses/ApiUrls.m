@@ -1,11 +1,3 @@
-//
-//  ApiUrls.m
-//  RateIt
-//
-//  Created by lorenzo on 22/03/15.
-//  Copyright (c) 2015 DFMPSS_2015. All rights reserved.
-//
-
 #import "ApiUrls.h"
 
 /*  Classe contenente soltanto gli URL relative alle API di RateIt  */
@@ -20,6 +12,5 @@ NSString const *URL_GET_RESULTS = @"http://www.sapienzaapps.it/rateitapp/getresu
 NSString const *URL_DUMP_POLL = @"http://www.sapienzaapps.it/rateitapp/dumppoll.php?pollid=_POLL_ID_";
 NSString const *URL_RESET_POLL = @"http://www.sapienzaapps.it/rateitapp/resetpoll.php?pollid=_POLL_ID_";
 NSString const *URL_ADD_POLL = @"http://www.sapienzaapps.it/rateitapp/addpoll.php?newpoll=_NEW_POLL_";
-
 
 @end

@@ -1,11 +1,3 @@
-//
-//  Poll.h
-//  RateIt
-//
-//  Created by Marco Mulas on 20/03/15.
-//  Copyright (c) 2015 DFMPSS_2015. All rights reserved.
-//
-
 #ifndef Poll_h
 
 #import <Foundation/Foundation.h>
@@ -15,7 +7,6 @@ const NSString *UDID_IN_INFO_PLIST = @"CustomUDID";
 
 @interface Poll : NSObject
 {
-    
     int pollId;
     NSString *pollName;
     NSString *pollDescription;
@@ -42,7 +33,6 @@ const NSString *UDID_IN_INFO_PLIST = @"CustomUDID";
 - (void) setUserID:(NSString *)usrID;
 - (void) setPvt:(BOOL)pvt;
 @end
-
 
 
 #endif
