@@ -62,7 +62,7 @@
         
         //  (TO-DO) CARICAMENTO POLL
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        messageLabel.text = @"Qui vedremo i poll pubblici.\nSe scrollate fa refresh!";
+        messageLabel.text = CONNECTED;
         messageLabel.textColor = [UIColor blackColor];
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = NSTextAlignmentCenter;
@@ -74,7 +74,7 @@
     {
         //  MANCATA CONNESSIONE
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        messageLabel.text = @"Problema di connessione.\nSe scrollate cerca di riconnettersi!";
+        messageLabel.text = SERVER_UNREACHABLE;
         messageLabel.textColor = [UIColor blackColor];
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = NSTextAlignmentCenter;
