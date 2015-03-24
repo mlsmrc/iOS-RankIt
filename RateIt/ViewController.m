@@ -14,7 +14,7 @@
 
 @implementation ViewController
 
-@synthesize TableView,Home,MieiSondaggi,Votati,Impostazioni,AddPoll,WarningInternet,TabBar;
+@synthesize TableView,Home,MieiSondaggi,Votati,Impostazioni,AddPoll,TabBar;
 
 /*  Funzione che viene eseguita prima che la schermata appaia (funzione di default per iOS)   */
 - (void)viewDidLoad
@@ -22,19 +22,16 @@
     
     [super viewDidLoad];
     
-    /*  Prima che viene fatto il check sulla rete, la TableView viene resa invisibile e gli altri elementi vengono      *
-     *  settati come non abilitati, il bottone Home viene settato come abilitato                                        */
+    //  Pulsante Home selezionato (colorato di blu), tutti i pulsanti disattivati, TableView senza righe
     [TabBar setSelectedItem:Home];
-    [TableView setHidden:YES];
     [self setEnabledAllButton:NO];
-    
-    //  La scritta che notifica il server non raggiungibile viene messa ad invisibile
-    [WarningInternet setHidden:YES];
+    self.TableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     //  Questa è la parte di codice che definisce il refresh da parte della TableView
     refreshControl = [[UIRefreshControl alloc]init];
     [refreshControl addTarget:self action:@selector(HomePolls) forControlEvents:UIControlEventValueChanged];
     [self.TableView addSubview:refreshControl];
+
     
 }
 
@@ -45,7 +42,7 @@
 }
 
 /*  Funzione che prova a scaricare tutti i poll. Legata alla schermata Home.                                            *
- *  Viene eseguita al momento dell'apertura dell'app e al momento del refresh in seguito ad una notifica di app non     *
+ *  Viene eseguita al momento dell'apertura dell'app, al momento del refresh ed in seguito ad una notifica di app non   *
  *  connessa ad internet.                                                                                               *
  *  ANCORA DA IMPLEMENTARE IL CARICAMENTO DEI POLL!                                                                     */
 - (void)HomePolls
@@ -55,7 +52,7 @@
     ConnectionToServer *Connection = [[ConnectionToServer alloc]init];
     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
     NSDictionary *allPublicPolls = Connection.getDizionarioPolls;
-    //  Decommentate la riga sotto per vedere cosa succede se siamo senza connessione. Bisogna decidere però come gestire il refresh.
+    //  Decommentare/Commentare la riga sotto per simulare cosa succede senza/con connessione.
     //  allPublicPolls = nil;
     
     if (allPublicPolls!=nil)
@@ -63,16 +60,26 @@
         //  Setta tutti i pulsanti come abilitati
         [self setEnabledAllButton:YES];
         
-        //  La tableView viene settata a visible e vengono caricati i poll
-        [TableView setHidden:NO];
-        
-        //  (TO-DO) CARICAMENTO POLL.
+        //  (TO-DO) CARICAMENTO POLL
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        messageLabel.text = @"Qui vedremo i poll pubblici.\nSe scrollate fa refresh!";
+        messageLabel.textColor = [UIColor blackColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        self.TableView.backgroundView = messageLabel;
     }
     
     else //Internet assente
     {
-        //  Visualizza la label di mancata connessione ad internet
-        [WarningInternet setHidden:NO];
+        //  MANCATA CONNESSIONE
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        messageLabel.text = @"Problema di connessione.\nSe scrollate cerca di riconnettersi!";
+        messageLabel.textColor = [UIColor blackColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        self.TableView.backgroundView = messageLabel;
         
         /*  Abilita solo i pulsanti:                                            *
             - Impostazioni (poichè è possibile usarlo anche senza internet)     *
