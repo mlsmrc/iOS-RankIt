@@ -31,7 +31,7 @@ NSMutableDictionary *dizionarioPolls;
         //  Esito positivo: parsing del JSON nel dizionario polls (una entry per ogni poll)
         NSMutableDictionary *polls = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         
-        //  Controlliamo se la richiesta ha prodotto dei poll
+        //  Controlliamo se la richiesta ha prodotto dei poll (se non ci fossero poll non succede nulla, il dizionario rimane vuoto)
         if(polls!=nil) {
             
             //  Funzione che prende i pollid per ogni poll presente nel dizionario
@@ -62,9 +62,6 @@ NSMutableDictionary *dizionarioPolls;
             }
             
         }
-        
-        //  Non ci sono poll per questa richiesta
-        else dizionarioPolls = nil;
         
     }
     

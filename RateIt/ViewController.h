@@ -3,10 +3,10 @@
 
 @interface ViewController : UIViewController
 {
-    __weak IBOutlet UITableView *TableView;
     __weak IBOutlet UITabBarItem *Home;
     __weak IBOutlet UITabBarItem *MieiSondaggi;
     __weak IBOutlet UITabBarItem *Votati;
+    __weak IBOutlet UITableView *TableView;
     __weak IBOutlet UITabBarItem *Impostazioni;
     __weak IBOutlet UIBarButtonItem *AddPoll;
     __weak IBOutlet UITabBar *TabBar;
@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITabBarItem *Votati;
 @property (weak, nonatomic) IBOutlet UITabBarItem *Impostazioni;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *AddPoll;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *CheckingInternet;
 @property (weak, nonatomic) IBOutlet UILabel *WarningInternet;
 
 @end
