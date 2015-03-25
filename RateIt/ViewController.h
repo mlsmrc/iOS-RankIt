@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "ConnectionToServer.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
     __weak IBOutlet UITabBarItem *Home;
     __weak IBOutlet UITabBarItem *MieiSondaggi;

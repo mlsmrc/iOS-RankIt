@@ -2,9 +2,9 @@
 
 @implementation ConnectionToServer
 
-/*  Stringhe che appariranno a video per feedback di connessione                    */
-NSString *SERVER_UNREACHABLE = @"Problema di connessione.\nSe scrollate cerca di riconnettersi!";
-NSString *CONNECTED = @"Qui vedremo i poll pubblici.\nSe scrollate fa refresh!";
+/*  Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
+NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
+NSString *EMPTYPOLLSLIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
 
 /*  Dizionario che conterrà i poll scaricati per una determinata connessione        */
 NSMutableDictionary *dizionarioPolls;
