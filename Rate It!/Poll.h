@@ -13,6 +13,7 @@ const NSString *POLL_DESCRIPTION;
     int pollId;
     NSString *pollName;
     NSString *pollDescription;
+    int resultsType; // 0 Short - 1 Full
     NSString *userID;
     BOOL pvtPoll;
     NSDate *dataUpdate;
@@ -23,6 +24,7 @@ const NSString *POLL_DESCRIPTION;
 @property(readonly)int pollId;
 @property(readonly)NSString *pollName;
 @property(readonly)NSString *pollDescription;
+@property(readonly)int resultsType;
 @property(readonly)NSString *userID;
 @property(readonly)BOOL pvtPoll;
 @property(readwrite)NSDate *dataUpdate;
@@ -31,6 +33,7 @@ const NSString *POLL_DESCRIPTION;
 
 - (void) setPollName:(NSString *)Name;
 - (void) setPollDescription:(NSString *)Description;
+- (void) setResultsType:(int)rType;
 - (void) setUserID:(NSString *)usrID;
 - (void) setCandidates:(NSMutableArray *)cand;
 - (void) setPvt:(BOOL)pvt;
@@ -38,6 +41,7 @@ const NSString *POLL_DESCRIPTION;
 -(id)initPollWithUserID: (NSString *)ID
                withName: (NSString *)Name
         withDescription: (NSString *)Description
+         withResultType: (int)resultType
          withCandidates: (NSMutableArray *) cand;
 @end
 

@@ -9,11 +9,12 @@ const NSString *POLL_DESCRIPTION = @"{\"pollid\": \"\",\"pollname\": \"_POLL_NAM
 
 
 // synthesize tutti gli attributi
-@synthesize pollId,pollName,pollDescription,userID,pvtPoll,dataUpdate,candidates,mine;
+@synthesize pollId,pollName,pollDescription,resultsType,userID,pvtPoll,dataUpdate,candidates,mine;
 
 -(id)initPollWithUserID: (NSString *)ID
                withName: (NSString *)Name
         withDescription: (NSString *)Description
+         withResultType: (int)rType     // è da inserire nel JSON il resultType??
          withCandidates: (NSMutableArray *)cand
 {
     self = [super init];
@@ -21,7 +22,8 @@ const NSString *POLL_DESCRIPTION = @"{\"pollid\": \"\",\"pollname\": \"_POLL_NAM
     {
         [self setUserID:ID];
         [self setPollName:Name];
-        [self setPollDescription:Description];
+        pollDescription=Description;
+        [self setResultsType:rType];
         [self setCandidates:cand];
         
         // lettura UDID dal file Info.plist
@@ -40,6 +42,10 @@ const NSString *POLL_DESCRIPTION = @"{\"pollid\": \"\",\"pollname\": \"_POLL_NAM
 - (void)setPollDescription:(NSString *)Description
 {
     pollDescription=Description;
+}
+- (void) setResultsType:(int)rType
+{
+    resultsType=rType;
 }
 - (void) setUserID:(NSString *)usrID
 {
