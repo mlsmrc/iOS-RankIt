@@ -2,10 +2,9 @@
 #import "Candidate.h"
 #import <Foundation/Foundation.h>
 
-// CLASSE PER ORA MAI USATA
 @implementation Poll
 
-const NSString *POLL_DESCRIPTION = @"{\"pollid\": \"\",\"pollname\": \"_POLL_NAME_\",\"polldescription\": \"_POLL_DESCRIPTION_\",\"pollimage\": \"_POLL_IMAGE_\",\"deadline\": \"_DEADLINE_\",\"userid\": \"_USER_ID_\",\"candidates\": [_CANDIDATES_STRING_]}";
+const NSString *POLL_DESCRIPTION = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"_POLL_IMAGE_\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"candidates\": [_CANDIDATES_STRING_]}";
 
 
 // synthesize tutti gli attributi
@@ -85,7 +84,7 @@ const NSString *POLL_DESCRIPTION = @"{\"pollid\": \"\",\"pollname\": \"_POLL_NAM
         i++;
     }
     descr = [descr  stringByReplacingOccurrencesOfString:@"_CANDIDATES_STRING_" withString:[NSString stringWithFormat:@"%@",cands]];
-    
+    descr = [ descr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     return descr;
 }
 
