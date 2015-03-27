@@ -16,6 +16,8 @@
 		6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD11AC4B23600D2D867 /* ConnectionToServer.m */; };
 		6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD41AC4B2A000D2D867 /* APIurls.m */; };
 		6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD81AC4B6D100D2D867 /* TableViewController.m */; };
+		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
+		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,10 @@
 		6F193FD61AC4B2B200D2D867 /* APIurls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIurls.h; sourceTree = "<group>"; };
 		6F193FD71AC4B6D100D2D867 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		6F193FD81AC4B6D100D2D867 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		A915B0831AC5877500BD95ED /* Poll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poll.h; sourceTree = "<group>"; };
+		A915B0841AC5877500BD95ED /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
+		A915B0861AC59AEF00BD95ED /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
+		A915B0871AC59AEF00BD95ED /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candidate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,10 @@
 		6F193FCA1AC4B17500D2D867 /* UtilClasses */ = {
 			isa = PBXGroup;
 			children = (
+				A915B0861AC59AEF00BD95ED /* Candidate.h */,
+				A915B0871AC59AEF00BD95ED /* Candidate.m */,
+				A915B0831AC5877500BD95ED /* Poll.h */,
+				A915B0841AC5877500BD95ED /* Poll.m */,
 				6F193FD61AC4B2B200D2D867 /* APIurls.h */,
 				6F193FD41AC4B2A000D2D867 /* APIurls.m */,
 				6F193FD31AC4B23F00D2D867 /* ConnectionToServer.h */,
@@ -247,9 +257,11 @@
 			files = (
 				6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */,
 				6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */,
+				A915B0851AC5877500BD95ED /* Poll.m in Sources */,
 				6F193FA61AC4ADE200D2D867 /* AppDelegate.m in Sources */,
 				6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */,
 				6F193FA31AC4ADE200D2D867 /* main.m in Sources */,
+				A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +452,7 @@
 				6F193FC51AC4ADE200D2D867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F193FC61AC4ADE200D2D867 /* Build configuration list for PBXNativeTarget "Rate It!Tests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +461,7 @@
 				6F193FC81AC4ADE200D2D867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

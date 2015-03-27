@@ -1,4 +1,5 @@
 #import "ConnectionToServer.h"
+#import "Poll.h"
 
 /* Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
@@ -74,6 +75,58 @@ NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare 
     /* Non c'è connessione */
     else dizionarioPolls = nil;
     
+}
+
+/* Funzione che dato un pollId, che fa riferimento ad un particolare poll, uno userId, che indica chi sta votando e *
+ * una classifica (sotto la forma a,b,cd,e), invia il voto del poll                                                 *
+ * IL SERVER NON LA FA FUNZIONARE                                                                                   */
+-(void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
+
+{
+    NSString *post = [NSString stringWithFormat:@"pollid=%@&userid=%@&ranking=%@",pollId,userId,ranking];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSURL *url = [[NSURL alloc] initFileURLWithPath:URL_SUBMIT_RANKING];
+    [request setURL: url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    [conn start];
+}
+
+/* Funzione che dato un oggetto di tipo Poll, aggiunge un poll      *
+ * IL SERVER NON LA FA FUNZIONARE                                   *
+ * provare il json: 
+    {"pollid": "","pollname": "Gusto gelato","polldescription": "Classifica per i gusti del gelato","pollimage": "","deadline": "2020-06-06 10:47:00","userid": "prova","private": "0","candidates": [{"candname": "Pistacchio","canddescription": "Gusto al pistacchio","candimage": ""},{"candname": "Cioccolato","canddescription": "Gusto al cioccolato","candimage": ""}]}                    */
+-(void) addPollWithPoll:(Poll*)newpoll
+{
+    
+    NSString *post = [NSString stringWithFormat:@"newpoll=%@",[newpoll toJSON]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSURL *url = [[NSURL alloc] initFileURLWithPath:URL_ADD_POLL];
+    [request setURL: url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    [conn start];
+                      
 }
 
 /* Ritorna il dizionario contenente i poll nel formato <pollid,poll> */
