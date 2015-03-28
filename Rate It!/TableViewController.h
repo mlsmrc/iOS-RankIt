@@ -4,6 +4,8 @@
 
 FOUNDATION_EXPORT NSInteger POLL_NAME;
 FOUNDATION_EXPORT NSString *NO_RESULTS;
+FOUNDATION_EXPORT NSString *SEARCH;
+FOUNDATION_EXPORT NSString *BACK;
 
 - (void)viewDidLoad;
 - (void)DownloadPolls;
@@ -15,5 +17,7 @@ FOUNDATION_EXPORT NSString *NO_RESULTS;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope;
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString;
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

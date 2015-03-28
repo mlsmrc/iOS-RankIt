@@ -16,6 +16,7 @@
 		6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD11AC4B23600D2D867 /* ConnectionToServer.m */; };
 		6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD41AC4B2A000D2D867 /* APIurls.m */; };
 		6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD81AC4B6D100D2D867 /* TableViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
+		6F3D71EA1AC6FC3A00094C6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D71E91AC6FC3A00094C6C /* ViewController.m */; };
 		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
 		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,8 @@
 		6F193FD61AC4B2B200D2D867 /* APIurls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIurls.h; sourceTree = "<group>"; };
 		6F193FD71AC4B6D100D2D867 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		6F193FD81AC4B6D100D2D867 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		6F3D71E81AC6FC3A00094C6C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6F3D71E91AC6FC3A00094C6C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A915B0831AC5877500BD95ED /* Poll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poll.h; sourceTree = "<group>"; };
 		A915B0841AC5877500BD95ED /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A915B0861AC59AEF00BD95ED /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 		6F193FC91AC4B12F00D2D867 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6F3D71E81AC6FC3A00094C6C /* ViewController.h */,
+				6F3D71E91AC6FC3A00094C6C /* ViewController.m */,
 				6F193FD71AC4B6D100D2D867 /* TableViewController.h */,
 				6F193FD81AC4B6D100D2D867 /* TableViewController.m */,
 			);
@@ -257,6 +262,7 @@
 			files = (
 				6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */,
 				6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */,
+				6F3D71EA1AC6FC3A00094C6C /* ViewController.m in Sources */,
 				A915B0851AC5877500BD95ED /* Poll.m in Sources */,
 				6F193FA61AC4ADE200D2D867 /* AppDelegate.m in Sources */,
 				6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */,

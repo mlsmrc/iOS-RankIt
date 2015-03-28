@@ -1,4 +1,5 @@
 #import "TableViewController.h"
+#import "ViewController.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
 
@@ -7,6 +8,10 @@ NSInteger POLL_NAME = 9;
 
 /* Stringa per la search bar */
 NSString *NO_RESULTS = @"Nessun risultato trovato";
+
+/* Stringhe per il pulsante di ritorno schermata */
+NSString *SEARCH = @"Cerca";
+NSString *BACK = @"Indietro";
 
 @interface TableViewController ()
 
@@ -34,6 +39,9 @@ NSString *NO_RESULTS = @"Nessun risultato trovato";
     
     /* Messaggio nella schermata Home */
     UILabel *messageLabel;
+    
+    /* Pulsante di ritorno schermata precedente */
+    UIBarButtonItem *backButton;
     
 }
 
@@ -251,6 +259,50 @@ NSString *NO_RESULTS = @"Nessun risultato trovato";
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     
     return YES;
+    
+}
+
+/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showPollDetails"]) {
+        
+        NSIndexPath *indexPath = nil;
+        NSString *name = nil;
+        
+        if (self.searchDisplayController.active) {
+            
+            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            name = [searchResults objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH, returnbuttontitle) style:     UIBarButtonItemStyleBordered target:nil action:nil];
+            self.navigationItem.backBarButtonItem = backButton;
+
+            
+        }
+        
+        else {
+            
+            indexPath = [self.tableView indexPathForSelectedRow];
+            name = [pollName objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK, returnbuttontitle) style:     UIBarButtonItemStyleBordered target:nil action:nil];
+            self.navigationItem.backBarButtonItem = backButton;
+            
+        }
+        
+        ViewController *destViewController = segue.destinationViewController;
+        destViewController.pollname = name;
+        
+    }
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        [self performSegueWithIdentifier: @"showPollDetails" sender: self];
+        
+    }
     
 }
 

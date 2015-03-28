@@ -115,7 +115,7 @@ NSMutableDictionary *dizionarioPolls;
 }
 
 /* Funzione che dato un pollId, che fa riferimento ad un particolare poll, uno userId, che indica chi sta votando e *
- * una classifica (sotto la forma a,b,c,d,e), invia il voto del poll                                                 */
+ * una classifica (sotto la forma a,b,c,d,e), invia il voto del poll                                                */
 - (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
 {
     NSString * url=[URL_SUBMIT_RANKING stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
@@ -135,6 +135,7 @@ NSMutableDictionary *dizionarioPolls;
     
     /* Url giusto sul browser */
     NSLog(@"URL RICHIESTA: %@",url);
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 }
