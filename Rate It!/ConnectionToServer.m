@@ -118,33 +118,50 @@ NSMutableDictionary *dizionarioPolls;
  * una classifica (sotto la forma a,b,c,d,e), invia il voto del poll                                                */
 - (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
 {
+    /* Creazione URL */
     NSString * url=[URL_SUBMIT_RANKING stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     url=[url stringByReplacingOccurrencesOfString:@"_USER_ID_" withString:[NSString stringWithFormat:@"%@",userId]];
     url=[url stringByReplacingOccurrencesOfString:@"_RANKING_" withString:[NSString stringWithFormat:@"%@",ranking]];
-    NSLog(@"URL RICHIESTA: %@",url);
+
+    /* Invio richiesta */
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 }
 
-/* Funzione che dato un oggetto di tipo Poll, aggiunge un poll      *
- * URL GIUSTO SUL BROWSER, ma la funzione non funziona              */
-- (void) addPollWithPoll:(Poll*)newpoll
+/*  Funzione che dato un oggetto di tipo Poll, aggiunge un poll e   *
+ *  ritorna l'id del poll appena inserito come stringa              */
+- (NSString *) addPollWithPoll:(Poll*)newpoll
 {
+    /* Preparazione dati richiesta POST */
+    NSString *post = [NSString stringWithFormat:@"newpoll=%@",[newpoll toJSON]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
-    NSString * url=[URL_ADD_POLL stringByReplacingOccurrencesOfString:@"_NEW_POLL_" withString:[NSString stringWithFormat:@"%@",[newpoll toJSON]]];
+    /* Preparazione richiesta post */
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:URL_ADD_POLL]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
     
-    /* Url giusto sul browser */
-    NSLog(@"URL RICHIESTA: %@",url);
+    /* Invio richiesta , che tornerà un json con il pollid*/
+    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *requestReply = [[NSString alloc] initWithBytes:[requestHandler bytes] length:[requestHandler length] encoding:NSASCIIStringEncoding];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    /* creazione dizionario per estrapolare il pollid */
+    NSDictionary *d = [NSJSONSerialization JSONObjectWithData:[requestReply dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+
+    /* si ritorna il pollid associato */
+    return ([d valueForKey:@"pollid"]);
+    
+    
 }
 
 /* Ritorna il dizionario contenente i poll nel formato <pollid,poll> */
-- (NSMutableDictionary*) getDizionarioPolls {
-    
+- (NSMutableDictionary*) getDizionarioPolls
+{
     return dizionarioPolls;
-    
 }
 
 @end

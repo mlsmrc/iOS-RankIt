@@ -4,7 +4,7 @@
 
 @implementation Poll
 
-const NSString *POLL_DESCRIPTION = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"_POLL_IMAGE_\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"candidates\": [_CANDIDATES_STRING_]}";
+const NSString *POLL_DESCRIPTION = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"_POLL_IMAGE_\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"candidates\":[_CANDIDATES_STRING_]}";
 
 @synthesize pollId,pollName,pollDescription,resultsType,userID,pvtPoll,dataUpdate,candidates,mine;
 
