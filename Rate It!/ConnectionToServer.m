@@ -1,9 +1,13 @@
 #import "ConnectionToServer.h"
 #import "Poll.h"
+#import "Candidate.h"
 
 /* Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
+
+
+NSMutableDictionary *dizionarioPolls;
 
 @implementation ConnectionToServer {
     
@@ -76,6 +80,59 @@ NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare 
     else dizionarioPolls = nil;
     
 }
+
+
+
+
+
+
+
+
+-(NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId
+
+{
+    
+    NSString * url=[URL_GET_CANDIDATES stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
+    NSLog(@"URL RICHIESTA: %@",url);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    NSDictionary *dict;
+    
+    NSMutableArray * arrayCandidates= [[NSMutableArray alloc]init];
+    
+        if(response!=nil)
+    {
+        dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+        
+        response=nil;
+       
+       
+        for(NSString * key in dict)
+            
+        {
+            
+            
+            Candidate * candidate=[[Candidate alloc]init];
+            [candidate setCandicateWithChar: [key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"]  andDescription:[key valueForKey:@"canddescription"]] ;
+            
+            
+            [arrayCandidates addObject:candidate];
+            candidate=nil;
+            
+            
+        }
+        
+        
+    }
+    
+    return arrayCandidates;
+    
+    
+}
+
 
 /* Funzione che dato un pollId, che fa riferimento ad un particolare poll, uno userId, che indica chi sta votando e *
  * una classifica (sotto la forma a,b,cd,e), invia il voto del poll                                                 */
