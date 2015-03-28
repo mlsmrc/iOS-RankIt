@@ -240,8 +240,7 @@ NSString *NO_RESULTS = @"Nessun risultato trovato";
     
 }
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains %@",searchText];
     searchResults = [pollName filteredArrayUsingPredicate:resultPredicate];
     

@@ -4,14 +4,14 @@
 #define Poll_h
 
 const NSString *POLL_DESCRIPTION;
-//const NSString *UDID_IN_INFO_PLIST = @"CustomUDID";
+/* const NSString *UDID_IN_INFO_PLIST = @"CustomUDID"; */
 
 @interface Poll : NSObject
 {
     int pollId;
     NSString *pollName;
     NSString *pollDescription;
-    int resultsType; // 0 Short - 1 Full
+    int resultsType;
     NSString *userID;
     BOOL pvtPoll;
     NSDate *dataUpdate;
@@ -36,11 +36,13 @@ const NSString *POLL_DESCRIPTION;
 - (void) setCandidates:(NSMutableArray *)cand;
 - (void) setPvt:(BOOL)pvt;
 - (NSString *) toJSON;
+
 -(id)initPollWithUserID: (NSString *)ID
                withName: (NSString *)Name
         withDescription: (NSString *)Description
          withResultType: (int)resultType
          withCandidates: (NSMutableArray *) cand;
+
 @end
 
 #endif

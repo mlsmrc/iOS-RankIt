@@ -6,20 +6,19 @@ const NSString *CANDIDATE = @"{\"candname\": \"_CAND_NAME_\",\"canddescription\"
 
 - (void) setCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
 {
-
     [self setCandChar:Char];
     [self setCandDescription:description];
     [self setCandName:Name];
 }
 
--(NSString*)description
+- (NSString*)description
 {
     return [self candName];
 }
 
-/* crea una stringa utile per creare il JSON per l'aggiunta del poll    *
- * (usata in descriptionAddPoll in Poll.m)                              */
--(NSString *) descriptionForAddPoll
+/* Crea una stringa utile per creare il JSON per l'aggiunta del poll *
+ * (usata in descriptionAddPoll in Poll.m)                           */
+- (NSString *) descriptionForAddPoll
 {
     NSString *desc = [CANDIDATE  stringByReplacingOccurrencesOfString:@"_CAND_NAME_" withString:[NSString stringWithFormat:@"%@",[self candName]]];
     desc = [desc  stringByReplacingOccurrencesOfString:@"_CAND_DESCR_" withString:[NSString stringWithFormat:@"%@",[self candDescription]]];

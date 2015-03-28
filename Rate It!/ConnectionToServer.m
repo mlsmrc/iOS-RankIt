@@ -81,15 +81,8 @@ NSMutableDictionary *dizionarioPolls;
     
 }
 
-
-
-
-
-
-
-
--(NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId
-
+/* Funzione che ritorna le scelte per il voto di un determinato poll specificato tramite pollId */
+- (NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId
 {
     
     NSString * url=[URL_GET_CANDIDATES stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
@@ -103,63 +96,45 @@ NSMutableDictionary *dizionarioPolls;
     
     NSMutableArray * arrayCandidates= [[NSMutableArray alloc]init];
     
-        if(response!=nil)
+    if(response!=nil)
     {
         dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-        
         response=nil;
        
-       
         for(NSString * key in dict)
-            
         {
-            
-            
             Candidate * candidate=[[Candidate alloc]init];
             [candidate setCandicateWithChar: [key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"]  andDescription:[key valueForKey:@"canddescription"]] ;
-            
-            
             [arrayCandidates addObject:candidate];
             candidate=nil;
-            
-            
         }
-        
-        
+            
     }
     
     return arrayCandidates;
-    
-    
 }
 
-
 /* Funzione che dato un pollId, che fa riferimento ad un particolare poll, uno userId, che indica chi sta votando e *
- * una classifica (sotto la forma a,b,cd,e), invia il voto del poll                                                 */
--(void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
-
+ * una classifica (sotto la forma a,b,c,d,e), invia il voto del poll                                                 */
+- (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
 {
     NSString * url=[URL_SUBMIT_RANKING stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     url=[url stringByReplacingOccurrencesOfString:@"_USER_ID_" withString:[NSString stringWithFormat:@"%@",userId]];
     url=[url stringByReplacingOccurrencesOfString:@"_RANKING_" withString:[NSString stringWithFormat:@"%@",ranking]];
-    
     NSLog(@"URL RICHIESTA: %@",url);
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 }
 
 /* Funzione che dato un oggetto di tipo Poll, aggiunge un poll      *
  * URL GIUSTO SUL BROWSER, ma la funzione non funziona              */
--(void) addPollWithPoll:(Poll*)newpoll
+- (void) addPollWithPoll:(Poll*)newpoll
 {
     
     NSString * url=[URL_ADD_POLL stringByReplacingOccurrencesOfString:@"_NEW_POLL_" withString:[NSString stringWithFormat:@"%@",[newpoll toJSON]]];
     
-    // Url giusto sul browser
+    /* Url giusto sul browser */
     NSLog(@"URL RICHIESTA: %@",url);
-    
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 }
@@ -170,4 +145,5 @@ NSMutableDictionary *dizionarioPolls;
     return dizionarioPolls;
     
 }
+
 @end

@@ -6,6 +6,7 @@
 @property NSString *candDescription;
 
 - (void) setCandicateWithChar:(NSString *)candChar andName:(NSString*) candName andDescription:(NSString*)description ;
--(NSString *) descriptionForAddPoll;
+- (NSString *) descriptionForAddPoll;
+- (NSString*)description;
 
 @end
