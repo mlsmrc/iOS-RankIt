@@ -6,8 +6,6 @@
 const NSString *POLL_DESCRIPTION;
 //const NSString *UDID_IN_INFO_PLIST = @"CustomUDID";
 
-
-
 @interface Poll : NSObject
 {
     int pollId;
@@ -44,6 +42,5 @@ const NSString *POLL_DESCRIPTION;
          withResultType: (int)resultType
          withCandidates: (NSMutableArray *) cand;
 @end
-
 
 #endif

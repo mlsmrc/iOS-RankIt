@@ -15,7 +15,7 @@
 		6F193FC01AC4ADE200D2D867 /* Rate_It_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FBF1AC4ADE200D2D867 /* Rate_It_Tests.m */; };
 		6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD11AC4B23600D2D867 /* ConnectionToServer.m */; };
 		6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD41AC4B2A000D2D867 /* APIurls.m */; };
-		6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD81AC4B6D100D2D867 /* TableViewController.m */; };
+		6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD81AC4B6D100D2D867 /* TableViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
 		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
 /* End PBXBuildFile section */

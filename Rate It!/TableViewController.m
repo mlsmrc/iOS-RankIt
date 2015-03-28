@@ -5,8 +5,8 @@
 /* Costante per i nomi dei poll pubblici */
 NSInteger POLL_NAME = 9;
 
-/* Serve solo per la simulazione dei vari casi della schermata Home (DA TOGLIERE) */
-#define ARC4RANDOM_MAX  0x100000000
+/* Stringa per la search bar */
+NSString *NO_RESULTS = @"Nessun risultato trovato";
 
 @interface TableViewController ()
 
@@ -23,14 +23,17 @@ NSInteger POLL_NAME = 9;
     /* Array dei nomi dei poll pubblici che verranno visualizzati */
     NSMutableArray *pollName;
     
+    /* Array per i risultati di ricerca */
+    NSArray *searchResults;
+    
     /* Oggetto per il refresh da TableView */
     UIRefreshControl *refreshControl;
     
+    /* Variabile che conterrà la subview da rimuovere */
+    UIView *subView;
+    
     /* Messaggio nella schermata Home */
     UILabel *messageLabel;
-    
-    /* Serve solo per la simulazione dei vari casi della schermata Home (DA TOGLIERE) */
-    double random;
     
 }
 
@@ -38,18 +41,25 @@ NSInteger POLL_NAME = 9;
     
     [super viewDidLoad];
     
-    /*  Download iniziale di tutti i poll pubblici */
+    /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    /* Download iniziale di tutti i poll pubblici */
     [self DownloadPolls];
     
-    /*  Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
+    /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
     if (allPublicPolls==nil || [allPublicPolls count] == 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Altrimenti prende i nomi dei poll pubblici da visualizzare */
     else [self NamePolls];
     
+    searchResults = [[NSArray alloc]init];
+    
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
     messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    messageLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
     messageLabel.textColor = [UIColor darkGrayColor];
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
@@ -70,57 +80,18 @@ NSInteger POLL_NAME = 9;
 /* Download poll pubblici dal server */
 - (void)DownloadPolls {
     
-    /* Simula tutti i casi che potrebbero accadere man mano che si aggiorna la Home. *
-     * Ovviamente potete sostituire questo con l'altro sotto per vederlo reale.      */
-    
-    random = ((double)arc4random()/ARC4RANDOM_MAX);
-    
-    if(random>0.4 && random<=0.8) {
-        
-        Connection = [[ConnectionToServer alloc]init];
-        [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
-        allPublicPolls = Connection.getDizionarioPolls;
-        
-        [self NamePolls];
-        [self.tableView reloadData];
-        [self HomePolls];
-        
-    }
-    
-    else {
-        
-        if(random>0.8 && random<=1){
-            
-            Connection = [[ConnectionToServer alloc]init];
-            [Connection scaricaPollsWithPollId:@"444" andUserId:@"" andStart:@""];
-            allPublicPolls = Connection.getDizionarioPolls;
-            [self HomePolls];
-            
-        }
-        
-        else {
-            
-            allPublicPolls = nil;
-            [self HomePolls];
-            
-        }
-        
-    }
-    
-    /* Se si vuole vedere il reale funzionamento della Home, sostituire il codice sopra con questo */
-    
-    /* Connection = [[ConnectionToServer alloc]init];
+     Connection = [[ConnectionToServer alloc]init];
      [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
      allPublicPolls = Connection.getDizionarioPolls;
      
-     if (allPublicPolls==nil || [allPublicPolls count] == 0) {
+     if (allPublicPolls!=nil && [allPublicPolls count] != 0) {
      
         [self NamePolls];
         [self.tableView reloadData];
      
      }
      
-     [self HomePolls]; */
+     [self HomePolls];
     
 }
 
@@ -152,6 +123,10 @@ NSInteger POLL_NAME = 9;
     if (allPublicPolls!=nil) {
         
         if([allPublicPolls count] != 0) {
+            
+            /* Rimuoviamo la subview aggiunta per il messaggio d'errore */
+            subView  = [self.tableView viewWithTag:1];
+            [subView removeFromSuperview];
             
             /* Background con linee */
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -206,27 +181,78 @@ NSInteger POLL_NAME = 9;
     
 }
 
-/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della Home */
+/* Regola l'altezza delle celle nella Home */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 75;
+}
+
+/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della Home o i risultati di ricerca */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [pollName count];
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        if([searchResults count] == 0) {
+            
+            [self.searchDisplayController.searchResultsTableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
+            
+            for (UIView *view in self.searchDisplayController.searchResultsTableView.subviews) {
+                
+                if ([view isKindOfClass:[UILabel class]]) {
+                    
+                    ((UILabel *)view).font = [UIFont fontWithName:@"Helvetica" size:20];
+                    ((UILabel *)view).textColor = [UIColor darkGrayColor];
+                    ((UILabel *)view).text = NO_RESULTS;
+
+                }
+            }
+        
+        }
+    
+        else [self.searchDisplayController.searchResultsTableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
+        
+        return [searchResults count];
+        
+    }
+    
+    else return [pollName count];
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *simpleTableIdentifier = @"PollCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
-    cell.textLabel.text = [pollName objectAtIndex:indexPath.row];
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = [searchResults objectAtIndex:indexPath.row];
+        
+    }
+    
+    else cell.textLabel.text = [pollName objectAtIndex:indexPath.row];
     
     return cell;
     
 }
-/* --------------------------------------------------------------------------------------- */
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains %@",searchText];
+    searchResults = [pollName filteredArrayUsingPredicate:resultPredicate];
+    
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    
+    return YES;
+    
+}
 
 @end

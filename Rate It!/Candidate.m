@@ -1,11 +1,3 @@
-//
-//  Candidate.m
-//  FunzioniServer
-//
-//  Created by lorenzo on 26/03/15.
-//  Copyright (c) 2015 lorenzo. All rights reserved.
-//
-
 #import "Candidate.h"
 
 @implementation Candidate
@@ -24,6 +16,7 @@ const NSString *CANDIDATE = @"{\"candname\": \"_CAND_NAME_\",\"canddescription\"
 {
     return [self candName];
 }
+
 /* crea una stringa utile per creare il JSON per l'aggiunta del poll    *
  * (usata in descriptionAddPoll in Poll.m)                              */
 -(NSString *) descriptionForAddPoll
@@ -33,4 +26,5 @@ const NSString *CANDIDATE = @"{\"candname\": \"_CAND_NAME_\",\"canddescription\"
     desc = [desc  stringByReplacingOccurrencesOfString:@"_CAND_IMAGE_" withString:[NSString stringWithFormat:@""]];
     return desc;
 }
+
 @end

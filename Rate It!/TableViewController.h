@@ -3,6 +3,7 @@
 @interface TableViewController : UITableViewController
 
 FOUNDATION_EXPORT NSInteger POLL_NAME;
+FOUNDATION_EXPORT NSString *NO_RESULTS;
 
 - (void)viewDidLoad;
 - (void)DownloadPolls;
