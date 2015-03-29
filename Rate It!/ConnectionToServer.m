@@ -114,8 +114,6 @@ NSMutableDictionary *dizionarioPolls;
     return arrayCandidates;
 }
 
-
-
 - (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
 {
     
@@ -132,13 +130,10 @@ NSMutableDictionary *dizionarioPolls;
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
-    /* Invio richiesta , che tornerà un json con il pollid*/
-    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
+    /* Invio richiesta , che tornerà un json con il pollid */
+    //NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
   
 }
-
-
 
 /*  Funzione che dato un oggetto di tipo Poll, aggiunge un poll e   *
  *  ritorna l'id del poll appena inserito come stringa              */
