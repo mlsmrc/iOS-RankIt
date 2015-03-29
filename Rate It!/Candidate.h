@@ -1,6 +1,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Candidate : NSObject
+
+FOUNDATION_EXPORT NSString *CANDIDATE;
+
 @property NSString *candChar;
 @property NSString *candName;
 @property NSString *candDescription;

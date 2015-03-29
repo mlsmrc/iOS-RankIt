@@ -8,12 +8,12 @@
 
 @implementation ViewController
 
-@synthesize pollname;
+@synthesize p;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.title = pollname;
+    self.title = p.pollName;
     
 }
 

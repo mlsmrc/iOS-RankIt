@@ -3,8 +3,12 @@
 #import "ConnectionToServer.h"
 #import "APIurls.h"
 
-/* Costante per i nomi dei poll pubblici */
+/* Costanti per i dettagli dei poll pubblici */
+NSInteger POLL_ID = 7;
 NSInteger POLL_NAME = 9;
+NSInteger POLL_DESCRIPT = 5;
+NSInteger POLL_DEADLINE = 1;
+NSInteger POLL_VOTES = 19;
 
 /* Stringa per la search bar */
 NSString *NO_RESULTS = @"Nessun risultato trovato";
@@ -25,8 +29,8 @@ NSString *BACK = @"Indietro";
     /* Dizionario dei poll pubblici */
     NSMutableDictionary *allPublicPolls;
     
-    /* Array dei nomi dei poll pubblici che verranno visualizzati */
-    NSMutableArray *pollName;
+    /* Array dei poll pubblici che verranno visualizzati */
+    NSMutableArray *allPublicPollsDetails;
     
     /* Array per i risultati di ricerca */
     NSArray *searchResults;
@@ -45,7 +49,7 @@ NSString *BACK = @"Indietro";
     
 }
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     
     [super viewDidLoad];
     
@@ -57,11 +61,11 @@ NSString *BACK = @"Indietro";
     [self DownloadPolls];
     
     /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
-    if (allPublicPolls==nil || [allPublicPolls count] == 0)
+    if(allPublicPolls==nil || [allPublicPolls count] == 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Altrimenti prende i nomi dei poll pubblici da visualizzare */
-    else [self NamePolls];
+    else [self CreatePollsDetails];
     
     searchResults = [[NSArray alloc]init];
     
@@ -86,15 +90,15 @@ NSString *BACK = @"Indietro";
 }
 
 /* Download poll pubblici dal server */
-- (void)DownloadPolls {
+- (void) DownloadPolls {
     
      Connection = [[ConnectionToServer alloc]init];
      [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
      allPublicPolls = Connection.getDizionarioPolls;
      
-     if (allPublicPolls!=nil && [allPublicPolls count] != 0) {
+     if(allPublicPolls!=nil && [allPublicPolls count] != 0) {
      
-        [self NamePolls];
+        [self CreatePollsDetails];
         [self.tableView reloadData];
      
      }
@@ -103,15 +107,15 @@ NSString *BACK = @"Indietro";
     
 }
 
-/* Estrapolazione dei nomi dei poll pubblici ritornati dal server */
-- (void)NamePolls {
+/* Estrapolazione dei dettagli dei poll pubblici ritornati dal server */
+- (void) CreatePollsDetails {
     
     NSString *value;
     NSString *str;
     NSArray *split;
     NSString *sep = @"=;";
     NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:sep];
-    pollName = [[NSMutableArray alloc]init];
+    allPublicPollsDetails = [[NSMutableArray alloc]init];
     
     /* Scorre il dizionario e splitta in base all'insieme di caratteri set */
     for(id key in allPublicPolls) {
@@ -119,16 +123,18 @@ NSString *BACK = @"Indietro";
         value = [allPublicPolls objectForKey:key];
         str = [NSString stringWithFormat:@"%@",value];
         split = [str componentsSeparatedByCharactersInSet:set];
-        [pollName addObject:split[POLL_NAME]];
+        Poll *p = [[Poll alloc]init];
+        p = [p initPollWithPollID:(int)split[POLL_ID] withName:split[POLL_NAME] withDescription:split[POLL_DESCRIPT] withResultsType:-1 withDeadline:split[POLL_DEADLINE] withVote:(int)split[POLL_VOTES] withCandidates:nil];
+        [allPublicPollsDetails addObject:p];
         
     }
     
 }
 
 /* Visualizzazione poll pubblici nella Home */
-- (void)HomePolls {
+- (void) HomePolls {
     
-    if (allPublicPolls!=nil) {
+    if(allPublicPolls!=nil) {
         
         if([allPublicPolls count] != 0) {
             
@@ -144,7 +150,7 @@ NSString *BACK = @"Indietro";
         else {
             
             /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza poll */
-            [pollName removeAllObjects];
+            [allPublicPollsDetails removeAllObjects];
             [self.tableView reloadData];
             
             /* Stampa del messaggio di notifica */
@@ -158,7 +164,7 @@ NSString *BACK = @"Indietro";
     else {
         
         /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza connessione */
-        [pollName removeAllObjects];
+        [allPublicPollsDetails removeAllObjects];
         [self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
@@ -172,7 +178,7 @@ NSString *BACK = @"Indietro";
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
-- (void)printMessaggeError {
+- (void) printMessaggeError {
     
     /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -190,13 +196,13 @@ NSString *BACK = @"Indietro";
 }
 
 /* Regola l'altezza delle celle nella Home */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 75;
 }
 
 /* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della Home o i risultati di ricerca */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
@@ -204,9 +210,9 @@ NSString *BACK = @"Indietro";
             
             [self.searchDisplayController.searchResultsTableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
             
-            for (UIView *view in self.searchDisplayController.searchResultsTableView.subviews) {
+            for(UIView *view in self.searchDisplayController.searchResultsTableView.subviews) {
                 
-                if ([view isKindOfClass:[UILabel class]]) {
+                if([view isKindOfClass:[UILabel class]]) {
                     
                     ((UILabel *)view).font = [UIFont fontWithName:@"Helvetica" size:20];
                     ((UILabel *)view).textColor = [UIColor darkGrayColor];
@@ -223,13 +229,14 @@ NSString *BACK = @"Indietro";
         
     }
     
-    else return [pollName count];
+    else return [allPublicPollsDetails count];
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *simpleTableIdentifier = @"PollCell";
+    Poll *p;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil)
@@ -238,23 +245,29 @@ NSString *BACK = @"Indietro";
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
         cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = [searchResults objectAtIndex:indexPath.row];
+        p = [searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.text = p.pollName;
         
     }
     
-    else cell.textLabel.text = [pollName objectAtIndex:indexPath.row];
+    else {
+        
+        p = [allPublicPollsDetails objectAtIndex:indexPath.row];
+        cell.textLabel.text = p.pollName;
+        
+    }
     
     return cell;
     
 }
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@",searchText];
-    searchResults = [pollName filteredArrayUsingPredicate:resultPredicate];
+- (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
+    searchResults = [allPublicPollsDetails filteredArrayUsingPredicate:resultPredicate];
     
 }
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     
@@ -263,18 +276,18 @@ NSString *BACK = @"Indietro";
 }
 
 /* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showPollDetails"]) {
         
         NSIndexPath *indexPath = nil;
-        NSString *name = nil;
+        Poll *p = nil;
         
         if (self.searchDisplayController.active) {
             
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            name = [searchResults objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH, returnbuttontitle) style:     UIBarButtonItemStyleBordered target:nil action:nil];
+            p = [searchResults objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH, returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
 
             
@@ -283,24 +296,24 @@ NSString *BACK = @"Indietro";
         else {
             
             indexPath = [self.tableView indexPathForSelectedRow];
-            name = [pollName objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK, returnbuttontitle) style:     UIBarButtonItemStyleBordered target:nil action:nil];
+            p = [allPublicPollsDetails objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK, returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
         }
         
         ViewController *destViewController = segue.destinationViewController;
-        destViewController.pollname = name;
+        destViewController.p = p;
         
     }
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
-        [self performSegueWithIdentifier: @"showPollDetails" sender: self];
+        [self performSegueWithIdentifier:@"showPollDetails" sender:self];
         
     }
     

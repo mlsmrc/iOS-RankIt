@@ -2,7 +2,7 @@
 
 @implementation Candidate
 
-const NSString *CANDIDATE = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAND_DESCR_\",\"candimage\":\"_CAND_IMAGE_\"}";
+NSString *CANDIDATE = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAND_DESCR_\",\"candimage\":\"_CAND_IMAGE_\"}";
 
 - (void) setCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
 {
