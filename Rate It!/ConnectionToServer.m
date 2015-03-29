@@ -114,19 +114,31 @@ NSMutableDictionary *dizionarioPolls;
     return arrayCandidates;
 }
 
-/* Funzione che dato un pollId, che fa riferimento ad un particolare poll, uno userId, che indica chi sta votando e *
- * una classifica (sotto la forma a,b,c,d,e), invia il voto del poll                                                */
+
+
 - (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
 {
-    /* Creazione URL */
-    NSString * url=[URL_SUBMIT_RANKING stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
-    url=[url stringByReplacingOccurrencesOfString:@"_USER_ID_" withString:[NSString stringWithFormat:@"%@",userId]];
-    url=[url stringByReplacingOccurrencesOfString:@"_RANKING_" withString:[NSString stringWithFormat:@"%@",ranking]];
-
-    /* Invio richiesta */
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    /* Preparazione dati richiesta POST */
+    NSString *post = [NSString stringWithFormat:@"pollid=%@&userid=%@&ranking=%@",pollId,userId,ranking];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    
+    /* Preparazione richiesta post */
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+    [request setURL:[NSURL URLWithString:URL_SUBMIT_RANKING]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    /* Invio richiesta , che tornerà un json con il pollid*/
+    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+  
 }
+
+
 
 /*  Funzione che dato un oggetto di tipo Poll, aggiunge un poll e   *
  *  ritorna l'id del poll appena inserito come stringa              */
