@@ -51,7 +51,7 @@ NSString *BACK = @"Indietro";
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     /* Download iniziale di tutti i poll pubblici */
     [self DownloadPolls];
@@ -249,7 +249,7 @@ NSString *BACK = @"Indietro";
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains %@",searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@",searchText];
     searchResults = [pollName filteredArrayUsingPredicate:resultPredicate];
     
 }

@@ -138,7 +138,7 @@ NSMutableDictionary *dizionarioPolls;
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
     /* Preparazione richiesta post */
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
     [request setURL:[NSURL URLWithString:URL_ADD_POLL]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -147,14 +147,13 @@ NSMutableDictionary *dizionarioPolls;
     
     /* Invio richiesta , che tornerà un json con il pollid*/
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *requestReply = [[NSString alloc] initWithBytes:[requestHandler bytes] length:[requestHandler length] encoding:NSASCIIStringEncoding];
+    NSString *requestReply = [[NSString alloc] initWithBytes:[requestHandler bytes]length:[requestHandler length]encoding:NSASCIIStringEncoding];
     
     /* creazione dizionario per estrapolare il pollid */
-    NSDictionary *d = [NSJSONSerialization JSONObjectWithData:[requestReply dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+    NSDictionary *d = [NSJSONSerialization JSONObjectWithData:[requestReply dataUsingEncoding:NSUTF8StringEncoding]options:NSJSONReadingMutableContainers error:nil];
 
     /* si ritorna il pollid associato */
     return ([d valueForKey:@"pollid"]);
-    
     
 }
 
