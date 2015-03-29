@@ -4,7 +4,7 @@
 
 @implementation Poll
 
-NSString *POLL_DESCRIPTION = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"Unlisted\":_PVT_FLAG_,\"candidates\":[_CANDIDATES_STRING_]}";
+NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"Unlisted\":_PVT_FLAG_,\"candidates\":[_CANDIDATES_STRING_]}";
 
 @synthesize pollId, pollName, pollDescription, resultsType, deadline, userID, pvtPoll, lastUpdate, votes, mine, candidates;
 
@@ -65,7 +65,7 @@ NSString *POLL_DESCRIPTION = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"p
 /* Crea una stringa utile per creare il JSON per l'aggiunta del poll */
 - (NSString *) toJSON
 {
-    NSString *descr = [POLL_DESCRIPTION  stringByReplacingOccurrencesOfString:@"_POLL_NAME_" withString:[NSString stringWithFormat:@"%@",pollName]];
+    NSString *descr = [POLL_JSON  stringByReplacingOccurrencesOfString:@"_POLL_NAME_" withString:[NSString stringWithFormat:@"%@",pollName]];
     descr = [descr  stringByReplacingOccurrencesOfString:@"_POLL_DESCRIPTION_" withString:[NSString stringWithFormat:@"%@",pollDescription]];
     descr = [descr  stringByReplacingOccurrencesOfString:@"_DEADLINE_" withString:[NSString stringWithFormat:@"%@",deadline]];
     descr = [descr  stringByReplacingOccurrencesOfString:@"_USER_ID_" withString:[NSString stringWithFormat:@"%@",userID]];

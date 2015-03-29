@@ -2,7 +2,7 @@
 
 @implementation Candidate
 
-NSString *CANDIDATE = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAND_DESCR_\",\"candimage\":\"_CAND_IMAGE_\"}";
+NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAND_DESCR_\",\"candimage\":\"_CAND_IMAGE_\"}";
 
 - (void) setCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
 {
@@ -20,7 +20,7 @@ NSString *CANDIDATE = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAN
  * (usata in descriptionAddPoll in Poll.m)                           */
 - (NSString *) descriptionForAddPoll
 {
-    NSString *desc = [CANDIDATE  stringByReplacingOccurrencesOfString:@"_CAND_NAME_" withString:[NSString stringWithFormat:@"%@",[self candName]]];
+    NSString *desc = [CANDIDATE_JSON  stringByReplacingOccurrencesOfString:@"_CAND_NAME_" withString:[NSString stringWithFormat:@"%@",[self candName]]];
     desc = [desc  stringByReplacingOccurrencesOfString:@"_CAND_DESCR_" withString:[NSString stringWithFormat:@"%@",[self candDescription]]];
     desc = [desc  stringByReplacingOccurrencesOfString:@"_CAND_IMAGE_" withString:[NSString stringWithFormat:@""]];
     return desc;

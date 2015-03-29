@@ -84,10 +84,10 @@ NSMutableDictionary *dizionarioPolls;
 /* Funzione che ritorna le scelte per il voto di un determinato poll specificato tramite pollId */
 - (NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId
 {
-    
+    /* Sostituzione dei parametri */
     NSString * url=[URL_GET_CANDIDATES stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
-    NSLog(@"URL RICHIESTA: %@",url);
     
+    /* Creazione della richiesta ed invio */
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
@@ -96,11 +96,13 @@ NSMutableDictionary *dizionarioPolls;
     
     NSMutableArray * arrayCandidates= [[NSMutableArray alloc]init];
     
+    /* Esito positivo: parsing del JSON nel dizionario (una entry per ogni candidate) */
     if(response!=nil)
     {
         dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         response=nil;
        
+        /* creazione dell'array contenente i candidates */
         for(NSString * key in dict)
         {
             Candidate * candidate=[[Candidate alloc]init];
@@ -114,6 +116,8 @@ NSMutableDictionary *dizionarioPolls;
     return arrayCandidates;
 }
 
+/*  Funzione che dato il pollid, lo userid e la stringa che corrisponde alla votazione  *
+ *  inserisce la votazione relativa al poll al server                                   */
 - (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
 {
     
@@ -130,8 +134,8 @@ NSMutableDictionary *dizionarioPolls;
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
-    /* Invio richiesta , che tornerà un json con il pollid */
-    //NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    /* Invio richiesta */
+    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
   
 }
 
