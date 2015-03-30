@@ -22,6 +22,11 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
     int *mine;
     int votes;
     NSMutableArray *candidates;
+    
+    /* utile per la formattazione della NSDate                          *
+     * Per trasformare una NSDate in stringa usarlo in questa maniera:  *
+     * [dateFormatter stringFromDate:date]                              */
+    NSDateFormatter *dateFormatter;
 }
 
 @property (readonly,nonatomic) int pollId;
@@ -31,7 +36,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 @property (readwrite,nonatomic) NSDate *deadline;
 @property (readonly,nonatomic) NSString *userID;
 @property (readwrite,nonatomic) BOOL pvtPoll;
-@property (readwrite,nonatomic) NSDate *lastUpdate;
+@property (readonly,nonatomic) NSDate *lastUpdate;
 @property (readonly,nonatomic) int votes;
 @property (readonly,nonatomic) int *mine;
 @property (readwrite,nonatomic) NSMutableArray *candidates;

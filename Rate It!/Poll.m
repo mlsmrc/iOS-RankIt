@@ -4,7 +4,7 @@
 
 @implementation Poll
 
-NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"Unlisted\":_PVT_FLAG_,\"candidates\":[_CANDIDATES_STRING_]}";
+NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"unlisted\":_PVT_FLAG_,\"candidates\":[_CANDIDATES_STRING_]}";
 
 @synthesize pollId, pollName, pollDescription, resultsType, deadline, userID, pvtPoll, lastUpdate, votes, mine, candidates;
 
@@ -26,6 +26,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
         /* NSString *UDID = [infoDict objectForKey:UDID_IN_INFO_PLIST]; */
         
         ID = @"prova";
+        pollId=0;
         userID = ID;
         pollName = Name;
         pollDescription = Description;
@@ -34,11 +35,11 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
         candidates = cand;
         
         /* inserimento data al momento della creazione dell'oggetto */
-        NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-        [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        lastUpdate = [[NSDate alloc ]init];
         
-        lastUpdate = [DateFormatter gregorianStartDate];
-        
+        /* inizializzazione formattore date */
+        [self initDateFormatter];
+  
     }
     
     return self;
@@ -64,6 +65,9 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
         deadline = Deadline;
         votes = Votes;
         candidates = cand;
+        
+        /* inizializzazione formattore date */
+        [self initDateFormatter];
     }
     
     return self;
@@ -74,8 +78,10 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
 - (NSString *) toJSON
 {
     NSString *descr = [POLL_JSON  stringByReplacingOccurrencesOfString:@"_POLL_NAME_" withString:[NSString stringWithFormat:@"%@",pollName]];
+    
+    descr = [descr  stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%d",pollId]];
     descr = [descr  stringByReplacingOccurrencesOfString:@"_POLL_DESCRIPTION_" withString:[NSString stringWithFormat:@"%@",pollDescription]];
-    descr = [descr  stringByReplacingOccurrencesOfString:@"_DEADLINE_" withString:[NSString stringWithFormat:@"%@",deadline]];
+    descr = [descr  stringByReplacingOccurrencesOfString:@"_DEADLINE_" withString:[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:deadline]]];
     descr = [descr  stringByReplacingOccurrencesOfString:@"_USER_ID_" withString:[NSString stringWithFormat:@"%@",userID]];
     
     if(pvtPoll == true)
@@ -103,16 +109,25 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
     }
     
     descr = [descr  stringByReplacingOccurrencesOfString:@"_CANDIDATES_STRING_" withString:[NSString stringWithFormat:@"%@",cands]];
-    descr = [ descr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     return descr;
 }
 
 - (void) setLastUpdate
 {
-    /* inserimento data al momento della creazione dell'oggetto */
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    lastUpdate = [DateFormatter gregorianStartDate];
+    // aggiornamento data
+    lastUpdate = [[NSDate alloc]init];
+}
+
+/* si inizializza l'oggetto utile a formattare la data */
+-(void) initDateFormatter
+{
+    dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:language];
+    [dateFormatter setLocale:usLocale];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 @end

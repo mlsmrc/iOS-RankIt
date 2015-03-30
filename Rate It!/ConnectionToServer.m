@@ -105,7 +105,7 @@ NSMutableDictionary *dizionarioPolls;
         /* creazione dell'array contenente i candidates */
         for(NSString *key in dict)
         {
-            Candidate *candidate=[[Candidate alloc] initCandicateWithChar: [key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"] andDescription:[key valueForKey:@"canddescription"]];
+            Candidate * candidate=[[Candidate alloc]initCandicateWithChar:[key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"] andDescription:[key valueForKey:@"canddescription"]];
             [arrayCandidates addObject:candidate];
             candidate=nil;
         }
