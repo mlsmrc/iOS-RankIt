@@ -15,7 +15,10 @@
     [super viewDidLoad];
     self.title = p.pollName;
     description.text = p.pollDescription;
+    description.textAlignment = NSTextAlignmentJustified;
+    description.font = [UIFont fontWithName:@"Arial" size:15];
     deadline.text = (NSString *) p.deadline;
+    deadline.font = [UIFont fontWithName:@"Arial" size:15];
     
 }
 

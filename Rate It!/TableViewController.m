@@ -286,7 +286,7 @@ NSString *BACK = @"Indietro";
             
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
             p = [searchResults objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH, returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
 
             
@@ -296,7 +296,7 @@ NSString *BACK = @"Indietro";
             
             indexPath = [self.tableView indexPathForSelectedRow];
             p = [allPublicPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK, returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
         }
