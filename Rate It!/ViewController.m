@@ -8,12 +8,14 @@
 
 @implementation ViewController
 
-@synthesize p;
+@synthesize p, description, deadline;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     self.title = p.pollName;
+    description.text = p.pollDescription;
+    deadline.text = (NSString *) p.deadline;
     
 }
 
