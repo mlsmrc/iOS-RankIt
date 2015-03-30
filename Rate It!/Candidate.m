@@ -7,6 +7,7 @@ NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\
 - (id) initCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
 {
     self = [super init];
+    
     if (self)
     {
         [self setCandChar:Char];

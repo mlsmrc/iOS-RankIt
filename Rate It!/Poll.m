@@ -112,7 +112,6 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
     /* inserimento data al momento della creazione dell'oggetto */
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    
     lastUpdate = [DateFormatter gregorianStartDate];
 }
 

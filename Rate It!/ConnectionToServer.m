@@ -103,10 +103,9 @@ NSMutableDictionary *dizionarioPolls;
         response=nil;
        
         /* creazione dell'array contenente i candidates */
-        for(NSString * key in dict)
+        for(NSString *key in dict)
         {
-            Candidate * candidate=[[Candidate alloc]init];
-            [candidate setCandicateWithChar: [key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"]  andDescription:[key valueForKey:@"canddescription"]] ;
+            Candidate *candidate=[[Candidate alloc] initCandicateWithChar: [key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"] andDescription:[key valueForKey:@"canddescription"]];
             [arrayCandidates addObject:candidate];
             candidate=nil;
         }
@@ -156,7 +155,7 @@ NSMutableDictionary *dizionarioPolls;
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
-    /* Invio richiesta , che tornerà un json con il pollid*/
+    /* Invio richiesta che tornerà un json con il pollid */
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *requestReply = [[NSString alloc] initWithBytes:[requestHandler bytes]length:[requestHandler length]encoding:NSASCIIStringEncoding];
     
