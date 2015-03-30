@@ -4,11 +4,16 @@
 
 NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAND_DESCR_\",\"candimage\":\"_CAND_IMAGE_\"}";
 
-- (void) setCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
+- (id) initCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
 {
-    [self setCandChar:Char];
-    [self setCandDescription:description];
-    [self setCandName:Name];
+    self = [super init];
+    if (self)
+    {
+        [self setCandChar:Char];
+        [self setCandDescription:description];
+        [self setCandName:Name];
+    }
+    return self;
 }
 
 - (NSString*)description

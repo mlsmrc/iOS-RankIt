@@ -31,7 +31,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 @property (readwrite,nonatomic) NSDate *deadline;
 @property (readonly,nonatomic) NSString *userID;
 @property (readwrite,nonatomic) BOOL pvtPoll;
-@property (readonly,nonatomic) NSDate *lastUpdate;
+@property (readwrite,nonatomic) NSDate *lastUpdate;
 @property (readonly,nonatomic) int votes;
 @property (readonly,nonatomic) int *mine;
 @property (readwrite,nonatomic) NSMutableArray *candidates;
@@ -54,6 +54,8 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
          withCandidates: (NSMutableArray *) cand;
 
 - (NSString *) toJSON;
+- (void) setLastUpdate;
+
 
 @end
 

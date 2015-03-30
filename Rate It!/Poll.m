@@ -18,7 +18,8 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
     
     self = [super init];
     
-    if(self) {
+    if(self)
+    {
         
         /* lettura UDID dal file Info.plist */
         /* NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary]; */
@@ -32,6 +33,12 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
         pvtPoll = Private;
         candidates = cand;
         
+        /* inserimento data al momento della creazione dell'oggetto */
+        NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+        [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        lastUpdate = [DateFormatter gregorianStartDate];
+        
     }
     
     return self;
@@ -44,10 +51,12 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
          withResultsType: (int) rType
             withDeadline: (NSDate *) Deadline
                 withVote: (int) Votes
-          withCandidates: (NSMutableArray *) cand; {
+          withCandidates: (NSMutableArray *) cand;
+{
+    self = [super init];
     
-    if(self) {
-        
+    if(self)
+    {
         pollId = PollID;
         pollName = Name;
         pollDescription = Description;
@@ -55,7 +64,6 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
         deadline = Deadline;
         votes = Votes;
         candidates = cand;
-        
     }
     
     return self;
@@ -97,6 +105,15 @@ NSString *POLL_JSON = @"{\"pollid\":\"\",\"pollname\":\"_POLL_NAME_\",\"polldesc
     descr = [descr  stringByReplacingOccurrencesOfString:@"_CANDIDATES_STRING_" withString:[NSString stringWithFormat:@"%@",cands]];
     descr = [ descr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     return descr;
+}
+
+- (void) setLastUpdate
+{
+    /* inserimento data al momento della creazione dell'oggetto */
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    
+    lastUpdate = [DateFormatter gregorianStartDate];
 }
 
 @end

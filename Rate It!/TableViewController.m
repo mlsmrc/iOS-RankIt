@@ -123,8 +123,7 @@ NSString *BACK = @"Indietro";
         value = [allPublicPolls objectForKey:key];
         str = [NSString stringWithFormat:@"%@",value];
         split = [str componentsSeparatedByCharactersInSet:set];
-        Poll *p = [[Poll alloc]init];
-        p = [p initPollWithPollID:(int)split[POLL_ID] withName:split[POLL_NAME] withDescription:split[POLL_DESCRIPT] withResultsType:-1 withDeadline:split[POLL_DEADLINE] withVote:(int)split[POLL_VOTES] withCandidates:nil];
+        Poll *p = [[Poll alloc]initPollWithPollID:(int)split[POLL_ID] withName:split[POLL_NAME] withDescription:split[POLL_DESCRIPT] withResultsType:-1 withDeadline:split[POLL_DEADLINE] withVote:(int)split[POLL_VOTES] withCandidates:nil];
         [allPublicPollsDetails addObject:p];
         
     }

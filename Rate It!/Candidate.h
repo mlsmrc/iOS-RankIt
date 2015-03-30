@@ -8,7 +8,7 @@ FOUNDATION_EXPORT NSString *CANDIDATE_JSON;
 @property NSString *candName;
 @property NSString *candDescription;
 
-- (void) setCandicateWithChar:(NSString *)candChar andName:(NSString*) candName andDescription:(NSString*)description ;
+- (id) initCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description;
 - (NSString*) descriptionForAddPoll;
 - (NSString*) description;
 
