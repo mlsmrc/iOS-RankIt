@@ -6,7 +6,7 @@
 
 NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"unlisted\":_PVT_FLAG_,\"candidates\":[_CANDIDATES_STRING_]}";
 
-@synthesize pollId, pollName, pollDescription, resultsType, deadline, userID, pvtPoll, lastUpdate, votes, mine, candidates;
+@synthesize pollId,pollName,pollDescription,resultsType,deadline,userID,pvtPoll,lastUpdate,votes,mine,candidates;
 
 /* Costruttore per l'aggiunta di un nuovo Poll */
 - (id)initPollWithUserID: (NSString *) ID
@@ -37,7 +37,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         /* inserimento data al momento della creazione dell'oggetto */
         lastUpdate = [[NSDate alloc ]init];
         
-        /* inizializzazione formattore date */
+        /* inizializzazione formattatore date */
         [self initDateFormatter];
   
     }
@@ -66,7 +66,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         votes = Votes;
         candidates = cand;
         
-        /* inizializzazione formattore date */
+        /* inizializzazione formattatore date */
         [self initDateFormatter];
     }
     
@@ -114,8 +114,8 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 
 - (void) setLastUpdate
 {
-    // aggiornamento data
-    lastUpdate = [[NSDate alloc]init];
+    /* aggiornamento data */
+   lastUpdate = [[NSDate alloc]init];
 }
 
 /* si inizializza l'oggetto utile a formattare la data */

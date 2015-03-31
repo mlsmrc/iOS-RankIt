@@ -61,7 +61,7 @@ NSString *BACK = @"Indietro";
     [self DownloadPolls];
     
     /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
-    if(allPublicPolls==nil || [allPublicPolls count] == 0)
+    if(allPublicPolls==nil || [allPublicPolls count]==0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Altrimenti prende i nomi dei poll pubblici da visualizzare */

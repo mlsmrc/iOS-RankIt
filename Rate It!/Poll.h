@@ -23,7 +23,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
     int votes;
     NSMutableArray *candidates;
     
-    /* utile per la formattazione della NSDate                          *
+    /* Utile per la formattazione della NSDate                          *
      * Per trasformare una NSDate in stringa usarlo in questa maniera:  *
      * [dateFormatter stringFromDate:date]                              */
     NSDateFormatter *dateFormatter;
@@ -60,7 +60,6 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 
 - (NSString *) toJSON;
 - (void) setLastUpdate;
-
 
 @end
 
