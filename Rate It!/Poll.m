@@ -51,6 +51,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
          withDescription: (NSString *) Description
          withResultsType: (int) rType
             withDeadline: (NSDate *) Deadline
+          withLastUpdate: (NSDate *) LastUpdate
                 withVote: (int) Votes
           withCandidates: (NSMutableArray *) cand;
 {
@@ -63,6 +64,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         pollDescription = Description;
         resultsType = rType;
         deadline = Deadline;
+        lastUpdate = LastUpdate;
         votes = Votes;
         candidates = cand;
         

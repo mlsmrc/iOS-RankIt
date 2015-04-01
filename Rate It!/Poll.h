@@ -55,6 +55,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
         withDescription: (NSString *) Description
         withResultsType: (int) rType
            withDeadline: (NSDate *) Deadline
+         withLastUpdate: (NSDate *) LastUpdate
                withVote: (int) Votes
          withCandidates: (NSMutableArray *) cand;
 

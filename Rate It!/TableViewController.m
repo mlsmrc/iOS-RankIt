@@ -8,6 +8,7 @@ NSInteger POLL_ID = 7;
 NSInteger POLL_NAME = 9;
 NSInteger POLL_DESCRIPT = 5;
 NSInteger POLL_DEADLINE = 1;
+NSInteger POLL_LAST_UPDATE = 17;
 NSInteger POLL_VOTES = 19;
 
 /* Stringa per la search bar */
@@ -123,7 +124,7 @@ NSString *BACK = @"Indietro";
         value = [allPublicPolls objectForKey:key];
         str = [NSString stringWithFormat:@"%@",value];
         split = [str componentsSeparatedByCharactersInSet:set];
-        Poll *p = [[Poll alloc]initPollWithPollID:(int)split[POLL_ID] withName:split[POLL_NAME] withDescription:split[POLL_DESCRIPT] withResultsType:-1 withDeadline:split[POLL_DEADLINE] withVote:(int)split[POLL_VOTES] withCandidates:nil];
+        Poll *p = [[Poll alloc]initPollWithPollID:(int)split[POLL_ID] withName:split[POLL_NAME] withDescription:split[POLL_DESCRIPT] withResultsType:-1 withDeadline:split[POLL_DEADLINE] withLastUpdate:split[POLL_LAST_UPDATE] withVote:(int)split[POLL_VOTES] withCandidates:nil];
         [allPublicPollsDetails addObject:p];
         
     }
