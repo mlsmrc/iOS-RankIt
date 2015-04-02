@@ -28,10 +28,9 @@
     description.selectable = true;
     description.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:18];
     description.textAlignment = NSTextAlignmentNatural;
-    description.selectable = false;
     description.text = p.pollDescription;
+    description.selectable = false;
     [[vota layer] setCornerRadius:5.0f];
-    //[[vota layer] setBorderWidth:1.f];
     
 }
 
