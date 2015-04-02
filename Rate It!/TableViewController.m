@@ -72,7 +72,7 @@ NSString *BACK = @"Indietro";
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
     messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-    messageLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
+    messageLabel.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:20];
     messageLabel.textColor = [UIColor darkGrayColor];
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
@@ -214,7 +214,7 @@ NSString *BACK = @"Indietro";
                 
                 if([view isKindOfClass:[UILabel class]]) {
                     
-                    ((UILabel *)view).font = [UIFont fontWithName:@"Helvetica" size:20];
+                    ((UILabel *)view).font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:20];
                     ((UILabel *)view).textColor = [UIColor darkGrayColor];
                     ((UILabel *)view).text = NO_RESULTS;
 
@@ -257,6 +257,7 @@ NSString *BACK = @"Indietro";
         
     }
     
+    cell.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:18];
     return cell;
     
 }

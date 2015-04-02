@@ -4,9 +4,10 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic,strong) Poll *p;
-@property (nonatomic,strong) UILabel *name;
-@property (nonatomic,strong) UILabel *deadline;
-@property (nonatomic,strong) UILabel *lastUpdate;
-@property (nonatomic,strong) UILabel *description;
+@property (nonatomic,weak) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UITextView *description;
+@property (weak, nonatomic) IBOutlet UILabel *deadline;
+@property (weak, nonatomic) IBOutlet UILabel *lastUpdate;
+@property (weak, nonatomic) IBOutlet UIButton *vota;
 
 @end
