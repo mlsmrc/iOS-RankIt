@@ -30,8 +30,8 @@
     description.textAlignment = NSTextAlignmentNatural;
     description.selectable = false;
     description.text = p.pollDescription;
-    [[vota layer] setCornerRadius:8.0f];
-    [[vota layer] setBorderWidth:1.3f];
+    [[vota layer] setCornerRadius:5.0f];
+    //[[vota layer] setBorderWidth:1.f];
     
 }
 

@@ -96,38 +96,47 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Descrizione" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v45-Ho-Aku">
-                                <rect key="frame" x="16" y="134" width="568" height="147"/>
+                                <rect key="frame" x="16" y="244" width="568" height="133"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytU-ze-Gxh">
-                                <rect key="frame" x="272" y="411" width="56" height="30"/>
+                                <rect key="frame" x="216" y="420" width="169" height="30"/>
                                 <color key="backgroundColor" red="0.1258978927686133" green="0.89667823699989702" blue="0.079091764584262619" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="bSX-10-yIf"/>
+                                    <constraint firstAttribute="width" constant="169" id="bSX-10-yIf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="18"/>
-                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Vota!">
-                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Poll-Image" translatesAutoresizingMaskIntoConstraints="NO" id="L8i-r6-RKA">
+                                <rect key="frame" x="242" y="143" width="116" height="77"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="NDE-sm-Pkv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oXQ-cH-Akd" firstAttribute="leading" secondItem="gpK-Qn-Oth" secondAttribute="leading" id="0Ct-xc-dmL"/>
                             <constraint firstItem="gpK-Qn-Oth" firstAttribute="top" secondItem="oXQ-cH-Akd" secondAttribute="bottom" constant="1" id="1xx-bP-UsI"/>
-                            <constraint firstItem="4cR-y3-k1g" firstAttribute="top" secondItem="v45-Ho-Aku" secondAttribute="bottom" constant="211" id="3Nu-XE-4Yg"/>
-                            <constraint firstItem="4cR-y3-k1g" firstAttribute="top" secondItem="ytU-ze-Gxh" secondAttribute="bottom" constant="51" id="8Po-76-YO7"/>
+                            <constraint firstItem="4cR-y3-k1g" firstAttribute="top" secondItem="v45-Ho-Aku" secondAttribute="bottom" constant="115" id="3Nu-XE-4Yg"/>
+                            <constraint firstItem="4cR-y3-k1g" firstAttribute="top" secondItem="ytU-ze-Gxh" secondAttribute="bottom" constant="42" id="8Po-76-YO7"/>
                             <constraint firstItem="gpK-Qn-Oth" firstAttribute="top" secondItem="Xdo-wD-IVf" secondAttribute="bottom" constant="90" id="BSh-CU-ptQ"/>
                             <constraint firstItem="G5q-pu-b6S" firstAttribute="leading" secondItem="d40-Ix-fq5" secondAttribute="leadingMargin" id="EiB-g1-nat"/>
                             <constraint firstItem="v45-Ho-Aku" firstAttribute="trailing" secondItem="d40-Ix-fq5" secondAttribute="trailingMargin" id="Evm-Ff-ebD"/>
                             <constraint firstItem="gpK-Qn-Oth" firstAttribute="trailing" secondItem="d40-Ix-fq5" secondAttribute="trailingMargin" id="GSf-YG-qCK"/>
                             <constraint firstItem="oXQ-cH-Akd" firstAttribute="leading" secondItem="d40-Ix-fq5" secondAttribute="leadingMargin" id="L7c-7B-GDt"/>
+                            <constraint firstItem="v45-Ho-Aku" firstAttribute="top" secondItem="L8i-r6-RKA" secondAttribute="bottom" constant="24" id="Nkl-6f-0i8"/>
                             <constraint firstItem="oXQ-cH-Akd" firstAttribute="top" secondItem="G5q-pu-b6S" secondAttribute="bottom" constant="14" id="Obw-Zm-CFB"/>
-                            <constraint firstItem="ytU-ze-Gxh" firstAttribute="top" secondItem="v45-Ho-Aku" secondAttribute="bottom" constant="130" id="PCr-p0-fg3"/>
-                            <constraint firstItem="v45-Ho-Aku" firstAttribute="top" secondItem="Xdo-wD-IVf" secondAttribute="bottom" constant="134" id="YI5-8m-txA"/>
+                            <constraint firstItem="ytU-ze-Gxh" firstAttribute="top" secondItem="v45-Ho-Aku" secondAttribute="bottom" constant="43" id="PCr-p0-fg3"/>
+                            <constraint firstItem="L8i-r6-RKA" firstAttribute="centerX" secondItem="gpK-Qn-Oth" secondAttribute="centerX" id="RND-Ay-Zag"/>
+                            <constraint firstItem="L8i-r6-RKA" firstAttribute="top" secondItem="gpK-Qn-Oth" secondAttribute="bottom" constant="32" id="XTV-fh-Iaz"/>
+                            <constraint firstItem="v45-Ho-Aku" firstAttribute="top" secondItem="Xdo-wD-IVf" secondAttribute="bottom" constant="244" id="YI5-8m-txA"/>
                             <constraint firstItem="oXQ-cH-Akd" firstAttribute="trailing" secondItem="G5q-pu-b6S" secondAttribute="trailing" id="Ydu-rq-1r8"/>
                             <constraint firstItem="G5q-pu-b6S" firstAttribute="trailing" secondItem="d40-Ix-fq5" secondAttribute="trailingMargin" id="Zww-5E-Fve"/>
                             <constraint firstItem="oXQ-cH-Akd" firstAttribute="trailing" secondItem="gpK-Qn-Oth" secondAttribute="trailing" id="bMs-7q-n5a"/>
@@ -192,6 +201,7 @@
     </scenes>
     <resources>
         <image name="Home" width="25" height="25"/>
+        <image name="Poll-Image" width="400" height="400"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
