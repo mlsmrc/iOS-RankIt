@@ -28,6 +28,10 @@
     description.selectable = true;
     description.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:16];
     description.textAlignment = NSTextAlignmentNatural;
+    
+    /* Prova con 255 caratteri esatti (il max numero di caratteri per la descrizione del Poll) */
+    //description.text = @"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX?";
+    
     description.text = p.pollDescription;
     description.selectable = false;
     [[vota layer] setCornerRadius:5.0f];
