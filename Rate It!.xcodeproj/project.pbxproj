@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6F193FA31AC4ADE200D2D867 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FA21AC4ADE200D2D867 /* main.m */; };
 		6F193FA61AC4ADE200D2D867 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FA51AC4ADE200D2D867 /* AppDelegate.m */; };
-		6F193FAF1AC4ADE200D2D867 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F193FAD1AC4ADE200D2D867 /* Main.storyboard */; };
 		6F193FB11AC4ADE200D2D867 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F193FB01AC4ADE200D2D867 /* Images.xcassets */; };
 		6F193FB41AC4ADE200D2D867 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F193FB21AC4ADE200D2D867 /* LaunchScreen.xib */; };
 		6F193FC01AC4ADE200D2D867 /* Rate_It_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FBF1AC4ADE200D2D867 /* Rate_It_Tests.m */; };
@@ -17,6 +16,7 @@
 		6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD41AC4B2A000D2D867 /* APIurls.m */; };
 		6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F193FD81AC4B6D100D2D867 /* TableViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		6F3D71EA1AC6FC3A00094C6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D71E91AC6FC3A00094C6C /* ViewController.m */; };
+		6FA905AD1AD5D1B70034339F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA905AC1AD5D1B70034339F /* Main.storyboard */; };
 		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
 		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,6 @@
 		6F193FA21AC4ADE200D2D867 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F193FA41AC4ADE200D2D867 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6F193FA51AC4ADE200D2D867 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6F193FAE1AC4ADE200D2D867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6F193FB01AC4ADE200D2D867 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6F193FB31AC4ADE200D2D867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		6F193FB91AC4ADE200D2D867 /* Rate It!Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rate It!Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +50,7 @@
 		6F193FD81AC4B6D100D2D867 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		6F3D71E81AC6FC3A00094C6C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6F3D71E91AC6FC3A00094C6C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6FA905AC1AD5D1B70034339F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		A915B0831AC5877500BD95ED /* Poll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poll.h; sourceTree = "<group>"; };
 		A915B0841AC5877500BD95ED /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A915B0861AC59AEF00BD95ED /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				6F193FA51AC4ADE200D2D867 /* AppDelegate.m */,
 				6F193FC91AC4B12F00D2D867 /* Home */,
 				6F193FCA1AC4B17500D2D867 /* UtilClasses */,
-				6F193FAD1AC4ADE200D2D867 /* Main.storyboard */,
+				6FA905AC1AD5D1B70034339F /* Main.storyboard */,
 				6F193FB21AC4ADE200D2D867 /* LaunchScreen.xib */,
 				6F193FB01AC4ADE200D2D867 /* Images.xcassets */,
 				6F193FA01AC4ADE200D2D867 /* Supporting Files */,
@@ -240,7 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F193FAF1AC4ADE200D2D867 /* Main.storyboard in Resources */,
+				6FA905AD1AD5D1B70034339F /* Main.storyboard in Resources */,
 				6F193FB41AC4ADE200D2D867 /* LaunchScreen.xib in Resources */,
 				6F193FB11AC4ADE200D2D867 /* Images.xcassets in Resources */,
 			);
@@ -290,14 +290,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6F193FAD1AC4ADE200D2D867 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F193FAE1AC4ADE200D2D867 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6F193FB21AC4ADE200D2D867 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
