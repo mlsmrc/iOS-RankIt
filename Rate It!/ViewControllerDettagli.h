@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "Poll.h"
 
-@interface ViewController : UIViewController
+@interface ViewControllerDettagli : UIViewController
 
 @property (nonatomic,strong) Poll *p;
 @property (nonatomic,weak) IBOutlet UILabel *name;

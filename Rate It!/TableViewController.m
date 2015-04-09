@@ -1,5 +1,5 @@
 #import "TableViewController.h"
-#import "ViewController.h"
+#import "ViewControllerDettagli.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
 
@@ -112,19 +112,14 @@ NSString *BACK = @"Indietro";
 - (void) CreatePollsDetails {
     
     NSString *value;
-    NSString *str;
-    NSArray *split;
-    NSString *sep = @"=;";
-    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:sep];
     allPublicPollsDetails = [[NSMutableArray alloc]init];
     
     /* Scorre il dizionario e splitta in base all'insieme di caratteri set */
     for(id key in allPublicPolls) {
         
         value = [allPublicPolls objectForKey:key];
-        str = [NSString stringWithFormat:@"%@",value];
-        split = [str componentsSeparatedByCharactersInSet:set];
-        Poll *p = [[Poll alloc]initPollWithPollID:(int)split[POLL_ID] withName:split[POLL_NAME] withDescription:split[POLL_DESCRIPT] withResultsType:-1 withDeadline:split[POLL_DEADLINE] withLastUpdate:split[POLL_LAST_UPDATE] withVote:(int)split[POLL_VOTES] withCandidates:nil];
+        
+        Poll *p = [[Poll alloc]initPollWithPollID:(int)[value valueForKey:@"pollid"] withName:[value valueForKey:@"pollname"] withDescription:[value valueForKey:@"polldescription"] withResultsType:-1 withDeadline:[value valueForKey:@"deadline"] withLastUpdate:[value valueForKey:@"updated"] withVote:(int)[value valueForKey:@"votes"] withCandidates:nil];
         [allPublicPollsDetails addObject:p];
         
     }
@@ -303,7 +298,7 @@ NSString *BACK = @"Indietro";
             
         }
         
-        ViewController *destViewController = segue.destinationViewController;
+        ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = p;
         
     }
