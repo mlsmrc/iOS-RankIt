@@ -1,4 +1,4 @@
-/* Classe relativa alla View del "segue" */
+/* Classe relativa alla View dei dettagli di un Poll */
 
 #import "ViewControllerDettagli.h"
 
@@ -14,7 +14,7 @@
     
     [super viewDidLoad];
     [scrollView setScrollEnabled:YES];
-    [scrollView setContentSize:CGSizeMake(320,400)];
+    [scrollView setContentSize:CGSizeMake(320,415)];
 
     name.font = [UIFont fontWithName:@"ChalkboardSE-Bold" size:23];
     name.text = p.pollName;
@@ -35,11 +35,18 @@
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della scroll view */
     
-    float numberOfLines = (description.text.length * 10)/description.frame.size.width;
+    [description sizeToFit];
+    int numLines = description.frame.size.height / description.font.lineHeight;
     
-    if(numberOfLines>2)
-        [scrollView setContentSize:CGSizeMake(320,400+(numberOfLines*22))];
+    if(numLines>2)
+        [scrollView setContentSize:CGSizeMake(320,(415 + (numLines * 6.5)))];
     
+}
+
+/* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
 }
 
 @end

@@ -3,14 +3,6 @@
 #import "ConnectionToServer.h"
 #import "APIurls.h"
 
-/* Costanti per i dettagli dei poll pubblici */
-NSInteger POLL_ID = 7;
-NSInteger POLL_NAME = 9;
-NSInteger POLL_DESCRIPT = 5;
-NSInteger POLL_DEADLINE = 1;
-NSInteger POLL_LAST_UPDATE = 17;
-NSInteger POLL_VOTES = 19;
-
 /* Stringa per la search bar */
 NSString *NO_RESULTS = @"Nessun risultato trovato";
 

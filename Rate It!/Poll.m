@@ -26,7 +26,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         /* NSString *UDID = [infoDict objectForKey:UDID_IN_INFO_PLIST]; */
         
         ID = @"prova";
-        pollId=0;
+        pollId = 0;
         userID = ID;
         pollName = Name;
         pollDescription = Description;
