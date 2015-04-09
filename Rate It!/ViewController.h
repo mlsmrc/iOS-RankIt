@@ -9,6 +9,6 @@
 @property (nonatomic,weak) IBOutlet UIImageView *image;
 @property (nonatomic,weak) IBOutlet UILabel *deadline;
 @property (nonatomic,weak) IBOutlet UILabel *lastUpdate;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic,weak) IBOutlet UIScrollView *scrollView;
 
 @end

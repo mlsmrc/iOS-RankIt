@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <scenes>
+        <!--Rate It!-->
+        <scene sceneID="fFG-se-UgY">
+            <objects>
+                <tableViewController id="VcF-GY-ZeW" customClass="TableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Q1p-5a-tIn">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Cerca tra i sondaggi" id="ZYD-t1-isE">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PollCell" textLabel="VfV-x6-zGR" style="IBUITableViewCellStyleDefault" id="Iql-TX-jW4">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iql-TX-jW4" id="XZh-Fd-569">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Nome Poll" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VfV-x6-zGR">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="zPC-dB-2ah" kind="push" identifier="showPollDetails" id="74D-T9-jML"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VcF-GY-ZeW" id="wVI-go-08o"/>
+                            <outlet property="delegate" destination="VcF-GY-ZeW" id="fbU-fh-H7D"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Rate It!" id="Bl3-io-SPq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="W5g-Hf-0bH"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="BuJ-16-U82" id="3iq-Pz-BIX"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Twf-1U-zK4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="BuJ-16-U82">
+                    <connections>
+                        <outlet property="delegate" destination="VcF-GY-ZeW" id="nrN-8H-dNV"/>
+                        <outlet property="searchBar" destination="ZYD-t1-isE" id="cz5-Xq-4dj"/>
+                        <outlet property="searchContentsController" destination="VcF-GY-ZeW" id="MlY-6x-Kst"/>
+                        <outlet property="searchResultsDataSource" destination="VcF-GY-ZeW" id="uZS-PT-Qyn"/>
+                        <outlet property="searchResultsDelegate" destination="VcF-GY-ZeW" id="4CS-CY-CAy"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1169.0666666666666" y="-1.8933333333333333"/>
+        </scene>
+        <!--Dettagli Poll-->
+        <scene sceneID="Bua-UN-JOU">
+            <objects>
+                <viewController title="Dettagli Poll" hidesBottomBarWhenPushed="YES" id="zPC-dB-2ah" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d40-Ix-fq5">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gG7-GW-Suq">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tz4-Ct-5KQ">
+                                        <rect key="frame" x="8" y="10" width="304" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scadenza" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SJk-PZ-VcP">
+                                        <rect key="frame" x="13" y="52" width="294" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ultima modifica" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2cb-Ds-2hT">
+                                        <rect key="frame" x="13" y="70" width="294" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Poll-Image" id="bp8-We-Uw6">
+                                        <rect key="frame" x="40" y="111" width="240" height="228"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Descrizione" selectable="NO" id="CYU-Xe-lEv">
+                                        <rect key="frame" x="13" y="349" width="294" height="235"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Dettagli" id="4kz-q0-sHc">
+                        <barButtonItem key="rightBarButtonItem" title="Vota" id="LuI-o9-qrd"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="deadline" destination="SJk-PZ-VcP" id="103-9j-dDI"/>
+                        <outlet property="description" destination="CYU-Xe-lEv" id="B5p-aT-JQZ"/>
+                        <outlet property="image" destination="bp8-We-Uw6" id="Ak7-nE-slh"/>
+                        <outlet property="lastUpdate" destination="2cb-Ds-2hT" id="r9W-B2-q1P"/>
+                        <outlet property="name" destination="Tz4-Ct-5KQ" id="c6K-Xj-4iQ"/>
+                        <outlet property="scrollView" destination="gG7-GW-Suq" id="n74-NF-faT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rhz-Tc-zKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1604" y="-2"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="1LF-th-dMd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9NF-H3-4BB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="eKs-EK-jnG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="tTw-1B-ylm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VcF-GY-ZeW" kind="relationship" relationship="rootViewController" id="ntA-k6-hxO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2nM-l7-U1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="736" y="-1.8933333333333333"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="shl-gZ-a0k">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Gk2-zu-o1D" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="NHO-zN-3YK">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9NF-H3-4BB" kind="relationship" relationship="viewControllers" id="bUt-pO-8qs"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hdX-vX-50F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="302.93333333333334" y="-1.8933333333333333"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Home" width="25" height="25"/>
+        <image name="Poll-Image" width="400" height="400"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+</document>
