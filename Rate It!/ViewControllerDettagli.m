@@ -1,6 +1,7 @@
 /* Classe relativa alla View dei dettagli di un Poll */
 
 #import "ViewControllerDettagli.h"
+#import "Font.h"
 
 @interface ViewControllerDettagli ()
 
@@ -16,19 +17,19 @@
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,415)];
 
-    name.font = [UIFont fontWithName:@"ChalkboardSE-Bold" size:23];
+    name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:23];
     name.text = p.pollName;
     NSString *strDeadline = @"Scadenza: ";
     strDeadline = [strDeadline stringByAppendingString:(NSString *)p.deadline];
-    deadline.font = [UIFont fontWithName:@"ChalkboardSE-Light" size:14];
+    deadline.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];
     deadline.textColor = [UIColor redColor];
     deadline.text = strDeadline;
     NSString *strLastUpdate = @"Ultima modifica: ";
     strLastUpdate = [strLastUpdate stringByAppendingString:(NSString *)p.lastUpdate];
-    lastUpdate.font = [UIFont fontWithName:@"ChalkboardSE-Light" size:14];;
+    lastUpdate.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];;
     lastUpdate.text = strLastUpdate;
     description.selectable = true;
-    description.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:15];
+    description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:15];
     description.textAlignment = NSTextAlignmentNatural;
     description.text = p.pollDescription;
     description.selectable = false;

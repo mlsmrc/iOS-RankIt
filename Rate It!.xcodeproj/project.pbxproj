@@ -19,6 +19,7 @@
 		6F3D71EA1AC6FC3A00094C6C /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D71E91AC6FC3A00094C6C /* ViewControllerDettagli.m */; };
 		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
 		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
+		A9E928271AD80C830095E0C6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E928261AD80C830095E0C6 /* Font.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		A915B0841AC5877500BD95ED /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A915B0861AC59AEF00BD95ED /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
 		A915B0871AC59AEF00BD95ED /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candidate.m; sourceTree = "<group>"; };
+		A9E928261AD80C830095E0C6 /* Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Font.m; sourceTree = "<group>"; };
+		A9E928281AD80C940095E0C6 /* Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,8 @@
 				6F193FD41AC4B2A000D2D867 /* APIurls.m */,
 				6F193FD31AC4B23F00D2D867 /* ConnectionToServer.h */,
 				6F193FD11AC4B23600D2D867 /* ConnectionToServer.m */,
+				A9E928261AD80C830095E0C6 /* Font.m */,
+				A9E928281AD80C940095E0C6 /* Font.h */,
 			);
 			name = UtilClasses;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */,
 				6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */,
 				6F3D71EA1AC6FC3A00094C6C /* ViewControllerDettagli.m in Sources */,
+				A9E928271AD80C830095E0C6 /* Font.m in Sources */,
 				A915B0851AC5877500BD95ED /* Poll.m in Sources */,
 				6F193FA61AC4ADE200D2D867 /* AppDelegate.m in Sources */,
 				6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */,
@@ -336,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -371,7 +377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -385,7 +391,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Rate It!/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -400,7 +406,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Rate It!/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -421,6 +427,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Rate It!Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rate It!.app/Rate It!";
@@ -436,6 +443,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Rate It!Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rate It!.app/Rate It!";
