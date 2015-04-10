@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "home-25.png"
+      "filename" : "checkmark-25.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "home-50.png"
+      "filename" : "checkmark-50.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "home-75.png"
+      "filename" : "checkmark-75.png"
     }
   ],
   "info" : {
