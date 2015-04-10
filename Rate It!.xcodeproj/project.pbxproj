@@ -140,10 +140,10 @@
 		6F193FC91AC4B12F00D2D867 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				6F3D71E81AC6FC3A00094C6C /* ViewControllerDettagli.h */,
-				6F3D71E91AC6FC3A00094C6C /* ViewControllerDettagli.m */,
 				6F193FD71AC4B6D100D2D867 /* TableViewController.h */,
 				6F193FD81AC4B6D100D2D867 /* TableViewController.m */,
+				6F3D71E81AC6FC3A00094C6C /* ViewControllerDettagli.h */,
+				6F3D71E91AC6FC3A00094C6C /* ViewControllerDettagli.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -151,16 +151,16 @@
 		6F193FCA1AC4B17500D2D867 /* UtilClasses */ = {
 			isa = PBXGroup;
 			children = (
-				A915B0861AC59AEF00BD95ED /* Candidate.h */,
-				A915B0871AC59AEF00BD95ED /* Candidate.m */,
-				A915B0831AC5877500BD95ED /* Poll.h */,
-				A915B0841AC5877500BD95ED /* Poll.m */,
 				6F193FD61AC4B2B200D2D867 /* APIurls.h */,
 				6F193FD41AC4B2A000D2D867 /* APIurls.m */,
+				A915B0861AC59AEF00BD95ED /* Candidate.h */,
+				A915B0871AC59AEF00BD95ED /* Candidate.m */,
 				6F193FD31AC4B23F00D2D867 /* ConnectionToServer.h */,
 				6F193FD11AC4B23600D2D867 /* ConnectionToServer.m */,
-				A9E928261AD80C830095E0C6 /* Font.m */,
 				A9E928281AD80C940095E0C6 /* Font.h */,
+				A9E928261AD80C830095E0C6 /* Font.m */,
+				A915B0831AC5877500BD95ED /* Poll.h */,
+				A915B0841AC5877500BD95ED /* Poll.m */,
 			);
 			name = UtilClasses;
 			sourceTree = "<group>";
