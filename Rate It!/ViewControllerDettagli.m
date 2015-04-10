@@ -29,7 +29,7 @@
     lastUpdate.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];;
     lastUpdate.text = strLastUpdate;
     description.selectable = true;
-    description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:15];
+    description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:16];
     description.textAlignment = NSTextAlignmentNatural;
     description.text = p.pollDescription;
     description.selectable = false;
