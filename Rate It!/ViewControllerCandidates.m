@@ -22,6 +22,7 @@
 -(void)setYSpaceSubmit:(UIButton *)Button WithY:(CGFloat)Y;
 -(void)setTextDescription:(UITextView *)Description forCand:(Candidate *)C;
 -(void)setYSpaceVoto:(UITextField *)Voto WithY:(CGFloat)Y;
+-(void)setLabel:(UILabel *)Label OfCandidate:(Candidate *)C;
 
 @end
 
@@ -73,8 +74,8 @@
         {
             case 0:
                 
-                LabelForPrimo.text = [NSString stringWithFormat:@"a) %@",C.candName];
-                LabelForPrimo.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_NAME];
+                /* Aggiungi la label del candidate  */
+                [self setLabel:LabelForPrimo OfCandidate:C];
                 
                 [self setTextDescription:DescriptionForPrimo forCand:C];
                 
@@ -86,8 +87,8 @@
                 break;
             case 1:
                 
-                LabelForSecondo.text = [NSString stringWithFormat:@"b) %@",C.candName];
-                LabelForSecondo.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_NAME];
+                /* Aggiungi la label del candidate  */
+                [self setLabel:LabelForSecondo OfCandidate:C];
                 
                 /*  Fisso l'altezza per la descrizione  */
                 [self setTextDescription:DescriptionForSecondo forCand:C];
@@ -106,8 +107,9 @@
                 
                 break;
             case 2:
-                LabelForTerzo.text = [NSString stringWithFormat:@"c) %@",C.candName];
-                LabelForTerzo.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_NAME];
+                
+                /* Aggiungi la label del candidate  */
+                [self setLabel:LabelForTerzo OfCandidate:C];
                 
                 /* Setto il testo della descrizione */
                 [self setTextDescription:DescriptionForTerzo forCand:C];
@@ -126,8 +128,9 @@
                 
                 break;
             case 3:
-                LabelForQuarto.text = [NSString stringWithFormat:@"d) %@",C.candName];
-                LabelForQuarto.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_NAME];
+                
+                /* Aggiungi la label del candidate  */
+                [self setLabel:LabelForQuarto OfCandidate:C];
                 
                 /* Setto il testo della descrizione */
                 [self setTextDescription:DescriptionForQuarto forCand:C];
@@ -147,8 +150,9 @@
                 break;
                 
             case 4:
-                LabelForQuinto.text = [NSString stringWithFormat:@"e) %@",C.candName];
-                LabelForQuinto.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_NAME];
+                
+                /* Aggiungi la label del candidate  */
+                [self setLabel:LabelForQuinto OfCandidate:C];
                 
                 /* Setto il testo della descrizione */
                 [self setTextDescription:DescriptionForQuinto forCand:C];
@@ -218,7 +222,6 @@
     [Description sizeToFit];
     
     int numLines = Description.frame.size.height/Description.font.lineHeight;
-    
     if(numLines>1)
         Y += numLines * LINE_HEIGHT + DESCR_LABEL;
     else
@@ -249,6 +252,7 @@
 -(void)setTextDescription:(UITextView *)Description forCand:(Candidate *)C
 {
     Description.selectable = true;
+    Description.backgroundColor = [UIColor clearColor];
     Description.text= C.candDescription;
     Description.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_DESCRIPTION];
     Description.selectable = false;
@@ -274,5 +278,11 @@
         Button.frame=frame;
         [scrollView setContentSize:CGSizeMake(320,Yscreen)];
     }
+}
+
+-(void)setLabel:(UILabel *)Label OfCandidate:(Candidate *)C
+{
+    Label.text = [NSString stringWithFormat:@"%@) %@",C.candChar,C.candName];
+    Label.font = [UIFont fontWithName:FONT_CANDIDATES_POLL size:FONT_SIZE_CAND_NAME];
 }
 @end

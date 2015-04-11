@@ -11,5 +11,6 @@ NSString* FONT_DETTAGLI_POLL = @"Avenir-Book";
 NSString* FONT_DETTAGLI_POLL_LIGHT = @"Avenir-Light";
 NSString* FONT_DETTAGLI_POLL_BOLD = @"Avenir-Heavy";
 NSString* FONT_CANDIDATES_POLL = @"Avenir-Book";
+NSString* FONT_CANDIDATES_POLL_MEDIUM = @"Avenir-Medium";
 
 @end
