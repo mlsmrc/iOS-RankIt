@@ -19,6 +19,7 @@
 		6F3D71EA1AC6FC3A00094C6C /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D71E91AC6FC3A00094C6C /* ViewControllerDettagli.m */; };
 		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
 		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
+		A9BBBBCD1AD9298B008EA0AD /* ViewControllerCandidates.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BBBBCC1AD9298B008EA0AD /* ViewControllerCandidates.m */; };
 		A9E928271AD80C830095E0C6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E928261AD80C830095E0C6 /* Font.m */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		A915B0841AC5877500BD95ED /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A915B0861AC59AEF00BD95ED /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
 		A915B0871AC59AEF00BD95ED /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candidate.m; sourceTree = "<group>"; };
+		A9BBBBCB1AD9298B008EA0AD /* ViewControllerCandidates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerCandidates.h; sourceTree = "<group>"; };
+		A9BBBBCC1AD9298B008EA0AD /* ViewControllerCandidates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerCandidates.m; sourceTree = "<group>"; };
 		A9E928261AD80C830095E0C6 /* Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Font.m; sourceTree = "<group>"; };
 		A9E928281AD80C940095E0C6 /* Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +147,8 @@
 				6F193FD81AC4B6D100D2D867 /* TableViewController.m */,
 				6F3D71E81AC6FC3A00094C6C /* ViewControllerDettagli.h */,
 				6F3D71E91AC6FC3A00094C6C /* ViewControllerDettagli.m */,
+				A9BBBBCB1AD9298B008EA0AD /* ViewControllerCandidates.h */,
+				A9BBBBCC1AD9298B008EA0AD /* ViewControllerCandidates.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9BBBBCD1AD9298B008EA0AD /* ViewControllerCandidates.m in Sources */,
 				6F193FD51AC4B2A000D2D867 /* APIurls.m in Sources */,
 				6F193FD21AC4B23600D2D867 /* ConnectionToServer.m in Sources */,
 				6F3D71EA1AC6FC3A00094C6C /* ViewControllerDettagli.m in Sources */,

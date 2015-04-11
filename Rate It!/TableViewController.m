@@ -112,7 +112,7 @@ NSString *BACK = @"Indietro";
         
         value = [allPublicPolls objectForKey:key];
         
-        Poll *p = [[Poll alloc]initPollWithPollID:(int)[value valueForKey:@"pollid"] withName:[value valueForKey:@"pollname"] withDescription:[value valueForKey:@"polldescription"] withResultsType:-1 withDeadline:[value valueForKey:@"deadline"] withLastUpdate:[value valueForKey:@"updated"] withVote:(int)[value valueForKey:@"votes"] withCandidates:nil];
+        Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]  withName:[value valueForKey:@"pollname"] withDescription:[value valueForKey:@"polldescription"] withResultsType:-1 withDeadline:[value valueForKey:@"deadline"] withLastUpdate:[value valueForKey:@"updated"] withVote:(int)[value valueForKey:@"votes"] withCandidates:nil];
         [allPublicPollsDetails addObject:p];
         
     }

@@ -1,5 +1,6 @@
 /* Classe relativa alla View dei dettagli di un Poll */
 
+#import "ViewControllerCandidates.h"
 #import "ViewControllerDettagli.h"
 #import "Font.h"
 
@@ -16,6 +17,7 @@
     [super viewDidLoad];
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,415)];
+    [scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
 
     name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:23];
     name.text = p.pollName;
@@ -26,7 +28,7 @@
     deadline.text = strDeadline;
     NSString *strLastUpdate = @"Ultima modifica: ";
     strLastUpdate = [strLastUpdate stringByAppendingString:(NSString *)p.lastUpdate];
-    lastUpdate.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];;
+    lastUpdate.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];
     lastUpdate.text = strLastUpdate;
     description.selectable = true;
     description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:16];
@@ -50,6 +52,13 @@
     [super viewDidAppear:animated];
     [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
+}
+
+/* Metodo che passa il poll alla schermata successiva   */
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ViewControllerCandidates *candidates = segue.destinationViewController;
+    candidates.poll = p;
 }
 
 @end
