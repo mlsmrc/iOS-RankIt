@@ -3,12 +3,12 @@
 
 @interface ViewControllerDettagli : UIViewController
 
-@property (nonatomic,strong) Poll *p;
-@property (nonatomic,weak) IBOutlet UILabel *name;
-@property (nonatomic,weak) IBOutlet UITextView *description;
-@property (nonatomic,weak) IBOutlet UIImageView *image;
-@property (nonatomic,weak) IBOutlet UILabel *deadline;
-@property (nonatomic,weak) IBOutlet UILabel *lastUpdate;
-@property (nonatomic,weak) IBOutlet UIScrollView *scrollView;
+@property (strong,nonatomic) Poll *p;
+@property (weak,nonatomic) IBOutlet UILabel *name;
+@property (weak,nonatomic) IBOutlet UITextView *description;
+@property (weak,nonatomic) IBOutlet UIImageView *image;
+@property (weak,nonatomic) IBOutlet UILabel *deadline;
+@property (weak,nonatomic) IBOutlet UILabel *lastUpdate;
+@property (weak,nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

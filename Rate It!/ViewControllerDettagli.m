@@ -12,14 +12,14 @@
 
 @synthesize p,scrollView,name,description,image,deadline,lastUpdate;
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     
     [super viewDidLoad];
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,415)];
-    [scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
+    //[scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
 
-    name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:23];
+    name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
     name.text = p.pollName;
     NSString *strDeadline = @"Scadenza: ";
     strDeadline = [strDeadline stringByAppendingString:(NSString *)p.deadline];
@@ -38,17 +38,18 @@
     description.selectable = false;
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della scroll view */
-    
+    CGRect frame;
+    CGFloat currentY = 0;
     [description sizeToFit];
-    int numLines = description.frame.size.height/description.font.lineHeight;
-    
-    if(numLines>2)
-        [scrollView setContentSize:CGSizeMake(320,(415+(numLines*6.5)))];
+    frame = description.frame;
+    currentY += frame.origin.y;
+    currentY += frame.size.height;
+    [scrollView setContentSize:CGSizeMake(320,currentY+5)];
     
 }
 
 /* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
-- (void)viewDidAppear:(BOOL)animated {
+- (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
     [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
@@ -56,10 +57,11 @@
 }
 
 /* Metodo che passa il poll alla schermata successiva   */
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     ViewControllerCandidates *candidates = segue.destinationViewController;
     candidates.poll = p;
+    
 }
 
 @end
