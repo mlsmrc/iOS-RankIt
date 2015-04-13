@@ -270,7 +270,8 @@
     
 }
 
-/* Setta l'altezza per la TextField del voto */
+/* Setta l'altezza per la TextField del voto.                  *
+ * Il valore 7 serve per allineare perfettamente con la label. */
 - (void) setYSpaceVoto:(UITextField *)Voto WithY:(CGFloat)Y
 {
     
@@ -295,7 +296,7 @@
 }
 
 /* Setta l'altezza del bottone submit portandolo ad ugual distanza dal basso. *
- * Il valore 40 è stato scelto dopo alcune prove.                             */
+ * I valori 40 e 15 sono stati scelti dopo alcune prove.                      */
 - (void) setYSpaceSubmit:(UIButton *)Button WithY:(CGFloat)Y
 {
     
@@ -315,7 +316,7 @@
     else
     {
         
-        frame.origin.y=YScreen-SUBMIT_END_FRAME-10;
+        frame.origin.y=YScreen-15;
         Button.frame=frame;
         [scrollView setContentSize:CGSizeMake(320,YScreen)];
         

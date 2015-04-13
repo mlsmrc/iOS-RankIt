@@ -19,6 +19,7 @@
     [scrollView setContentSize:CGSizeMake(320,415)];
     //[scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
 
+    /* Tutti i settaggi del caso */
     name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
     name.text = p.pollName;
     NSString *strDeadline = @"Scadenza: ";
@@ -37,7 +38,8 @@
     description.text = p.pollDescription;
     description.selectable = false;
     
-    /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della scroll view */
+    /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della scroll view. *
+     * Il valore 5 serve per spaziare dal fondo della view, è stato scelto empiricamente.                             */
     CGRect frame;
     CGFloat currentY = 0;
     [description sizeToFit];
