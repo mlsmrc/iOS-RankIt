@@ -105,8 +105,7 @@
 		6F193F9F1AC4ADE200D2D867 /* Rate It! */ = {
 			isa = PBXGroup;
 			children = (
-				6F193FA41AC4ADE200D2D867 /* AppDelegate.h */,
-				6F193FA51AC4ADE200D2D867 /* AppDelegate.m */,
+				A94967F71ADD42DD009DE8A9 /* Delegates */,
 				6F193FC91AC4B12F00D2D867 /* Home */,
 				6F193FCA1AC4B17500D2D867 /* UtilClasses */,
 				6F116FEA1AD5E4AA005B2A9A /* Main.storyboard */,
@@ -146,8 +145,6 @@
 		6F193FC91AC4B12F00D2D867 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				6F9E94D41ADB3589006C7A6E /* Flip.h */,
-				6F9E94D51ADB3589006C7A6E /* Flip.m */,
 				6F193FD71AC4B6D100D2D867 /* TableViewController.h */,
 				6F193FD81AC4B6D100D2D867 /* TableViewController.m */,
 				A9BBBBCB1AD9298B008EA0AD /* ViewControllerCandidates.h */,
@@ -173,6 +170,17 @@
 				A915B0841AC5877500BD95ED /* Poll.m */,
 			);
 			name = UtilClasses;
+			sourceTree = "<group>";
+		};
+		A94967F71ADD42DD009DE8A9 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				6F193FA41AC4ADE200D2D867 /* AppDelegate.h */,
+				6F193FA51AC4ADE200D2D867 /* AppDelegate.m */,
+				6F9E94D41ADB3589006C7A6E /* Flip.h */,
+				6F9E94D51ADB3589006C7A6E /* Flip.m */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

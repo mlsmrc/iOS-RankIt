@@ -11,6 +11,10 @@
 #define DESCR_SUBMIT 15
 #define SUBMIT_END_FRAME 35
 
+#define MANCA_VOTO 0
+#define VOTO_SBAGLIATO 1
+#define VOTI_OK 2
+
 @interface ViewControllerCandidates ()
 
 /* Funzioni private, non inserite nell'header */
@@ -22,17 +26,22 @@
 - (void) setTextDescription:(UITextView *)Description forCand:(Candidate *)C;
 - (void) setYSpaceVoto:(UITextField *)Voto WithY:(CGFloat)Y;
 - (void) setLabel:(UILabel *)Label OfCandidate:(Candidate *)C;
-
+- (int) checkVoti: (NSMutableArray *)Voti;
+- (NSMutableString*) getRankingString:(NSMutableDictionary *)ranking;
 @end
 
 @implementation ViewControllerCandidates
 
 @synthesize poll,scrollView,Submit;
+@synthesize Picker,ViewForPicker,Chiudi,CandidateEditing;
 @synthesize LabelForPrimo,VotoForPrimo,DescriptionForPrimo;
 @synthesize LabelForSecondo,VotoForSecondo,DescriptionForSecondo;
 @synthesize LabelForTerzo,VotoForTerzo,DescriptionForTerzo;
 @synthesize LabelForQuarto,VotoForQuarto,DescriptionForQuarto;
 @synthesize LabelForQuinto,VotoForQuinto,DescriptionForQuinto;
+
+long tagSelected = -1;
+long candsDim = -1;
 
 - (void) viewDidLoad
 {
@@ -44,10 +53,37 @@
     [scrollView setContentSize:CGSizeMake(320,800)];
     //[scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
     
+    /* Settaggio dei tag */
+    VotoForPrimo.tag = 1;
+    VotoForSecondo.tag = 2;
+    VotoForTerzo.tag = 3;
+    VotoForQuarto.tag = 4;
+    VotoForQuinto.tag = 5;
+
+    
+    /* Settaggi delegate per TextField voto */
+    VotoForPrimo.delegate = self;
+    VotoForSecondo.delegate = self;
+    VotoForTerzo.delegate = self;
+    VotoForQuarto.delegate = self;
+    VotoForQuinto.delegate = self;
+    
+    /* Settaggi DataPicker */
+    Picker.delegate = self;
+    numbersForVoto = [[NSMutableArray alloc]init];
+
+    
+    
     /* Download dei candidates */
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
     NSString *ID = [NSString stringWithFormat:@"%d",[poll pollId]];
     NSMutableArray *cands = [conn getCandidatesWithPollId:ID];
+    
+    /* Popolamento Picker per la classifica */
+    [numbersForVoto addObject:@"-"];
+    candsDim = [cands count];
+    for (int i=0; i<candsDim; i++)
+        [numbersForVoto addObject:[NSString stringWithFormat:@"%d°",(i+1)]];
     
     /* Inserimento degli elementi in GUI */
     [self setCandsInfoToGUI:cands];
@@ -58,12 +94,11 @@
 {
     
     Candidate *C;
-    int dim = (int)[cands count];
     
     /* Angolo superiore prima label */
     CGFloat Y = LabelForPrimo.frame.origin.y;
     
-    for (int i=0; i<dim; i++)
+    for (int i=0; i<candsDim; i++)
     {
         
         C = cands[i];
@@ -182,7 +217,7 @@
     }
     
     /* Nascondo gli outlet riferenti alle risposte che non ci sono */
-    for (int j=dim; j<=5; j++)
+    for (long j=candsDim; j<=5; j++)
     {
         
         switch (j) {
@@ -207,7 +242,7 @@
     }
     
     /* Setta l'altezza per l'ultima TextView */
-    switch (dim) {
+    switch (candsDim) {
             
         case 3:
             Y = [self getYSpaceLabelSpacedFrom:DescriptionForTerzo WithY:Y];
@@ -382,4 +417,187 @@
     
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    NSString *textInTextField = [textField.text stringByReplacingOccurrencesOfString:@"°" withString:@""];
+    [Picker selectRow:[textInTextField intValue] inComponent:0 animated:true];
+    
+    ViewForPicker.backgroundColor=[UIColor whiteColor];
+    Picker.backgroundColor=[UIColor whiteColor];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:.50];
+    [UIView setAnimationDelegate:self];
+    CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
+    ViewForPicker.frame = CGRectMake(0, YScreen-ViewForPicker.frame.size.height-50, ViewForPicker.frame.size.width, ViewForPicker.frame.size.height);
+    [self.view addSubview:ViewForPicker];
+    [UIView commitAnimations];
+
+    /* setto come tag selezionato il tag del textField */
+    tagSelected = textField.tag;
+    
+    /* setto come label il nome del candidato che si sta votando */
+    switch (tagSelected) {
+        case 1:
+            CandidateEditing.text = LabelForPrimo.text;
+            break;
+            
+        case 2:
+            CandidateEditing.text = LabelForSecondo.text;
+            break;
+            
+        case 3:
+            CandidateEditing.text = LabelForTerzo.text;
+            break;
+            
+        case 4:
+            CandidateEditing.text = LabelForQuarto.text;
+            break;
+            
+        case 5:
+            CandidateEditing.text = LabelForQuinto.text;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [CandidateEditing sizeToFit];
+    
+    
+    
+
+    
+    return NO;
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    //One column
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    //set number of rows
+    return numbersForVoto.count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    //set item per row
+    return [numbersForVoto objectAtIndex:row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    switch (tagSelected) {
+        case 1:
+            [VotoForPrimo setText:[numbersForVoto objectAtIndex:row]];
+            break;
+            
+        case 2:
+            [VotoForSecondo setText:[numbersForVoto objectAtIndex:row]];
+            break;
+            
+        case 3:
+            [VotoForTerzo setText:[numbersForVoto objectAtIndex:row]];
+            break;
+            
+        case 4:
+            [VotoForQuarto setText:[numbersForVoto objectAtIndex:row]];
+            break;
+            
+        case 5:
+            [VotoForQuinto setText:[numbersForVoto objectAtIndex:row]];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+- (IBAction)chiudiPicker:(id)sender
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
+    ViewForPicker.frame = CGRectMake(0, YScreen, ViewForPicker.frame.size.width, ViewForPicker.frame.size.height);
+ 
+    [UIView commitAnimations];
+
+}
+
+- (IBAction)inviaVoto:(id)sender
+{
+
+    NSMutableDictionary *voti = [[NSMutableDictionary alloc]init];
+    [voti setObject:[VotoForPrimo.text stringByReplacingOccurrencesOfString:@"°" withString:@""] forKey:@"a" ];
+    [voti setObject:[VotoForSecondo.text stringByReplacingOccurrencesOfString:@"°" withString:@"" ] forKey:@"b" ];
+    [voti setObject:[VotoForTerzo.text stringByReplacingOccurrencesOfString:@"°" withString:@""] forKey:@"c" ];
+    
+    if (candsDim >= 4)
+        [voti setObject:[VotoForQuarto.text stringByReplacingOccurrencesOfString:@"°" withString:@""] forKey:@"d" ];
+    if (candsDim == 5)
+        [voti setObject:[VotoForQuinto.text stringByReplacingOccurrencesOfString:@"°" withString:@""] forKey:@"e" ];
+    
+    NSMutableArray *votiSorted = [[NSMutableArray alloc]init];
+    NSString *value;
+    for(id key in voti) {
+        
+        value = [voti objectForKey:key] ;
+        [votiSorted addObject:value];
+    
+    }
+    
+    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
+    votiSorted = (NSMutableArray*)[votiSorted sortedArrayUsingDescriptors:@[sd]];
+    
+    if([self checkVoti: votiSorted]==VOTI_OK)
+    {
+        ConnectionToServer *conn = [[ConnectionToServer alloc] init];
+        NSMutableString *stringVotiToSubmit = [self getRankingString:voti];
+        NSLog(@"%@",stringVotiToSubmit);
+        [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:poll.userID andRanking:stringVotiToSubmit];
+        
+    }
+    
+}
+/* controllo sui voti */
+-(int)checkVoti: (NSMutableArray *)Voti
+{
+    if([Voti[0] isEqual:@"-"])
+        return MANCA_VOTO;
+    if(![Voti[0] isEqual:@"1"])
+        return VOTO_SBAGLIATO;
+    
+    long voto = [Voti[0] integerValue];
+    for (int i=1; i < [Voti count]; i++)
+    {
+        if ([Voti[i] integerValue]>voto+1)
+            return VOTO_SBAGLIATO;
+        
+        voto = [Voti[i] integerValue];
+    }
+    
+    return VOTI_OK;
+}
+
+-(NSMutableString*) getRankingString:(NSMutableDictionary *)ranking
+{
+    NSLog(@"%@",ranking);
+    NSMutableString *voti=[[NSMutableString alloc] initWithString:@""];
+    for (int voto=1; voto<=candsDim; voto++)
+    {
+        for (NSString *cand in ranking)
+        {
+            if ([[ranking objectForKey:cand] integerValue]==voto)
+            {
+                voti = [NSMutableString stringWithFormat:@"%@%@",voti,cand];
+            }
+        }
+        if(voto<candsDim)
+            voti = [NSMutableString stringWithFormat:@"%@,",voti];
+    }
+    return voti;
+}
 @end
