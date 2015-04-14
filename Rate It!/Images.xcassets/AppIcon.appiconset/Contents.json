@@ -27,7 +27,7 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "rateit120-1.png",
+      "filename" : "rateit120.png",
       "scale" : "3x"
     },
     {
@@ -107,7 +107,7 @@
     {
       "size" : "120x120",
       "idiom" : "car",
-      "filename" : "rateit120-2.png",
+      "filename" : "rateit120-1.png",
       "scale" : "1x"
     },
     {

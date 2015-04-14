@@ -155,7 +155,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Voto" textAlignment="center" minimumFontSize="17" id="baD-NL-ymi" customClass="ShowDataPicker">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Voto" textAlignment="center" minimumFontSize="17" id="baD-NL-ymi">
                                         <rect key="frame" x="264" y="26" width="44" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -300,7 +300,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Votazione" id="gvu-kU-T3I">
-                        <barButtonItem key="rightBarButtonItem" title="Annulla" id="Ywh-cl-h3P"/>
+                        <barButtonItem key="rightBarButtonItem" title="Annulla" id="Ywh-cl-h3P">
+                            <connections>
+                                <action selector="backToPrevius:" destination="YMh-wj-FqY" id="4Al-ta-Php"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

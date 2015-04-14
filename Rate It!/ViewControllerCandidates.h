@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "Poll.h"
 
-@interface ViewControllerCandidates : UIViewController <UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface ViewControllerCandidates : UIViewController <UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>
 {
     NSMutableArray *numbersForVoto;
 }
@@ -30,14 +30,15 @@
 @property (weak,nonatomic) IBOutlet UITextView *DescriptionForQuinto;
 
 @property (weak,nonatomic) IBOutlet UIButton *Submit;
+
 @property (weak, nonatomic) IBOutlet UIPickerView *Picker;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Chiudi;
 @property (weak, nonatomic) IBOutlet UIView *ViewForPicker;
-//@property (weak, nonatomic) IBOutlet UILabel *CandidateEditing;
+
 @property (weak, nonatomic) IBOutlet UILabel *CandidateEditing;
 
 - (IBAction)chiudiPicker:(id)sender;
 - (IBAction)inviaVoto:(id)sender;
-
+- (IBAction)backToPrevius:(id)sender;
 
 @end

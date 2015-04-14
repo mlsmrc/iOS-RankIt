@@ -14,7 +14,8 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
          withDescription: (NSString *) Description
             withDeadline: (NSDate *) Deadline
              withPrivate: (BOOL) Private
-          withCandidates: (NSMutableArray *) cand; {
+          withCandidates: (NSMutableArray *) cand;
+{
     
     self = [super init];
     
