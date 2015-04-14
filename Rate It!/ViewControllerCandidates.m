@@ -27,7 +27,7 @@
 
 @implementation ViewControllerCandidates
 
-@synthesize poll,scrollView,Submit;
+@synthesize poll,scrollView,Submit,Picker,ViewForPicker,Chiudi;
 @synthesize LabelForPrimo,VotoForPrimo,DescriptionForPrimo;
 @synthesize LabelForSecondo,VotoForSecondo,DescriptionForSecondo;
 @synthesize LabelForTerzo,VotoForTerzo,DescriptionForTerzo;
@@ -43,6 +43,15 @@
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,800)];
     //[scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
+    
+    /* Settaggi DataPicker */
+    VotoForPrimo.delegate = self;
+    Picker.delegate = self;
+    numbersForVoto = [[NSMutableArray alloc] init];
+    [numbersForVoto addObject:@"1"];
+    [numbersForVoto addObject:@"2"];
+    [numbersForVoto addObject:@"3"];
+    
     
     /* Download dei candidates */
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
@@ -382,4 +391,48 @@
     
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    //Picker.frame = CGRectMake(0, 500, Picker.frame.size.width,    Picker.frame.size.height);
+    ViewForPicker.backgroundColor=[UIColor whiteColor];
+    Picker.backgroundColor=[UIColor whiteColor];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:.50];
+    [UIView setAnimationDelegate:self];
+    CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
+    ViewForPicker.frame = CGRectMake(0, YScreen-ViewForPicker.frame.size.height-50, ViewForPicker.frame.size.width, ViewForPicker.frame.size.height);
+    [self.view addSubview:ViewForPicker];
+    [UIView commitAnimations];
+
+    
+    return NO;
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    //One column
+     NSLog(@"Oh one!");
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    //set number of rows
+    return numbersForVoto.count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    //set item per row
+    return [numbersForVoto objectAtIndex:row];
+}
+
+- (IBAction)chiudiPicker:(id)sender
+ {
+ [UIView beginAnimations:nil context:nil];
+ [UIView setAnimationDuration:0.5];
+ CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
+ ViewForPicker.frame = CGRectMake(0, YScreen, ViewForPicker.frame.size.width, ViewForPicker.frame.size.height);
+ 
+ [UIView commitAnimations];
+ }
 @end

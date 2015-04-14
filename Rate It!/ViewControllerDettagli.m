@@ -37,6 +37,8 @@
     description.textAlignment = NSTextAlignmentNatural;
     description.text = p.pollDescription;
     description.selectable = false;
+    [image.layer setBorderColor: [[UIColor darkGrayColor] CGColor]];
+    [image.layer setBorderWidth: 0.5];
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della scroll view. *
      * Il valore 5 serve per spaziare dal fondo della view, è stato scelto empiricamente.                             */
