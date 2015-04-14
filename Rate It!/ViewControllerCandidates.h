@@ -33,8 +33,11 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *Picker;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Chiudi;
 @property (weak, nonatomic) IBOutlet UIView *ViewForPicker;
+//@property (weak, nonatomic) IBOutlet UILabel *CandidateEditing;
+@property (weak, nonatomic) IBOutlet UILabel *CandidateEditing;
 
 - (IBAction)chiudiPicker:(id)sender;
+- (IBAction)inviaVoto:(id)sender;
 
 
 @end

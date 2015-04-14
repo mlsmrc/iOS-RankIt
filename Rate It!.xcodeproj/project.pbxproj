@@ -20,7 +20,6 @@
 		6F9E94D61ADB3589006C7A6E /* Flip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9E94D51ADB3589006C7A6E /* Flip.m */; };
 		A915B0851AC5877500BD95ED /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0841AC5877500BD95ED /* Poll.m */; };
 		A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A915B0871AC59AEF00BD95ED /* Candidate.m */; };
-		A94967FD1ADD496C009DE8A9 /* ShowPickerCandidates.m in Sources */ = {isa = PBXBuildFile; fileRef = A94967FC1ADD496C009DE8A9 /* ShowPickerCandidates.m */; };
 		A9BBBBCD1AD9298B008EA0AD /* ViewControllerCandidates.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BBBBCC1AD9298B008EA0AD /* ViewControllerCandidates.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A9E928271AD80C830095E0C6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E928261AD80C830095E0C6 /* Font.m */; };
 /* End PBXBuildFile section */
@@ -61,8 +60,6 @@
 		A915B0841AC5877500BD95ED /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A915B0861AC59AEF00BD95ED /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
 		A915B0871AC59AEF00BD95ED /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candidate.m; sourceTree = "<group>"; };
-		A94967FB1ADD496C009DE8A9 /* ShowPickerCandidates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPickerCandidates.h; sourceTree = "<group>"; };
-		A94967FC1ADD496C009DE8A9 /* ShowPickerCandidates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPickerCandidates.m; sourceTree = "<group>"; };
 		A9BBBBCB1AD9298B008EA0AD /* ViewControllerCandidates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerCandidates.h; sourceTree = "<group>"; };
 		A9BBBBCC1AD9298B008EA0AD /* ViewControllerCandidates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerCandidates.m; sourceTree = "<group>"; };
 		A9E928261AD80C830095E0C6 /* Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Font.m; sourceTree = "<group>"; };
@@ -182,8 +179,6 @@
 				6F193FA51AC4ADE200D2D867 /* AppDelegate.m */,
 				6F9E94D41ADB3589006C7A6E /* Flip.h */,
 				6F9E94D51ADB3589006C7A6E /* Flip.m */,
-				A94967FB1ADD496C009DE8A9 /* ShowPickerCandidates.h */,
-				A94967FC1ADD496C009DE8A9 /* ShowPickerCandidates.m */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -297,7 +292,6 @@
 				6F9E94D61ADB3589006C7A6E /* Flip.m in Sources */,
 				A915B0851AC5877500BD95ED /* Poll.m in Sources */,
 				6F193FA61AC4ADE200D2D867 /* AppDelegate.m in Sources */,
-				A94967FD1ADD496C009DE8A9 /* ShowPickerCandidates.m in Sources */,
 				6F193FD91AC4B6D100D2D867 /* TableViewController.m in Sources */,
 				6F193FA31AC4ADE200D2D867 /* main.m in Sources */,
 				A915B0881AC59AEF00BD95ED /* Candidate.m in Sources */,
