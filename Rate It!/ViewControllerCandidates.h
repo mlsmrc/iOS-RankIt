@@ -39,6 +39,5 @@
 
 - (IBAction)chiudiPicker:(id)sender;
 - (IBAction)inviaVoto:(id)sender;
-- (IBAction)backToPrevius:(id)sender;
 
 @end

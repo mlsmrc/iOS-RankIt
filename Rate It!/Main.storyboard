@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Rate It!-->
@@ -141,11 +141,11 @@
             <objects>
                 <viewController title="Votazione" id="YMh-wj-FqY" customClass="ViewControllerCandidates" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4GG-zl-quj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="950"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3SW-0W-4GB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="950"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelForPrimo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W00-g1-vzF">
@@ -299,16 +299,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Votazione" id="gvu-kU-T3I">
-                        <barButtonItem key="rightBarButtonItem" title="Annulla" id="Ywh-cl-h3P">
-                            <connections>
-                                <action selector="backToPrevius:" destination="YMh-wj-FqY" id="4Al-ta-Php"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Votazione" id="gvu-kU-T3I"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="950"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="CandidateEditing" destination="AnY-xX-IgB" id="oXS-ah-4Yg"/>
                         <outlet property="Chiudi" destination="UGr-4C-rdD" id="BG4-WO-a31"/>

@@ -84,6 +84,7 @@ NSMutableDictionary *dizionarioPolls;
 /* Funzione che ritorna le scelte per il voto di un determinato poll specificato tramite pollId */
 - (NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId
 {
+    
     /* Sostituzione dei parametri */
     NSString * url=[URL_GET_CANDIDATES stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     
@@ -99,20 +100,24 @@ NSMutableDictionary *dizionarioPolls;
     /* Esito positivo: parsing del JSON nel dizionario (una entry per ogni candidate) */
     if(response!=nil)
     {
+        
         dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         response=nil;
        
         /* creazione dell'array contenente i candidates */
         for(NSString *key in dict)
         {
+            
             Candidate * candidate=[[Candidate alloc]initCandicateWithChar:[key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"] andDescription:[key valueForKey:@"canddescription"]];
             [arrayCandidates addObject:candidate];
             candidate=nil;
+            
         }
             
     }
     
     return arrayCandidates;
+    
 }
 
 /*  Funzione che dato il pollid, lo userid e la stringa che corrisponde alla votazione  *
@@ -142,6 +147,7 @@ NSMutableDictionary *dizionarioPolls;
  *  ritorna l'id del poll appena inserito come stringa              */
 - (NSString *) addPollWithPoll:(Poll*)newpoll
 {
+    
     /* Preparazione dati richiesta POST */
     NSString *post = [NSString stringWithFormat:@"newpoll=%@",[newpoll toJSON]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -159,10 +165,10 @@ NSMutableDictionary *dizionarioPolls;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *requestReply = [[NSString alloc] initWithBytes:[requestHandler bytes]length:[requestHandler length]encoding:NSASCIIStringEncoding];
     
-    /* creazione dizionario per estrapolare il pollid */
+    /* Creazione dizionario per estrapolare il pollid */
     NSDictionary *d = [NSJSONSerialization JSONObjectWithData:[requestReply dataUsingEncoding:NSUTF8StringEncoding]options:NSJSONReadingMutableContainers error:nil];
 
-    /* si ritorna il pollid associato */
+    /* Ritorna il pollid associato */
     return ([d valueForKey:@"pollid"]);
     
 }

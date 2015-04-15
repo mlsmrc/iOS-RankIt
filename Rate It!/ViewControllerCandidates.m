@@ -10,6 +10,7 @@
 #define DESCR_LABEL 45
 #define DESCR_SUBMIT 15
 #define SUBMIT_END_FRAME 35
+#define DEPTH 10
 
 #define MANCA_VOTO 0
 #define VOTO_SBAGLIATO 1
@@ -59,7 +60,6 @@ long candsDim = -1;
     VotoForTerzo.tag = 3;
     VotoForQuarto.tag = 4;
     VotoForQuinto.tag = 5;
-
     
     /* Settaggi delegate per TextField voto */
     VotoForPrimo.delegate = self;
@@ -71,8 +71,8 @@ long candsDim = -1;
     /* Settaggi DataPicker */
     Picker.delegate = self;
     numbersForVoto = [[NSMutableArray alloc]init];
-
-    
+    CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
+    ViewForPicker.frame = CGRectMake(0,DEPTH*YScreen,ViewForPicker.frame.size.width,ViewForPicker.frame.size.height);
     
     /* Download dei candidates */
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
@@ -417,12 +417,13 @@ long candsDim = -1;
     
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-    /* rimozione di ° dalla stringa del voto - le stringhe del voto sono 1°, 2°, 3°, ... */
+    
+    /* Rimozione di "°" dalla stringa del voto - Le stringhe del voto sono 1°, 2°, 3°, ... */
     NSString *textInTextField = [textField.text stringByReplacingOccurrencesOfString:@"°" withString:@""];
     
-    /* animazione della view per la picker */
+    /* Animazione della view per il Picker */
     [Picker selectRow:[textInTextField intValue] inComponent:0 animated:true];
     ViewForPicker.backgroundColor=[UIColor whiteColor];
     Picker.backgroundColor=[UIColor whiteColor];
@@ -430,16 +431,17 @@ long candsDim = -1;
     [UIView setAnimationDuration:.50];
     [UIView setAnimationDelegate:self];
     CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
-    ViewForPicker.frame = CGRectMake(0, YScreen-ViewForPicker.frame.size.height-50, ViewForPicker.frame.size.width, ViewForPicker.frame.size.height);
+    ViewForPicker.frame = CGRectMake(0,YScreen-ViewForPicker.frame.size.height-50,ViewForPicker.frame.size.width,ViewForPicker.frame.size.height);
     [self.view addSubview:ViewForPicker];
     [UIView commitAnimations];
 
-    /* setto come tag selezionato il tag del textField */
+    /* Setta come tag selezionato il tag del textField */
     tagSelected = textField.tag;
     
-    /* setto come label il nome del candidato che si sta votando                    *
-     * le stringhe arrivano tutte della forma #) Titolo, per cui esigono di pulizia */
+    /* Setta come label il nome del candidato che si sta votando                    *
+     * Le stringhe arrivano tutte della forma #) Titolo, per cui esigono di pulizia */
     switch (tagSelected) {
+            
         case 1:
             CandidateEditing.text = [LabelForPrimo.text stringByReplacingOccurrencesOfString:@"a)" withString:@""];
             break;
@@ -462,37 +464,36 @@ long candsDim = -1;
             
         default:
             break;
+            
     }
     
     [CandidateEditing sizeToFit];
-    
-    
-    
-
-    
     return NO;
+    
 }
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+
+/* Metodi per visualizzare correttamente le scelte del Picker */
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    //One column
     return 1;
 }
 
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    //set number of rows
     return numbersForVoto.count;
 }
 
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    //set item per row
     return [numbersForVoto objectAtIndex:row];
 }
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+/* Settaggio della scelta dal Picker */
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
     switch (tagSelected) {
+            
         case 1:
             [VotoForPrimo setText:[numbersForVoto objectAtIndex:row]];
             break;
@@ -515,24 +516,28 @@ long candsDim = -1;
             
         default:
             break;
+            
     }
     
 }
 
-- (IBAction)chiudiPicker:(id)sender
+/* Chiude il Picker */
+- (IBAction) chiudiPicker:(id)sender
 {
+    
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDuration:0.3];
     CGFloat YScreen = [[UIScreen mainScreen] bounds ].size.height;
-    ViewForPicker.frame = CGRectMake(0, YScreen, ViewForPicker.frame.size.width, ViewForPicker.frame.size.height);
- 
+    ViewForPicker.frame = CGRectMake(0,DEPTH*YScreen,ViewForPicker.frame.size.width,ViewForPicker.frame.size.height);
     [UIView commitAnimations];
 
 }
 
-- (IBAction)inviaVoto:(id)sender
+/* Invio della classifica al server */
+- (IBAction) inviaVoto:(id)sender
 {
-    /* dizionario di voti */
+    
+    /* Dizionario di voti */
     NSMutableDictionary *voti = [[NSMutableDictionary alloc]init];
     [voti setObject:[VotoForPrimo.text stringByReplacingOccurrencesOfString:@"°" withString:@""] forKey:@"a" ];
     [voti setObject:[VotoForSecondo.text stringByReplacingOccurrencesOfString:@"°" withString:@"" ] forKey:@"b" ];
@@ -543,9 +548,10 @@ long candsDim = -1;
     if (candsDim == 5)
         [voti setObject:[VotoForQuinto.text stringByReplacingOccurrencesOfString:@"°" withString:@""] forKey:@"e" ];
     
-    /* sort dei voti per facilitare il controllo successivo */
+    /* Sort dei voti per facilitare il controllo successivo */
     NSMutableArray *votiSorted = [[NSMutableArray alloc]init];
     NSString *value;
+    
     for(id key in voti) {
         
         value = [voti objectForKey:key] ;
@@ -556,106 +562,119 @@ long candsDim = -1;
     NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
     votiSorted = (NSMutableArray*)[votiSorted sortedArrayUsingDescriptors:@[sd]];
     
-    /* gestione dei valori */
+    /* Gestione dei valori */
     int resultsCheckVoti = [self checkVoti: votiSorted];
+    
     if(resultsCheckVoti==VOTI_OK)
     {
+        
         ConnectionToServer *conn = [[ConnectionToServer alloc] init];
         NSMutableString *stringVotiToSubmit = [self getRankingString:voti];
         NSLog(@"%@",stringVotiToSubmit);
         [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:poll.userID andRanking:stringVotiToSubmit];
         
-        /* popup per voto sottomesso */
+        /* Popup per voto sottomesso */
         UIAlertView *alert = [UIAlertView alloc];
         alert.tag = VOTI_OK;
-        alert = [alert initWithTitle:@"Votazione" message:@"Votazione effettuata con successo" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alert = [alert initWithTitle:@"Messaggio" message:@"Votazione effettuata con successo!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [alert show];
+        
     }
+    
     else if(resultsCheckVoti==VOTO_SBAGLIATO)
     {
-        /* popup per voto sbagliato */
+        
+        /* Popup per voto sbagliato */
         UIAlertView *alert = [UIAlertView alloc];
         alert.tag = VOTO_SBAGLIATO;
-        alert = [alert initWithTitle:@"Attenzione" message:@"Voto sbagliato\nDeve esistere voti consecutivi" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Correggi", nil];
+        alert = [alert initWithTitle:@"Attenzione" message:@"Devono esistere voti consecutivi!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Correggi", nil];
         [alert show];
+        
     }
+    
     else if(resultsCheckVoti==MANCA_VOTO)
     {
-        /* popup per voto sbagliato */
+        
+        /* Popup per voto sbagliato */
         UIAlertView *alert = [UIAlertView alloc];
         alert.tag = MANCA_VOTO;
-        alert = [alert initWithTitle:@"Attenzione" message:@"Manca uno o più di un voto" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Cancel",@"Correggi", nil];
+        alert = [alert initWithTitle:@"Attenzione" message:@"Manca uno o più di un voto!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Correggi", nil];
         [alert show];
+        
     }
     
-    
 }
-/* controllo sui voti */
--(int)checkVoti: (NSMutableArray *)Voti
+
+/* Controllo sui voti */
+- (int) checkVoti: (NSMutableArray *)Voti
 {
-    /* Visto che i voti sono sortati basta controllare i primi valori se sono "-" o "" poichè vengono prima nell'ordine QUASI lessicografico */
+    
+    /* I voti sono ordinati, basta controllare i primi valori se sono "-" o "" poichè vengono prima nell'ordine QUASI lessicografico */
     if([Voti[0] isEqual:@"-"] || [Voti[0] isEqual:@""])
         return MANCA_VOTO;
     
     long voto = [Voti[0] integerValue];
+    
     for (int i=1; i < [Voti count]; i++)
     {
         
-        /* se non c'è nessun voto è bene che il MANCA_VOTO preceda il VOTO_SBAGLIATO */
+        /* Se non c'è nessun voto è bene che il MANCA_VOTO preceda il VOTO_SBAGLIATO */
         if(![Voti[i] isEqual:@"1"] && i==0)
             return VOTO_SBAGLIATO;
         
-        /* i voti devono essere consecutivi */
+        /* I voti devono essere consecutivi */
         if ([Voti[i] integerValue]>voto+1)
             return VOTO_SBAGLIATO;
         
         voto = [Voti[i] integerValue];
+        
     }
     
     return VOTI_OK;
+    
 }
-/* crea la stringa dei voti da inviare al server */
--(NSMutableString*) getRankingString:(NSMutableDictionary *)ranking
+
+/* Crea la stringa dei voti da inviare al server */
+- (NSMutableString*) getRankingString:(NSMutableDictionary *)ranking
 {
+    
     NSLog(@"%@",ranking);
     NSMutableString *voti=[[NSMutableString alloc] initWithString:@""];
     for (int voto=1; voto<=candsDim; voto++)
     {
+        
         for (NSString *cand in ranking)
         {
+            
             if ([[ranking objectForKey:cand] integerValue]==voto)
-            {
                 voti = [NSMutableString stringWithFormat:@"%@%@",voti,cand];
-            }
         }
+        
         if(voto<candsDim)
             voti = [NSMutableString stringWithFormat:@"%@,",voti];
     }
+    
     return voti;
+    
 }
 
-/* funzione delegate per i popup della view */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+/* Funzione delegate per i Popup della view */
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
     /* Titolo del bottone cliccato */
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    /* l'alert view conseguente ad una votazione effettuata */
+    /* L'alert view conseguente ad una votazione effettuata */
     if(alertView.tag == VOTI_OK)
     {
+        
         if([title isEqualToString:@"Ok"])
-            /* vai alla home */
+            /* Vai alla Home */
             [self.navigationController popToRootViewControllerAnimated:TRUE];
+        
     }
-    else if(alertView.tag == MANCA_VOTO)
-    {
-        if ([title isEqualToString:@"Cancel"])
-            [self.navigationController popToRootViewControllerAnimated:TRUE];
-    }
+    
 }
-/* Action al click sull'annulla */
-- (IBAction)backToPrevius:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:TRUE];
-}
+
 @end
