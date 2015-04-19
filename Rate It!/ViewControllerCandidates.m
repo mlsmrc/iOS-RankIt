@@ -52,7 +52,6 @@ long candsDim = -1;
     /* Settaggi per la scrollView */
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,800)];
-    //[scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Sfondo_Candidates"]]];
     
     /* Settaggio dei tag */
     VotoForPrimo.tag = 1;

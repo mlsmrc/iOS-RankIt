@@ -11,7 +11,7 @@ NSString *NO_RESULTS = @"Nessun risultato trovato";
 NSString *SEARCH = @"Cerca";
 NSString *BACK = @"Home";
 
-@interface TableViewController ()
+@interface UIViewController ()
 
 @end
 
@@ -70,7 +70,7 @@ NSString *BACK = @"Home";
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.tag = 1;
-    [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.tableView.frame) - CGRectGetWidth(self.tableView.bounds)/2, CGRectGetMidY(self.tableView.frame) - CGRectGetHeight(self.tableView.bounds)/1.5)];
+    [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
     /* Questa è la parte di codice che definisce il refresh da parte della TableView */
     refreshControl = [[UIRefreshControl alloc]init];
@@ -183,10 +183,11 @@ NSString *BACK = @"Home";
     
 }
 
-/* Regola l'altezza delle celle nella Home */
+/* Permette di modificare l'altezza delle righe della Home */
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 75;
+    
 }
 
 /* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della Home o i risultati di ricerca */
@@ -225,7 +226,7 @@ NSString *BACK = @"Home";
     
     static NSString *simpleTableIdentifier = @"PollCell";
     Poll *p;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
@@ -234,18 +235,16 @@ NSString *BACK = @"Home";
         
         cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         p = [searchResults objectAtIndex:indexPath.row];
-        cell.textLabel.text = p.pollName;
         
     }
     
-    else {
-        
-        p = [allPublicPollsDetails objectAtIndex:indexPath.row];
-        cell.textLabel.text = p.pollName;
-        
-    }
+    else p = [allPublicPollsDetails objectAtIndex:indexPath.row];
     
     cell.font = [UIFont fontWithName:FONT_HOME size:18];
+    cell.textLabel.text = p.pollName;
+    cell.detailTextLabel.text = (NSString *)p.deadline;
+    cell.imageView.image = [UIImage imageNamed:@"Poll-image"];
+    [cell setSeparatorInset:UIEdgeInsetsZero];
     return cell;
     
 }
@@ -300,12 +299,51 @@ NSString *BACK = @"Home";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.tableView == self.searchDisplayController.searchResultsTableView) {
         
         [self performSegueWithIdentifier:@"showPollDetails" sender:self];
         
     }
     
+}
+
+/* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
+}
+
+/* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
+- (void) viewWillAppear:(BOOL)animated {
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    [tableView setContentInset:UIEdgeInsetsZero];
+    [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+}
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
+        [UIView animateWithDuration:0.25 animations:^{
+            for (UIView *subview in self.view.subviews)
+                subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
+        }];
+    }
+}
+
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        [UIView animateWithDuration:0.25 animations:^{
+            for (UIView *subview in self.view.subviews)
+                subview.transform = CGAffineTransformIdentity;
+        }];
+    }
 }
 
 @end
