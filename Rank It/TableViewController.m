@@ -9,6 +9,7 @@
 
 /* Stringa di spazi da usare per interire nella detailTextLabel quanti voti ha ricevuto il poll */
 #define SPACES_FOR_VOTES "                              "
+#define SPACES_FOR_VOTES_SCADUTO "                   "
 
 /* Stringa per la search bar */
 NSString *NO_RESULTS = @"Nessun risultato trovato";
@@ -67,6 +68,9 @@ NSString *BACK = @"Home";
     
     /* Altrimenti prende i nomi dei poll pubblici da visualizzare */
     else [self CreatePollsDetails];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Votes" ofType:@"plist"];
+    NSLog(@"%@",path);
     
     searchResults = [[NSArray alloc]init];
     
@@ -249,7 +253,12 @@ NSString *BACK = @"Home";
     /* Visualizzazione del poll nella cella */
     cell.font = [UIFont fontWithName:FONT_HOME size:18];
     cell.textLabel.text = p.pollName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
+
+    /* Controllo sulla scadenza del poll */
+    if ( [Poll compareDate:p.deadline WithDate: [[NSDate alloc]init]] == -1)
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Scaduto%s%sVoti: %d",SPACES_FOR_VOTES_SCADUTO,SPACES_FOR_VOTES,p.votes];
+    else
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
     cell.imageView.image = [self imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
     

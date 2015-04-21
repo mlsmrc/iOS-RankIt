@@ -157,6 +157,52 @@
             </objects>
             <point key="canvasLocation" x="1604" y="-2"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="6sr-Ec-d4l">
+            <objects>
+                <tableViewController id="7m9-5P-KWX" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="DQA-Kq-Jar">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VotatiPollCell" rowHeight="75" id="oTE-yE-u8p">
+                                <rect key="frame" x="0.0" y="86" width="320" height="75"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oTE-yE-u8p" id="CVp-VY-QF4">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7m9-5P-KWX" id="THz-Db-OIw"/>
+                            <outlet property="delegate" destination="7m9-5P-KWX" id="h2I-C0-tFW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="qdj-GA-aD3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dhl-sx-04v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="706"/>
+        </scene>
+        <!--Votati-->
+        <scene sceneID="vCS-Ov-Cj9">
+            <objects>
+                <navigationController id="m6v-fF-Aqv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Votati" image="Votati" id="GaB-TX-hFF"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XKL-gA-SgG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7m9-5P-KWX" kind="relationship" relationship="rootViewController" id="3lc-tx-8xQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IZD-5n-cG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746" y="706"/>
+        </scene>
         <!--Votazione-->
         <scene sceneID="Fb5-6n-iUf">
             <objects>
@@ -384,6 +430,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="9NF-H3-4BB" kind="relationship" relationship="viewControllers" id="bUt-pO-8qs"/>
+                        <segue destination="m6v-fF-Aqv" kind="relationship" relationship="viewControllers" id="WYe-kM-Mcq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdX-vX-50F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -393,7 +440,8 @@
     </scenes>
     <resources>
         <image name="Home" width="25" height="25"/>
-        <image name="Poll-image" width="411" height="411"/>
+        <image name="Poll-image" width="137" height="137"/>
+        <image name="Votati" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

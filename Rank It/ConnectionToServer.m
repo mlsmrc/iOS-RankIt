@@ -1,6 +1,7 @@
 #import "ConnectionToServer.h"
 #import "Poll.h"
 #import "Candidate.h"
+#import "PList.h"
 
 /* Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
@@ -140,6 +141,16 @@ NSMutableDictionary *dizionarioPolls;
     
     /* Invio richiesta */
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    /* Aggiungi votazione in Vota.plist */
+    bool write=[PList addOnPListRanking:ranking OfPoll:pollId];
+    if (write) {
+        NSLog(@"OK write %@",pollId);
+        NSLog(@"%@",[PList getRankingOfPoll:pollId]);
+    }
+    else
+        NSLog(@"----ERRORE----");
+    
   
 }
 

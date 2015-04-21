@@ -60,7 +60,8 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 
 - (NSString *) toJSON;
 - (void) setLastUpdate;
-+(NSDateFormatter*) getDateFormatter;
++ (NSDateFormatter*) getDateFormatter;
++ (int) compareDate:(NSDate *)first WithDate:(NSDate *)second;
 
 @end
 

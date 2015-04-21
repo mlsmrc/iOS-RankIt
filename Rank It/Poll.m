@@ -138,4 +138,13 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     return DF;
 }
 
+
+/* Comparatore di date */
++(int) compareDate:(NSDate *)first WithDate:(NSDate *)second
+{
+    NSString *f = [first description];
+    NSString *s = [second description];
+    return ([f compare:s]);
+}
+
 @end
