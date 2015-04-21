@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
-        <!--Rate It!-->
+        <!--Rank It-->
         <scene sceneID="9Xr-sv-Leh">
             <objects>
                 <viewController id="gC1-D5-SfG" customClass="TableViewController" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Rate It!" id="Ukz-nf-C31">
+                    <navigationItem key="navigationItem" title="Rank It" id="Ukz-nf-C31">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oWi-6Q-xer"/>
                     </navigationItem>
                     <connections>
@@ -82,7 +82,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1176" y="-2"/>
+            <point key="canvasLocation" x="1194" y="-222"/>
         </scene>
         <!--Dettagli Poll-->
         <scene sceneID="Bua-UN-JOU">
@@ -111,7 +111,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Poll-image" id="bp8-We-Uw6">
-                                        <rect key="frame" x="40" y="108" width="240" height="228"/>
+                                        <rect key="frame" x="40" y="107" width="240" height="228"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tz4-Ct-5KQ">
@@ -122,7 +122,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Descrizione" selectable="NO" id="CYU-Xe-lEv">
-                                        <rect key="frame" x="8" y="349" width="304" height="105"/>
+                                        <rect key="frame" x="8" y="341" width="304" height="105"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -155,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rhz-Tc-zKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1604" y="-2"/>
+            <point key="canvasLocation" x="1642" y="-222"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="6sr-Ec-d4l">
@@ -184,7 +184,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhl-sx-04v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286" y="706"/>
+            <point key="canvasLocation" x="1194" y="712"/>
         </scene>
         <!--Votati-->
         <scene sceneID="vCS-Ov-Cj9">
@@ -201,7 +201,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZD-5n-cG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="746" y="706"/>
+            <point key="canvasLocation" x="746" y="712"/>
         </scene>
         <!--Votazione-->
         <scene sceneID="Fb5-6n-iUf">
@@ -396,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpE-S7-lPC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2037" y="-2"/>
+            <point key="canvasLocation" x="2087" y="-222"/>
         </scene>
         <!--Home-->
         <scene sceneID="1LF-th-dMd">
@@ -416,7 +416,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2nM-l7-U1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736" y="-1.8933333333333333"/>
+            <point key="canvasLocation" x="746" y="-222"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="shl-gZ-a0k">

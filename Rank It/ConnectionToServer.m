@@ -7,7 +7,6 @@
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
 
-
 NSMutableDictionary *dizionarioPolls;
 
 @implementation ConnectionToServer {

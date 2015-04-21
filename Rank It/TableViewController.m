@@ -7,7 +7,7 @@
 /* Altezza della cella */
 #define CELL_HEIGHT 75
 
-/* Stringa di spazi da usare per interire nella detailTextLabel quanti voti ha ricevuto il poll */
+/* Stringa di spazi da usare per inserire nella detailTextLabel quanti voti ha ricevuto il poll */
 #define SPACES_FOR_VOTES "                              "
 #define SPACES_FOR_VOTES_SCADUTO "                   "
 
@@ -47,7 +47,6 @@ NSString *BACK = @"Home";
     
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
-    
     
 }
 
@@ -241,12 +240,13 @@ NSString *BACK = @"Home";
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
-    if(tableView == self.searchDisplayController.searchResultsTableView)
-    {
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        
         cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         p = [searchResults objectAtIndex:indexPath.row];
         
     }
+    
     else
         p = [allPublicPollsDetails objectAtIndex:indexPath.row];
     
@@ -257,15 +257,17 @@ NSString *BACK = @"Home";
     /* Controllo sulla scadenza del poll */
     if ( [Poll compareDate:p.deadline WithDate: [[NSDate alloc]init]] == -1)
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Scaduto%s%sVoti: %d",SPACES_FOR_VOTES_SCADUTO,SPACES_FOR_VOTES,p.votes];
+    
     else
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
     cell.imageView.image = [self imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
-    
     [cell setSeparatorInset:UIEdgeInsetsZero];
+    
     return cell;
     
 }
+
 - (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
     searchResults = [allPublicPollsDetails filteredArrayUsingPredicate:resultPredicate];
@@ -364,14 +366,15 @@ NSString *BACK = @"Home";
 }
 
 /* Funzione utile per scalare la grandezza di un immagine */
-- (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
-{
+- (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+    
     UIGraphicsBeginImageContext( newSize );
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;
+    
 }
 
 @end

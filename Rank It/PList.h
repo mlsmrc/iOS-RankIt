@@ -2,7 +2,7 @@
 
 @interface PList : NSObject
 
-+ (BOOL)addOnPListRanking: (NSString*)ranking OfPoll:(NSString*)pollid;
++ (BOOL) addOnPListRanking: (NSString*)ranking OfPoll:(NSString*)pollid;
 + (NSString*) getRankingOfPoll: (NSString*)pollid;
 
 @end
