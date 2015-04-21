@@ -1,7 +1,6 @@
 #import "Poll.h"
 #import "Candidate.h"
 #import "ConnectionToServer.h"
-#import "PList.h"
 #import <Foundation/Foundation.h>
 
 @implementation Poll
@@ -23,9 +22,12 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     
     if(self)
     {
-        /* lettura UDID dal file Info.plist */
-        ID = [PList getUDID];
         
+        /* lettura UDID dal file Info.plist */
+        /* NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary]; */
+        /* NSString *UDID = [infoDict objectForKey:UDID_IN_INFO_PLIST]; */
+        
+        ID = @"prova";
         pollId = 0;
         userID = ID;
         pollName = Name;

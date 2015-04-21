@@ -142,7 +142,15 @@ NSMutableDictionary *dizionarioPolls;
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     /* Aggiungi votazione in Vota.plist */
-    [PList writeOnPListRanking:ranking OfPoll:pollId];
+    bool write=[PList addOnPListRanking:ranking OfPoll:pollId];
+    if (write) {
+        NSLog(@"OK write %@",pollId);
+        NSLog(@"%@",[PList getRankingOfPoll:pollId]);
+    }
+    else
+        NSLog(@"----ERRORE----");
+    
+  
 }
 
 /*  Funzione che dato un oggetto di tipo Poll, aggiunge un poll e   *

@@ -3,7 +3,6 @@
 #import "ConnectionToServer.h"
 #import "APIurls.h"
 #import "Font.h"
-#import "Plist.h"
 
 /* Altezza della cella */
 #define CELL_HEIGHT 75
@@ -55,10 +54,6 @@ NSString *BACK = @"Home";
     
     [super viewDidLoad];
     
-    /* Se non esiste un UDID in info.plist lo genera. Servirà per le votazioni */
-    if([PList getUDID]==NULL)
-        [PList writeUDID];
-    
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -72,6 +67,9 @@ NSString *BACK = @"Home";
     
     /* Altrimenti prende i nomi dei poll pubblici da visualizzare */
     else [self CreatePollsDetails];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Votes" ofType:@"plist"];
+    NSLog(@"%@",path);
     
     searchResults = [[NSArray alloc]init];
     

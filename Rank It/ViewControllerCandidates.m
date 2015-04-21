@@ -569,6 +569,7 @@ long candsDim = -1;
         
         ConnectionToServer *conn = [[ConnectionToServer alloc] init];
         NSMutableString *stringVotiToSubmit = [self getRankingString:voti];
+        NSLog(@"%@",stringVotiToSubmit);
         [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:poll.userID andRanking:stringVotiToSubmit];
         
         /* Popup per voto sottomesso */
@@ -635,6 +636,8 @@ long candsDim = -1;
 /* Crea la stringa dei voti da inviare al server */
 - (NSMutableString*) getRankingString:(NSMutableDictionary *)ranking
 {
+    
+    NSLog(@"%@",ranking);
     NSMutableString *voti=[[NSMutableString alloc] initWithString:@""];
     for (int voto=1; voto<=candsDim; voto++)
     {

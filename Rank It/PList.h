@@ -2,16 +2,7 @@
 
 @interface PList : NSObject
 
-FOUNDATION_EXPORT NSString *VOTES_PLIST;
-FOUNDATION_EXPORT NSString *INFO_PLIST;
-FOUNDATION_EXPORT NSString *CUSTOM_UDID;
-
-/* Funzioni di scrittura */
-+ (BOOL) writeOnPListRanking: (NSString*)ranking OfPoll:(NSString*)pollid;
-+ (BOOL) writeUDID;
-
-/* Funzioni di lettura */
++ (BOOL) addOnPListRanking: (NSString*)ranking OfPoll:(NSString*)pollid;
 + (NSString*) getRankingOfPoll: (NSString*)pollid;
-+ (NSString*) getUDID;
 
 @end
