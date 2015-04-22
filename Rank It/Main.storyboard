@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
@@ -355,7 +355,6 @@
         <!--Home-->
         <scene sceneID="1LF-th-dMd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2nM-l7-U1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9NF-H3-4BB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="eKs-EK-jnG"/>
                     <toolbarItems/>
@@ -369,6 +368,7 @@
                         <segue destination="gC1-D5-SfG" kind="relationship" relationship="rootViewController" id="582-RG-Oco"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2nM-l7-U1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="746" y="-460"/>
         </scene>
@@ -417,7 +417,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Cerca tra i sondaggi" id="MYJ-nT-h2A">
+                            <searchBar contentMode="redraw" placeholder="Cerca tra i sondaggi votati" id="MYJ-nT-h2A">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>

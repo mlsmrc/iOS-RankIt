@@ -8,6 +8,7 @@ NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprova
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
 
 NSMutableDictionary *dizionarioPolls;
+NSMutableDictionary *dizionarioPollsVotati;
 
 @implementation ConnectionToServer {
     
@@ -142,7 +143,7 @@ NSMutableDictionary *dizionarioPolls;
     [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     /* Aggiungi votazione in Vota.plist */
-    bool write=[PList addOnPListRanking:ranking OfPoll:pollId];
+    bool write=[PList writeOnPListRanking:ranking OfPoll:pollId];
     if (write) {
         NSLog(@"OK write %@",pollId);
         NSLog(@"%@",[PList getRankingOfPoll:pollId]);
@@ -214,6 +215,28 @@ NSMutableDictionary *dizionarioPolls;
 - (NSMutableDictionary*) getDizionarioPolls
 {
     return dizionarioPolls;
+}
+
+/*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
+-(NSMutableDictionary*) getDizionarioPollsVotati
+{
+    NSMutableDictionary *allPolls = [self getDizionarioPolls];
+    NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc] init];
+    
+    /* Controllo presenza di connessione */
+    if (allPolls==nil)
+        return nil;
+    
+    /* Contiene i pollid di tutti i poll votati */
+    NSArray *VotesPListKeys = [PList getAllKeysinPList:VOTES_PLIST];
+    
+    /* Aggiungi i poll vodati nel dizionario */
+    for (NSString* key in [allPolls allKeys])
+        if([VotesPListKeys containsObject:key])
+            [PollVotati setObject:[allPolls objectForKey:key] forKey:key];
+    
+    
+    return PollVotati;
 }
 
 @end
