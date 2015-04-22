@@ -327,8 +327,14 @@
 
 /* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
 - (void) viewWillAppear:(BOOL)animated {
+    
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* ogni volta che la view appare vengono scaricati i poll votati */
+    [self DownloadPolls];
+    
     [super viewWillAppear:animated];
+    
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
