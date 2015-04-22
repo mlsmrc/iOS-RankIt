@@ -11,7 +11,8 @@
 		A92FA1F11AE65D7900AB73FB /* PList.m in Sources */ = {isa = PBXBuildFile; fileRef = A92FA1F01AE65D7900AB73FB /* PList.m */; };
 		A9534FA01AE6C76D003375CF /* Votes.plist in Sources */ = {isa = PBXBuildFile; fileRef = A92FA1EE1AE65B8E00AB73FB /* Votes.plist */; };
 		A9EF3FF11AE6C6660076579C /* Votes.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9EF3FF01AE6C6660076579C /* Votes.plist */; };
-		A9F839191AE7B7A400795C40 /* ViewControllerVotati.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F839181AE7B7A400795C40 /* ViewControllerVotati.m */; };
+		A9F839191AE7B7A400795C40 /* ViewControllerVotati.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F839181AE7B7A400795C40 /* ViewControllerVotati.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
+		A9F8391E1AE847E100795C40 /* UtilTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F8391D1AE847E100795C40 /* UtilTableView.m */; };
 		A9FB90AD1AE579EB00AF181A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90AC1AE579EB00AF181A /* main.m */; };
 		A9FB90B01AE579EB00AF181A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90AF1AE579EB00AF181A /* AppDelegate.m */; };
 		A9FB90B81AE579EB00AF181A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9FB90B71AE579EB00AF181A /* Images.xcassets */; };
@@ -46,6 +47,8 @@
 		A9EF3FF01AE6C6660076579C /* Votes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Votes.plist; sourceTree = "<group>"; };
 		A9F839171AE7B7A400795C40 /* ViewControllerVotati.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerVotati.h; sourceTree = "<group>"; };
 		A9F839181AE7B7A400795C40 /* ViewControllerVotati.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerVotati.m; sourceTree = "<group>"; };
+		A9F8391D1AE847E100795C40 /* UtilTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilTableView.m; sourceTree = "<group>"; };
+		A9F8391F1AE8480E00795C40 /* UtilTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilTableView.h; sourceTree = "<group>"; };
 		A9FB90A71AE579EB00AF181A /* Rank It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rank It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9FB90AB1AE579EB00AF181A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9FB90AC1AE579EB00AF181A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				A9FB90DC1AE57A7200AF181A /* Poll.m */,
 				A92FA1F21AE65D8C00AB73FB /* PList.h */,
 				A92FA1F01AE65D7900AB73FB /* PList.m */,
+				A9F8391D1AE847E100795C40 /* UtilTableView.m */,
+				A9F8391F1AE8480E00795C40 /* UtilTableView.h */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				A9FB90EC1AE57A7200AF181A /* ViewControllerDettagli.m in Sources */,
 				A9FB90EA1AE57A7200AF181A /* TableViewController.m in Sources */,
 				A9F839191AE7B7A400795C40 /* ViewControllerVotati.m in Sources */,
+				A9F8391E1AE847E100795C40 /* UtilTableView.m in Sources */,
 				A92FA1F11AE65D7900AB73FB /* PList.m in Sources */,
 				A9FB90B01AE579EB00AF181A /* AppDelegate.m in Sources */,
 				A9FB90E91AE57A7200AF181A /* Poll.m in Sources */,

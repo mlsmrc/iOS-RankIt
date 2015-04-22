@@ -68,8 +68,8 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         candidates = cand;
         
         /* Scarico dal server il quantitativo di voti che il poll ha ricevuto */
-        ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-        votes = [conn getVotiPollWithPollId: [NSString stringWithFormat:@"%d",PollID]];
+        //ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+        votes = 0;//[conn getVotiPollWithPollId: [NSString stringWithFormat:@"%d",PollID]];
 
         /* inizializzazione formattatore date */
         dateFormatter = [Poll getDateFormatter];

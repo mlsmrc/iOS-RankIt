@@ -412,7 +412,7 @@
         <!--Votati-->
         <scene sceneID="YU7-YC-QW2">
             <objects>
-                <viewController id="C72-Q9-8eF" sceneMemberID="viewController">
+                <viewController id="C72-Q9-8eF" customClass="ViewControllerVotati" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="92S-uJ-025">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -425,12 +425,12 @@
                                     <outlet property="delegate" destination="C72-Q9-8eF" id="6Ya-ah-EiB"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iHr-4M-jad">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="iHr-4M-jad">
                                 <rect key="frame" x="0.0" y="108" width="320" height="412"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PollVotedCell" textLabel="XaU-Lw-M9J" detailTextLabel="4FZ-nn-7yg" imageView="9Zy-92-wjd" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="xKi-gm-yeo">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PollCell" textLabel="XaU-Lw-M9J" detailTextLabel="4FZ-nn-7yg" imageView="9Zy-92-wjd" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="xKi-gm-yeo">
                                         <rect key="frame" x="0.0" y="22" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xKi-gm-yeo" id="KcU-jl-xFW">
@@ -455,8 +455,14 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <segue destination="zPC-dB-2ah" kind="push" identifier="showVotedPollDetails" id="0lC-AM-l7G"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="C72-Q9-8eF" id="EkW-pa-1yQ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -464,6 +470,7 @@
                     <navigationItem key="navigationItem" title="Votati" id="ges-0V-Tf5"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="JQ8-wY-Bgp" id="Qb9-Jj-sP0"/>
+                        <outlet property="tableView" destination="iHr-4M-jad" id="1F6-eI-ZEx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eib-Rl-MTr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -490,5 +497,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="rsJ-CQ-Vd1"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
