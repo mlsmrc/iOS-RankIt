@@ -256,12 +256,12 @@ NSString *BACK = @"Home";
 
     /* Controllo sulla scadenza del poll */
     if ( [Poll compareDate:p.deadline WithDate: [[NSDate alloc]init]] == -1)
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"Scaduto%s%sVoti: %d",SPACES_FOR_VOTES_SCADUTO,SPACES_FOR_VOTES,p.votes];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Scaduto!%s%sVoti: %d",SPACES_FOR_VOTES_SCADUTO,SPACES_FOR_VOTES,p.votes];
     
     else
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
-    cell.imageView.image = [self imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
+    cell.imageView.image = [self imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;

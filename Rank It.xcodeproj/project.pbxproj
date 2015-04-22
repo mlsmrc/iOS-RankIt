@@ -114,13 +114,13 @@
 			isa = PBXGroup;
 			children = (
 				A9FB90AC1AE579EB00AF181A /* main.m */,
-				A9FB90F01AE57B3D00AF181A /* Util */,
-				A9FB90EF1AE57B3000AF181A /* Home */,
-				A9FB90EE1AE57B1100AF181A /* VotaPoll */,
 				A9FB90ED1AE57AF300AF181A /* Delegate */,
+				A9FB90EF1AE57B3000AF181A /* Home */,
+				A9FB90F01AE57B3D00AF181A /* Util */,
+				A9FB90EE1AE57B1100AF181A /* VotaPoll */,
 				A9FB90DA1AE57A7200AF181A /* Main.storyboard */,
-				A9FB90B71AE579EB00AF181A /* Images.xcassets */,
 				A9FB90B91AE579EB00AF181A /* LaunchScreen.xib */,
+				A9FB90B71AE579EB00AF181A /* Images.xcassets */,
 				A9FB90AA1AE579EB00AF181A /* Supporting Files */,
 			);
 			path = "Rank It";
@@ -197,8 +197,8 @@
 				A9FB90D91AE57A7200AF181A /* Font.m */,
 				A9FB90DB1AE57A7200AF181A /* Poll.h */,
 				A9FB90DC1AE57A7200AF181A /* Poll.m */,
-				A92FA1F01AE65D7900AB73FB /* PList.m */,
 				A92FA1F21AE65D8C00AB73FB /* PList.h */,
+				A92FA1F01AE65D7900AB73FB /* PList.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -252,6 +252,7 @@
 				TargetAttributes = {
 					A9FB90A61AE579EB00AF181A = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 4UVHD887LG;
 					};
 					A9FB90BF1AE579EB00AF181A = {
 						CreatedOnToolsVersion = 6.3;
@@ -387,7 +388,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -425,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -437,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Rank It/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -449,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Rank It/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
