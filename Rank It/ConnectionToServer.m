@@ -6,6 +6,7 @@
 /* Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
+NSString *EMPTY_VOTED_POLLS_LIST = @"Non sono presenti sondaggi votati.\nVai sulla Home e inizia a votare!";
 
 NSMutableDictionary *dizionarioPolls;
 NSMutableDictionary *dizionarioPollsVotati;
@@ -220,6 +221,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 /*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
 -(NSMutableDictionary*) getDizionarioPollsVotati
 {
+    [self scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
     NSMutableDictionary *allPolls = [self getDizionarioPolls];
     NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc] init];
     
@@ -229,6 +231,9 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     /* Contiene i pollid di tutti i poll votati */
     NSArray *VotesPListKeys = [PList getAllKeysinPList:VOTES_PLIST];
+    
+    if ([VotesPListKeys count]==0)
+        return PollVotati;
     
     /* Aggiungi i poll vodati nel dizionario */
     for (NSString* key in [allPolls allKeys])

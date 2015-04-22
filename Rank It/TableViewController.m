@@ -4,20 +4,7 @@
 #import "APIurls.h"
 #import "Font.h"
 #import "PList.h"
-
-/* Altezza della cella */
-#define CELL_HEIGHT 75
-
-/* Stringa di spazi da usare per inserire nella detailTextLabel quanti voti ha ricevuto il poll */
-#define SPACES_FOR_VOTES "                              "
-#define SPACES_FOR_VOTES_SCADUTO "                   "
-
-/* Stringa per la search bar */
-NSString *NO_RESULTS = @"Nessun risultato trovato";
-
-/* Stringhe per il pulsante di ritorno schermata */
-NSString *SEARCH = @"Cerca";
-NSString *BACK = @"Home";
+#import "UtilTableView.h"
 
 @interface UIViewController ()
 
@@ -48,6 +35,8 @@ NSString *BACK = @"Home";
     
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
+    
+    
     
 }
 
@@ -263,7 +252,7 @@ NSString *BACK = @"Home";
     else
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
-    cell.imageView.image = [self imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
+    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;
@@ -367,16 +356,6 @@ NSString *BACK = @"Home";
     }
 }
 
-/* Funzione utile per scalare la grandezza di un immagine */
-- (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
-    
-    UIGraphicsBeginImageContext( newSize );
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-    
-}
+
 
 @end
