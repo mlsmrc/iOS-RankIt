@@ -132,7 +132,7 @@ NSMutableDictionary *dizionarioPollsVotati;
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
-    /* Preparazione richiesta post */
+    /* Preparazione richiesta POST */
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
     [request setURL:[NSURL URLWithString:URL_SUBMIT_RANKING]];
     [request setHTTPMethod:@"POST"];
@@ -145,13 +145,16 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     /* Aggiungi votazione in Vota.plist */
     bool write=[PList writeOnPListRanking:ranking OfPoll:pollId];
+    
     if (write) {
+        
         NSLog(@"OK write %@",pollId);
         NSLog(@"%@",[PList getRankingOfPoll:pollId]);
+        
     }
+    
     else
         NSLog(@"----ERRORE----");
-    
   
 }
 
@@ -185,8 +188,10 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
+/* Ritorna il numero di voti correnti di un determinato poll identificato da pollId */
 -(int) getVotiPollWithPollId:(NSString*)pollId
 {
+    
     /* Sostituzione dei parametri */
     NSString * url=[URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     
@@ -210,6 +215,7 @@ NSMutableDictionary *dizionarioPollsVotati;
     }
     
     return -1;
+    
 }
 
 /* Ritorna il dizionario contenente i poll nel formato <pollid,poll> */
@@ -218,9 +224,10 @@ NSMutableDictionary *dizionarioPollsVotati;
     return dizionarioPolls;
 }
 
-/*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
+/* Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
 -(NSMutableDictionary*) getDizionarioPollsVotati
 {
+    
     [self scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
     NSMutableDictionary *allPolls = [self getDizionarioPolls];
     NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc] init];
@@ -240,8 +247,8 @@ NSMutableDictionary *dizionarioPollsVotati;
         if([VotesPListKeys containsObject:key])
             [PollVotati setObject:[allPolls objectForKey:key] forKey:key];
     
-    
     return PollVotati;
+    
 }
 
 @end

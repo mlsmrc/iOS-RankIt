@@ -1,3 +1,5 @@
+/* DA BUTTARE, la lascio solo perchè mi servono alcune cose. */
+
 #import <UIKit/UIKit.h>
 #import "Poll.h"
 

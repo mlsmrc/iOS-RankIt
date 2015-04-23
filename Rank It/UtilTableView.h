@@ -19,7 +19,8 @@ FOUNDATION_EXPORT NSString *NO_RESULTS;
 
 /* Stringhe per il pulsante di ritorno schermata */
 FOUNDATION_EXPORT NSString *SEARCH;
-FOUNDATION_EXPORT NSString *BACK;
+FOUNDATION_EXPORT NSString *BACK_TO_HOME;
+FOUNDATION_EXPORT NSString *BACK_TO_VOTED;
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 

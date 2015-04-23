@@ -24,7 +24,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     if(self)
     {
         
-        /* lettura UDID dal file Info.plist */
+        /* Lettura UDID dal file Info.plist */
         ID = [PList getUDID];
         
         pollId = 0;
@@ -35,10 +35,10 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         pvtPoll = Private;
         candidates = cand;
         
-        /* inserimento data al momento della creazione dell'oggetto */
+        /* Inserimento data al momento della creazione dell'oggetto */
         lastUpdate = [[NSDate alloc ]init];
         
-        /* inizializzazione formattatore date */
+        /* Inizializzazione formattatore date */
         dateFormatter = [Poll getDateFormatter];
   
     }
@@ -59,6 +59,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     
     if(self)
     {
+        
         pollId = PollID;
         pollName = Name;
         pollDescription = Description;
@@ -69,10 +70,12 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         
         /* Scarico dal server il quantitativo di voti che il poll ha ricevuto */
         //ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-        votes = 0;//[conn getVotiPollWithPollId: [NSString stringWithFormat:@"%d",PollID]];
+        //[conn getVotiPollWithPollId: [NSString stringWithFormat:@"%d",PollID]];
+        votes = 0;
 
-        /* inizializzazione formattatore date */
+        /* Inizializzazione formattatore date */
         dateFormatter = [Poll getDateFormatter];
+        
     }
     
     return self;
@@ -103,6 +106,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     /* Crea una stringa parziale JSON di tutti i candidati */
     for(Candidate *cand in candidates)
     {
+        
         NSString *description = [cand descriptionForAddPoll];
         [cands appendString:description];
         
@@ -111,6 +115,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
             [cands appendString:@","];
         
         i++;
+        
     }
     
     descr = [descr  stringByReplacingOccurrencesOfString:@"_CANDIDATES_STRING_" withString:[NSString stringWithFormat:@"%@",cands]];
@@ -119,13 +124,14 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 
 - (void) setLastUpdate
 {
-    /* aggiornamento data */
+    /* Aggiornamento data */
    lastUpdate = [[NSDate alloc]init];
 }
 
-/* ritorna l'oggetto utile a formattare la data - funzione statica */
+/* Ritorna l'oggetto utile a formattare la data - funzione statica */
 +(NSDateFormatter*) getDateFormatter
 {
+    
     NSDateFormatter *DF = [[NSDateFormatter alloc] init];
     DF.timeStyle = NSDateFormatterNoStyle;
     DF.dateStyle = NSDateFormatterMediumStyle;
@@ -135,15 +141,17 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     [DF setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     return DF;
+    
 }
-
 
 /* Comparatore di date */
 +(int) compareDate:(NSDate *)first WithDate:(NSDate *)second
 {
+    
     NSString *f = [first description];
     NSString *s = [second description];
     return ([f compare:s]);
+    
 }
 
 @end

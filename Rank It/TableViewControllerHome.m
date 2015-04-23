@@ -1,4 +1,4 @@
-#import "TableViewController.h"
+#import "TableViewControllerHome.h"
 #import "ViewControllerDettagli.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
@@ -10,7 +10,7 @@
 
 @end
 
-@implementation TableViewController {
+@implementation TableViewControllerHome {
     
     /* Oggetto per la connessione al server */
     ConnectionToServer *Connection;
@@ -107,7 +107,7 @@
     NSString *value;
     allPublicPollsDetails = [[NSMutableArray alloc]init];
     
-    /* Scorre il dizionario e splitta in base all'insieme di caratteri set */
+    /* Scorre il dizionario e recupera i dettagli necessari */
     for(id key in allPublicPolls) {
         
         value = [allPublicPolls objectForKey:key];
@@ -119,7 +119,7 @@
     
 }
 
-/* Visualizzazione poll pubblici nella Home */
+/* Visualizzazione poll pubblici nella schermata "Home" */
 - (void) HomePolls {
     
     if(allPublicPolls!=nil) {
@@ -183,14 +183,14 @@
     
 }
 
-/* Permette di modificare l'altezza delle righe della Home */
+/* Permette di modificare l'altezza delle righe della schermata "Home" */
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return CELL_HEIGHT;
     
 }
 
-/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della Home o i risultati di ricerca */
+/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della schermata "Home" o i risultati di ricerca */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
@@ -252,7 +252,7 @@
     else
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
+    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;
@@ -273,7 +273,7 @@
     
 }
 
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
+/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Home" che dai risultati di ricerca */
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showPollDetails"]) {
@@ -295,7 +295,7 @@
             
             indexPath = [self.tableView indexPathForSelectedRow];
             p = [allPublicPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_HOME,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
         }
@@ -330,20 +330,22 @@
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* ogni volta che la view appare vengono scaricati i poll votati */
+    /* Ogni volta che la view appare vengono scaricati i poll pubblici */
     [self DownloadPolls];
-    
     [super viewWillAppear:animated];
     
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
 {
+    
     [tableView setContentInset:UIEdgeInsetsZero];
     [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+    
 }
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
         [UIView animateWithDuration:0.25 animations:^{
@@ -351,17 +353,18 @@
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
         }];
     }
+    
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         [UIView animateWithDuration:0.25 animations:^{
             for (UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformIdentity;
         }];
     }
+    
 }
-
-
 
 @end

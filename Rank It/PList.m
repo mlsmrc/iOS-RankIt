@@ -20,20 +20,20 @@ NSString *CUSTOM_UDID = @"CustomUDID";
 }
 
 /* Lettura da info.plist dell'uuid salvato in precedenza. Se inesistente torna NULL */
-+(NSString*) getUDID
++ (NSString*) getUDID
 {
     return [PList readStringforKey:CUSTOM_UDID inPList:INFO_PLIST];
 }
 
 /* Scrittura su info.plist dell'uuid generato */
-+(BOOL) writeUDID
++ (BOOL) writeUDID
 {
     NSString *uuid = [[NSUUID UUID] UUIDString];
     return [PList writeString:uuid forKey:CUSTOM_UDID inPList:INFO_PLIST];
 }
 
 /* Funzione generica privata che scrive una coppia <chiave,info> su una plist */
-+(BOOL)writeString:(NSString*)Info forKey:(NSString*)key inPList:(NSString *)PList
++ (BOOL) writeString:(NSString*)Info forKey:(NSString*)key inPList:(NSString *)PList
 {
     /* Catturo il path del file Votes.plist dove si manterranno le votazioni effettuate */
     NSString *path = [[NSBundle mainBundle] pathForResource:PList ofType:@"plist"];
@@ -47,7 +47,7 @@ NSString *CUSTOM_UDID = @"CustomUDID";
 }
 
 /* Funzione generica privata che legge una stringa da una plist data una chiave */
-+(NSString *)readStringforKey:(NSString*)key inPList:(NSString *)PList
++ (NSString *) readStringforKey:(NSString*)key inPList:(NSString *)PList
 {
     /* Catturo il path del file Votes.plist dove si manterranno le votazioni effettuate */
     NSString *path = [[[NSBundle mainBundle] pathForResource:PList ofType:@"plist"] mutableCopy];
@@ -59,7 +59,7 @@ NSString *CUSTOM_UDID = @"CustomUDID";
 }
 
 /* Funzione che ritorna tutte le chiavi da una plist */
-+(NSArray *) getAllKeysinPList:(NSString *)PList
++ (NSArray *) getAllKeysinPList:(NSString *)PList
 {
     /* Catturo il path del file Votes.plist dove si manterranno le votazioni effettuate */
     NSString *path = [[[NSBundle mainBundle] pathForResource:PList ofType:@"plist"] mutableCopy];

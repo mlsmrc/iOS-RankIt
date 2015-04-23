@@ -1,3 +1,5 @@
+/* DA BUTTARE, la lascio solo perchè mi servono alcune cose. */
+
 #import "ConnectionToServer.h"
 #import "ViewControllerCandidates.h"
 #import "Font.h"

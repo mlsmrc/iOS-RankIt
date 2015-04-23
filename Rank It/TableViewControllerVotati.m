@@ -1,4 +1,4 @@
-#import "ViewControllerVotati.h"
+#import "TableViewControllerVotati.h"
 #import "ViewControllerDettagli.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
@@ -11,16 +11,16 @@
 
 @end
 
-@implementation ViewControllerVotati {
+@implementation TableViewControllerVotati {
     
     /* Oggetto per la connessione al server */
     ConnectionToServer *Connection;
     
-    /* Dizionario dei poll pubblici */
-    NSMutableDictionary *allPublicPolls;
+    /* Dizionario dei poll votati */
+    NSMutableDictionary *allVotedPolls;
     
-    /* Array dei poll pubblici che verranno visualizzati */
-    NSMutableArray *allPublicPollsDetails;
+    /* Array dei poll votati che verranno visualizzati */
+    NSMutableArray *allVotedPollsDetails;
     
     /* Array per i risultati di ricerca */
     NSArray *searchResults;
@@ -31,7 +31,7 @@
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
-    /* Messaggio nella schermata Home */
+    /* Messaggio nella schermata Votati */
     UILabel *messageLabel;
     
     /* Pulsante di ritorno schermata precedente */
@@ -43,19 +43,18 @@
     
     [super viewDidLoad];
     
-    
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    /* Download iniziale di tutti i poll pubblici */
+    /* Download iniziale di tutti i poll votati */
     [self DownloadPolls];
     
-    /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
-    if(allPublicPolls==nil || [allPublicPolls count]==0)
+    /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
+    if(allVotedPolls==nil || [allVotedPolls count]==0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    /* Altrimenti prende i nomi dei poll pubblici da visualizzare */
+    /* Altrimenti prende i nomi dei poll votati da visualizzare */
     else [self CreatePollsDetails];
     
     searchResults = [[NSArray alloc]init];
@@ -75,51 +74,51 @@
     refreshControl.tag = 0;
     [self.tableView addSubview:refreshControl];
     
-    /* Visualizza i poll pubblici nella Home */
-    [self HomePolls];
+    /* Visualizza i poll votati nella schermata "Votati" */
+    [self VotedPolls];
     
 }
 
-/* Download poll pubblici dal server */
+/* Download poll votati dal server */
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
-    allPublicPolls = [Connection getDizionarioPollsVotati];
+    allVotedPolls = [Connection getDizionarioPollsVotati];
     
-    if(allPublicPolls!=nil && [allPublicPolls count] != 0)
+    if(allVotedPolls!=nil && [allVotedPolls count] != 0)
     {
         [self CreatePollsDetails];
         [self.tableView reloadData];
     }
     
-    [self HomePolls];
+    [self VotedPolls];
     
 }
 
-/* Estrapolazione dei dettagli dei poll pubblici ritornati dal server */
+/* Estrapolazione dei dettagli dei poll votati ritornati dal server */
 - (void) CreatePollsDetails {
     
     NSString *value;
-    allPublicPollsDetails = [[NSMutableArray alloc]init];
+    allVotedPollsDetails = [[NSMutableArray alloc]init];
     
-    /* Scorre il dizionario e splitta in base all'insieme di caratteri set */
-    for(id key in allPublicPolls) {
+    /* Scorre il dizionario e recupera i dettagli necessari */
+    for(id key in allVotedPolls) {
         
-        value = [allPublicPolls objectForKey:key];
+        value = [allVotedPolls objectForKey:key];
         
         Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]  withName:[value valueForKey:@"pollname"] withDescription:[value valueForKey:@"polldescription"] withResultsType:-1 withDeadline:[value valueForKey:@"deadline"] withLastUpdate:[value valueForKey:@"updated"] withCandidates:nil];
-        [allPublicPollsDetails addObject:p];
+        [allVotedPollsDetails addObject:p];
         
     }
     
 }
 
-/* Visualizzazione poll pubblici nella Home */
-- (void) HomePolls {
+/* Visualizzazione poll votati nella schermata "Votati" */
+- (void) VotedPolls {
     
-    if(allPublicPolls!=nil) {
+    if(allVotedPolls!=nil) {
         
-        if([allPublicPolls count] != 0) {
+        if([allVotedPolls count] != 0) {
             
             /* Rimuoviamo la subview aggiunta per il messaggio d'errore */
             subView  = [self.tableView viewWithTag:1];
@@ -133,7 +132,7 @@
         else {
             
             /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza poll */
-            [allPublicPollsDetails removeAllObjects];
+            [allVotedPollsDetails removeAllObjects];
             [self.tableView reloadData];
             
             /* Stampa del messaggio di notifica */
@@ -147,7 +146,7 @@
     else {
         
         /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza connessione */
-        [allPublicPollsDetails removeAllObjects];
+        [allVotedPollsDetails removeAllObjects];
         [self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
@@ -167,7 +166,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Assegna il messaggio a seconda dei casi */
-    if(allPublicPolls!=nil)
+    if(allVotedPolls!=nil)
         messageLabel.text = EMPTY_VOTED_POLLS_LIST;
     
     else messageLabel.text = SERVER_UNREACHABLE;
@@ -185,7 +184,7 @@
     
 }
 
-/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della Home o i risultati di ricerca */
+/* Funzioni che permettono di visualizzare i nomi dei poll votati nelle celle della schermata "Votati" o i risultati di ricerca */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
@@ -213,13 +212,13 @@
         
     }
     
-    else return [allPublicPollsDetails count];
+    else return [allVotedPollsDetails count];
     
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *simpleTableIdentifier = @"PollCell";
+    static NSString *simpleTableIdentifier = @"VotedPollCell";
     Poll *p;
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -234,7 +233,7 @@
     }
     
     else
-        p = [allPublicPollsDetails objectAtIndex:indexPath.row];
+        p = [allVotedPollsDetails objectAtIndex:indexPath.row];
     
     /* Visualizzazione del poll nella cella */
     cell.font = [UIFont fontWithName:FONT_HOME size:18];
@@ -247,7 +246,7 @@
     else
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
+    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;
@@ -256,7 +255,7 @@
 
 - (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
-    searchResults = [allPublicPollsDetails filteredArrayUsingPredicate:resultPredicate];
+    searchResults = [allVotedPollsDetails filteredArrayUsingPredicate:resultPredicate];
     
 }
 
@@ -268,7 +267,7 @@
     
 }
 
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
+/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Votati" che dai risultati di ricerca */
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -290,8 +289,8 @@
         else {
             
             indexPath = [self.tableView indexPathForSelectedRow];
-            p = [allPublicPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            p = [allVotedPollsDetails objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
         }
@@ -323,9 +322,10 @@
 
 /* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
 - (void) viewWillAppear:(BOOL)animated {
+    
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* ogni volta che la view appare vengono scaricati i poll votati */
+    /* Ogni volta che la view appare vengono scaricati i poll votati */
     [self DownloadPolls];
     [super viewWillAppear:animated];
     
@@ -338,6 +338,7 @@
 }
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
         [UIView animateWithDuration:0.25 animations:^{
@@ -345,15 +346,18 @@
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
         }];
     }
+    
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         [UIView animateWithDuration:0.25 animations:^{
             for (UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformIdentity;
         }];
     }
+    
 }
 
 @end
