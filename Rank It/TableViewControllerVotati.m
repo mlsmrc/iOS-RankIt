@@ -177,7 +177,7 @@
     
 }
 
-/* Permette di modificare l'altezza delle righe della Home */
+/* Permette di modificare l'altezza delle righe della schermata "Votati" */
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return CELL_HEIGHT;

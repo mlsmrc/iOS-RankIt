@@ -1,6 +1,5 @@
 #import "ViewControllerCandidates.h"
 #import "ConnectionToServer.h"
-#import "Candidate.h"
 #import "ViewControllerDettagli.h"
 #import "Font.h"
 #import "UtilTableView.h"
@@ -11,7 +10,7 @@
 
 @implementation ViewControllerDettagli
 
-@synthesize p,scrollView,name,description,image,deadline,cands,tableView;
+@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView;
 
 - (void) viewDidLoad {
     
@@ -86,7 +85,6 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *simpleTableIdentifier = @"CandCell";
-    Candidate *c;
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil)
@@ -111,11 +109,11 @@
     
 }
 
-/* Metodo che passa il poll alla schermata successiva */
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+/* Metodo che gestisce il ri-carimento dell view */
+- (void) viewWillAppear:(BOOL)animated {
     
-    ViewControllerCandidates *candidates = segue.destinationViewController;
-    candidates.poll = p;
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
 }
 
@@ -123,6 +121,33 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return @"CANDIDATI AL VOTO:";
+}
+
+/* Funzioni che permettono di accedere alla descrizione di un determinato candidato */
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showCandDetails"]) {
+        
+        NSIndexPath *indexPath = nil;
+        UIBarButtonItem *backButton;
+        c = nil;
+        
+        indexPath = [self.tableView indexPathForSelectedRow];
+        c = [cands objectAtIndex:indexPath.row];
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+        
+        ViewControllerCandidates *destViewController = segue.destinationViewController;
+        destViewController.c = c;
+            
+    }
+    
+    else if ([segue.identifier isEqualToString:@"showViewVote"]) {
+        
+        /* Segue del tasto "Vota" */
+        
+    }
+    
 }
 
 @end

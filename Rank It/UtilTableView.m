@@ -8,6 +8,7 @@ NSString *NO_RESULTS = @"Nessun risultato trovato";
 
 /* Stringhe per il pulsante di ritorno schermata */
 NSString *SEARCH = @"Cerca";
+NSString *BACK = @"Indietro";
 NSString *BACK_TO_HOME = @"Home";
 NSString *BACK_TO_VOTED = @"Votati";
 

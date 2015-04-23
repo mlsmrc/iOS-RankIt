@@ -36,8 +36,6 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
-    
-    
 }
 
 - (void) viewDidLoad {
@@ -325,9 +323,10 @@
     
 }
 
-/* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
+/* Metodo che gestisce il ri-carimento dell view */
 - (void) viewWillAppear:(BOOL)animated {
     
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
     /* Ogni volta che la view appare vengono scaricati i poll pubblici */
@@ -336,6 +335,7 @@
     
 }
 
+/* Funzioni utili ad una corretta visualizzazione della table view e della search bar */
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
 {
     

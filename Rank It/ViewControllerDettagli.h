@@ -1,9 +1,11 @@
 #import <UIKit/UIKit.h>
+#import "Candidate.h"
 #import "Poll.h"
 
 @interface ViewControllerDettagli : UIViewController
 
 @property (strong,nonatomic) Poll *p;
+@property (strong,nonatomic) Candidate *c;
 @property (strong,nonatomic) NSMutableArray* cands;
 @property (weak,nonatomic) IBOutlet UILabel *name;
 @property (weak,nonatomic) IBOutlet UITextView *description;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F6474A71AE953A200145688 /* Flip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6474A61AE953A200145688 /* Flip.m */; };
 		A92FA1EF1AE65B8E00AB73FB /* Votes.plist in Resources */ = {isa = PBXBuildFile; fileRef = A92FA1EE1AE65B8E00AB73FB /* Votes.plist */; };
 		A92FA1F11AE65D7900AB73FB /* PList.m in Sources */ = {isa = PBXBuildFile; fileRef = A92FA1F01AE65D7900AB73FB /* PList.m */; };
 		A9534FA01AE6C76D003375CF /* Votes.plist in Sources */ = {isa = PBXBuildFile; fileRef = A92FA1EE1AE65B8E00AB73FB /* Votes.plist */; };
@@ -26,7 +27,7 @@
 		A9FB90E91AE57A7200AF181A /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90DC1AE57A7200AF181A /* Poll.m */; };
 		A9FB90EA1AE57A7200AF181A /* TableViewControllerHome.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90DE1AE57A7200AF181A /* TableViewControllerHome.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A9FB90EB1AE57A7200AF181A /* ViewControllerCandidates.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90E01AE57A7200AF181A /* ViewControllerCandidates.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
-		A9FB90EC1AE57A7200AF181A /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90E21AE57A7200AF181A /* ViewControllerDettagli.m */; };
+		A9FB90EC1AE57A7200AF181A /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB90E21AE57A7200AF181A /* ViewControllerDettagli.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F6474A51AE953A200145688 /* Flip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flip.h; sourceTree = "<group>"; };
+		6F6474A61AE953A200145688 /* Flip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flip.m; sourceTree = "<group>"; };
 		A92FA1EE1AE65B8E00AB73FB /* Votes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Votes.plist; sourceTree = "<group>"; };
 		A92FA1F01AE65D7900AB73FB /* PList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PList.m; sourceTree = "<group>"; };
 		A92FA1F21AE65D8C00AB73FB /* PList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PList.h; sourceTree = "<group>"; };
@@ -204,6 +207,8 @@
 				A9FB90D31AE57A7200AF181A /* Candidate.m */,
 				A9FB90D41AE57A7200AF181A /* ConnectionToServer.h */,
 				A9FB90D51AE57A7200AF181A /* ConnectionToServer.m */,
+				6F6474A51AE953A200145688 /* Flip.h */,
+				6F6474A61AE953A200145688 /* Flip.m */,
 				A9FB90D81AE57A7200AF181A /* Font.h */,
 				A9FB90D91AE57A7200AF181A /* Font.m */,
 				A9FB90DB1AE57A7200AF181A /* Poll.h */,
@@ -331,6 +336,7 @@
 				A92FA1F11AE65D7900AB73FB /* PList.m in Sources */,
 				A9FB90B01AE579EB00AF181A /* AppDelegate.m in Sources */,
 				A9FB90E91AE57A7200AF181A /* Poll.m in Sources */,
+				6F6474A71AE953A200145688 /* Flip.m in Sources */,
 				A9FB90AD1AE579EB00AF181A /* main.m in Sources */,
 				A9FB90E51AE57A7200AF181A /* ConnectionToServer.m in Sources */,
 			);
