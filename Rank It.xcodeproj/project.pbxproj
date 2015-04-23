@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F6474A71AE953A200145688 /* Flip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6474A61AE953A200145688 /* Flip.m */; };
+		6FD104431AE96CDC00DCF75A /* ViewControllerVoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD104421AE96CDC00DCF75A /* ViewControllerVoto.m */; };
 		A92FA1EF1AE65B8E00AB73FB /* Votes.plist in Resources */ = {isa = PBXBuildFile; fileRef = A92FA1EE1AE65B8E00AB73FB /* Votes.plist */; };
 		A92FA1F11AE65D7900AB73FB /* PList.m in Sources */ = {isa = PBXBuildFile; fileRef = A92FA1F01AE65D7900AB73FB /* PList.m */; };
 		A9534FA01AE6C76D003375CF /* Votes.plist in Sources */ = {isa = PBXBuildFile; fileRef = A92FA1EE1AE65B8E00AB73FB /* Votes.plist */; };
@@ -43,6 +44,8 @@
 /* Begin PBXFileReference section */
 		6F6474A51AE953A200145688 /* Flip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flip.h; sourceTree = "<group>"; };
 		6F6474A61AE953A200145688 /* Flip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flip.m; sourceTree = "<group>"; };
+		6FD104411AE96CDC00DCF75A /* ViewControllerVoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerVoto.h; sourceTree = "<group>"; };
+		6FD104421AE96CDC00DCF75A /* ViewControllerVoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerVoto.m; sourceTree = "<group>"; };
 		A92FA1EE1AE65B8E00AB73FB /* Votes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Votes.plist; sourceTree = "<group>"; };
 		A92FA1F01AE65D7900AB73FB /* PList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PList.m; sourceTree = "<group>"; };
 		A92FA1F21AE65D8C00AB73FB /* PList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PList.h; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				A9FB90E01AE57A7200AF181A /* ViewControllerCandidates.m */,
 				A9FB90E11AE57A7200AF181A /* ViewControllerDettagli.h */,
 				A9FB90E21AE57A7200AF181A /* ViewControllerDettagli.m */,
+				6FD104411AE96CDC00DCF75A /* ViewControllerVoto.h */,
+				6FD104421AE96CDC00DCF75A /* ViewControllerVoto.m */,
 			);
 			name = VotaPoll;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				A9FB90EB1AE57A7200AF181A /* ViewControllerCandidates.m in Sources */,
 				A9FB90E31AE57A7200AF181A /* APIurls.m in Sources */,
 				A9FB90EC1AE57A7200AF181A /* ViewControllerDettagli.m in Sources */,
+				6FD104431AE96CDC00DCF75A /* ViewControllerVoto.m in Sources */,
 				A9FB90EA1AE57A7200AF181A /* TableViewControllerHome.m in Sources */,
 				A9F839191AE7B7A400795C40 /* TableViewControllerVotati.m in Sources */,
 				A9F8391E1AE847E100795C40 /* UtilTableView.m in Sources */,

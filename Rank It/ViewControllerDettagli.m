@@ -1,6 +1,7 @@
 #import "ViewControllerCandidates.h"
 #import "ConnectionToServer.h"
 #import "ViewControllerDettagli.h"
+#import "ViewControllerVoto.h"
 #import "Font.h"
 #import "UtilTableView.h"
 
@@ -51,17 +52,16 @@
     name.frame = frame;
     currentY += name.frame.size.height;
     frame = deadline.frame;
-    currentY += 13;
+    currentY += 10;
     frame.origin.y = currentY;
     deadline.frame = frame;
     currentY += deadline.frame.size.height;
     frame = image.frame;
-    currentY += 20;
+    currentY += 28;
     frame.origin.y = currentY;
     image.frame = frame;
     currentY += image.frame.size.height;
     frame = description.frame;
-    currentY += 20;
     frame.origin.y = currentY;
     description.frame = frame;
     currentY += description.frame.size.height;
@@ -97,6 +97,7 @@
     cell.detailTextLabel.text = c.candDescription;
     cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
+    
     return cell;
     
 }
@@ -118,18 +119,27 @@
 }
 
 /* Titolo della table view dei candidates */
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return @"CANDIDATI AL VOTO:";
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    return @"CANDIDATI PER LA CLASSIFICA:";
+    
+}
+
+/* Permette di modificare l'altezza delle righe della schermata "Home" */
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return CELL_HEIGHT;
+    
 }
 
 /* Funzioni che permettono di accedere alla descrizione di un determinato candidato */
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    UIBarButtonItem *backButton;
+    
     if ([segue.identifier isEqualToString:@"showCandDetails"]) {
         
         NSIndexPath *indexPath = nil;
-        UIBarButtonItem *backButton;
         c = nil;
         
         indexPath = [self.tableView indexPathForSelectedRow];
@@ -142,9 +152,13 @@
             
     }
     
-    else if ([segue.identifier isEqualToString:@"showViewVote"]) {
+    else if ([segue.identifier isEqualToString:@"showVoteView"]) {
         
-        /* Segue del tasto "Vota" */
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+
+        ViewControllerVoto *destViewController = segue.destinationViewController;
+        destViewController.candidates = cands;
         
     }
     
