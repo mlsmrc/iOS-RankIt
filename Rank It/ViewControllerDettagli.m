@@ -158,7 +158,17 @@
         self.navigationItem.backBarButtonItem = backButton;
 
         ViewControllerVoto *destViewController = segue.destinationViewController;
-        destViewController.candidates = cands;
+        destViewController.poll = p;
+        destViewController.candidateChars = [[NSMutableArray alloc]init];
+        destViewController.candidateNames = [[NSMutableArray alloc]init];
+        
+        for(int i=0;i<[cands count];i++) {
+            
+            c = [cands objectAtIndex:i];
+            [destViewController.candidateChars addObject:c.candChar];
+            [destViewController.candidateNames addObject:c.candName];
+        
+        }
         
     }
     

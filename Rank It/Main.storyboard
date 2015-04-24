@@ -108,7 +108,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Nome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1yQ-Cl-g4r">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Poll-image" id="SuJ-f1-dPm">
@@ -127,7 +127,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Crea la tua classifica" id="X1a-iV-Hzv">
-                        <barButtonItem key="rightBarButtonItem" title="Invia" id="osC-Vv-Fiy"/>
+                        <barButtonItem key="rightBarButtonItem" title="Invia" id="osC-Vv-Fiy">
+                            <connections>
+                                <action selector="vota:" destination="lj8-aj-OLu" id="Twl-AJ-J2I"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="bWt-Xo-Hpe" id="ITj-LU-K0o"/>
@@ -153,7 +157,7 @@
                                         <rect key="frame" x="8" y="8" width="304" height="28"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Descrizione" id="7br-do-PYc">
@@ -429,7 +433,7 @@
     </scenes>
     <resources>
         <image name="Home" width="25" height="25"/>
-        <image name="Poll-image" width="512" height="512"/>
+        <image name="Poll-image" width="1024" height="1024"/>
         <image name="Votati" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
