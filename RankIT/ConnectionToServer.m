@@ -18,6 +18,23 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
+- (void) sendPostRequestWithPostURL: (NSString*) postURL AndParametersString:(NSString *)parameters
+{
+    NSData *postData = [parameters dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    
+    /* Preparazione richiesta post */
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+    [request setURL:[NSURL URLWithString:postURL]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    /* Invio richiesta */
+    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+}
+
 /*  La funzione inizialmente sostituisce alle sottostringhe del tipo _PARAMETRO_   *
  *  (all'interno della stringa url) i parametri propri della funzione.             *
  *  Crea successivamente una richiesta asincrona verso l'API, il cui risultato     *
@@ -128,33 +145,14 @@ NSMutableDictionary *dizionarioPollsVotati;
 {
     
     /* Preparazione dati richiesta POST */
-    NSString *post = [NSString stringWithFormat:@"pollid=%@&userid=%@&ranking=%@",pollId,userId,ranking];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@&ranking=%@",pollId,userId,ranking];
     
-    /* Preparazione richiesta post */
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    [request setURL:[NSURL URLWithString:URL_SUBMIT_RANKING]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
+    /* Invio della richiesta POST */
+    [self sendPostRequestWithPostURL:URL_SUBMIT_RANKING AndParametersString:ParPost];
     
-    /* Invio richiesta */
-    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     /* Aggiungi votazione in Vota.plist */
-    bool write=[File writeOnPListRanking:ranking OfPoll:pollId];
-    
-    if (write) {
-        
-        NSLog(@"Scrittura sul file del voto di %@",pollId);
-        NSLog(@"%@",[File getRankingOfPoll:(int)pollId]);
-        
-    }
-    
-    else
-        NSLog(@"Errore scrittura voto");
+    [File writeOnPListRanking:ranking OfPoll:pollId];
     
 }
 
@@ -245,6 +243,26 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     
     return PollVotati;
+}
+
+/* Resetta le votazioni del poll */
+- (void) resetPollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId
+{
+    /* Preparazione dati richiesta POST */
+    NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
+    
+    /* Invio della richiesta POST */
+    [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
+}
+
+/* Elimina il poll */
+- (void) deletePollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId
+{
+    /* Preparazione dati richiesta POST */
+    NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
+    
+    /* Invio della richiesta POST */
+    [self sendPostRequestWithPostURL:URL_DELETE_POLL AndParametersString:ParPost];
 }
 
 @end

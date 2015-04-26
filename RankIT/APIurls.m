@@ -10,6 +10,7 @@ NSString *URL_GET_RESULTS = @"http://www.sapienzaapps.it/rateitapp/getresults.ph
 NSString *URL_DUMP_POLL = @"http://www.sapienzaapps.it/rateitapp/dumppoll.php?pollid=_POLL_ID_";
 NSString *URL_RESET_POLL = @"http://www.sapienzaapps.it/rateitapp/resetpoll.php?pollid=_POLL_ID_";
 NSString *URL_ADD_POLL = @"http://www.sapienzaapps.it/rateitapp/addpoll.php";
+NSString *URL_DELETE_POLL = @"http://www.sapienzaapps.it/rateitapp/deletepoll.php";
 
 @implementation APIurls
 
