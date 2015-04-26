@@ -1,4 +1,4 @@
-/* Classe contenente soltanto gli URL relativi alle API di "Rate It!" */
+/* Classe contenente soltanto gli URL relativi alle API di "RankIT" */
 
 #import "APIurls.h"
 

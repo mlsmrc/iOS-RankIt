@@ -115,7 +115,6 @@
     }
     
     [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:poll.userID andRanking:ranking];
-
     
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];

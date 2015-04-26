@@ -145,13 +145,16 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     /* Aggiungi votazione in Vota.plist */
     bool write=[File writeOnPListRanking:ranking OfPoll:pollId];
+    
     if (write) {
+        
         NSLog(@"Scrittura sul file del voto di %@",pollId);
-        NSLog(@"%@",[File getRankingOfPoll:[pollId integerValue]]);
+        NSLog(@"%@",[File getRankingOfPoll:(int)pollId]);
+        
     }
+    
     else
         NSLog(@"Errore scrittura voto");
-    
     
 }
 

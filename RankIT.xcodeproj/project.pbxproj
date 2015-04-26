@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FC08F501AECF3E300602B93 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC08F4F1AECF3E300602B93 /* Launch Screen.xib */; };
 		A907502B1AEB7BEE00D4945F /* Votes.strings in Resources */ = {isa = PBXBuildFile; fileRef = A907502A1AEB7BEE00D4945F /* Votes.strings */; };
 		A907502F1AEB8B5100D4945F /* SaveRank.strings in Resources */ = {isa = PBXBuildFile; fileRef = A907502E1AEB8B5100D4945F /* SaveRank.strings */; };
 		A90A687E1AEA79B100F6B0A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A687D1AEA79B100F6B0A6 /* main.m */; };
 		A90A68811AEA79B100F6B0A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68801AEA79B100F6B0A6 /* AppDelegate.m */; };
-		A90A688C1AEA79B100F6B0A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A90A688B1AEA79B100F6B0A6 /* Images.xcassets */; };
-		A90A688F1AEA79B100F6B0A6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90A688D1AEA79B100F6B0A6 /* LaunchScreen.xib */; };
 		A90A689B1AEA79B100F6B0A6 /* RankITTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A689A1AEA79B100F6B0A6 /* RankITTests.m */; };
 		A90A68C41AEA7A2D00F6B0A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A90A68A41AEA7A2D00F6B0A6 /* Main.storyboard */; };
 		A90A68C51AEA7A2D00F6B0A6 /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68A51AEA7A2D00F6B0A6 /* ConnectionToServer.m */; };
@@ -25,7 +24,6 @@
 		A90A68CE1AEA7A2D00F6B0A6 /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B41AEA7A2D00F6B0A6 /* ViewControllerDettagli.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B61AEA7A2D00F6B0A6 /* ViewControllerVoto.m */; };
 		A90A68D11AEA7A2D00F6B0A6 /* APIurls.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B91AEA7A2D00F6B0A6 /* APIurls.m */; };
-		A90A68D21AEA7A2D00F6B0A6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90A68BB1AEA7A2D00F6B0A6 /* LaunchScreen.xib */; };
 		A90A68D31AEA7A2D00F6B0A6 /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68BE1AEA7A2D00F6B0A6 /* Candidate.m */; };
 		A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68C21AEA7A2D00F6B0A6 /* Font.m */; };
 		A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
@@ -43,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FC08F4F1AECF3E300602B93 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		A907502A1AEB7BEE00D4945F /* Votes.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Votes.strings; sourceTree = "<group>"; };
 		A907502E1AEB8B5100D4945F /* SaveRank.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SaveRank.strings; sourceTree = "<group>"; };
 		A90A68781AEA79B100F6B0A6 /* RankIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,8 +49,6 @@
 		A90A687D1AEA79B100F6B0A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A90A687F1AEA79B100F6B0A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A90A68801AEA79B100F6B0A6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A90A688B1AEA79B100F6B0A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A90A688E1AEA79B100F6B0A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A90A68941AEA79B100F6B0A6 /* RankITTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RankITTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A90A68991AEA79B100F6B0A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A90A689A1AEA79B100F6B0A6 /* RankITTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankITTests.m; sourceTree = "<group>"; };
@@ -72,7 +69,6 @@
 		A90A68B61AEA7A2D00F6B0A6 /* ViewControllerVoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerVoto.m; sourceTree = "<group>"; };
 		A90A68B81AEA7A2D00F6B0A6 /* APIurls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIurls.h; sourceTree = "<group>"; };
 		A90A68B91AEA7A2D00F6B0A6 /* APIurls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIurls.m; sourceTree = "<group>"; };
-		A90A68BC1AEA7A2D00F6B0A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		A90A68BD1AEA7A2D00F6B0A6 /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
 		A90A68BE1AEA7A2D00F6B0A6 /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candidate.m; sourceTree = "<group>"; };
 		A90A68BF1AEA7A2D00F6B0A6 /* ConnectionToServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionToServer.h; sourceTree = "<group>"; };
@@ -131,10 +127,8 @@
 				A90A68D61AEA7A4100F6B0A6 /* Util */,
 				A90A68D51AEA7A3600F6B0A6 /* Delegate */,
 				A90A68A41AEA7A2D00F6B0A6 /* Main.storyboard */,
+				6FC08F4F1AECF3E300602B93 /* Launch Screen.xib */,
 				A90A68A71AEA7A2D00F6B0A6 /* Images.xcassets */,
-				A90A68BA1AEA7A2D00F6B0A6 /* Base.lproj */,
-				A90A688B1AEA79B100F6B0A6 /* Images.xcassets */,
-				A90A688D1AEA79B100F6B0A6 /* LaunchScreen.xib */,
 				A90A687B1AEA79B100F6B0A6 /* Supporting Files */,
 			);
 			path = RankIT;
@@ -168,14 +162,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A90A68BA1AEA7A2D00F6B0A6 /* Base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				A90A68BB1AEA7A2D00F6B0A6 /* LaunchScreen.xib */,
-			);
-			path = Base.lproj;
-			sourceTree = "<group>";
-		};
 		A90A68D51AEA7A3600F6B0A6 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,22 +174,22 @@
 		A90A68D61AEA7A4100F6B0A6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A90A68DD1AEA829E00F6B0A6 /* File.h */,
-				A90A68DE1AEA829E00F6B0A6 /* File.m */,
-				A90A68A61AEA7A2D00F6B0A6 /* Flip.m */,
-				A90A68C01AEA7A2D00F6B0A6 /* Flip.h */,
-				A90A68C11AEA7A2D00F6B0A6 /* Font.h */,
-				A90A68C21AEA7A2D00F6B0A6 /* Font.m */,
-				A90A68AF1AEA7A2D00F6B0A6 /* UtilTableView.h */,
-				A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */,
 				A90A68B81AEA7A2D00F6B0A6 /* APIurls.h */,
 				A90A68B91AEA7A2D00F6B0A6 /* APIurls.m */,
 				A90A68BD1AEA7A2D00F6B0A6 /* Candidate.h */,
 				A90A68BE1AEA7A2D00F6B0A6 /* Candidate.m */,
-				A90A68A51AEA7A2D00F6B0A6 /* ConnectionToServer.m */,
 				A90A68BF1AEA7A2D00F6B0A6 /* ConnectionToServer.h */,
-				A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */,
+				A90A68A51AEA7A2D00F6B0A6 /* ConnectionToServer.m */,
+				A90A68DD1AEA829E00F6B0A6 /* File.h */,
+				A90A68DE1AEA829E00F6B0A6 /* File.m */,
+				A90A68C01AEA7A2D00F6B0A6 /* Flip.h */,
+				A90A68A61AEA7A2D00F6B0A6 /* Flip.m */,
+				A90A68C11AEA7A2D00F6B0A6 /* Font.h */,
+				A90A68C21AEA7A2D00F6B0A6 /* Font.m */,
 				A90A68C31AEA7A2D00F6B0A6 /* Poll.h */,
+				A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */,
+				A90A68AF1AEA7A2D00F6B0A6 /* UtilTableView.h */,
+				A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -288,6 +274,7 @@
 				TargetAttributes = {
 					A90A68771AEA79B100F6B0A6 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 4UVHD887LG;
 					};
 					A90A68931AEA79B100F6B0A6 = {
 						CreatedOnToolsVersion = 6.3;
@@ -322,10 +309,8 @@
 				A907502B1AEB7BEE00D4945F /* Votes.strings in Resources */,
 				A90A68C41AEA7A2D00F6B0A6 /* Main.storyboard in Resources */,
 				A90A68C71AEA7A2D00F6B0A6 /* Images.xcassets in Resources */,
-				A90A688F1AEA79B100F6B0A6 /* LaunchScreen.xib in Resources */,
-				A90A68D21AEA7A2D00F6B0A6 /* LaunchScreen.xib in Resources */,
-				A90A688C1AEA79B100F6B0A6 /* Images.xcassets in Resources */,
 				A907502F1AEB8B5100D4945F /* SaveRank.strings in Resources */,
+				6FC08F501AECF3E300602B93 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,25 +363,6 @@
 			targetProxy = A90A68951AEA79B100F6B0A6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		A90A688D1AEA79B100F6B0A6 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A90A688E1AEA79B100F6B0A6 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		A90A68BB1AEA7A2D00F6B0A6 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A90A68BC1AEA7A2D00F6B0A6 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A90A689C1AEA79B100F6B0A6 /* Debug */ = {
@@ -483,8 +449,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -494,8 +461,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
