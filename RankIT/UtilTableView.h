@@ -7,8 +7,8 @@
 #define CELL_HEIGHT 75
 
 /* Stringa di spazi da usare per inserire nella detailTextLabel quanti voti ha ricevuto il poll */
-#define SPACES_FOR_VOTES "                              "
-#define SPACES_FOR_VOTES_SCADUTO "                   "
+#define SPACES_FOR_VOTES "                            "
+#define SPACES_FOR_VOTES_SCADUTO "                 "
 
 #endif
 

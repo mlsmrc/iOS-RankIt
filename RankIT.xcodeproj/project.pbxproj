@@ -22,7 +22,7 @@
 		A90A68CC1AEA7A2D00F6B0A6 /* UtilTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */; };
 		A90A68CD1AEA7A2D00F6B0A6 /* ViewControllerCandidates.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B21AEA7A2D00F6B0A6 /* ViewControllerCandidates.m */; };
 		A90A68CE1AEA7A2D00F6B0A6 /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B41AEA7A2D00F6B0A6 /* ViewControllerDettagli.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
-		A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B61AEA7A2D00F6B0A6 /* ViewControllerVoto.m */; };
+		A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B61AEA7A2D00F6B0A6 /* ViewControllerVoto.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A90A68D11AEA7A2D00F6B0A6 /* APIurls.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B91AEA7A2D00F6B0A6 /* APIurls.m */; };
 		A90A68D31AEA7A2D00F6B0A6 /* Candidate.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68BE1AEA7A2D00F6B0A6 /* Candidate.m */; };
 		A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68C21AEA7A2D00F6B0A6 /* Font.m */; };

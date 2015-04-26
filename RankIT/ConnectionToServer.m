@@ -186,8 +186,9 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
--(int) getVotiPollWithPollId:(NSString*)pollId
+- (int) getVotiPollWithPollId:(NSString*)pollId
 {
+    
     /* Sostituzione dei parametri */
     NSString * url=[URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     
@@ -211,6 +212,7 @@ NSMutableDictionary *dizionarioPollsVotati;
     }
     
     return -1;
+    
 }
 
 /* Ritorna il dizionario contenente i poll nel formato <pollid,poll> */
@@ -222,6 +224,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 /*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
 -(NSMutableDictionary*) getDizionarioPollsVotati
 {
+    
     [self scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
     NSMutableDictionary *allPolls = [self getDizionarioPolls];
     NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc] init];
@@ -243,26 +246,31 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     
     return PollVotati;
+    
 }
 
 /* Resetta le votazioni del poll */
 - (void) resetPollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId
 {
+    
     /* Preparazione dati richiesta POST */
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
     
     /* Invio della richiesta POST */
     [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
+    
 }
 
 /* Elimina il poll */
 - (void) deletePollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId
 {
+    
     /* Preparazione dati richiesta POST */
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
     
     /* Invio della richiesta POST */
     [self sendPostRequestWithPostURL:URL_DELETE_POLL AndParametersString:ParPost];
+    
 }
 
 @end

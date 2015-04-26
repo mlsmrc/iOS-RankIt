@@ -1,6 +1,7 @@
 #import "ViewControllerVoto.h"
 #import "ConnectionToServer.h"
 #import "UtilTableView.h"
+#import "Font.h"
 #import "File.h"
 
 #define VOTI_OK 0
@@ -36,13 +37,15 @@
     
     static NSString *simpleTableIdentifier = @"VoteCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    cell.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
+
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
 
     name = [candidateNames objectAtIndex:indexPath.row];
     cell.textLabel.text = name;
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
+    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;

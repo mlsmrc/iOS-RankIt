@@ -14,11 +14,11 @@
     [scrollView setContentSize:CGSizeMake(320,415)];
     
     /* Tutti i settaggi del caso */
-    name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
+    name.font = [UIFont fontWithName:FONT_CANDIDATES size:21];
     name.text = c.candName;
     
     description.selectable = true;
-    description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:16];
+    description.font = [UIFont fontWithName:FONT_CANDIDATES_DESCRIPTION size:16];
     description.backgroundColor = [UIColor clearColor];
     description.textAlignment = NSTextAlignmentNatural;
     description.text = c.candDescription;

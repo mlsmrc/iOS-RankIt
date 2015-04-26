@@ -17,6 +17,6 @@ FOUNDATION_EXPORT NSString *SAVE_RANK;
 + (NSString*) getRankingOfPoll:(int)pollid;
 + (NSString*) getUDID;
 + (NSArray *) getAllKeysinPList:(NSString *)PList;
-+ (NSString *)getSaveRankOfPoll:(NSString*)pollid;
++ (NSString *) getSaveRankOfPoll:(NSString*)pollid;
 
 @end

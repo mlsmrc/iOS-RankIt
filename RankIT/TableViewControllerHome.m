@@ -256,9 +256,7 @@
     else
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
     
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
-    
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;

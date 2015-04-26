@@ -87,6 +87,7 @@
     
     static NSString *simpleTableIdentifier = @"CandCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    cell.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
@@ -96,7 +97,7 @@
     NSString* strCandidate = [c.candChar stringByAppendingString:@") "];
     cell.textLabel.text = [strCandidate stringByAppendingString:(NSString *)c.candName];
     cell.detailTextLabel.text = c.candDescription;
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-20, CELL_HEIGHT-20)];
+    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     return cell;
@@ -158,111 +159,152 @@
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
         
-        /* init delle strutture utili per il segue */
+        /* Init delle strutture utili per il segue */
         ViewControllerVoto *destViewController = segue.destinationViewController;
         destViewController.poll = p;
         destViewController.candidateChars = [[NSMutableArray alloc]init];
         destViewController.candidateNames = [[NSMutableArray alloc]init];
         
-        /* lettura di un ipotetico voto già dato al poll */
+        /* Lettura di un ipotetico voto già dato al poll */
         NSString *voti = [File getRankingOfPoll:p.pollId];
         
-        /* lettura di un ipotetica classifica salvata */
+        /* Lettura di un ipotetica classifica salvata */
         NSString *savedRank = [File getSaveRankOfPoll:[NSString stringWithFormat:@"%d",p.pollId]];
         
-        /* poll già votato in precedenza e niente salvato */
+        /* Poll già votato in precedenza e non salvato */
         if(voti!=NULL && savedRank == NULL)
         {
-            /* Divido la classifica per i parimeriti */
+            
+            /* Divido la classifica */
             NSArray *arrayVoti = [voti componentsSeparatedByString:@","];
             
-            /* riassegnamento array in base al voto già dato al poll */
+            /* Riassegnamento array in base al voto già dato al poll */
             for(int i=0;i<[arrayVoti count];i++)
             {
+                
                 if([arrayVoti[i] containsString:@"a"])
                 {
+                    
                     c=[cands objectAtIndex:0];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"b"])
                 {
+                    
                     c=[cands objectAtIndex:1];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"c"])
                 {
+                    
                     c=[cands objectAtIndex:2];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"d"])
                 {
+                    
                     c=[cands objectAtIndex:3];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"e"])
                 {
+                    
                     c=[cands objectAtIndex:4];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                   
                 }
+                
             }
+            
         }
-        /* se ho una classifica salvata */
+        
+        /* Se ho una classifica salvata */
         else if((voti==NULL && savedRank!=NULL) || (voti!=NULL && savedRank!=NULL))
         {
-            /* Divido la classifica per i parimeriti */
+            /* Divido la classifica */
             NSArray *arrayVoti = [savedRank componentsSeparatedByString:@","];
             
-            /* riassegnamento array in base al voto già dato al poll */
+            /* Riassegnamento array in base al voto già dato al poll */
             for(int i=0;i<[arrayVoti count];i++)
             {
+                
                 if([arrayVoti[i] containsString:@"a"])
                 {
+                    
                     c=[cands objectAtIndex:0];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"b"])
                 {
+                    
                     c=[cands objectAtIndex:1];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"c"])
                 {
+                    
                     c=[cands objectAtIndex:2];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"d"])
                 {
+                    
                     c=[cands objectAtIndex:3];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
                 if([arrayVoti[i] containsString:@"e"])
                 {
+                    
                     c=[cands objectAtIndex:4];
                     [destViewController.candidateChars addObject:c.candChar];
                     [destViewController.candidateNames addObject:c.candName];
+                    
                 }
+                
             }
+            
         }
-        /* poll mai votato prima */
+        
+        /* Poll mai votato prima */
         else
         {
-            /* inizializzo normalmente l'array dei candidates */
+            /* Inizializzo normalmente l'array dei candidates */
             for(int i=0;i<[cands count];i++)
             {
+                
                 c = [cands objectAtIndex:i];
                 [destViewController.candidateChars addObject:c.candChar];
                 [destViewController.candidateNames addObject:c.candName];
+                
             }
+            
         }
+        
     }
     
 }

@@ -21,21 +21,22 @@ NSString *SAVE_RANK = @"SaveRank.strings";
 }
 
 /* Lettura da info.plist dell'uuid salvato in precedenza. Se inesistente torna NULL */
-+(NSString*) getUDID
++ (NSString*) getUDID
 {
     return [File readStringforKey:CUSTOM_UDID inPList:INFO_PLIST];
 }
 
 /* Scrittura su info.plist dell'uuid generato */
-+(BOOL) writeUDID
++ (BOOL) writeUDID
 {
     NSString *uuid = [[NSUUID UUID] UUIDString];
     return [File writeString:uuid forKey:CUSTOM_UDID inPList:INFO_PLIST];
 }
 
 /* Funzione generica privata che scrive una coppia <chiave,info> su una plist */
-+(BOOL)writeString:(NSString*)Info forKey:(NSString*)key inPList:(NSString *)PList
++ (BOOL) writeString:(NSString*)Info forKey:(NSString*)key inPList:(NSString *)PList
 {
+    
     NSString *path = [[self applicationDocumentsDirectory].path
                       stringByAppendingPathComponent:PList];
     
@@ -58,11 +59,13 @@ NSString *SAVE_RANK = @"SaveRank.strings";
     [votesPList setObject:Info forKey:key];
     
     return [[[NSDictionary alloc]initWithDictionary:votesPList] writeToFile:path atomically:YES];
+    
 }
 
 /* Funzione generica privata che legge una stringa da una plist data una chiave */
-+(NSString *)readStringforKey:(NSString*)key inPList:(NSString *)PList
++ (NSString *) readStringforKey:(NSString*)key inPList:(NSString *)PList
 {
+    
     /* Catturo il path del file sulla Documents Directory */
     NSString *path = [[self applicationDocumentsDirectory].path
                       stringByAppendingPathComponent:PList];
@@ -71,11 +74,13 @@ NSString *SAVE_RANK = @"SaveRank.strings";
     NSMutableDictionary *votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     
     return [votesPList objectForKey:key];
+    
 }
 
 /* Funzione che ritorna tutte le chiavi da una plist */
-+(NSArray *) getAllKeysinPList:(NSString *)PList
++ (NSArray *) getAllKeysinPList:(NSString *)PList
 {
+    
     /* Catturo il path del file sulla Documents Directory */
     NSString *path = [[self applicationDocumentsDirectory].path
                       stringByAppendingPathComponent:PList];
@@ -84,12 +89,11 @@ NSString *SAVE_RANK = @"SaveRank.strings";
     NSMutableDictionary *votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     
     return [votesPList allKeys];
+    
 }
 
-/**
- Returns the URL to the application's Documents directory.
- */
-+ (NSURL *)applicationDocumentsDirectory {
+/* Ritorna l'URL dell'application Documents Directory */
++ (NSURL *) applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
@@ -107,23 +111,23 @@ NSString *SAVE_RANK = @"SaveRank.strings";
 }
 
 /* Elimina il contenuto ad un file generico */
-+ (BOOL)clearFile:(NSString*)File
++ (BOOL) clearFile:(NSString*)File
 {
     
-    NSString *filePath = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:File];
-    
+    NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:File];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
+    
     if ([fileManager fileExistsAtPath:filePath])
         return [fileManager removeItemAtPath:filePath error:&error];
+    
     else
         return true;
     
 }
 
 /* Ritorna la classifica salvata in SaveRank.strings */
-+(NSString *)getSaveRankOfPoll:(NSString*)pollid
++ (NSString *) getSaveRankOfPoll:(NSString*)pollid
 {
     return [self readStringforKey:pollid inPList:SAVE_RANK];
 }
