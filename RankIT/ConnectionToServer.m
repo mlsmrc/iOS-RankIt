@@ -7,6 +7,7 @@
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
 NSString *EMPTY_VOTED_POLLS_LIST = @"Non sono presenti sondaggi votati.\nVai sulla Home e inizia a votare!";
+NSString *EMPTY_MY_POLLS_LIST = @"Non sono presenti sondaggi creati.\nVai sulla Home e crea il tuo primo sondaggio!";
 
 NSMutableDictionary *dizionarioPolls;
 NSMutableDictionary *dizionarioPollsVotati;
@@ -47,7 +48,7 @@ NSMutableDictionary *dizionarioPollsVotati;
     NSString *url=[URL_GET_POLLS  stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     url=[url  stringByReplacingOccurrencesOfString:@"_USER_ID_" withString:userId];
     url=[url stringByReplacingOccurrencesOfString:@"_START_" withString:[NSString stringWithFormat:@"%@",start]];
-    
+ 
     /* Creazione della richiesta ed invio */
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
@@ -74,11 +75,17 @@ NSMutableDictionary *dizionarioPollsVotati;
             if ([pollid isKindOfClass:[NSArray class]]) {
                 
                 /* Iterazione che permette di costruire il dizionario nel seguente modo: <pollid1,poll1>,<pollid2,poll2>,...,<pollidN,pollN> */
-                for(id key in polls) {
-                    
-                    str = pollid[i];
-                    [dizionarioPolls setObject:key forKey:[NSString stringWithString:str]];
-                    i = i + 1;
+                for(id key in polls)
+                {
+                    /* Se userId="" allora è la richiesta di Home             *
+                     * Se userId!="" e mine=1 allora è la richiesta di MyPoll */
+                    if (([[key valueForKey:@"mine"] isEqual:@"1"] && ![userId isEqual:@""]) || [userId isEqual:@""])
+                    {
+                        
+                        str = pollid[i];
+                        [dizionarioPolls setObject:key forKey:[NSString stringWithString:str]];
+                        i = i + 1;
+                    }
                     
                 }
                 
@@ -92,9 +99,8 @@ NSMutableDictionary *dizionarioPollsVotati;
             }
             
         }
-        
+
     }
-    
     /* Non c'è connessione */
     else dizionarioPolls = nil;
     

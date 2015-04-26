@@ -28,6 +28,7 @@
 		A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68C21AEA7A2D00F6B0A6 /* Font.m */; };
 		A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A90A68E01AEA829E00F6B0A6 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DE1AEA829E00F6B0A6 /* File.m */; };
+		A90B896A1AED39F00070A1E3 /* TableViewControllerMyPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = A90B89691AED39F00070A1E3 /* TableViewControllerMyPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerVotati.m; sourceTree = "<group>"; };
 		A90A68DD1AEA829E00F6B0A6 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		A90A68DE1AEA829E00F6B0A6 /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
+		A90B89681AED39F00070A1E3 /* TableViewControllerMyPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewControllerMyPoll.h; sourceTree = "<group>"; };
+		A90B89691AED39F00070A1E3 /* TableViewControllerMyPoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerMyPoll.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 		A90A687A1AEA79B100F6B0A6 /* RankIT */ = {
 			isa = PBXGroup;
 			children = (
+				A90B89671AED39DD0070A1E3 /* I miei Poll */,
 				A90A68D91AEA7C0600F6B0A6 /* Poll Votati */,
 				A90A68D81AEA7A9A00F6B0A6 /* Votazione Poll */,
 				A90A68D71AEA7A8400F6B0A6 /* Home */,
@@ -223,6 +227,15 @@
 				A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */,
 			);
 			name = "Poll Votati";
+			sourceTree = "<group>";
+		};
+		A90B89671AED39DD0070A1E3 /* I miei Poll */ = {
+			isa = PBXGroup;
+			children = (
+				A90B89681AED39F00070A1E3 /* TableViewControllerMyPoll.h */,
+				A90B89691AED39F00070A1E3 /* TableViewControllerMyPoll.m */,
+			);
+			name = "I miei Poll";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +351,7 @@
 				A90A68CA1AEA7A2D00F6B0A6 /* TableViewControllerHome.m in Sources */,
 				A90A687E1AEA79B100F6B0A6 /* main.m in Sources */,
 				A90A68CE1AEA7A2D00F6B0A6 /* ViewControllerDettagli.m in Sources */,
+				A90B896A1AED39F00070A1E3 /* TableViewControllerMyPoll.m in Sources */,
 				A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */,
 				A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */,
 				A90A68C51AEA7A2D00F6B0A6 /* ConnectionToServer.m in Sources */,
