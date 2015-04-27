@@ -37,9 +37,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     /* Array per i risultati di ricerca */
     NSArray *searchResults;
     
-    /* Oggetto per il refresh da TableView */
-    UIRefreshControl *refreshControl;
-    
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
@@ -79,12 +76,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
-    
-    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
-    refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
-    refreshControl.tag = 0;
-    [self.tableView addSubview:refreshControl];
     
     /* Visualizza i poll votati nella schermata "Votati" */
     [self VotedPolls];
@@ -177,9 +168,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         
     }
     
-    /* Conclude il refresh (Sparisce l'animazione) */
-    [refreshControl endRefreshing];
-    
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
@@ -252,8 +240,8 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Votati" che dai risultati di ricerca */
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "I Miei Sondaggi" che dai risultati di ricerca */
+/*- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
     if ([segue.identifier isEqualToString:@"showMyPollDetails"]) {
@@ -295,7 +283,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         
     }
     
-}
+}*/
 
 /* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
 - (void) viewDidAppear:(BOOL)animated {
@@ -313,7 +301,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
     [File clearSaveRank];
     
-    /* Ogni volta che la view appare vengono scaricati i poll votati */
+    /* Ogni volta che la view appare vengono scaricati i poll creati */
     [self DownloadPolls];
     [super viewWillAppear:animated];
     
@@ -342,12 +330,12 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         p = [allVotedPollsDetails objectAtIndex:indexPath.row];
         
     /* Visualizzazione del poll nella cella */
-    UILabel *NamePoll = (UILabel *)[cell viewWithTag:103];
+    UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = p.pollName;
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
         
-    UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:104];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@              Voti:%d",(NSString *)p.deadline,p.votes];
+    UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
+    DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
         
         /* Controllo sulla scadenza del poll */
@@ -366,12 +354,12 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:0.58f blue:0.0f alpha:1.0]
-                                                title:@"Reset\nVoti"];
+                                                title:@"Azzera"];
     
     
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                               title:@"Edit"];
+                                               title:@"Modif."];
     
     gradientLayer.colors = [NSArray arrayWithObjects:
                             (id)[UIColor colorWithWhite:1.0f alpha:0.1f].CGColor,
@@ -385,8 +373,8 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 {
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
     [leftUtilityButtons sw_addUtilityButtonWithColor:
-    [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                title:@"Delete"];
+    [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]
+                                                title:@"Elimina"];
     
     return leftUtilityButtons;
 }
@@ -412,13 +400,13 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 {
     switch (state) {
         case 0:
-            NSLog(@"utility buttons closed");
+            //NSLog(@"utility buttons closed");
             break;
         case 1:
-            NSLog(@"left utility buttons open");
+            //NSLog(@"left utility buttons open");
             break;
         case 2:
-            NSLog(@"right utility buttons open");
+            //NSLog(@"right utility buttons open");
             break;
         default:
             break;
@@ -445,13 +433,13 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             if(p.votes!=0)
             {
                 /* Alert eliminazione */
-                 AlertDelete = [UIAlertController alertControllerWithTitle:@"Delete Poll"
-                                                                                     message:[NSString stringWithFormat:@"Impossibile il poll \"%@\"\nPossiede almeno 1 voto.\nResettare il poll prima di eliminare",p.pollName]
+                 AlertDelete = [UIAlertController alertControllerWithTitle:@""
+                                                                                     message:[NSString stringWithFormat:@"Impossibile eliminare!\nQuesto sondaggio possiede almeno 1 voto.\nResettare prima di eliminare."]
                                                                               preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 /* Creazione pulsanti */
                 UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"Si"
+                                     actionWithTitle:@"Ok"
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action)
                                      {
@@ -464,8 +452,8 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             else
             {
                 /* Alert eliminazione */
-                AlertDelete = [UIAlertController alertControllerWithTitle:@"Delete Poll"
-                                                                                 message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare il poll \"%@\"?",p.pollName]
+                AlertDelete = [UIAlertController alertControllerWithTitle:@""
+                                                                                 message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare il sondaggio?"]
                                                                           preferredStyle:UIAlertControllerStyleActionSheet];
             
                 /* Creazione pulsanti */
@@ -484,14 +472,14 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                      /* Gestione della risposta */
                                      if (response)
                                      {
-                                         OkAlertDelete= [UIAlertController alertControllerWithTitle:@"Operazione completata"
-                                                                                            message:[NSString stringWithFormat:@"Eliminato il poll \"%@\"",p.pollName]
+                                         OkAlertDelete= [UIAlertController alertControllerWithTitle:@"Operazione completata!"
+                                                                                            message:[NSString stringWithFormat:@"Sondaggio Eliminato."]
                                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
                                      }
                                      else
                                      {
-                                         OkAlertDelete= [UIAlertController alertControllerWithTitle:@"Errore"
-                                                                                            message:@"Problemi di connessione al server"
+                                         OkAlertDelete= [UIAlertController alertControllerWithTitle:@"Errore!"
+                                                                                            message:SERVER_UNREACHABLE
                                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
                                      }
                                      
@@ -541,13 +529,13 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             break;
         }
         case 1:
-            NSLog(@"left button 1 was pressed");
+            //NSLog(@"left button 1 was pressed");
             break;
         case 2:
-            NSLog(@"left button 2 was pressed");
+            //NSLog(@"left button 2 was pressed");
             break;
         case 3:
-            NSLog(@"left btton 3 was pressed");
+            //NSLog(@"left btton 3 was pressed");
         default:
             break;
     }
@@ -573,7 +561,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             /* Controllo connessione */
             Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
             if ([networkReachability currentReachabilityStatus]==NotReachable) {
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Reset Poll"
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Errore!"
                                                                                   message:SERVER_UNREACHABLE
                                                                            preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction* ok = [UIAlertAction
@@ -596,16 +584,16 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             }
             
             if (p.votes>1)
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Reset Poll"
-                                                             message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare tutti i %d voti del poll?",p.votes] preferredStyle:UIAlertControllerStyleActionSheet];
+                AlertReset = [UIAlertController alertControllerWithTitle:@""
+                                                             message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare tutti i voti del sondaggio?"] preferredStyle:UIAlertControllerStyleActionSheet];
             else if (p.votes==1)
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Reset Poll"
-                                                                 message:@"Sei sicuro di voler eliminare l'unico voto ricevuto al poll?"
+                AlertReset = [UIAlertController alertControllerWithTitle:@""
+                                                                 message:@"Sei sicuro di voler eliminare l'unico voto ricevuto del sondaggio?"
                                                           preferredStyle:UIAlertControllerStyleActionSheet];
             else
             {
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Reset Poll"
-                                                                 message:@"Il poll non ha nessun voto da eliminare"
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!"
+                                                                 message:@"Il sondaggio non ha nessun voto da eliminare."
                                                           preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 UIAlertAction* ok = [UIAlertAction
@@ -641,8 +629,8 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                      UIAlertAction* okreset;
                                      if([conn resetPollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST])
                                      {
-                                         OkAlertReset = [UIAlertController alertControllerWithTitle:@"Operazione completata"
-                                                                                              message:[NSString stringWithFormat:@"Eliminati tutti i voti del poll \"%@\"",p.pollName]
+                                         OkAlertReset = [UIAlertController alertControllerWithTitle:@"Operazione completata!"
+                                                                                              message:[NSString stringWithFormat:@"Eliminati tutti i voti del Sondaggio."]
                                                                                        preferredStyle:UIAlertControllerStyleActionSheet];
                                          okreset = [UIAlertAction
                                                                    actionWithTitle:@"Ok"
@@ -662,7 +650,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                      }
                                      else
                                      {
-                                         OkAlertReset= [UIAlertController alertControllerWithTitle:@"Errore"
+                                         OkAlertReset= [UIAlertController alertControllerWithTitle:@"Errore!"
                                                                                             message:SERVER_UNREACHABLE
                                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
                                          UIAlertAction* okreset = [UIAlertAction

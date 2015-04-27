@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F59AD181AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59AD151AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		6F59AD191AEEE6B300EED588 /* UMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59AD171AEEE6B300EED588 /* UMTableViewCell.m */; };
 		6FC08F501AECF3E300602B93 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC08F4F1AECF3E300602B93 /* Launch Screen.xib */; };
 		A907502B1AEB7BEE00D4945F /* Votes.strings in Resources */ = {isa = PBXBuildFile; fileRef = A907502A1AEB7BEE00D4945F /* Votes.strings */; };
 		A907502F1AEB8B5100D4945F /* SaveRank.strings in Resources */ = {isa = PBXBuildFile; fileRef = A907502E1AEB8B5100D4945F /* SaveRank.strings */; };
@@ -33,9 +35,7 @@
 		A9ADA2B11AEE7BF10091BAA4 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A51AEE7BF10091BAA4 /* SWCellScrollView.m */; };
 		A9ADA2B21AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A71AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m */; };
 		A9ADA2B31AEE7BF10091BAA4 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A91AEE7BF10091BAA4 /* SWTableViewCell.m */; };
-		A9ADA2B41AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2AB1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		A9ADA2B51AEE7BF10091BAA4 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2AD1AEE7BF10091BAA4 /* SWUtilityButtonView.m */; };
-		A9ADA2B61AEE7BF10091BAA4 /* UMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2AF1AEE7BF10091BAA4 /* UMTableViewCell.m */; };
 		A9ADA2B91AEEBF040091BAA4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2B81AEEBF040091BAA4 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F59AD141AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		6F59AD151AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		6F59AD161AEEE6B300EED588 /* UMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTableViewCell.h; sourceTree = "<group>"; };
+		6F59AD171AEEE6B300EED588 /* UMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTableViewCell.m; sourceTree = "<group>"; };
 		6FC08F4F1AECF3E300602B93 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		A907502A1AEB7BEE00D4945F /* Votes.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Votes.strings; sourceTree = "<group>"; };
 		A907502E1AEB8B5100D4945F /* SaveRank.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SaveRank.strings; sourceTree = "<group>"; };
@@ -99,12 +103,8 @@
 		A9ADA2A71AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWLongPressGestureRecognizer.m; path = MyPollCellFiles/SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		A9ADA2A81AEE7BF10091BAA4 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewCell.h; path = MyPollCellFiles/SWTableViewCell.h; sourceTree = "<group>"; };
 		A9ADA2A91AEE7BF10091BAA4 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = MyPollCellFiles/SWTableViewCell.m; sourceTree = "<group>"; };
-		A9ADA2AA1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonTapGestureRecognizer.h; path = MyPollCellFiles/SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
-		A9ADA2AB1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonTapGestureRecognizer.m; path = MyPollCellFiles/SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		A9ADA2AC1AEE7BF10091BAA4 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonView.h; path = MyPollCellFiles/SWUtilityButtonView.h; sourceTree = "<group>"; };
 		A9ADA2AD1AEE7BF10091BAA4 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonView.m; path = MyPollCellFiles/SWUtilityButtonView.m; sourceTree = "<group>"; };
-		A9ADA2AE1AEE7BF10091BAA4 /* UMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMTableViewCell.h; path = MyPollCellFiles/UMTableViewCell.h; sourceTree = "<group>"; };
-		A9ADA2AF1AEE7BF10091BAA4 /* UMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMTableViewCell.m; path = MyPollCellFiles/UMTableViewCell.m; sourceTree = "<group>"; };
 		A9ADA2B71AEEBF040091BAA4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A9ADA2B81AEEBF040091BAA4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,8 +202,6 @@
 		A90A68D61AEA7A4100F6B0A6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A9ADA2B71AEEBF040091BAA4 /* Reachability.h */,
-				A9ADA2B81AEEBF040091BAA4 /* Reachability.m */,
 				A90A68B81AEA7A2D00F6B0A6 /* APIurls.h */,
 				A90A68B91AEA7A2D00F6B0A6 /* APIurls.m */,
 				A90A68BD1AEA7A2D00F6B0A6 /* Candidate.h */,
@@ -218,6 +216,8 @@
 				A90A68C21AEA7A2D00F6B0A6 /* Font.m */,
 				A90A68C31AEA7A2D00F6B0A6 /* Poll.h */,
 				A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */,
+				A9ADA2B71AEEBF040091BAA4 /* Reachability.h */,
+				A9ADA2B81AEEBF040091BAA4 /* Reachability.m */,
 				A90A68AF1AEA7A2D00F6B0A6 /* UtilTableView.h */,
 				A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */,
 			);
@@ -276,12 +276,12 @@
 				A9ADA2A71AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m */,
 				A9ADA2A81AEE7BF10091BAA4 /* SWTableViewCell.h */,
 				A9ADA2A91AEE7BF10091BAA4 /* SWTableViewCell.m */,
-				A9ADA2AA1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.h */,
-				A9ADA2AB1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m */,
 				A9ADA2AC1AEE7BF10091BAA4 /* SWUtilityButtonView.h */,
 				A9ADA2AD1AEE7BF10091BAA4 /* SWUtilityButtonView.m */,
-				A9ADA2AE1AEE7BF10091BAA4 /* UMTableViewCell.h */,
-				A9ADA2AF1AEE7BF10091BAA4 /* UMTableViewCell.m */,
+				6F59AD141AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.h */,
+				6F59AD151AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.m */,
+				6F59AD161AEEE6B300EED588 /* UMTableViewCell.h */,
+				6F59AD171AEEE6B300EED588 /* UMTableViewCell.m */,
 			);
 			name = SWCellFiles;
 			sourceTree = "<group>";
@@ -390,12 +390,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A90A68D11AEA7A2D00F6B0A6 /* APIurls.m in Sources */,
-				A9ADA2B41AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				A9ADA2B31AEE7BF10091BAA4 /* SWTableViewCell.m in Sources */,
 				A90A68CD1AEA7A2D00F6B0A6 /* ViewControllerCandidates.m in Sources */,
 				A90A68C61AEA7A2D00F6B0A6 /* Flip.m in Sources */,
+				6F59AD191AEEE6B300EED588 /* UMTableViewCell.m in Sources */,
 				A9ADA2B11AEE7BF10091BAA4 /* SWCellScrollView.m in Sources */,
 				A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */,
+				6F59AD181AEEE6B300EED588 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				A90A68811AEA79B100F6B0A6 /* AppDelegate.m in Sources */,
 				A90A68E01AEA829E00F6B0A6 /* File.m in Sources */,
 				A9ADA2B51AEE7BF10091BAA4 /* SWUtilityButtonView.m in Sources */,
@@ -410,7 +411,6 @@
 				A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */,
 				A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */,
 				A90A68C51AEA7A2D00F6B0A6 /* ConnectionToServer.m in Sources */,
-				A9ADA2B61AEE7BF10091BAA4 /* UMTableViewCell.m in Sources */,
 				A90A68CC1AEA7A2D00F6B0A6 /* UtilTableView.m in Sources */,
 				A90A68D31AEA7A2D00F6B0A6 /* Candidate.m in Sources */,
 			);
@@ -471,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -508,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -521,7 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -533,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

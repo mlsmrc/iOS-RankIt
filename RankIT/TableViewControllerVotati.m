@@ -25,9 +25,6 @@
     /* Array per i risultati di ricerca */
     NSArray *searchResults;
     
-    /* Oggetto per il refresh da TableView */
-    UIRefreshControl *refreshControl;
-    
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
@@ -68,11 +65,6 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
-    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
-    refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
-    refreshControl.tag = 0;
-    [self.tableView addSubview:refreshControl];
     
     /* Visualizza i poll votati nella schermata "Votati" */
     [self VotedPolls];
@@ -113,7 +105,7 @@
                                      withDeadline:[value valueForKey:@"deadline"]
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
-                                        withVotes:[[value valueForKey:@"votes"] integerValue]];
+                                        withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
         
         [allVotedPollsDetails addObject:p];
         
@@ -161,9 +153,6 @@
         [self printMessaggeError];
         
     }
-    
-    /* Conclude il refresh (Sparisce l'animazione) */
-    [refreshControl endRefreshing];
     
 }
 
@@ -249,7 +238,7 @@
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@              Voti:%d",(NSString *)p.deadline,p.votes];
+    DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
     
     /* Controllo sulla scadenza del poll */
@@ -275,7 +264,7 @@
 }
 
 /* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Votati" che dai risultati di ricerca */
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+/*- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
     if ([segue.identifier isEqualToString:@"showVotedPollDetails"]) {
@@ -317,7 +306,7 @@
         
     }
     
-}
+}*/
 
 /* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
 - (void) viewDidAppear:(BOOL)animated {
@@ -337,6 +326,9 @@
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Ogni volta che la view appare vengono scaricati i poll votati */
+    [self DownloadPolls];
     
 }
 

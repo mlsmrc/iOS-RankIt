@@ -49,11 +49,11 @@
     {
         
         write = [File writeUDID];
-        NSLog(@"%@",write?@"OK scritture UDID":@"Errore scrittura UDID");
+        //NSLog(@"%@",write?@"OK scritture UDID":@"Errore scrittura UDID");
     }
     
     else
-        NSLog(@"UDID presente");
+        //NSLog(@"UDID presente");
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -128,7 +128,7 @@
                                      withDeadline:[value valueForKey:@"deadline"]
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
-                                        withVotes:[[value valueForKey:@"votes"] integerValue]];
+                                        withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
         [allPublicPollsDetails addObject:p];
         
     }
@@ -263,7 +263,7 @@
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@              Voti:%d",(NSString *)p.deadline,p.votes];
+    DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
 
     /* Controllo sulla scadenza del poll */
@@ -350,6 +350,9 @@
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Ogni volta che la view appare vengono scaricati i poll pubblici */
+    [self DownloadPolls];
     
 }
 
