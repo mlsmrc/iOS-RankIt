@@ -129,7 +129,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                      withDeadline:[value valueForKey:@"deadline"]
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
-                                        withVotes:[[value valueForKey:@"votes"] integerValue]];
+                                        withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
         
   
         [allVotedPollsDetails addObject:p];
@@ -653,7 +653,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                                                        
                                                                        /* Resetta i voti del poll senza richiedere una connessione al server */
                                                                        [p setVotes:0];
-                                                                       [allVotedPolls setValue:p forKey:[NSString stringWithFormat:@"%d",index]];
+                                                                       [allVotedPolls setValue:p forKey:[NSString stringWithFormat:@"%ld",(long)index]];
                                                                        [self.tableView reloadData];
                                                                        
                                                                    }];
@@ -671,12 +671,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                                                    handler:^(UIAlertAction * action)
                                                                    {
                                                                        [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
-                                                                       
-                                                                       /* Resetta i voti del poll senza richiedere una connessione al server */
-                                                                       [p setVotes:0];
-                                                                       [allVotedPolls setValue:p forKey:[NSString stringWithFormat:@"%d",index]];
-                                                                       [self.tableView reloadData];
-                                                                       
                                                                    }];
                                          
                                          [OkAlertReset addAction:okreset];

@@ -235,7 +235,7 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     /* Invio della richiesta POST */
     [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
-    NSData *response = [self sendPostRequestWithPostURL:URL_DELETE_POLL AndParametersString:ParPost];
+    NSData *response = [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
     if (response!=nil) {
         NSString *dictResponse = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         return ([[dictResponse valueForKey:@"reset"] isEqual:@"1"] ? true:false);
