@@ -12,16 +12,4 @@ NSString *BACK = @"";
 NSString *BACK_TO_HOME = @"Home";
 NSString *BACK_TO_VOTED = @"Votati";
 
-/* Funzione utile per scalare la grandezza di un immagine */
-+ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
-    
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-    
-}
-
 @end

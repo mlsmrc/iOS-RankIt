@@ -12,17 +12,32 @@
 
 @implementation ViewControllerVoto
 
-@synthesize candidateNames,candidateChars,name,poll,tableView;
+@synthesize candidateNames,candidateChars,name,poll,tableView,fourth,fifth;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    /* Fa apparire eventuali posizioni nascoste precedentemente */
+    [fourth setHidden:NO];
+    [fifth setHidden:NO];
     
     /* Impostata su "editing" la table view per poter muovere le celle */
     [tableView setEditing:YES animated:YES];
     
     /* Permette alla table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    /* Nasconde le label delle posizioni che non servono */
+    if([candidateNames count] == 3) {
+        
+        [fourth setHidden:YES];
+        [fifth setHidden:YES];
+        
+    }
+    
+    else if([candidateNames count] == 4)
+        [fifth setHidden:YES];
     
 }
 
@@ -37,16 +52,21 @@
     
     static NSString *simpleTableIdentifier = @"VoteCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    cell.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
-
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
 
     name = [candidateNames objectAtIndex:indexPath.row];
-    cell.textLabel.text = name;
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
-    [cell setSeparatorInset:UIEdgeInsetsZero];
+    
+    /* Visualizzazione Candidato nella cella */
+    UILabel *PosCand = (UILabel *)[cell viewWithTag:100];
+    NSString *Position = [NSString stringWithFormat: @"%ld°", (long)(indexPath.row+1)];
+    PosCand.text = Position;
+    PosCand.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
+    
+    UILabel *NameCand = (UILabel *)[cell viewWithTag:101];
+    NameCand.text = name;
+    NameCand.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
     
     return cell;
     
@@ -92,7 +112,7 @@
     
     /* Creazione rank */
     NSString *rankToSave = @"";
-    for (int i=0; i<[candidateChars count]; i++)
+    for(int i=0; i<[candidateChars count]; i++)
         if(i!=[candidateChars count])
             rankToSave = [NSString stringWithFormat:@"%@,%@",rankToSave,candidateChars[i]];
     

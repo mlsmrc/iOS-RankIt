@@ -43,12 +43,15 @@
     [super viewDidLoad];
     
     bool write;
+    
     /* Se non esiste un UDID, lo genera. Servirà per le votazioni */
     if([File getUDID]==NULL)
     {
+        
         write = [File writeUDID];
         NSLog(@"%@",write?@"OK scritture UDID":@"Errore scrittura UDID");
     }
+    
     else
         NSLog(@"UDID presente");
     
@@ -97,8 +100,10 @@
      
      if(allPublicPolls!=nil && [allPublicPolls count] != 0)
      {
+         
         [self CreatePollsDetails];
         [self.tableView reloadData];
+         
      }
      
      [self HomePolls];
@@ -246,18 +251,17 @@
         p = [allPublicPollsDetails objectAtIndex:indexPath.row];
     
     /* Visualizzazione del poll nella cella */
-    cell.font = [UIFont fontWithName:FONT_HOME size:18];
-    cell.textLabel.text = p.pollName;
+    UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
+    NamePoll.text = p.pollName;
+    NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
+    
+    UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
+    DeadlinePoll.text = (NSString *)p.deadline;
+    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
 
     /* Controllo sulla scadenza del poll */
-    if ( [Poll compareDate:p.deadline WithDate: [[NSDate alloc]init]] == -1)
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"Scaduto!%s%sVoti: %d",SPACES_FOR_VOTES_SCADUTO,SPACES_FOR_VOTES,p.votes];
-    
-    else
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%sVoti: %d",(NSString *)p.deadline,SPACES_FOR_VOTES,p.votes];
-    
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
-    [cell setSeparatorInset:UIEdgeInsetsZero];
+    if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)
+      DeadlinePoll.text = @"Sondaggio scaduto!";
     
     return cell;
     
@@ -332,15 +336,13 @@
 /* Metodo che gestisce il ri-carimento dell view */
 - (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+    
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
     [File clearSaveRank];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
-    /* Ogni volta che la view appare vengono scaricati i poll pubblici */
-    [self DownloadPolls];
-    [super viewWillAppear:animated];
     
 }
 

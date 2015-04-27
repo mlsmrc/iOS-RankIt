@@ -87,17 +87,30 @@
     
     static NSString *simpleTableIdentifier = @"CandCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    cell.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
+    CGRect frame;
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
-    cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     c = [cands objectAtIndex:indexPath.row];
-    cell.textLabel.text = c.candName;
-    cell.detailTextLabel.text = c.candDescription;
-    cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
-    [cell setSeparatorInset:UIEdgeInsetsZero];
+    
+    /* Visualizzazione Candidato nella cella */
+    UILabel *NameCand = (UILabel *)[cell viewWithTag:101];
+    NameCand.text = c.candName;
+    NameCand.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
+    
+    UILabel *DescriptionCand = (UILabel *)[cell viewWithTag:102];
+    DescriptionCand.text = (NSString *)c.candDescription;
+    DescriptionCand.font = [UIFont fontWithName:FONT_CANDIDATES_DESCRIPTION size:12];
+    
+    /* Se non c'è descrizione riposizioniamo la Label del nome al centro della cella */
+    if([c.candDescription isEqual:@""]) {
+        
+        frame = NameCand.frame;
+        frame.origin.y = 26;
+        NameCand.frame = frame;
+        
+    }
     
     return cell;
     
