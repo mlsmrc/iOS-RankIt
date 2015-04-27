@@ -37,7 +37,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 @property (readonly,nonatomic) NSString *userID;
 @property (readwrite,nonatomic) BOOL pvtPoll;
 @property (readonly,nonatomic) NSDate *lastUpdate;
-@property (readonly,nonatomic) int votes;
+@property (readwrite,nonatomic) int votes;
 @property (readonly,nonatomic) int *mine;
 @property (readwrite,nonatomic) NSMutableArray *candidates;
 
@@ -50,13 +50,14 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
          withCandidates: (NSMutableArray *) cand;
 
 /* Costruttore per creare un oggetto Poll da visualizzare in Home */
--(id)initPollWithPollID: (int) PollID
-               withName: (NSString *) Name
-        withDescription: (NSString *) Description
-        withResultsType: (int) rType
-           withDeadline: (NSDate *) Deadline
-         withLastUpdate: (NSDate *) LastUpdate
-         withCandidates: (NSMutableArray *) cand;
+- (id)initPollWithPollID: (int) PollID
+                withName: (NSString *) Name
+         withDescription: (NSString *) Description
+         withResultsType: (int) rType
+            withDeadline: (NSDate *) Deadline
+          withLastUpdate: (NSDate *) LastUpdate
+          withCandidates: (NSMutableArray *) cand
+               withVotes:(int)Votes;
 
 - (NSString *) toJSON;
 - (void) setLastUpdate;

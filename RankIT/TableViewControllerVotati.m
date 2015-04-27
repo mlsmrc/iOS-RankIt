@@ -106,7 +106,15 @@
         
         value = [allVotedPolls objectForKey:key];
         
-        Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]  withName:[value valueForKey:@"pollname"] withDescription:[value valueForKey:@"polldescription"] withResultsType:-1 withDeadline:[value valueForKey:@"deadline"] withLastUpdate:[value valueForKey:@"updated"] withCandidates:nil];
+        Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
+                                         withName:[value valueForKey:@"pollname"]
+                                  withDescription:[value valueForKey:@"polldescription"]
+                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
+                                     withDeadline:[value valueForKey:@"deadline"]
+                                   withLastUpdate:[value valueForKey:@"updated"]
+                                   withCandidates:nil
+                                        withVotes:[[value valueForKey:@"votes"] integerValue]];
+        
         [allVotedPollsDetails addObject:p];
         
     }
@@ -241,7 +249,7 @@
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = (NSString *)p.deadline;
+    DeadlinePoll.text = [NSString stringWithFormat:@"%@              Voti:%d",(NSString *)p.deadline,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
     
     /* Controllo sulla scadenza del poll */

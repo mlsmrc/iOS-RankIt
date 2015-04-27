@@ -28,6 +28,15 @@
 		A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68C21AEA7A2D00F6B0A6 /* Font.m */; };
 		A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A90A68E01AEA829E00F6B0A6 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DE1AEA829E00F6B0A6 /* File.m */; };
+		A9ADA2A01AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA29F1AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
+		A9ADA2B01AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A31AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m */; };
+		A9ADA2B11AEE7BF10091BAA4 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A51AEE7BF10091BAA4 /* SWCellScrollView.m */; };
+		A9ADA2B21AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A71AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m */; };
+		A9ADA2B31AEE7BF10091BAA4 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A91AEE7BF10091BAA4 /* SWTableViewCell.m */; };
+		A9ADA2B41AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2AB1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		A9ADA2B51AEE7BF10091BAA4 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2AD1AEE7BF10091BAA4 /* SWUtilityButtonView.m */; };
+		A9ADA2B61AEE7BF10091BAA4 /* UMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2AF1AEE7BF10091BAA4 /* UMTableViewCell.m */; };
+		A9ADA2B91AEEBF040091BAA4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2B81AEEBF040091BAA4 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +89,24 @@
 		A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerVotati.m; sourceTree = "<group>"; };
 		A90A68DD1AEA829E00F6B0A6 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		A90A68DE1AEA829E00F6B0A6 /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
+		A9ADA29E1AEE7A9A0091BAA4 /* TableViewControllerMyPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewControllerMyPoll.h; sourceTree = "<group>"; };
+		A9ADA29F1AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerMyPoll.m; sourceTree = "<group>"; };
+		A9ADA2A21AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+SWUtilityButtons.h"; path = "MyPollCellFiles/NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		A9ADA2A31AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+SWUtilityButtons.m"; path = "MyPollCellFiles/NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		A9ADA2A41AEE7BF10091BAA4 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWCellScrollView.h; path = MyPollCellFiles/SWCellScrollView.h; sourceTree = "<group>"; };
+		A9ADA2A51AEE7BF10091BAA4 /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWCellScrollView.m; path = MyPollCellFiles/SWCellScrollView.m; sourceTree = "<group>"; };
+		A9ADA2A61AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWLongPressGestureRecognizer.h; path = MyPollCellFiles/SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		A9ADA2A71AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWLongPressGestureRecognizer.m; path = MyPollCellFiles/SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		A9ADA2A81AEE7BF10091BAA4 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewCell.h; path = MyPollCellFiles/SWTableViewCell.h; sourceTree = "<group>"; };
+		A9ADA2A91AEE7BF10091BAA4 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = MyPollCellFiles/SWTableViewCell.m; sourceTree = "<group>"; };
+		A9ADA2AA1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonTapGestureRecognizer.h; path = MyPollCellFiles/SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		A9ADA2AB1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonTapGestureRecognizer.m; path = MyPollCellFiles/SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		A9ADA2AC1AEE7BF10091BAA4 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonView.h; path = MyPollCellFiles/SWUtilityButtonView.h; sourceTree = "<group>"; };
+		A9ADA2AD1AEE7BF10091BAA4 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonView.m; path = MyPollCellFiles/SWUtilityButtonView.m; sourceTree = "<group>"; };
+		A9ADA2AE1AEE7BF10091BAA4 /* UMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMTableViewCell.h; path = MyPollCellFiles/UMTableViewCell.h; sourceTree = "<group>"; };
+		A9ADA2AF1AEE7BF10091BAA4 /* UMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMTableViewCell.m; path = MyPollCellFiles/UMTableViewCell.m; sourceTree = "<group>"; };
+		A9ADA2B71AEEBF040091BAA4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A9ADA2B81AEEBF040091BAA4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +148,7 @@
 		A90A687A1AEA79B100F6B0A6 /* RankIT */ = {
 			isa = PBXGroup;
 			children = (
+				A9ADA29D1AEE7A400091BAA4 /* I Miei Poll */,
 				A90A68D91AEA7C0600F6B0A6 /* Poll Votati */,
 				A90A68D81AEA7A9A00F6B0A6 /* Votazione Poll */,
 				A90A68D71AEA7A8400F6B0A6 /* Home */,
@@ -174,6 +202,8 @@
 		A90A68D61AEA7A4100F6B0A6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A9ADA2B71AEEBF040091BAA4 /* Reachability.h */,
+				A9ADA2B81AEEBF040091BAA4 /* Reachability.m */,
 				A90A68B81AEA7A2D00F6B0A6 /* APIurls.h */,
 				A90A68B91AEA7A2D00F6B0A6 /* APIurls.m */,
 				A90A68BD1AEA7A2D00F6B0A6 /* Candidate.h */,
@@ -223,6 +253,37 @@
 				A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */,
 			);
 			name = "Poll Votati";
+			sourceTree = "<group>";
+		};
+		A9ADA29D1AEE7A400091BAA4 /* I Miei Poll */ = {
+			isa = PBXGroup;
+			children = (
+				A9ADA2A11AEE7AA10091BAA4 /* SWCellFiles */,
+				A9ADA29E1AEE7A9A0091BAA4 /* TableViewControllerMyPoll.h */,
+				A9ADA29F1AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m */,
+			);
+			name = "I Miei Poll";
+			sourceTree = "<group>";
+		};
+		A9ADA2A11AEE7AA10091BAA4 /* SWCellFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A9ADA2A21AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.h */,
+				A9ADA2A31AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m */,
+				A9ADA2A41AEE7BF10091BAA4 /* SWCellScrollView.h */,
+				A9ADA2A51AEE7BF10091BAA4 /* SWCellScrollView.m */,
+				A9ADA2A61AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.h */,
+				A9ADA2A71AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m */,
+				A9ADA2A81AEE7BF10091BAA4 /* SWTableViewCell.h */,
+				A9ADA2A91AEE7BF10091BAA4 /* SWTableViewCell.m */,
+				A9ADA2AA1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.h */,
+				A9ADA2AB1AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m */,
+				A9ADA2AC1AEE7BF10091BAA4 /* SWUtilityButtonView.h */,
+				A9ADA2AD1AEE7BF10091BAA4 /* SWUtilityButtonView.m */,
+				A9ADA2AE1AEE7BF10091BAA4 /* UMTableViewCell.h */,
+				A9ADA2AF1AEE7BF10091BAA4 /* UMTableViewCell.m */,
+			);
+			name = SWCellFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,18 +390,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				A90A68D11AEA7A2D00F6B0A6 /* APIurls.m in Sources */,
+				A9ADA2B41AEE7BF10091BAA4 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
+				A9ADA2B31AEE7BF10091BAA4 /* SWTableViewCell.m in Sources */,
 				A90A68CD1AEA7A2D00F6B0A6 /* ViewControllerCandidates.m in Sources */,
 				A90A68C61AEA7A2D00F6B0A6 /* Flip.m in Sources */,
+				A9ADA2B11AEE7BF10091BAA4 /* SWCellScrollView.m in Sources */,
 				A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */,
 				A90A68811AEA79B100F6B0A6 /* AppDelegate.m in Sources */,
 				A90A68E01AEA829E00F6B0A6 /* File.m in Sources */,
+				A9ADA2B51AEE7BF10091BAA4 /* SWUtilityButtonView.m in Sources */,
+				A9ADA2B91AEEBF040091BAA4 /* Reachability.m in Sources */,
 				A90A68C91AEA7A2D00F6B0A6 /* Poll.m in Sources */,
 				A90A68CA1AEA7A2D00F6B0A6 /* TableViewControllerHome.m in Sources */,
 				A90A687E1AEA79B100F6B0A6 /* main.m in Sources */,
 				A90A68CE1AEA7A2D00F6B0A6 /* ViewControllerDettagli.m in Sources */,
+				A9ADA2B21AEE7BF10091BAA4 /* SWLongPressGestureRecognizer.m in Sources */,
+				A9ADA2B01AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				A9ADA2A01AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m in Sources */,
 				A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */,
 				A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */,
 				A90A68C51AEA7A2D00F6B0A6 /* ConnectionToServer.m in Sources */,
+				A9ADA2B61AEE7BF10091BAA4 /* UMTableViewCell.m in Sources */,
 				A90A68CC1AEA7A2D00F6B0A6 /* UtilTableView.m in Sources */,
 				A90A68D31AEA7A2D00F6B0A6 /* Candidate.m in Sources */,
 			);
@@ -401,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -438,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -451,7 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -463,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

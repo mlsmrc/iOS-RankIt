@@ -53,7 +53,8 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
          withResultsType: (int) rType
             withDeadline: (NSDate *) Deadline
           withLastUpdate: (NSDate *) LastUpdate
-          withCandidates: (NSMutableArray *) cand;
+          withCandidates: (NSMutableArray *) cand
+               withVotes:(int)Votes
 {
     self = [super init];
     
@@ -71,7 +72,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         /* Scarico dal server il quantitativo di voti che il poll ha ricevuto */
         //ConnectionToServer *conn = [[ConnectionToServer alloc]init];
         //[conn getVotiPollWithPollId: [NSString stringWithFormat:@"%d",PollID]];
-        votes = 0;
+        votes = Votes;
 
         /* Inizializzazione formattatore date */
         dateFormatter = [Poll getDateFormatter];
