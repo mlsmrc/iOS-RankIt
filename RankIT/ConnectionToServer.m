@@ -192,35 +192,6 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
-- (int) getVotiPollWithPollId:(NSString*)pollId
-{
-    
-    /* Sostituzione dei parametri */
-    NSString * url=[URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
-    
-    /* Creazione della richiesta ed invio */
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
-    NSDictionary *dict;
-    
-    /* Esito positivo: parsing del JSON nel dizionario (una entry per ogni candidate) */
-    if(response!=nil)
-    {
-        
-        dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-        response=nil;
-        
-        /* creazione dell'array contenente i candidates */
-        return (int)[[dict valueForKey:@"votes"] integerValue];
-        
-    }
-    
-    return -1;
-    
-}
-
 /* Ritorna il dizionario contenente i poll nel formato <pollid,poll> */
 - (NSMutableDictionary*) getDizionarioPolls
 {

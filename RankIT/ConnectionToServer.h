@@ -14,7 +14,6 @@ FOUNDATION_EXPORT NSString *EMPTY_MY_POLLS_LIST;
 - (NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId;
 - (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking;
 - (NSString *) addPollWithPoll:(Poll*)newpoll;
-- (int) getVotiPollWithPollId:(NSString*)pollId;
 - (NSMutableDictionary*) getDizionarioPollsVotati;
 - (BOOL) resetPollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId;
 - (BOOL) deletePollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId;
