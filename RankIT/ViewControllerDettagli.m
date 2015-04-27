@@ -94,8 +94,7 @@
     
     cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     c = [cands objectAtIndex:indexPath.row];
-    NSString* strCandidate = [c.candChar stringByAppendingString:@") "];
-    cell.textLabel.text = [strCandidate stringByAppendingString:(NSString *)c.candName];
+    cell.textLabel.text = c.candName;
     cell.detailTextLabel.text = c.candDescription;
     cell.imageView.image = [UtilTableView imageWithImage:[UIImage imageNamed:@"Poll-image"] scaledToSize:CGSizeMake(CELL_HEIGHT-10, CELL_HEIGHT-10)];
     [cell setSeparatorInset:UIEdgeInsetsZero];
