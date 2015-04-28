@@ -8,7 +8,7 @@ FOUNDATION_EXPORT NSString *CUSTOM_UDID;
 FOUNDATION_EXPORT NSString *SAVE_RANK;
 
 /* Funzioni di scrittura */
-+ (BOOL) writeOnPListRanking: (NSString*)ranking OfPoll:(NSString*)pollid;
++ (BOOL) writeOnPListRanking:(NSString*)ranking OfPoll:(NSString*)pollid;
 + (BOOL) writeUDID;
 + (BOOL) clearSaveRank;
 + (BOOL) SaveRank:(NSString *)rank OfPoll:(NSString *)pollId;

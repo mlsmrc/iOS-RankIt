@@ -89,7 +89,7 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     CGRect frame;
     
-    if (cell == nil)
+    if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
     c = [cands objectAtIndex:indexPath.row];
@@ -151,7 +151,7 @@
     
     UIBarButtonItem *backButton;
     
-    if ([segue.identifier isEqualToString:@"showCandDetails"]) {
+    if([segue.identifier isEqualToString:@"showCandDetails"]) {
         
         NSIndexPath *indexPath = nil;
         c = nil;
@@ -166,7 +166,7 @@
         
     }
     
-    else if ([segue.identifier isEqualToString:@"showVoteView"]) {
+    else if([segue.identifier isEqualToString:@"showVoteView"]) {
         
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
@@ -184,18 +184,15 @@
         NSString *savedRank = [File getSaveRankOfPoll:[NSString stringWithFormat:@"%d",p.pollId]];
         
         /* Poll già votato in precedenza e non salvato */
-        if(voti!=NULL && savedRank == NULL)
-        {
+        if(voti!=NULL && savedRank == NULL) {
             
-            /* Divido la classifica */
+            /* Divide la classifica */
             NSArray *arrayVoti = [voti componentsSeparatedByString:@","];
             
             /* Riassegnamento array in base al voto già dato al poll */
-            for(int i=0;i<[arrayVoti count];i++)
-            {
+            for(int i=0;i<[arrayVoti count];i++) {
                 
-                if([arrayVoti[i] containsString:@"a"])
-                {
+                if([arrayVoti[i] containsString:@"a"]) {
                     
                     c=[cands objectAtIndex:0];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -203,8 +200,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"b"])
-                {
+                if([arrayVoti[i] containsString:@"b"]) {
                     
                     c=[cands objectAtIndex:1];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -212,8 +208,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"c"])
-                {
+                if([arrayVoti[i] containsString:@"c"]) {
                     
                     c=[cands objectAtIndex:2];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -221,8 +216,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"d"])
-                {
+                if([arrayVoti[i] containsString:@"d"]) {
                     
                     c=[cands objectAtIndex:3];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -230,8 +224,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"e"])
-                {
+                if([arrayVoti[i] containsString:@"e"]) {
                     
                     c=[cands objectAtIndex:4];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -243,18 +236,16 @@
             
         }
         
-        /* Se ho una classifica salvata */
-        else if((voti==NULL && savedRank!=NULL) || (voti!=NULL && savedRank!=NULL))
-        {
-            /* Divido la classifica */
+        /* Classifica salvata */
+        else if((voti==NULL && savedRank!=NULL) || (voti!=NULL && savedRank!=NULL)) {
+            
+            /* Divide la classifica */
             NSArray *arrayVoti = [savedRank componentsSeparatedByString:@","];
             
             /* Riassegnamento array in base al voto già dato al poll */
-            for(int i=0;i<[arrayVoti count];i++)
-            {
+            for(int i=0;i<[arrayVoti count];i++) {
                 
-                if([arrayVoti[i] containsString:@"a"])
-                {
+                if([arrayVoti[i] containsString:@"a"]) {
                     
                     c=[cands objectAtIndex:0];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -262,8 +253,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"b"])
-                {
+                if([arrayVoti[i] containsString:@"b"]) {
                     
                     c=[cands objectAtIndex:1];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -271,8 +261,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"c"])
-                {
+                if([arrayVoti[i] containsString:@"c"]) {
                     
                     c=[cands objectAtIndex:2];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -280,8 +269,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"d"])
-                {
+                if([arrayVoti[i] containsString:@"d"]) {
                     
                     c=[cands objectAtIndex:3];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -289,8 +277,7 @@
                     
                 }
                 
-                if([arrayVoti[i] containsString:@"e"])
-                {
+                if([arrayVoti[i] containsString:@"e"]) {
                     
                     c=[cands objectAtIndex:4];
                     [destViewController.candidateChars addObject:c.candChar];
@@ -303,11 +290,10 @@
         }
         
         /* Poll mai votato prima */
-        else
-        {
-            /* Inizializzo normalmente l'array dei candidates */
-            for(int i=0;i<[cands count];i++)
-            {
+        else {
+            
+            /* Inizializza normalmente l'array dei candidates */
+            for(int i=0;i<[cands count];i++) {
                 
                 c = [cands objectAtIndex:i];
                 [destViewController.candidateChars addObject:c.candChar];

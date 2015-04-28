@@ -9,7 +9,7 @@ NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\
     
     self=[super init];
     
-    if (self)
+    if(self)
     {
         
         [self setCandChar:Char];

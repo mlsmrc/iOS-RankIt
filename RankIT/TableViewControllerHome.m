@@ -366,33 +366,41 @@
 }
 
 /* Funzioni utili ad una corretta visualizzazione della table view e della search bar */
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
+- (void) searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
     
     [tableView setContentInset:UIEdgeInsetsZero];
     [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
     
 }
 
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
+        
         [UIView animateWithDuration:0.25 animations:^{
+            
             for (UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
+            
         }];
+        
     }
     
 }
 
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        
         [UIView animateWithDuration:0.25 animations:^{
+            
             for (UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformIdentity;
+            
         }];
+        
     }
     
 }

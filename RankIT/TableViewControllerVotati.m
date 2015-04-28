@@ -172,10 +172,10 @@
     
 }
 
-/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll votati */
 - (void) printMessaggeError {
     
-    /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
+    /* Background senza linee e definizione del messaggio di assenza poll votati o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Assegna il messaggio a seconda dei casi */
@@ -215,6 +215,7 @@
                     ((UILabel *)view).text = NO_RESULTS;
                     
                 }
+            
             }
             
         }
@@ -235,7 +236,7 @@
     Poll *p;
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil)
+    if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
@@ -278,51 +279,6 @@
     
 }
 
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Votati" che dai risultati di ricerca */
-/*- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    if ([segue.identifier isEqualToString:@"showVotedPollDetails"]) {
-        
-        NSIndexPath *indexPath = nil;
-        Poll *p = nil;
-        
-        if (self.searchDisplayController.active) {
-            
-            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            p = [searchResults objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
-            
-        }
-        
-        else {
-            
-            indexPath = [self.tableView indexPathForSelectedRow];
-            p = [allVotedPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
-        }
-        
-        ViewControllerDettagli *destViewController = segue.destinationViewController;
-        destViewController.p = p;
-        
-    }
-    
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (self.tableView == self.searchDisplayController.searchResultsTableView) {
-        
-        [self performSegueWithIdentifier:@"showPollDetails" sender:self];
-        
-    }
-    
-}*/
-
 /* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
 - (void) viewDidAppear:(BOOL)animated {
     
@@ -331,7 +287,7 @@
     
 }
 
-/* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
+/* Metodo che gestisce il ri-carimento dell view */
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -347,31 +303,42 @@
     
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
+/* Funzioni utili ad una corretta visualizzazione della table view e della search bar */
+- (void) searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
+    
     [tableView setContentInset:UIEdgeInsetsZero];
     [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+
 }
 
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
+        
         [UIView animateWithDuration:0.25 animations:^{
-            for (UIView *subview in self.view.subviews)
+            
+            for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
+        
         }];
+    
     }
     
 }
 
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        
         [UIView animateWithDuration:0.25 animations:^{
-            for (UIView *subview in self.view.subviews)
+            
+            for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformIdentity;
+            
         }];
+        
     }
     
 }

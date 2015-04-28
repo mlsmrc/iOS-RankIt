@@ -6,8 +6,8 @@
 FOUNDATION_EXPORT NSString *POLL_JSON;
 /* const NSString *UDID_IN_INFO_PLIST = @"CustomUDID"; */
 
-@interface Poll : NSObject
-{
+@interface Poll : NSObject {
+    
     int pollId;
     NSString *pollName;
     NSString *pollDescription;

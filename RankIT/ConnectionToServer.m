@@ -72,14 +72,14 @@ NSMutableDictionary *dizionarioPollsVotati;
             NSString *str;
             
             /* Controlla se pollid è un array, se lo è allora vuol dire che c'erano almeno due poll nel JSON altrimenti solo uno */
-            if ([pollid isKindOfClass:[NSArray class]]) {
+            if([pollid isKindOfClass:[NSArray class]]) {
                 
                 /* Iterazione che permette di costruire il dizionario nel seguente modo: <pollid1,poll1>,<pollid2,poll2>,...,<pollidN,pollN> */
                 for(id key in polls)
                 {
                     /* Se userId="" allora è la richiesta di Home             *
                      * Se userId!="" e mine=1 allora è la richiesta di MyPoll */
-                    if (([[key valueForKey:@"mine"] isEqual:@"1"] && ![userId isEqual:@""]) || [userId isEqual:@""])
+                    if(([[key valueForKey:@"mine"] isEqual:@"1"] && ![userId isEqual:@""]) || [userId isEqual:@""])
                     {
                         
                         str = pollid[i];
@@ -107,8 +107,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 }
 
 /* Funzione che ritorna le scelte per il voto di un determinato poll specificato tramite pollId */
-- (NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId
-{
+- (NSMutableArray*) getCandidatesWithPollId:(NSString*)pollId {
     
     /* Sostituzione dei parametri */
     NSString * url=[URL_GET_CANDIDATES stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
@@ -123,15 +122,13 @@ NSMutableDictionary *dizionarioPollsVotati;
     NSMutableArray * arrayCandidates= [[NSMutableArray alloc]init];
     
     /* Esito positivo: parsing del JSON nel dizionario (una entry per ogni candidate) */
-    if(response!=nil)
-    {
+    if(response!=nil) {
         
         dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         response=nil;
         
         /* creazione dell'array contenente i candidates */
-        for(NSString *key in dict)
-        {
+        for(NSString *key in dict) {
             
             Candidate * candidate=[[Candidate alloc]initCandicateWithChar:[key valueForKey:@"candchar"] andName:[key valueForKey:@"candname"] andDescription:[key valueForKey:@"canddescription"]];
             [arrayCandidates addObject:candidate];
@@ -147,8 +144,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 
 /*  Funzione che dato il pollid, lo userid e la stringa che corrisponde alla votazione  *
  *  inserisce la votazione relativa al poll al server                                   */
-- (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking
-{
+- (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking {
     
     /* Preparazione dati richiesta POST */
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@&ranking=%@",pollId,userId,ranking];
@@ -164,8 +160,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 
 /*  Funzione che dato un oggetto di tipo Poll, aggiunge un poll e   *
  *  ritorna l'id del poll appena inserito come stringa              */
-- (NSString *) addPollWithPoll:(Poll*)newpoll
-{
+- (NSString *) addPollWithPoll:(Poll*)newpoll {
     
     /* Preparazione dati richiesta POST */
     NSString *post = [NSString stringWithFormat:@"newpoll=%@",[newpoll toJSON]];
@@ -193,31 +188,31 @@ NSMutableDictionary *dizionarioPollsVotati;
 }
 
 /* Ritorna il dizionario contenente i poll nel formato <pollid,poll> */
-- (NSMutableDictionary*) getDizionarioPolls
-{
+- (NSMutableDictionary*) getDizionarioPolls {
+    
     return dizionarioPolls;
+    
 }
 
 /*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
--(NSMutableDictionary*) getDizionarioPollsVotati
-{
+-(NSMutableDictionary*) getDizionarioPollsVotati {
     
     [self scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
     NSMutableDictionary *allPolls = [self getDizionarioPolls];
     NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc] init];
     
     /* Controllo presenza di connessione */
-    if (allPolls==nil)
+    if(allPolls==nil)
         return nil;
     
     /* Contiene i pollid di tutti i poll votati */
     NSArray *VotesPListKeys = [File getAllKeysinPList:VOTES_PLIST];
     
-    if ([VotesPListKeys count]==0)
+    if([VotesPListKeys count]==0)
         return PollVotati;
     
     /* Aggiungi i poll vodati nel dizionario */
-    for (NSString* key in [allPolls allKeys])
+    for(NSString* key in [allPolls allKeys])
         if([VotesPListKeys containsObject:key])
             [PollVotati setObject:[allPolls objectForKey:key] forKey:key];
     
@@ -227,8 +222,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 }
 
 /* Resetta le votazioni del poll */
-- (BOOL) resetPollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId
-{
+- (BOOL) resetPollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId {
     
     /* Preparazione dati richiesta POST */
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
@@ -236,30 +230,31 @@ NSMutableDictionary *dizionarioPollsVotati;
     /* Invio della richiesta POST */
     [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
     NSData *response = [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
-    if (response!=nil) {
+    if(response!=nil) {
         NSString *dictResponse = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         return ([[dictResponse valueForKey:@"reset"] isEqual:@"1"] ? true:false);
     }
     else
         return false;
 
-    
 }
 
 /* Elimina il poll */
-- (BOOL) deletePollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId
-{
+- (BOOL) deletePollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId {
+    
     /* Preparazione dati richiesta POST */
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
     
     /* Invio della richiesta POST */
     NSData *response = [self sendPostRequestWithPostURL:URL_DELETE_POLL AndParametersString:ParPost];
-    if (response!=nil) {
+    if(response!=nil) {
         NSString *dictResponse = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         return ([[dictResponse valueForKey:@"delete"] isEqual:@"1"] ? true:false);
     }
+    
     else
         return false;
+    
 }
 
 @end

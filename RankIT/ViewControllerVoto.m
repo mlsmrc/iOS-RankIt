@@ -53,7 +53,7 @@
     static NSString *simpleTableIdentifier = @"VoteCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil)
+    if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
 
     name = [candidateNames objectAtIndex:indexPath.row];

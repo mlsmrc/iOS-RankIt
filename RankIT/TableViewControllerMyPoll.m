@@ -38,7 +38,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
-    /* Messaggio nella schermata Votati */
+    /* Messaggio nella schermata "I Miei Sondaggi" */
     UILabel *messageLabel;
     
     /* Pulsante di ritorno schermata precedente */
@@ -97,29 +97,29 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-/* Download poll votati dal server */
+/* Download poll dal server */
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
     
-    /* Prova */
+    /* Connessione di prova */
     [Connection scaricaPollsWithPollId:@"" andUserId:USER_TEST andStart:@""];
-    /* ----- */
     
     /* [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""]; */
     allMyPolls = [Connection getDizionarioPolls];
     
-    if(allMyPolls!=nil && [allMyPolls count] != 0)
-    {
+    if(allMyPolls!=nil && [allMyPolls count] != 0) {
+        
         [self CreatePollsDetails];
         [self.tableView reloadData];
+        
     }
     
     [self MyPolls];
     
 }
 
-/* Estrapolazione dei dettagli dei poll votati ritornati dal server */
+/* Estrapolazione dei dettagli dei poll ritornati dal server */
 - (void) CreatePollsDetails {
     
     NSString *value;
@@ -146,7 +146,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-/* Visualizzazione poll votati nella schermata "I Miei Sondaggi" */
+/* Visualizzazione poll nella schermata "I Miei Sondaggi" */
 - (void) MyPolls {
     
     if(allMyPolls!=nil) {
@@ -189,10 +189,10 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll */
 - (void) printMessaggeError {
     
-    /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
+    /* Background senza linee e definizione del messaggio di assenza poll o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Assegna il messaggio a seconda dei casi */
@@ -207,7 +207,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-/* Permette di modificare l'altezza delle righe della schermata "Votati" */
+/* Permette di modificare l'altezza delle righe della schermata "I Miei Sondaggi" */
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return CELL_HEIGHT;
@@ -248,112 +248,23 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-- (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
-    
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
-    searchResults = [allMyPollsDetails filteredArrayUsingPredicate:resultPredicate];
-    
-}
-
-- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    
-    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-    
-    return YES;
-    
-}
-
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "I Miei Sondaggi" che dai risultati di ricerca */
-/*- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    if ([segue.identifier isEqualToString:@"showMyPollDetails"]) {
-        
-        NSIndexPath *indexPath = nil;
-        Poll *p = nil;
-        
-        if (self.searchDisplayController.active) {
-            
-            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            p = [searchResults objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
-            
-        }
-        
-        else {
-            
-            indexPath = [self.tableView indexPathForSelectedRow];
-            p = [allVotedPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
-        }
-        
-        ViewControllerDettagli *destViewController = segue.destinationViewController;
-        destViewController.p = p;
-        
-    }
-    
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (self.tableView == self.searchDisplayController.searchResultsTableView) {
-        
-        [self performSegueWithIdentifier:@"showPollDetails" sender:self];
-        
-    }
-    
-}*/
-
-/* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
-    
-}
-
-/* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
-- (void) viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
-    [File clearSaveRank];
-    
-    /* Ogni volta che la view appare vengono scaricati i poll creati */
-    [self DownloadPolls];
-    
-}
-
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *simpleTableIdentifier = @"MyPollCell";
     UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil) {
+    if(cell == nil)
         cell = [[UMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
     
     Poll *p;
-        
+    
     [cell setLeftUtilityButtons:[self leftButtons] WithButtonWidth:58.0f];
     [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:58.0f];
     cell.delegate = self;
-        
-    if(tableView == self.searchDisplayController.searchResultsTableView) {
-        
-        
+    
+    if(tableView == self.searchDisplayController.searchResultsTableView)
         p = [searchResults objectAtIndex:indexPath.row];
-        
-    }
-        
+    
     else
         p = [allMyPollsDetails objectAtIndex:indexPath.row];
     
@@ -375,30 +286,61 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-- (NSArray *)rightButtons {
+- (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
+    searchResults = [allMyPollsDetails filteredArrayUsingPredicate:resultPredicate];
+    
+}
+
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    
+    return YES;
+    
+}
+
+/* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
+}
+
+/* Metodo che gestisce il ri-carimento dell view */
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
+    [File clearSaveRank];
+    
+    /* Ogni volta che la view appare vengono scaricati i poll creati */
+    [self DownloadPolls];
+    
+}
+
+/* Gestione barra dei bottoni con swipe */
+- (NSArray *) rightButtons {
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:0.58f blue:0.0f alpha:1.0]
-                                                title:@"Azzera"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.58f blue:0.0f alpha:1.0]title:@"Azzera"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]title:@"Modif."];
     
-    
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                               title:@"Modif."];
-    
-    gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)[UIColor colorWithWhite:1.0f alpha:0.1f].CGColor,
-                            (id)[UIColor colorWithWhite:0.4f alpha:0.5f].CGColor,
-                            nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0f alpha:0.1f].CGColor,(id)[UIColor colorWithWhite:0.4f alpha:0.5f].CGColor,nil];
 
     return rightUtilityButtons;
     
 }
 
-- (NSArray *)leftButtons {
+- (NSArray *) leftButtons {
     
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
     [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
@@ -406,108 +348,89 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-
 #pragma mark - SWTableViewDelegate
 
-/* Gestione barra dei bottoni con swipe sinistra -> destra */
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
-{
+- (void) swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    
     switch (index) {
-        case DELETE_POLL:
-        {
+            
+        case DELETE_POLL: {
+            
             /* Cattura del poll */
             Poll *p;
-            if(self.tableView == self.searchDisplayController.searchResultsTableView)
-            {
+            
+            if(self.tableView == self.searchDisplayController.searchResultsTableView) {
+                
                 cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 p = [searchResults objectAtIndex:index];
+                
             }
             
             else
                 p = [allMyPollsDetails objectAtIndex:index];
             
             UIAlertController *AlertDelete;
-            if(p.votes!=0)
-            {
+            
+            if(p.votes!=0) {
+                
                 /* Alert eliminazione */
-                 AlertDelete = [UIAlertController alertControllerWithTitle:@"Impossibile eliminare!"
-                                                                                     message:[NSString stringWithFormat:@"Questo sondaggio possiede almeno 1 voto.\nResettare prima di eliminare."]
-                                                                              preferredStyle:UIAlertControllerStyleActionSheet];
+                AlertDelete = [UIAlertController alertControllerWithTitle:@"Impossibile eliminare!" message:@"Questo sondaggio possiede almeno 1 voto.\nResettare prima di eliminare." preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 /* Creazione pulsanti */
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"Ok"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
                                          [AlertDelete dismissViewControllerAnimated:YES completion:nil];
-                                     }];
+                
+                }];
                 
                 /* Aggiunta pulsante all'alert */
                 [AlertDelete addAction:ok];
+                
             }
-            else
-            {
+            
+            else {
+                
                 /* Alert eliminazione */
-                AlertDelete = [UIAlertController alertControllerWithTitle:@"Attenzione!"
-                                                                                 message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare il sondaggio?"]
-                                                                          preferredStyle:UIAlertControllerStyleActionSheet];
+                AlertDelete = [UIAlertController alertControllerWithTitle:@"Attenzione!" message:@"Sei sicuro di voler eliminare il sondaggio?" preferredStyle:UIAlertControllerStyleActionSheet];
             
                 /* Creazione pulsanti */
-                UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"Si"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     /* Handler dell'ok */
-                                     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-                                     bool response = [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST];
-                                     [AlertDelete dismissViewControllerAnimated:YES completion:nil];
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Si" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Handler dell'ok */
+                    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+                    bool response = [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST];
+                    [AlertDelete dismissViewControllerAnimated:YES completion:nil];
+                    UIAlertController *OkAlertDelete;
+            
+                    /* Gestione della risposta */
+                    if(response)
+                        OkAlertDelete = [UIAlertController alertControllerWithTitle:@"Operazione completata!" message:@"Sondaggio Eliminato." preferredStyle:UIAlertControllerStyleActionSheet];
+                    
+                    else
+                        OkAlertDelete = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE preferredStyle:UIAlertControllerStyleActionSheet];
                                      
-                                     UIAlertController *OkAlertDelete;
-                                     
-                                     /* Gestione della risposta */
-                                     if (response)
-                                     {
-                                         OkAlertDelete= [UIAlertController alertControllerWithTitle:@"Operazione completata!"
-                                                                                            message:[NSString stringWithFormat:@"Sondaggio Eliminato."]
-                                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
-                                     }
-                                     else
-                                     {
-                                         OkAlertDelete= [UIAlertController alertControllerWithTitle:@"Errore!"
-                                                                                            message:SERVER_UNREACHABLE
-                                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
-                                     }
-                                     
-                                     UIAlertAction* okdelete = [UIAlertAction
-                                                               actionWithTitle:@"Ok"
-                                                               style:UIAlertActionStyleDefault
-                                                               handler:^(UIAlertAction * action)
-                                                               {
-                                                                   [OkAlertDelete dismissViewControllerAnimated:YES completion:nil];
+                    UIAlertAction* okdelete = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                        [OkAlertDelete dismissViewControllerAnimated:YES completion:nil];
                                                                    
-                                                                   /* Elimina poll senza richiedere una connessione al server */
-                                                                   NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                                                                   [allMyPolls removeObjectForKey:[NSString stringWithFormat:@"%d",p.pollId]];
-                                                                   [allMyPollsDetails removeObjectAtIndex:cellIndexPath.row];
-                                                                   [self.tableView reloadData];
-                                                                   if ([allMyPolls count] == 0) {
-                                                                       [self printMessaggeError];
-                                                                   }
+                        /* Elimina poll senza richiedere una connessione al server */
+                        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                        [allMyPolls removeObjectForKey:[NSString stringWithFormat:@"%d",p.pollId]];
+                        [allMyPollsDetails removeObjectAtIndex:cellIndexPath.row];
+                        [self.tableView reloadData];
+                    
+                        if([allMyPolls count] == 0)
+                            [self printMessaggeError];
                                                                    
-                                                               }];
+                    }];
                                      
-                                     [OkAlertDelete addAction:okdelete];
-                                     [self presentViewController:OkAlertDelete animated:YES completion:nil];
-
+                    [OkAlertDelete addAction:okdelete];
+                    [self presentViewController:OkAlertDelete animated:YES completion:nil];
                                      
-                                 }];
-                UIAlertAction* cancel = [UIAlertAction
-                                     actionWithTitle:@"Annulla"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
+                }];
+                
+                UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
                                          /* Handler del cancel */
                                          [AlertDelete dismissViewControllerAnimated:YES completion:nil];
                                          
@@ -516,30 +439,36 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                 /* Aggiunta pulsanti all'alert */
                 [AlertDelete addAction:ok];
                 [AlertDelete addAction:cancel];
+                
             }
             
             /* Presentazione dell'alert */
             [self presentViewController:AlertDelete animated:YES completion:nil];
-            
             [cell hideUtilityButtonsAnimated:YES];
-
             break;
+            
         }
+            
     }
+    
 }
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
-{
+- (void) swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    
     switch (index) {
-        case RESET_POLL:
-        {
+        
+        case RESET_POLL: {
+            
             /* Cattura del poll */
             Poll *p;
-            if(self.tableView == self.searchDisplayController.searchResultsTableView)
-            {
+            
+            if(self.tableView == self.searchDisplayController.searchResultsTableView) {
+                
                 cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 p = [searchResults objectAtIndex:index];
+            
             }
+            
             else
                 p = [allMyPollsDetails objectAtIndex:index];
 
@@ -547,19 +476,16 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             
             /* Controllo connessione */
             Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-            if ([networkReachability currentReachabilityStatus]==NotReachable) {
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Errore!"
-                                                                                  message:SERVER_UNREACHABLE
-                                                                           preferredStyle:UIAlertControllerStyleActionSheet];
-                UIAlertAction* ok = [UIAlertAction
-                                     actionWithTitle:@"Ok"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         /* Handler del cancel */
-                                         [AlertReset dismissViewControllerAnimated:YES completion:nil];
+            if([networkReachability currentReachabilityStatus]==NotReachable) {
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE preferredStyle:UIAlertControllerStyleActionSheet];
+                
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Handler del cancel */
+                    [AlertReset dismissViewControllerAnimated:YES completion:nil];
                                          
-                                     }];
+                }];
+                
                 /* Aggiunta pulsanti all'alert */
                 [AlertReset addAction:ok];
                 
@@ -568,30 +494,24 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                 
                 [cell hideUtilityButtonsAnimated:YES];
                 break;
+            
             }
             
-            if (p.votes>1)
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!"
-                                                             message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare tutti i voti del sondaggio?"] preferredStyle:UIAlertControllerStyleActionSheet];
-            else if (p.votes==1)
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!"
-                                                                 message:@"Sei sicuro di voler eliminare l'unico voto ricevuto del sondaggio?"
-                                                          preferredStyle:UIAlertControllerStyleActionSheet];
-            else
-            {
-                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!"
-                                                                 message:@"Il sondaggio non ha nessun voto da eliminare."
-                                                          preferredStyle:UIAlertControllerStyleActionSheet];
+            if(p.votes>1)
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!" message:@"Sei sicuro di voler eliminare tutti i voti del sondaggio?" preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            else if(p.votes==1)
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!" message:@"Sei sicuro di voler eliminare l'unico voto del sondaggio?" preferredStyle:UIAlertControllerStyleActionSheet];
+            else {
                 
-                UIAlertAction* ok = [UIAlertAction
-                                         actionWithTitle:@"Ok"
-                                         style:UIAlertActionStyleDefault
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             /* Handler del cancel */
-                                             [AlertReset dismissViewControllerAnimated:YES completion:nil];
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!" message:@"Il sondaggio non ha nessun voto da eliminare." preferredStyle:UIAlertControllerStyleActionSheet];
+                
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Handler del cancel */
+                    [AlertReset dismissViewControllerAnimated:YES completion:nil];
                                              
-                                         }];
+                }];
                 
                 /* Aggiunta pulsanti all'alert */
                 [AlertReset addAction:ok];
@@ -605,136 +525,146 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             }
             
             /* Creazione pulsanti */
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"Si"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     /* Handler dell'ok */
-                                     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-                                     UIAlertController *OkAlertReset;
-                                     UIAlertAction* okreset;
-                                     if([conn resetPollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST])
-                                     {
-                                         OkAlertReset = [UIAlertController alertControllerWithTitle:@"Operazione completata!"
-                                                                                              message:[NSString stringWithFormat:@"Eliminati tutti i voti del Sondaggio."]
-                                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
-                                         okreset = [UIAlertAction
-                                                                   actionWithTitle:@"Ok"
-                                                                   style:UIAlertActionStyleDefault
-                                                                   handler:^(UIAlertAction * action)
-                                                                   {
-                                                                       [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Si" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                
+                /* Handler dell'ok */
+                ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+                UIAlertController *OkAlertReset;
+                UIAlertAction* okreset;
+                
+                if([conn resetPollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST]) {
+                    
+                    OkAlertReset = [UIAlertController alertControllerWithTitle:@"Operazione completata!" message:@"Eliminati tutti i voti del Sondaggio." preferredStyle:UIAlertControllerStyleActionSheet];
+                    
+                    okreset = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                        
+                        [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
+                        
+                        /* Resetta i voti del poll senza richiedere una connessione al server */
+                        [p setVotes:0];
+                        [allMyPolls setValue:p forKey:[NSString stringWithFormat:@"%ld",(long)index]];
+                        [self.tableView reloadData];
                                                                        
-                                                                       /* Resetta i voti del poll senza richiedere una connessione al server */
-                                                                       [p setVotes:0];
-                                                                       [allMyPolls setValue:p forKey:[NSString stringWithFormat:@"%ld",(long)index]];
-                                                                       [self.tableView reloadData];
-                                                                       
-                                                                   }];
+                    }];
                                          
-                                         [OkAlertReset addAction:okreset];
-                                     }
-                                     else
-                                     {
-                                         OkAlertReset= [UIAlertController alertControllerWithTitle:@"Errore!"
-                                                                                            message:SERVER_UNREACHABLE
-                                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
-                                         UIAlertAction* okreset = [UIAlertAction
-                                                                   actionWithTitle:@"Ok"
-                                                                   style:UIAlertActionStyleDefault
-                                                                   handler:^(UIAlertAction * action)
-                                                                   {
-                                                                       [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
-                                                                   }];
+                    [OkAlertReset addAction:okreset];
+                    
+                }
+                
+                else {
+                
+                    OkAlertReset= [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE preferredStyle:UIAlertControllerStyleActionSheet];
+        
+                    UIAlertAction* okreset = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
+                    
+                    }];
                                          
-                                         [OkAlertReset addAction:okreset];
-                                     }
+                [OkAlertReset addAction:okreset];
+            
+                }
 
-                                    [AlertReset dismissViewControllerAnimated:YES completion:nil];
-                                     
-                                     [self presentViewController:OkAlertReset animated:YES completion:nil];
-                                 }];
-           UIAlertAction* cancel = [UIAlertAction
-                                     actionWithTitle:@"Annulla"
-                                     style:UIAlertActionStyleDefault
-                                     handler:^(UIAlertAction * action)
-                                     {
-                                         /* Handler del cancel */
-                                         [AlertReset dismissViewControllerAnimated:YES completion:nil];
+                [AlertReset dismissViewControllerAnimated:YES completion:nil];
+                [self presentViewController:OkAlertReset animated:YES completion:nil];
+            
+            }];
+            
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+               
+                /* Handler del cancel */
+                [AlertReset dismissViewControllerAnimated:YES completion:nil];
                                          
-                                     }];
+           }];
             
-            /* Aggiunta pulsanti all'alert */
-            [AlertReset addAction:ok];
-            [AlertReset addAction:cancel];
+           /* Aggiunta pulsanti all'alert */
+           [AlertReset addAction:ok];
+           [AlertReset addAction:cancel];
             
-            /* Presentazione dell'alert */
-            [self presentViewController:AlertReset animated:YES completion:nil];
+           /* Presentazione dell'alert */
+           [self presentViewController:AlertReset animated:YES completion:nil];
             
-            [cell hideUtilityButtonsAnimated:YES];
-            break;
+           [cell hideUtilityButtonsAnimated:YES];
+           break;
+            
         }
-        case EDIT_POLL:
-        {
-            // Delete button was pressed
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
+        case EDIT_POLL: {
+            
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
             break;
         }
+            
         default:
             break;
+            
     }
 
 }
 
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
+- (BOOL) swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
+    
     return YES;
+    
 }
 
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
+- (BOOL) swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
+    
     switch (state) {
+        
         case 1:
             return YES;
             break;
+            
         case 2:
             return YES;
             break;
+            
         default:
             break;
+            
     }
     
     return YES;
+    
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
+/* Funzioni utili ad una corretta visualizzazione della table view e della search bar */
+- (void) searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
+    
     [tableView setContentInset:UIEdgeInsetsZero];
     [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+    
 }
 
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
+        
         [UIView animateWithDuration:0.25 animations:^{
-            for (UIView *subview in self.view.subviews)
+            
+            for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
+            
         }];
+        
     }
     
 }
 
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        
         [UIView animateWithDuration:0.25 animations:^{
-            for (UIView *subview in self.view.subviews)
+            
+            for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformIdentity;
+            
         }];
+        
     }
     
 }

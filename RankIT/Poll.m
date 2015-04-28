@@ -21,8 +21,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     
     self = [super init];
     
-    if(self)
-    {
+    if(self) {
         
         /* Lettura UDID dal file Info.plist */
         ID = [File getUDID];
@@ -58,8 +57,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 {
     self = [super init];
     
-    if(self)
-    {
+    if(self) {
         
         pollId = PollID;
         pollName = Name;
@@ -84,8 +82,8 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 }
 
 /* Crea una stringa utile per creare il JSON per l'aggiunta del poll */
-- (NSString *) toJSON
-{
+- (NSString *) toJSON {
+    
     NSString *descr = [POLL_JSON  stringByReplacingOccurrencesOfString:@"_POLL_NAME_" withString:[NSString stringWithFormat:@"%@",pollName]];
     
     descr = [descr  stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%d",pollId]];
@@ -105,8 +103,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     int i=1;
     
     /* Crea una stringa parziale JSON di tutti i candidati */
-    for(Candidate *cand in candidates)
-    {
+    for(Candidate *cand in candidates) {
         
         NSString *description = [cand descriptionForAddPoll];
         [cands appendString:description];
@@ -123,15 +120,15 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     return descr;
 }
 
-- (void) setLastUpdate
-{
+- (void) setLastUpdate {
+    
     /* Aggiornamento data */
    lastUpdate = [[NSDate alloc]init];
+
 }
 
 /* Ritorna l'oggetto utile a formattare la data - funzione statica */
-+(NSDateFormatter*) getDateFormatter
-{
++(NSDateFormatter*) getDateFormatter {
     
     NSDateFormatter *DF = [[NSDateFormatter alloc] init];
     DF.timeStyle = NSDateFormatterNoStyle;
@@ -146,8 +143,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 }
 
 /* Comparatore di date */
-+(int) compareDate:(NSDate *)first WithDate:(NSDate *)second
-{
++(int) compareDate:(NSDate *)first WithDate:(NSDate *)second {
     
     NSString *f = [first description];
     NSString *s = [second description];
