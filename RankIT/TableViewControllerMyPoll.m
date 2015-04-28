@@ -202,6 +202,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
         if([searchResults count] == 0) {
+            
         
             [self.searchDisplayController.searchResultsTableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
             
@@ -225,6 +226,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     }
     
     else return [allMyPollsDetails count];
+    
     
 }
 
@@ -314,35 +316,42 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MyPollCell" forIndexPath:indexPath];
+    static NSString *simpleTableIdentifier = @"MyPollCell";
+    
+    UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil)
+        cell = [[UMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    
     Poll *p;
         
     [cell setLeftUtilityButtons:[self leftButtons] WithButtonWidth:58.0f];
     [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:58.0f];
     cell.delegate = self;
         
-    if(tableView == self.searchDisplayController.searchResultsTableView)
-    {
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         p = [searchResults objectAtIndex:indexPath.row];
+        
     }
         
     else
         p = [allMyPollsDetails objectAtIndex:indexPath.row];
-        
+    
     /* Visualizzazione del poll nella cella */
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = p.pollName;
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
-        
+    
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
     DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
-        
+    
     /* Controllo sulla scadenza del poll */
     if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)
         DeadlinePoll.text = @"Sondaggio scaduto!";
-        
+    
     return cell;
     
 }

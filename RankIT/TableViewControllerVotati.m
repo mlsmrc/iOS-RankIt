@@ -220,7 +220,10 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil)
+    {
+        NSLog(@"%@",cell);
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
