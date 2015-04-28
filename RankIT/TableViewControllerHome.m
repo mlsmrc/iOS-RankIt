@@ -46,14 +46,7 @@
     
     /* Se non esiste un UDID, lo genera. Servirà per le votazioni */
     if([File getUDID]==NULL)
-    {
-        
         write = [File writeUDID];
-        //NSLog(@"%@",write?@"OK scritture UDID":@"Errore scrittura UDID");
-    }
-    
-    else
-        //NSLog(@"UDID presente");
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -206,7 +199,7 @@
     
 }
 
-/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della schermata "Home" o i risultati di ricerca */
+/* Funzioni che permettono di visualizzare i nomi dei poll pubblici nelle celle della schermata "Home" o nei risultati di ricerca */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
@@ -249,7 +242,7 @@
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
-        cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         p = [searchResults objectAtIndex:indexPath.row];
         
     }

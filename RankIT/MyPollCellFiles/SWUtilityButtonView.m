@@ -110,7 +110,6 @@
     }
     
     self.widthConstraint.constant = (width * utilityButtons.count);
-    
     [self setNeedsLayout];
     
     return;

@@ -7,7 +7,8 @@
     if (gestureRecognizer == self.panGestureRecognizer) {
         CGPoint translation = [(UIPanGestureRecognizer*)gestureRecognizer translationInView:gestureRecognizer.view];
         return fabs(translation.y) <= fabs(translation.x);
-    } else {
+    }
+    else {
         return YES;
     }
 }

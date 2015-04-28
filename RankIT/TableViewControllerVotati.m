@@ -181,7 +181,7 @@
     
 }
 
-/* Funzioni che permettono di visualizzare i nomi dei poll votati nelle celle della schermata "Votati" o i risultati di ricerca */
+/* Funzioni che permettono di visualizzare i nomi dei poll votati nelle celle della schermata "Votati" o nei risultati di ricerca */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
@@ -224,7 +224,7 @@
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
-        cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         p = [searchResults objectAtIndex:indexPath.row];
         
     }

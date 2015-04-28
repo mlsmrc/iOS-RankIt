@@ -18,5 +18,4 @@ FOUNDATION_EXPORT NSString *EMPTY_MY_POLLS_LIST;
 - (BOOL) resetPollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId;
 - (BOOL) deletePollWithPollId:(NSString *)pollId AndUserID:(NSString*)userId;
 
-
 @end

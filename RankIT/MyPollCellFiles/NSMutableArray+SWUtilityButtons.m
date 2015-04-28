@@ -68,7 +68,6 @@
 
 @end
 
-
 @implementation NSArray (SWUtilityButtons)
 
 - (BOOL)sw_isEqualToButtons:(NSArray *)buttons

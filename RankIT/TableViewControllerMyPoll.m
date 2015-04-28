@@ -19,20 +19,17 @@
 NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397625afd44";
 @interface UIViewController ()
 
-//@property (nonatomic) BOOL useCustomCells;
-
-
 @end
 @implementation TableViewControllerMyPoll {
     
     /* Oggetto per la connessione al server */
     ConnectionToServer *Connection;
     
-    /* Dizionario dei poll votati */
-    NSMutableDictionary *allVotedPolls;
+    /* Dizionario dei poll */
+    NSMutableDictionary *allMyPolls;
     
-    /* Array dei poll votati che verranno visualizzati */
-    NSMutableArray *allVotedPollsDetails;
+    /* Array dei poll che verranno visualizzati */
+    NSMutableArray *allMyPollsDetails;
     
     /* Array per i risultati di ricerca */
     NSArray *searchResults;
@@ -56,14 +53,14 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    /* Download iniziale di tutti i poll votati */
+    /* Download iniziale di tutti i poll */
     [self DownloadPolls];
     
-    /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
-    if(allVotedPolls==nil || [allVotedPolls count]==0)
+    /* Se non c'è connessione o non ci sono poll , il background della TableView è senza linee */
+    if(allMyPolls==nil || [allMyPolls count]==0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    /* Altrimenti prende i nomi dei poll votati da visualizzare */
+    /* Altrimenti prende i nomi dei poll da visualizzare */
     else [self CreatePollsDetails];
     
     searchResults = [[NSArray alloc]init];
@@ -77,8 +74,8 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
-    /* Visualizza i poll votati nella schermata "Votati" */
-    [self VotedPolls];
+    /* Visualizza i poll nella schermata "I Miei Sondaggi" */
+    [self MyPolls];
     
 }
 
@@ -86,32 +83,34 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
-    /* Prova*/
+    
+    /* Prova */
     [Connection scaricaPollsWithPollId:@"" andUserId:USER_TEST andStart:@""];
-    /**/
+    /* ----- */
     
-    //[Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
-    allVotedPolls = [Connection getDizionarioPolls];
+    /* [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""]; */
+    allMyPolls = [Connection getDizionarioPolls];
     
-    if(allVotedPolls!=nil && [allVotedPolls count] != 0)
+    if(allMyPolls!=nil && [allMyPolls count] != 0)
     {
         [self CreatePollsDetails];
         [self.tableView reloadData];
     }
     
-    [self VotedPolls];
+    [self MyPolls];
     
 }
 
 /* Estrapolazione dei dettagli dei poll votati ritornati dal server */
 - (void) CreatePollsDetails {
+    
     NSString *value;
-    allVotedPollsDetails = [[NSMutableArray alloc]init];
+    allMyPollsDetails = [[NSMutableArray alloc]init];
     
     /* Scorre il dizionario e recupera i dettagli necessari */
-    for(id key in allVotedPolls) {
+    for(id key in allMyPolls) {
         
-        value = [allVotedPolls objectForKey:key];
+        value = [allMyPolls objectForKey:key];
         
         Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
                                          withName:[value valueForKey:@"pollname"]
@@ -123,16 +122,18 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
         
   
-        [allVotedPollsDetails addObject:p];
+        [allMyPollsDetails addObject:p];
         
     }
+    
 }
 
-/* Visualizzazione poll votati nella schermata "Votati" */
-- (void) VotedPolls {
-    if(allVotedPolls!=nil) {
+/* Visualizzazione poll votati nella schermata "I Miei Sondaggi" */
+- (void) MyPolls {
+    
+    if(allMyPolls!=nil) {
         
-        if([allVotedPolls count] != 0) {
+        if([allMyPolls count] != 0) {
             
             /* Rimuoviamo la subview aggiunta per il messaggio d'errore */
             subView  = [self.tableView viewWithTag:1];
@@ -146,7 +147,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         else {
             
             /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza poll */
-            [allVotedPollsDetails removeAllObjects];
+            [allMyPollsDetails removeAllObjects];
             [self.tableView reloadData];
             
             /* Stampa del messaggio di notifica */
@@ -160,7 +161,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     else {
         
         /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza connessione */
-        [allVotedPollsDetails removeAllObjects];
+        [allMyPollsDetails removeAllObjects];
         [self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
@@ -177,7 +178,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Assegna il messaggio a seconda dei casi */
-    if(allVotedPolls!=nil)
+    if(allMyPolls!=nil)
         messageLabel.text = EMPTY_MY_POLLS_LIST;
     
     else messageLabel.text = SERVER_UNREACHABLE;
@@ -195,8 +196,9 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
 }
 
-/* Funzioni che permettono di visualizzare i nomi dei poll votati nelle celle della schermata "Votati" o i risultati di ricerca */
+/* Funzioni che permettono di visualizzare i nomi dei poll nelle celle della schermata "I Miei Sondaggi" o nei risultati di ricerca */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
         if([searchResults count] == 0) {
@@ -222,13 +224,14 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         
     }
     
-    else return [allVotedPollsDetails count];
+    else return [allMyPollsDetails count];
     
 }
 
 - (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
-    searchResults = [allVotedPollsDetails filteredArrayUsingPredicate:resultPredicate];
+    searchResults = [allMyPollsDetails filteredArrayUsingPredicate:resultPredicate];
     
 }
 
@@ -296,6 +299,9 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 /* Metodi che servono per mantenere la search bar fuori dallo scroll generale della table view */
 - (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
@@ -303,31 +309,26 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
     /* Ogni volta che la view appare vengono scaricati i poll creati */
     [self DownloadPolls];
-    [super viewWillAppear:animated];
     
 }
 
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MyPollCell" forIndexPath:indexPath];
     Poll *p;
         
-    // optionally specify a width that each set of utility buttons will share
     [cell setLeftUtilityButtons:[self leftButtons] WithButtonWidth:58.0f];
     [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:58.0f];
     cell.delegate = self;
         
     if(tableView == self.searchDisplayController.searchResultsTableView)
     {
-        cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         p = [searchResults objectAtIndex:indexPath.row];
     }
         
     else
-        p = [allVotedPollsDetails objectAtIndex:indexPath.row];
+        p = [allMyPollsDetails objectAtIndex:indexPath.row];
         
     /* Visualizzazione del poll nella cella */
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
@@ -338,17 +339,16 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
         
-        /* Controllo sulla scadenza del poll */
+    /* Controllo sulla scadenza del poll */
     if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)
         DeadlinePoll.text = @"Sondaggio scaduto!";
         
-
-        
     return cell;
+    
 }
 
-- (NSArray *)rightButtons
-{
+- (NSArray *)rightButtons {
+    
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
@@ -367,51 +367,20 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                             nil];
 
     return rightUtilityButtons;
-}
-
-- (NSArray *)leftButtons
-{
-    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-    [leftUtilityButtons sw_addUtilityButtonWithColor:
-    [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]
-                                                title:@"Elimina"];
     
+}
+
+- (NSArray *)leftButtons {
+    
+    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
     return leftUtilityButtons;
+    
 }
 
-// Set row height on an individual basis
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return [self rowHeightForIndexPath:indexPath];
-//}
-//
-//- (CGFloat)rowHeightForIndexPath:(NSIndexPath *)indexPath {
-//    return ([indexPath row] * 10) + 60;
-//}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Set background color of cell here if you don't want default white
-}
 
 #pragma mark - SWTableViewDelegate
 
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
-{
-    switch (state) {
-        case 0:
-            //NSLog(@"utility buttons closed");
-            break;
-        case 1:
-            //NSLog(@"left utility buttons open");
-            break;
-        case 2:
-            //NSLog(@"right utility buttons open");
-            break;
-        default:
-            break;
-    }
-}
 /* Gestione barra dei bottoni con swipe sinistra -> destra */
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
 {
@@ -427,14 +396,14 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             }
             
             else
-                p = [allVotedPollsDetails objectAtIndex:index];
+                p = [allMyPollsDetails objectAtIndex:index];
             
             UIAlertController *AlertDelete;
             if(p.votes!=0)
             {
                 /* Alert eliminazione */
-                 AlertDelete = [UIAlertController alertControllerWithTitle:@""
-                                                                                     message:[NSString stringWithFormat:@"Impossibile eliminare!\nQuesto sondaggio possiede almeno 1 voto.\nResettare prima di eliminare."]
+                 AlertDelete = [UIAlertController alertControllerWithTitle:@"Impossibile eliminare!"
+                                                                                     message:[NSString stringWithFormat:@"Questo sondaggio possiede almeno 1 voto.\nResettare prima di eliminare."]
                                                                               preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 /* Creazione pulsanti */
@@ -452,7 +421,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             else
             {
                 /* Alert eliminazione */
-                AlertDelete = [UIAlertController alertControllerWithTitle:@""
+                AlertDelete = [UIAlertController alertControllerWithTitle:@"Attenzione!"
                                                                                  message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare il sondaggio?"]
                                                                           preferredStyle:UIAlertControllerStyleActionSheet];
             
@@ -492,10 +461,10 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                                                    
                                                                    /* Elimina poll senza richiedere una connessione al server */
                                                                    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                                                                   [allVotedPolls removeObjectForKey:[NSString stringWithFormat:@"%d",p.pollId]];
-                                                                   [allVotedPollsDetails removeObjectAtIndex:cellIndexPath.row];
+                                                                   [allMyPolls removeObjectForKey:[NSString stringWithFormat:@"%d",p.pollId]];
+                                                                   [allMyPollsDetails removeObjectAtIndex:cellIndexPath.row];
                                                                    [self.tableView reloadData];
-                                                                   if ([allVotedPolls count] == 0) {
+                                                                   if ([allMyPolls count] == 0) {
                                                                        [self printMessaggeError];
                                                                    }
                                                                    
@@ -528,16 +497,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 
             break;
         }
-        case 1:
-            //NSLog(@"left button 1 was pressed");
-            break;
-        case 2:
-            //NSLog(@"left button 2 was pressed");
-            break;
-        case 3:
-            //NSLog(@"left btton 3 was pressed");
-        default:
-            break;
     }
 }
 
@@ -554,7 +513,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                 p = [searchResults objectAtIndex:index];
             }
             else
-                p = [allVotedPollsDetails objectAtIndex:index];
+                p = [allMyPollsDetails objectAtIndex:index];
 
             UIAlertController *AlertReset;
             
@@ -584,10 +543,10 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             }
             
             if (p.votes>1)
-                AlertReset = [UIAlertController alertControllerWithTitle:@""
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!"
                                                              message:[NSString stringWithFormat:@"Sei sicuro di voler eliminare tutti i voti del sondaggio?"] preferredStyle:UIAlertControllerStyleActionSheet];
             else if (p.votes==1)
-                AlertReset = [UIAlertController alertControllerWithTitle:@""
+                AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione!"
                                                                  message:@"Sei sicuro di voler eliminare l'unico voto ricevuto del sondaggio?"
                                                           preferredStyle:UIAlertControllerStyleActionSheet];
             else
@@ -641,7 +600,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                                                                        
                                                                        /* Resetta i voti del poll senza richiedere una connessione al server */
                                                                        [p setVotes:0];
-                                                                       [allVotedPolls setValue:p forKey:[NSString stringWithFormat:@"%ld",(long)index]];
+                                                                       [allMyPolls setValue:p forKey:[NSString stringWithFormat:@"%ld",(long)index]];
                                                                        [self.tableView reloadData];
                                                                        
                                                                    }];
@@ -693,7 +652,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             // Delete button was pressed
             NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
-           // [_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
             [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
             break;
         }
@@ -705,7 +663,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 
 - (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
 {
-    // allow just one cell's utility button to be open at once
     return YES;
 }
 
@@ -713,11 +670,9 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 {
     switch (state) {
         case 1:
-            // set to NO to disable all left utility buttons appearing
             return YES;
             break;
         case 2:
-            // set to NO to disable all right utility buttons appearing
             return YES;
             break;
         default:
@@ -726,6 +681,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
     return YES;
 }
+
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
 {
     [tableView setContentInset:UIEdgeInsetsZero];

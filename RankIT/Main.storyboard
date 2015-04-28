@@ -499,7 +499,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageCell" id="Mu0-EE-cO1">
+                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageView" id="Mu0-EE-cO1">
                                                     <rect key="frame" x="14" y="4" width="65" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -526,12 +526,12 @@
                                     <outlet property="delegate" destination="nCt-Ib-njW" id="3KN-yO-dwF"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Cerca tra i tuoi sondaggi" id="CbP-Fu-hgj">
+                            <searchBar contentMode="redraw" placeholder="Cerca tra i tuoi sondaggi" id="JFB-hb-SGw">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="nCt-Ib-njW" id="wqH-2P-kZ4"/>
+                                    <outlet property="delegate" destination="nCt-Ib-njW" id="56T-zc-yvb"/>
                                 </connections>
                             </searchBar>
                         </subviews>
@@ -540,19 +540,19 @@
                     <navigationItem key="navigationItem" title="I Miei Sondaggi" id="Elu-Di-Dqp"/>
                     <connections>
                         <outlet property="TableView" destination="tOt-cb-QJi" id="h0y-yL-EjF"/>
-                        <outlet property="searchBar" destination="CbP-Fu-hgj" id="zxQ-1W-CIw"/>
-                        <outlet property="searchDisplayController" destination="TEW-iH-NdC" id="Hg2-Mu-sBr"/>
+                        <outlet property="searchBar" destination="JFB-hb-SGw" id="vwR-9P-uEp"/>
+                        <outlet property="searchDisplayController" destination="7ip-Uj-nd1" id="oSu-XA-vZb"/>
                         <outlet property="tableView" destination="tOt-cb-QJi" id="qam-TP-WSV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0mP-nC-Jjy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="TEW-iH-NdC">
+                <searchDisplayController id="7ip-Uj-nd1">
                     <connections>
-                        <outlet property="delegate" destination="nCt-Ib-njW" id="2mL-8a-5im"/>
-                        <outlet property="searchBar" destination="CbP-Fu-hgj" id="PxK-hP-0mB"/>
-                        <outlet property="searchContentsController" destination="nCt-Ib-njW" id="wmD-Mw-0l9"/>
-                        <outlet property="searchResultsDataSource" destination="nCt-Ib-njW" id="Kbr-oV-0Vm"/>
-                        <outlet property="searchResultsDelegate" destination="nCt-Ib-njW" id="8ZH-9r-qBa"/>
+                        <outlet property="delegate" destination="nCt-Ib-njW" id="Xf5-kM-QxU"/>
+                        <outlet property="searchBar" destination="JFB-hb-SGw" id="Dw9-wh-ilF"/>
+                        <outlet property="searchContentsController" destination="nCt-Ib-njW" id="rpk-jv-F4F"/>
+                        <outlet property="searchResultsDataSource" destination="nCt-Ib-njW" id="sYY-eI-1gb"/>
+                        <outlet property="searchResultsDelegate" destination="nCt-Ib-njW" id="Y8K-B1-Nlq"/>
                     </connections>
                 </searchDisplayController>
             </objects>

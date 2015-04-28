@@ -6,7 +6,7 @@
 /* Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
-NSString *EMPTY_VOTED_POLLS_LIST = @"Non sono presenti sondaggi votati.\nVai sulla Home e inizia a votare!";
+NSString *EMPTY_VOTED_POLLS_LIST = @"Non sono presenti sondaggi votati.\nVai sulla Home ed inizia a votare!";
 NSString *EMPTY_MY_POLLS_LIST = @"Non sono presenti sondaggi creati.\nVai sulla Home e crea il tuo primo sondaggio!";
 
 NSMutableDictionary *dizionarioPolls;
