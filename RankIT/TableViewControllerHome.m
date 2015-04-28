@@ -42,6 +42,23 @@
     
     [super viewDidLoad];
     
+    /* Setta la spaziatura per i voti corretta per ogni IPhone */
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    
+    if(screenWidth == IPHONE_6_WIDTH)
+        SPACE_FOR_VOTES = IPHONE_6;
+    
+    else {
+        
+        if(screenWidth == IPHONE_6Plus_WIDTH)
+            SPACE_FOR_VOTES = IPHONE_6Plus;
+        
+        else
+            SPACE_FOR_VOTES = IPHONE_4_4S_5_5S;
+        
+    }
+    
     bool write;
     
     /* Se non esiste un UDID, lo genera. Servirà per le votazioni */
@@ -256,8 +273,7 @@
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
-    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    DeadlinePoll.text = [NSString stringWithFormat:@"%@%@Voti: %d",(NSString *)p.deadline,SPACE_FOR_VOTES,p.votes];    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
 
     /* Controllo sulla scadenza del poll */
     if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)

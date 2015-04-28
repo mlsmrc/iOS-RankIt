@@ -2,6 +2,4 @@
 
 @implementation UMTableViewCell
 
-@synthesize Nome,Scadenza;
-
 @end

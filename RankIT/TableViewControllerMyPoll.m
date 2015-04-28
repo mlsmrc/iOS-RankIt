@@ -17,6 +17,7 @@
 #define EDIT_POLL 1
 
 NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397625afd44";
+
 @interface UIViewController ()
 
 @end
@@ -49,6 +50,23 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
     [super viewDidLoad];
     
+    /* Setta la spaziatura per i voti corretta per ogni IPhone */
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    
+    if(screenWidth == IPHONE_6_WIDTH)
+        SPACE_FOR_VOTES = IPHONE_6;
+    
+    else {
+        
+        if(screenWidth == IPHONE_6Plus_WIDTH)
+            SPACE_FOR_VOTES = IPHONE_6Plus;
+        
+        else
+            SPACE_FOR_VOTES = IPHONE_4_4S_5_5S;
+        
+    }
+        
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -317,11 +335,11 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *simpleTableIdentifier = @"MyPollCell";
-    
     UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil)
+    if (cell == nil) {
         cell = [[UMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
     
     Poll *p;
         
@@ -331,7 +349,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
         p = [searchResults objectAtIndex:indexPath.row];
         
     }
@@ -345,13 +363,14 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@                             Voti: %d",(NSString *)p.deadline,p.votes];
+    DeadlinePoll.text = [NSString stringWithFormat:@"%@%@Voti: %d",(NSString *)p.deadline,SPACE_FOR_VOTES,p.votes];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
     
     /* Controllo sulla scadenza del poll */
     if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)
         DeadlinePoll.text = @"Sondaggio scaduto!";
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
     
 }

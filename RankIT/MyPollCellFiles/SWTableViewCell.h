@@ -29,6 +29,9 @@ typedef NS_ENUM(NSInteger, SWCellState)
 
 @interface SWTableViewCell : UITableViewCell
 
+@property (weak,nonatomic) IBOutlet UILabel *Nome;
+@property (weak,nonatomic) IBOutlet UILabel *Scadenza;
+@property (weak,nonatomic) IBOutlet UIView *cell;
 @property (nonatomic, copy) NSArray *leftUtilityButtons;
 @property (nonatomic, copy) NSArray *rightUtilityButtons;
 
