@@ -4,7 +4,7 @@
 #import "APIurls.h"
 #import "Font.h"
 #import "File.h"
-#import "UtilTableView.h"
+#import "Util.h"
 
 @interface UIViewController ()
 
@@ -44,15 +44,15 @@
     CGFloat screenWidth = screenRect.size.width;
     
     if(screenWidth == IPHONE_6_WIDTH)
-        SPACE_FOR_VOTES = IPHONE_6;
+        X_FOR_VOTES = IPHONE_6;
     
     else {
         
         if(screenWidth == IPHONE_6Plus_WIDTH)
-            SPACE_FOR_VOTES = IPHONE_6Plus;
+            X_FOR_VOTES = IPHONE_6Plus;
         
         else
-            SPACE_FOR_VOTES = IPHONE_4_4S_5_5S;
+            X_FOR_VOTES = IPHONE_4_4S_5_5S;
         
     }
     
@@ -229,6 +229,41 @@
     else return [allVotedPollsDetails count];
     
 }
+/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"showVotedPollDetails"]) {
+        
+        NSIndexPath *indexPath = nil;
+        Poll *p = nil;
+        
+        if (self.searchDisplayController.active) {
+            
+            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            p = [searchResults objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            self.navigationItem.backBarButtonItem = backButton;
+            
+            
+        }
+        
+        else {
+            
+            indexPath = [self.tableView indexPathForSelectedRow];
+            p = [allVotedPollsDetails objectAtIndex:indexPath.row];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            self.navigationItem.backBarButtonItem = backButton;
+            
+        }
+        
+        ViewControllerDettagli *destViewController = segue.destinationViewController;
+        destViewController.p = p;
+        
+    }
+    
+}
+
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -255,11 +290,18 @@
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@%@Voti: %d",(NSString *)p.deadline,SPACE_FOR_VOTES,p.votes];    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    DeadlinePoll.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
+    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
     
-    /* Controllo sulla scadenza del poll */
-    if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)
-        DeadlinePoll.text = @"Sondaggio scaduto!";
+    
+    UILabel *VotiPoll = (UILabel *)[cell viewWithTag:103];
+    VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];
+    VotiPoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    
+    /* Muovo la posizione dei voti a seconda del telefono */
+    CGRect newPosition = VotiPoll.frame;
+    newPosition.origin.x= X_FOR_VOTES;
+    VotiPoll.frame = newPosition;
     
     return cell;
     

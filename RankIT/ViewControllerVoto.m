@@ -1,6 +1,6 @@
 #import "ViewControllerVoto.h"
 #import "ConnectionToServer.h"
-#import "UtilTableView.h"
+#import "Util.h"
 #import "Font.h"
 #import "File.h"
 
@@ -142,7 +142,7 @@
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];
     alert.tag = VOTI_OK;
-    alert = [alert initWithTitle:@"Messaggio" message:@"Votazione effettuata con successo!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    alert = [alert initWithTitle:@"Votazione" message:@"Votazione effettuata con successo!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     [alert show];
     
 }

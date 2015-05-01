@@ -3,6 +3,7 @@
 #import "Candidate.h"
 #import "ConnectionToServer.h"
 #import "File.h"
+#import "Util.h"
 
 @implementation Poll
 
@@ -38,7 +39,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         lastUpdate = [[NSDate alloc ]init];
         
         /* Inizializzazione formattatore date */
-        dateFormatter = [Poll getDateFormatter];
+        dateFormatter = [Util getDateFormatter];
   
     }
     
@@ -73,7 +74,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         votes = Votes;
 
         /* Inizializzazione formattatore date */
-        dateFormatter = [Poll getDateFormatter];
+        dateFormatter = [Util getDateFormatter];
         
     }
     
@@ -125,30 +126,6 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     /* Aggiornamento data */
    lastUpdate = [[NSDate alloc]init];
 
-}
-
-/* Ritorna l'oggetto utile a formattare la data - funzione statica */
-+(NSDateFormatter*) getDateFormatter {
-    
-    NSDateFormatter *DF = [[NSDateFormatter alloc] init];
-    DF.timeStyle = NSDateFormatterNoStyle;
-    DF.dateStyle = NSDateFormatterMediumStyle;
-    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:language];
-    [DF setLocale:usLocale];
-    [DF setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    return DF;
-    
-}
-
-/* Comparatore di date */
-+(int) compareDate:(NSDate *)first WithDate:(NSDate *)second {
-    
-    NSString *f = [first description];
-    NSString *s = [second description];
-    return ([f compare:s]);
-    
 }
 
 @end

@@ -228,7 +228,6 @@ NSMutableDictionary *dizionarioPollsVotati;
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@",pollId,userId];
     
     /* Invio della richiesta POST */
-    [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
     NSData *response = [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
     if(response!=nil) {
         NSString *dictResponse = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];

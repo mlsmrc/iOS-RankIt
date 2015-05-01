@@ -5,6 +5,7 @@ NSString *VOTES_PLIST = @"Votes.strings";
 NSString *INFO_PLIST = @"Info";
 NSString *CUSTOM_UDID = @"CustomUDID";
 NSString *SAVE_RANK = @"SaveRank.strings";
+NSString *VOTES_PLIST_DATE = @"VotesDate.strings";
 
 @implementation File: NSObject
 
@@ -15,11 +16,25 @@ NSString *SAVE_RANK = @"SaveRank.strings";
 
 }
 
+/* Dato un pollid e la data, scrive all'interno del file VotesDate.strings la data relativa alla votazione effettuata */
++ (BOOL) writeOnPListRankDateOfPoll:(NSString*)pollid {
+
+    return [File writeString: [[[NSDate alloc] init] description] forKey:pollid inPList:VOTES_PLIST_DATE];
+    
+}
+
 /* Dato un pollid, legge all'interno del file Votes.plist la votazione effettuata */
 + (NSString*) getRankingOfPoll:(int)pollid {
     
     return [File readStringforKey:[NSString stringWithFormat:@"%d",pollid] inPList:VOTES_PLIST];
 
+}
+
+/* Dato un pollid, legge all'interno del file VotesDate.plist il giorno relativo alla votazione effettuata */
++ (NSString*) getRankDateOfPoll:(int)pollid {
+    
+    return [File readStringforKey:[NSString stringWithFormat:@"%d",pollid] inPList:VOTES_PLIST_DATE];
+    
 }
 
 /* Lettura da info.plist dell'uuid salvato in precedenza. Se inesistente torna NULL */

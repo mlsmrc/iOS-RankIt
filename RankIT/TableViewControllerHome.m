@@ -4,7 +4,7 @@
 #import "APIurls.h"
 #import "Font.h"
 #import "File.h"
-#import "UtilTableView.h"
+#import "Util.h"
 
 @interface UIViewController ()
 
@@ -47,15 +47,15 @@
     CGFloat screenWidth = screenRect.size.width;
     
     if(screenWidth == IPHONE_6_WIDTH)
-        SPACE_FOR_VOTES = IPHONE_6;
+        X_FOR_VOTES = IPHONE_6;
     
     else {
         
         if(screenWidth == IPHONE_6Plus_WIDTH)
-            SPACE_FOR_VOTES = IPHONE_6Plus;
+            X_FOR_VOTES = IPHONE_6Plus;
         
         else
-            SPACE_FOR_VOTES = IPHONE_4_4S_5_5S;
+            X_FOR_VOTES = IPHONE_4_4S_5_5S;
         
     }
     
@@ -273,11 +273,18 @@
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
     
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
-    DeadlinePoll.text = [NSString stringWithFormat:@"%@%@Voti: %d",(NSString *)p.deadline,SPACE_FOR_VOTES,p.votes];    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    DeadlinePoll.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
+    DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    
+    UILabel *VotiPoll = (UILabel *)[cell viewWithTag:103];
+    VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];
+    VotiPoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    
+    /* Muovo la posizione dei voti a seconda del telefono */
+    CGRect newPosition = VotiPoll.frame;
+    newPosition.origin.x= X_FOR_VOTES;
+    VotiPoll.frame = newPosition;
 
-    /* Controllo sulla scadenza del poll */
-    if([Poll compareDate:p.deadline WithDate:[[NSDate alloc]init]] == -1)
-      DeadlinePoll.text = @"Sondaggio scaduto!";
     
     return cell;
     

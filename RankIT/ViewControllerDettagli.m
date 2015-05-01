@@ -3,7 +3,7 @@
 #import "ViewControllerDettagli.h"
 #import "ViewControllerVoto.h"
 #import "Font.h"
-#import "UtilTableView.h"
+#import "Util.h"
 #import "File.h"
 
 @interface ViewControllerDettagli ()
@@ -29,11 +29,9 @@
     name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
     name.text = p.pollName;
     
-    NSString *strDeadline = @"Scadenza: ";
-    strDeadline = [strDeadline stringByAppendingString:(NSString *)p.deadline];
     deadline.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];
     deadline.textColor = [UIColor redColor];
-    deadline.text = strDeadline;
+    deadline.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
     
     description.selectable = true;
     description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:16];

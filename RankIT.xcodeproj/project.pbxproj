@@ -21,7 +21,7 @@
 		A90A68C71AEA7A2D00F6B0A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A90A68A71AEA7A2D00F6B0A6 /* Images.xcassets */; };
 		A90A68C91AEA7A2D00F6B0A6 /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */; };
 		A90A68CA1AEA7A2D00F6B0A6 /* TableViewControllerHome.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68AC1AEA7A2D00F6B0A6 /* TableViewControllerHome.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
-		A90A68CC1AEA7A2D00F6B0A6 /* UtilTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */; };
+		A90A68CC1AEA7A2D00F6B0A6 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B01AEA7A2D00F6B0A6 /* Util.m */; };
 		A90A68CD1AEA7A2D00F6B0A6 /* ViewControllerCandidates.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B21AEA7A2D00F6B0A6 /* ViewControllerCandidates.m */; };
 		A90A68CE1AEA7A2D00F6B0A6 /* ViewControllerDettagli.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B41AEA7A2D00F6B0A6 /* ViewControllerDettagli.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68B61AEA7A2D00F6B0A6 /* ViewControllerVoto.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
@@ -72,8 +72,8 @@
 		A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A90A68AB1AEA7A2D00F6B0A6 /* TableViewControllerHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewControllerHome.h; sourceTree = "<group>"; };
 		A90A68AC1AEA7A2D00F6B0A6 /* TableViewControllerHome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerHome.m; sourceTree = "<group>"; };
-		A90A68AF1AEA7A2D00F6B0A6 /* UtilTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilTableView.h; sourceTree = "<group>"; };
-		A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilTableView.m; sourceTree = "<group>"; };
+		A90A68AF1AEA7A2D00F6B0A6 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		A90A68B01AEA7A2D00F6B0A6 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		A90A68B11AEA7A2D00F6B0A6 /* ViewControllerCandidates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerCandidates.h; sourceTree = "<group>"; };
 		A90A68B21AEA7A2D00F6B0A6 /* ViewControllerCandidates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerCandidates.m; sourceTree = "<group>"; };
 		A90A68B31AEA7A2D00F6B0A6 /* ViewControllerDettagli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerDettagli.h; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 				A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */,
 				A9ADA2B71AEEBF040091BAA4 /* Reachability.h */,
 				A9ADA2B81AEEBF040091BAA4 /* Reachability.m */,
-				A90A68AF1AEA7A2D00F6B0A6 /* UtilTableView.h */,
-				A90A68B01AEA7A2D00F6B0A6 /* UtilTableView.m */,
+				A90A68AF1AEA7A2D00F6B0A6 /* Util.h */,
+				A90A68B01AEA7A2D00F6B0A6 /* Util.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -411,7 +411,7 @@
 				A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */,
 				A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */,
 				A90A68C51AEA7A2D00F6B0A6 /* ConnectionToServer.m in Sources */,
-				A90A68CC1AEA7A2D00F6B0A6 /* UtilTableView.m in Sources */,
+				A90A68CC1AEA7A2D00F6B0A6 /* Util.m in Sources */,
 				A90A68D31AEA7A2D00F6B0A6 /* Candidate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -508,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -521,7 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -533,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RankIT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
