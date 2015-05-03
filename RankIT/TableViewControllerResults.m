@@ -1,4 +1,5 @@
 #import "TableViewControllerResults.h"
+#import "ViewControllerCandidates.h"
 #import "ViewControllerDettagli.h"
 #import "Font.h"
 #import "Candidate.h"
@@ -11,6 +12,11 @@
 @end
 
 @implementation TableViewControllerResults
+{
+    /* Pulsante di ritorno schermata precedente */
+    UIBarButtonItem *backButton;
+}
+
 @synthesize poll,classificaFinale,flussoFrom;
 
 
@@ -71,21 +77,43 @@
     
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = c.candName;
+    
+    /* Nome su più linee */
+    NamePoll.adjustsFontSizeToFitWidth  = NO;
+    NamePoll.numberOfLines = 0;
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:16];
     
     return cell;
 
 }
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    // do a segue based on the indexPath or do any setup later in prepareForSegue
+    [self performSegueWithIdentifier:@"showCandRankDetails" sender:self];
+}
 
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Home" che dai risultati di ricerca */
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+
     if ([segue.identifier isEqualToString:@"showVotedResultsDetails"]) {
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = poll;
         /* Flusso dati */
         destViewController.flussoFrom = flussoFrom;
+        
+    }
+    else if ([segue.identifier isEqualToString:@"showCandRankDetails"]) {
+        
+        NSIndexPath *indexPath = nil;
+        Candidate *c = nil;
+        
+        indexPath = [self.tableView indexPathForSelectedRow];
+        c = [[poll candidates] objectAtIndex:indexPath.row];
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_RANKING,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+        
+        ViewControllerCandidates *destViewController = segue.destinationViewController;
+        destViewController.c = c;
         
     }
     

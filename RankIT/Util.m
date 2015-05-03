@@ -12,6 +12,7 @@ NSString *BACK = @"";
 NSString *BACK_TO_HOME = @"Home";
 NSString *BACK_TO_VOTED = @"Votati";
 NSString *BACK_TO_MY_POLL = @"I Miei";
+NSString *BACK_TO_RANKING = @"Classifica";
 
 /* Spaziatura voti per diversi IPhone */
 int IPHONE_4_4S_5_5S = 245;
