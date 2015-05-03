@@ -12,7 +12,7 @@
 
 @implementation ViewControllerDettagli
 
-@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView;
+@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,flussoFrom,Vota;
 
 - (void) viewDidLoad {
     
@@ -40,6 +40,10 @@
     description.text = p.pollDescription;
     description.selectable = false;
     [description sizeToFit];
+    
+    /* Se il flusso proviene dalla schermata di ranking allora si oscura il pulsante di votazione */
+    if(flussoFrom==FROM_MY_POLL)
+        self.navigationItem.rightBarButtonItem = nil;
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *
      * I valori che vedete servono per spaziare tra gli oggetti e sono stati scelti empiricamente.                            */
@@ -133,7 +137,7 @@
 /* Titolo della table view dei candidates */
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    return @"CANDIDATI PER LA CLASSIFICA:";
+    return @"CANDIDATI DELLA CLASSIFICA:";
     
 }
 

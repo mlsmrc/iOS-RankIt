@@ -8,6 +8,14 @@
 /* Altezza della cella */
 #define CELL_HEIGHT 75
 
+/* Utile per convertire un colore da esadecimale a "colore Obj-C" */
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+/* Utile per ViewControllerDettagli per capire il flusso da dove proviene */
+#define FROM_VOTATI 0
+#define FROM_HOME 1
+#define FROM_MY_POLL 2
+
 #endif
 
 @interface Util : NSObject
@@ -20,6 +28,7 @@ FOUNDATION_EXPORT NSString *SEARCH;
 FOUNDATION_EXPORT NSString *BACK;
 FOUNDATION_EXPORT NSString *BACK_TO_HOME;
 FOUNDATION_EXPORT NSString *BACK_TO_VOTED;
+FOUNDATION_EXPORT NSString *BACK_TO_MY_POLL;
 
 /* Spaziatura voti per diversi IPhone */
 FOUNDATION_EXPORT int IPHONE_4_4S_5_5S;

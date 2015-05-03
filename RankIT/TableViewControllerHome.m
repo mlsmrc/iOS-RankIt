@@ -334,6 +334,9 @@
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = p;
         
+        /* Flusso proveniente dalle home */
+        destViewController.flussoFrom = FROM_HOME;
+        
     }
     
 }

@@ -1,4 +1,5 @@
 #import "TableViewControllerMyPoll.h"
+#import "TableViewControllerResults.h"
 #import "ViewControllerDettagli.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
@@ -643,6 +644,29 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     return YES;
     
 }
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //if (self.tableView == self.searchDisplayController.searchResultsTableView) {
+        [self performSegueWithIdentifier:@"showMyPollResults" sender:self];
+//    }
+}
+    
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showMyPollResults"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Poll *p = [allMyPollsDetails objectAtIndex:indexPath.row];
+
+        TableViewControllerResults *viewResults = segue.destinationViewController;
+        viewResults.poll = p;
+        viewResults.flussoFrom = FROM_MY_POLL;
+        
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_MY_POLL,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+    }
+}
+
+
 
 /* Funzioni utili ad una corretta visualizzazione della table view e della search bar */
 - (void) searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {

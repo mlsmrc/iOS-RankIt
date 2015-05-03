@@ -1,9 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "Util.h"
 
-/* Utile per convertire un colore da esadecimale a "colore Obj-C" */
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 @implementation Util: NSObject
 
 /* Stringa per la search bar */
@@ -14,6 +11,7 @@ NSString *SEARCH = @"Cerca";
 NSString *BACK = @"";
 NSString *BACK_TO_HOME = @"Home";
 NSString *BACK_TO_VOTED = @"Votati";
+NSString *BACK_TO_MY_POLL = @"I Miei";
 
 /* Spaziatura voti per diversi IPhone */
 int IPHONE_4_4S_5_5S = 245;

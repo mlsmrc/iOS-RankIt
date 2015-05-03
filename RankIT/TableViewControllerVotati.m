@@ -1,4 +1,5 @@
 #import "TableViewControllerVotati.h"
+#import "TableViewControllerResults.h"
 #import "ViewControllerDettagli.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
@@ -233,7 +234,7 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([segue.identifier isEqualToString:@"showVotedPollDetails"]) {
+    if ([segue.identifier isEqualToString:@"showVotedResults"]) {
         
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
@@ -257,8 +258,17 @@
             
         }
         
-        ViewControllerDettagli *destViewController = segue.destinationViewController;
-        destViewController.p = p;
+        /* Risultato di tipo short */
+        //if (p.resultsType==0)
+        //{
+            TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
+            destViewController.poll = p;
+            destViewController.flussoFrom = FROM_VOTATI;
+            
+            
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            self.navigationItem.backBarButtonItem = backButton;
+        //}
         
     }
     
