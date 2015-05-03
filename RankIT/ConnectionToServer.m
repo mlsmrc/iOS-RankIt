@@ -323,6 +323,10 @@ NSMutableDictionary *dizionarioPollsVotati;
             return nil;
         
         NSMutableArray * classifiche=[[results valueForKey:@"optimalnotiesdata"]valueForKey:@"pattern"];
+        /* PER ORA FACCIAMO COSì, MA SOLO PER EVITARE I CRASH */
+        if ([classifiche count]==0) {
+            classifiche=[[results valueForKey:@"optimaldata"]valueForKey:@"pattern"];
+        }
         
         NSMutableArray * classificaOttimale=[[NSMutableArray alloc]init];
         
