@@ -230,6 +230,7 @@
     else return [allVotedPollsDetails count];
     
 }
+
 /* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -258,16 +259,11 @@
             
         }
         
-        /* Risultato di tipo short */
-        //if(p.resultsType==0) {
-        
-            TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
-            destViewController.poll = p;
-            destViewController.flussoFrom = FROM_VOTATI;
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-        
-        //}
+        TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
+        destViewController.poll = p;
+        destViewController.flussoFrom = FROM_VOTATI;
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
         
     }
     

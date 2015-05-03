@@ -31,8 +31,9 @@
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    /* Scarica i risultati per il poll selezionato */
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-    classificaFinale=[conn getOptimalResultsOfPoll:poll];
+    classificaFinale = [conn getOptimalResultsOfPoll:poll];
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
     messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
@@ -43,12 +44,11 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
-    /* Gestione di 0 voti del poll e della connessione */
-    if ([classificaFinale count] == 0 || classificaFinale==nil) {
-        
+    /* Gestione di 0 voti nel poll e della connessione */
+    if ([classificaFinale count] == 0 || classificaFinale==nil)
+    
         /* Stampa del messaggio di notifica */
         [self printMessageError];
-    }
     
 }
 
@@ -74,8 +74,8 @@
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
-    NSMutableArray * candidates=[poll candidates];
-    NSString * risp=[classificaFinale objectAtIndex:indexPath.row];
+    NSMutableArray *candidates = [poll candidates];
+    NSString *risp = [classificaFinale objectAtIndex:indexPath.row];
     
     /* Cattura dell'indice per estrarre il candidato */
     int indexCand = -1;
@@ -89,9 +89,9 @@
     
     /* Visualizzazione del risultato nella cella */
     UIImageView *image = (UIImageView *)[cell viewWithTag:100];
-    if(indexPath.row==0)           image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
-    else if(indexPath.row==1)      image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
-    else if(indexPath.row==2)      image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
+    if(indexPath.row == 0)           image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
+    else if(indexPath.row == 1)      image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
+    else if(indexPath.row == 2)      image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
     else                            image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
     
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
@@ -127,10 +127,22 @@
     else if([segue.identifier isEqualToString:@"showCandRankDetails"]) {
         
         NSIndexPath *indexPath = nil;
+        NSString *candChar;
         candidate = nil;
         
         indexPath = [self.tableView indexPathForSelectedRow];
-        candidate = [[poll candidates] objectAtIndex:indexPath.row];
+        candChar = [classificaFinale objectAtIndex:indexPath.row];
+        
+        /* Cattura dell'indice per estrarre il candidato */
+        int indexCand = -1;
+        if([candChar isEqual:@"A"])        indexCand = 0;
+        else if([candChar isEqual:@"B"])   indexCand = 1;
+        else if([candChar isEqual:@"C"])   indexCand = 2;
+        else if([candChar isEqual:@"D"])   indexCand = 3;
+        else                            indexCand = 4;
+        
+        candidate = poll.candidates[indexCand];
+
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_RANKING,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
         

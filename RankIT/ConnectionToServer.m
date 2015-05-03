@@ -17,8 +17,8 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
-- (NSData *) sendPostRequestWithPostURL: (NSString*) postURL AndParametersString:(NSString *)parameters
-{
+- (NSData *) sendPostRequestWithPostURL: (NSString*) postURL AndParametersString:(NSString *)parameters {
+    
     NSData *postData = [parameters dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
@@ -262,30 +262,6 @@ NSMutableDictionary *dizionarioPollsVotati;
 
 - (NSMutableDictionary*) getResultsOfPoll:(Poll*)poll {
     
-    /*
-     int pollId=118;
-     
-     NSString* url = [URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat: @"%d", pollId]];
-     
-     url=[url stringByReplacingOccurrencesOfString:@"_FORCE_" withString:@""];
-     
-     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-     
-     if(response!=nil) {
-     
-     NSMutableDictionary *results = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-     
-     NSMutableDictionary *candidates=[self getCandidatesWithPollId:@"118"];
-     
-     if(candidates!=nil)
-     [poll setCandidates:candidates];
-     NSLog(@"%@",[poll candidates]);
-     return results;
-     
-     }
-     */
-    
     return nil;
     
 }
@@ -316,9 +292,9 @@ NSMutableDictionary *dizionarioPollsVotati;
         NSMutableArray * classifiche=[[results valueForKey:@"optimalnotiesdata"]valueForKey:@"pattern"];
         
         /* PER ORA FACCIAMO COSì, MA SOLO PER EVITARE I CRASH */
-        if([classifiche count]==0){
+        if([classifiche count]==0) {
             
-            classifiche=[[results valueForKey:@"optimaldata"]valueForKey:@"pattern"];
+            classifiche = [[results valueForKey:@"optimaldata"]valueForKey:@"pattern"];
         
         }
         

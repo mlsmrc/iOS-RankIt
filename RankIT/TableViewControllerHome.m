@@ -291,6 +291,7 @@
 }
 
 - (void) filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"pollName CONTAINS[c] %@",searchText];
     searchResults = [allPublicPollsDetails filteredArrayUsingPredicate:resultPredicate];
     
