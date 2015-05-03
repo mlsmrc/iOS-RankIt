@@ -234,12 +234,12 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([segue.identifier isEqualToString:@"showVotedResults"]) {
+    if([segue.identifier isEqualToString:@"showVotedResults"]) {
         
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
         
-        if (self.searchDisplayController.active) {
+        if(self.searchDisplayController.active) {
             
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
             p = [searchResults objectAtIndex:indexPath.row];
@@ -259,15 +259,14 @@
         }
         
         /* Risultato di tipo short */
-        //if (p.resultsType==0)
-        //{
+        //if(p.resultsType==0) {
+        
             TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
             destViewController.poll = p;
             destViewController.flussoFrom = FROM_VOTATI;
-            
-            
             backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
+        
         //}
         
     }
@@ -302,7 +301,6 @@
     UILabel *DeadlinePoll = (UILabel *)[cell viewWithTag:102];
     DeadlinePoll.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
-    
     
     UILabel *VotiPoll = (UILabel *)[cell viewWithTag:103];
     VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];

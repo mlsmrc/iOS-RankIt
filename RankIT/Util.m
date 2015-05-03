@@ -11,7 +11,7 @@ NSString *SEARCH = @"Cerca";
 NSString *BACK = @"";
 NSString *BACK_TO_HOME = @"Home";
 NSString *BACK_TO_VOTED = @"Votati";
-NSString *BACK_TO_MY_POLL = @"I Miei";
+NSString *BACK_TO_MY_POLL = @"";
 NSString *BACK_TO_RANKING = @"Classifica";
 
 /* Spaziatura voti per diversi IPhone */
@@ -23,7 +23,6 @@ int X_FOR_VOTES = 245;
 /* Larghezza degli schermi di IPhone6 e IPhone6+ */
 float IPHONE_6_WIDTH = 375;
 float IPHONE_6Plus_WIDTH = 414;
-
 
 /* Ritorna l'oggetto utile a formattare la data - funzione statica */
 +(NSDateFormatter*) getDateFormatter {
@@ -69,43 +68,57 @@ float IPHONE_6Plus_WIDTH = 414;
     int minuteData = (int)[compData minute];
     NSArray *monthStrings = [[NSArray alloc] initWithObjects:@"Gennaio", @"Febbraio", @"Marzo", @"Aprile", @"Maggio", @"Giugno", @"Luglio", @"Agosto", @"Settembre", @"Ottobre", @"Novembre", @"Dicembre", nil];
     
-    if (yearToDay>yearData)
-        return @"Scaduto";
-    else if (yearToDay<yearData)
-        return [NSString stringWithFormat:@"Scadrà nel %d",yearData];
-    else
-    {
-        if (monthToDay < monthData)
-            return [NSString stringWithFormat:@"Scadrà a %@",monthStrings[monthData-1]];
-        else if (monthToDay > monthData)
-            return @"Scaduto";
-        else
-        {
-            if (dayToDay < dayData)
-                return [NSString stringWithFormat:@"Scadrà il %d",dayData];
-            else if (dayToDay > dayData)
-                return @"Scaduto";
-            else
-            {
-                if (hourToDay < hourData)
-                    return [NSString stringWithFormat:@"Scadrà alle %d",hourData];
-                else if (dayToDay > dayData)
-                    return @"Scaduto";
-                else
-                {
-                    if (minuteToDay < minuteData)
-                        return [NSString stringWithFormat:@"Scadrà alle %d:%d",hourData,minuteData];
-                    else if (minuteToDay > minuteData)
-                        return @"Scaduto";
-                    else
-                        return @"Sta per scadere";
-                }
-            }
-        }
-    }
+    if(yearToDay>yearData)
+        return @"Sondaggio scaduto!";
     
+    else if(yearToDay<yearData)
+        return [NSString stringWithFormat:@"Scadrà nel %d",yearData];
+    
+    else {
+        
+        if(monthToDay < monthData)
+            return [NSString stringWithFormat:@"Scadrà a %@",monthStrings[monthData-1]];
+        
+        else if(monthToDay > monthData)
+            return @"Sondaggio scaduto!";
+        
+        else {
+            
+            if(dayToDay < dayData)
+                return [NSString stringWithFormat:@"Scadrà il %d",dayData];
+            
+            else if(dayToDay > dayData)
+                return @"Sondaggio scaduto!";
+            
+            else {
+                
+                if(hourToDay < hourData)
+                    return [NSString stringWithFormat:@"Scadrà alle %d",hourData];
+                
+                else if(dayToDay > dayData)
+                    return @"Sondaggio scaduto!";
+                
+                else {
+                    
+                    if(minuteToDay < minuteData)
+                        return [NSString stringWithFormat:@"Scadrà alle %d:%d",hourData,minuteData];
+                    
+                    else if(minuteToDay > minuteData)
+                        return @"Sondaggio scaduto!";
+                    
+                    else
+                        return @"Il sondaggio sta per scadere!";
+                
+                }
+            
+            }
+        
+        }
+    
+    }
 
     return @"";
+
 }
 
 @end

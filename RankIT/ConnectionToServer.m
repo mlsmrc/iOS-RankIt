@@ -195,7 +195,7 @@ NSMutableDictionary *dizionarioPollsVotati;
 }
 
 /*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
--(NSMutableDictionary*) getDizionarioPollsVotati {
+- (NSMutableDictionary*) getDizionarioPollsVotati {
     
     [self scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
     NSMutableDictionary *allPolls = [self getDizionarioPolls];
@@ -216,7 +216,6 @@ NSMutableDictionary *dizionarioPollsVotati;
         if([VotesPListKeys containsObject:key])
             [PollVotati setObject:[allPolls objectForKey:key] forKey:key];
     
-    
     return PollVotati;
     
 }
@@ -229,10 +228,14 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     /* Invio della richiesta POST */
     NSData *response = [self sendPostRequestWithPostURL:URL_RESET_POLL AndParametersString:ParPost];
+    
     if(response!=nil) {
+        
         NSString *dictResponse = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         return ([[dictResponse valueForKey:@"reset"] isEqual:@"1"] ? true:false);
+        
     }
+    
     else
         return false;
 
@@ -246,9 +249,12 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     /* Invio della richiesta POST */
     NSData *response = [self sendPostRequestWithPostURL:URL_DELETE_POLL AndParametersString:ParPost];
+    
     if(response!=nil) {
+        
         NSString *dictResponse = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
         return ([[dictResponse valueForKey:@"delete"] isEqual:@"1"] ? true:false);
+        
     }
     
     else
@@ -256,27 +262,19 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
-- (NSMutableDictionary*) getResultsOfPoll:(Poll*)poll
-
-{
+- (NSMutableDictionary*) getResultsOfPoll:(Poll*)poll {
+    
     /*
-     
      int pollId=118;
-     
-     
      
      NSString* url = [URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat: @"%d", pollId]];
      
      url=[url stringByReplacingOccurrencesOfString:@"_FORCE_" withString:@""];
      
-     
      NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
      NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
      
-     
-     
      if(response!=nil) {
-     
      
      NSMutableDictionary *results = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
      
@@ -294,11 +292,8 @@ NSMutableDictionary *dizionarioPollsVotati;
     
 }
 
--(NSMutableArray *) getOptimalResultsOfPoll:(Poll*)poll
-{
-    
-    
-    
+- (NSMutableArray *) getOptimalResultsOfPoll:(Poll*)poll {
+
     NSString* url = [URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat: @"%d", poll.pollId]];
     
     url=[url stringByReplacingOccurrencesOfString:@"_FORCE_" withString:@""];
@@ -306,8 +301,6 @@ NSMutableDictionary *dizionarioPollsVotati;
     /* Creazione della richiesta ed invio */
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
-    
     
     /* Viene controllato se la risposta del server è diversa da nil (connessione assente) */
     if(response!=nil) {
@@ -323,33 +316,32 @@ NSMutableDictionary *dizionarioPollsVotati;
             return nil;
         
         NSMutableArray * classifiche=[[results valueForKey:@"optimalnotiesdata"]valueForKey:@"pattern"];
+        
         /* PER ORA FACCIAMO COSì, MA SOLO PER EVITARE I CRASH */
-        if ([classifiche count]==0) {
+        if([classifiche count]==0){
+            
             classifiche=[[results valueForKey:@"optimaldata"]valueForKey:@"pattern"];
+        
         }
         
         NSMutableArray * classificaOttimale=[[NSMutableArray alloc]init];
-        
-        
         NSString* classificaFinale=classifiche[0];
-        
         unichar buffer[classificaFinale.length+1];
-        // do not use @selector(getCharacters:) it's unsafe
         [classificaFinale getCharacters:buffer range:NSMakeRange(0, classificaFinale.length)];
         
         int j=0;
-        for(int i = 0; i < classificaFinale.length; i++)
-        {
-            if(buffer[i]=='A'||buffer[i]=='B'||buffer[i]=='C'||buffer[i]=='D'||buffer[i]=='E')
-            {
+        
+        for(int i = 0; i < classificaFinale.length; i++) {
+            
+            if(buffer[i]=='A'||buffer[i]=='B'||buffer[i]=='C'||buffer[i]=='D'||buffer[i]=='E') {
+                
                 NSString *risp=[NSString stringWithFormat:@"%c",buffer[i]];
                 classificaOttimale[j]=risp;
                 j++;
                 
             }
+            
         }
-        
-        
         
         return classificaOttimale;
         
@@ -357,8 +349,6 @@ NSMutableDictionary *dizionarioPollsVotati;
     
     return nil;
     
-    
 }
-
 
 @end

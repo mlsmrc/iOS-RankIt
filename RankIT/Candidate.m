@@ -4,13 +4,11 @@
 
 NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\"_CAND_DESCR_\",\"candimage\":\"_CAND_IMAGE_\"}";
 
-- (id) initCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description
-{
+- (id) initCandicateWithChar:(NSString *)Char andName:(NSString *)Name andDescription:(NSString *)description {
     
     self=[super init];
     
-    if(self)
-    {
+    if(self) {
         
         [self setCandChar:Char];
         [self setCandDescription:description];
@@ -22,8 +20,7 @@ NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\
     
 }
 
-- (NSString*)description
-{
+- (NSString*)description {
     
     return [self candName];
     
@@ -31,8 +28,7 @@ NSString *CANDIDATE_JSON = @"{\"candname\":\"_CAND_NAME_\",\"canddescription\":\
 
 /* Crea una stringa utile per creare il JSON per l'aggiunta del poll *
  * (usata in descriptionAddPoll in Poll.m)                           */
-- (NSString *) descriptionForAddPoll
-{
+- (NSString *) descriptionForAddPoll {
     
     NSString *desc = [CANDIDATE_JSON  stringByReplacingOccurrencesOfString:@"_CAND_NAME_" withString:[NSString stringWithFormat:@"%@",[self candName]]];
     desc = [desc  stringByReplacingOccurrencesOfString:@"_CAND_DESCR_" withString:[NSString stringWithFormat:@"%@",[self candDescription]]];

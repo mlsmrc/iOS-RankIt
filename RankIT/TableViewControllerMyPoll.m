@@ -10,8 +10,6 @@
 #import "UMTableViewCell.h"
 #import "Reachability.h"
 
-
-
 #define DELETE_POLL 0
 #define RESET_POLL 0
 #define EDIT_POLL 1
@@ -133,7 +131,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
                                          withName:[value valueForKey:@"pollname"]
                                   withDescription:[value valueForKey:@"polldescription"]
-                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
+                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0)
                                      withDeadline:[value valueForKey:@"deadline"]
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
@@ -495,7 +493,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             if([networkReachability currentReachabilityStatus]==NotReachable) {
                 AlertReset = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE preferredStyle:UIAlertControllerStyleActionSheet];
                 
-                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                     
                     /* Handler del cancel */
                     [AlertReset dismissViewControllerAnimated:YES completion:nil];
@@ -644,15 +642,16 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     return YES;
     
 }
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //if (self.tableView == self.searchDisplayController.searchResultsTableView) {
         [self performSegueWithIdentifier:@"showMyPollResults" sender:self];
-//    }
+    //}
 }
     
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"showMyPollResults"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Poll *p = [allMyPollsDetails objectAtIndex:indexPath.row];
@@ -664,9 +663,8 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_MY_POLL,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
     }
+    
 }
-
-
 
 /* Funzioni utili ad una corretta visualizzazione della table view e della search bar */
 - (void) searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {

@@ -17,7 +17,6 @@
 		A90A689B1AEA79B100F6B0A6 /* RankITTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A689A1AEA79B100F6B0A6 /* RankITTests.m */; };
 		A90A68C41AEA7A2D00F6B0A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A90A68A41AEA7A2D00F6B0A6 /* Main.storyboard */; };
 		A90A68C51AEA7A2D00F6B0A6 /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68A51AEA7A2D00F6B0A6 /* ConnectionToServer.m */; };
-		A90A68C61AEA7A2D00F6B0A6 /* Flip.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68A61AEA7A2D00F6B0A6 /* Flip.m */; };
 		A90A68C71AEA7A2D00F6B0A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A90A68A71AEA7A2D00F6B0A6 /* Images.xcassets */; };
 		A90A68C91AEA7A2D00F6B0A6 /* Poll.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */; };
 		A90A68CA1AEA7A2D00F6B0A6 /* TableViewControllerHome.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68AC1AEA7A2D00F6B0A6 /* TableViewControllerHome.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
@@ -30,7 +29,7 @@
 		A90A68D41AEA7A2D00F6B0A6 /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68C21AEA7A2D00F6B0A6 /* Font.m */; };
 		A90A68DC1AEA7C4300F6B0A6 /* TableViewControllerVotati.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DB1AEA7C4300F6B0A6 /* TableViewControllerVotati.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A90A68E01AEA829E00F6B0A6 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A68DE1AEA829E00F6B0A6 /* File.m */; };
-		A90BF3C81AF4F37C004E8C1C /* TableViewControllerResults.m in Sources */ = {isa = PBXBuildFile; fileRef = A90BF3C71AF4F37C004E8C1C /* TableViewControllerResults.m */; };
+		A90BF3C81AF4F37C004E8C1C /* TableViewControllerResults.m in Sources */ = {isa = PBXBuildFile; fileRef = A90BF3C71AF4F37C004E8C1C /* TableViewControllerResults.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A9ADA2A01AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA29F1AEE7A9A0091BAA4 /* TableViewControllerMyPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		A9ADA2B01AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A31AEE7BF10091BAA4 /* NSMutableArray+SWUtilityButtons.m */; };
 		A9ADA2B11AEE7BF10091BAA4 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ADA2A51AEE7BF10091BAA4 /* SWCellScrollView.m */; };
@@ -68,7 +67,6 @@
 		A90A689A1AEA79B100F6B0A6 /* RankITTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankITTests.m; sourceTree = "<group>"; };
 		A90A68A41AEA7A2D00F6B0A6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A90A68A51AEA7A2D00F6B0A6 /* ConnectionToServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionToServer.m; sourceTree = "<group>"; };
-		A90A68A61AEA7A2D00F6B0A6 /* Flip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flip.m; sourceTree = "<group>"; };
 		A90A68A71AEA7A2D00F6B0A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A90A68AA1AEA7A2D00F6B0A6 /* Poll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poll.m; sourceTree = "<group>"; };
 		A90A68AB1AEA7A2D00F6B0A6 /* TableViewControllerHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewControllerHome.h; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 		A90A68BD1AEA7A2D00F6B0A6 /* Candidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candidate.h; sourceTree = "<group>"; };
 		A90A68BE1AEA7A2D00F6B0A6 /* Candidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candidate.m; sourceTree = "<group>"; };
 		A90A68BF1AEA7A2D00F6B0A6 /* ConnectionToServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionToServer.h; sourceTree = "<group>"; };
-		A90A68C01AEA7A2D00F6B0A6 /* Flip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flip.h; sourceTree = "<group>"; };
 		A90A68C11AEA7A2D00F6B0A6 /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
 		A90A68C21AEA7A2D00F6B0A6 /* Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Font.m; sourceTree = "<group>"; };
 		A90A68C31AEA7A2D00F6B0A6 /* Poll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poll.h; sourceTree = "<group>"; };
@@ -156,7 +153,7 @@
 				A9ADA29D1AEE7A400091BAA4 /* I Miei Poll */,
 				A90A68D91AEA7C0600F6B0A6 /* Poll Votati */,
 				A90A68D81AEA7A9A00F6B0A6 /* Votazione Poll */,
-				A90A68D61AEA7A4100F6B0A6 /* Util */,
+				A90A68D61AEA7A4100F6B0A6 /* Altro */,
 				A90A68D51AEA7A3600F6B0A6 /* Delegate */,
 				A90A68A41AEA7A2D00F6B0A6 /* Main.storyboard */,
 				6FC08F4F1AECF3E300602B93 /* Launch Screen.xib */,
@@ -203,7 +200,7 @@
 			name = Delegate;
 			sourceTree = "<group>";
 		};
-		A90A68D61AEA7A4100F6B0A6 /* Util */ = {
+		A90A68D61AEA7A4100F6B0A6 /* Altro */ = {
 			isa = PBXGroup;
 			children = (
 				A90A68B81AEA7A2D00F6B0A6 /* APIurls.h */,
@@ -214,8 +211,6 @@
 				A90A68A51AEA7A2D00F6B0A6 /* ConnectionToServer.m */,
 				A90A68DD1AEA829E00F6B0A6 /* File.h */,
 				A90A68DE1AEA829E00F6B0A6 /* File.m */,
-				A90A68C01AEA7A2D00F6B0A6 /* Flip.h */,
-				A90A68A61AEA7A2D00F6B0A6 /* Flip.m */,
 				A90A68C11AEA7A2D00F6B0A6 /* Font.h */,
 				A90A68C21AEA7A2D00F6B0A6 /* Font.m */,
 				A90A68C31AEA7A2D00F6B0A6 /* Poll.h */,
@@ -225,7 +220,7 @@
 				A90A68AF1AEA7A2D00F6B0A6 /* Util.h */,
 				A90A68B01AEA7A2D00F6B0A6 /* Util.m */,
 			);
-			name = Util;
+			name = Altro;
 			sourceTree = "<group>";
 		};
 		A90A68D71AEA7A8400F6B0A6 /* Home */ = {
@@ -405,7 +400,6 @@
 				A90A68D11AEA7A2D00F6B0A6 /* APIurls.m in Sources */,
 				A9ADA2B31AEE7BF10091BAA4 /* SWTableViewCell.m in Sources */,
 				A90A68CD1AEA7A2D00F6B0A6 /* ViewControllerCandidates.m in Sources */,
-				A90A68C61AEA7A2D00F6B0A6 /* Flip.m in Sources */,
 				6F59AD191AEEE6B300EED588 /* UMTableViewCell.m in Sources */,
 				A9ADA2B11AEE7BF10091BAA4 /* SWCellScrollView.m in Sources */,
 				A90A68CF1AEA7A2D00F6B0A6 /* ViewControllerVoto.m in Sources */,

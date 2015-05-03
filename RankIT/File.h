@@ -22,5 +22,4 @@ FOUNDATION_EXPORT NSString *SAVE_RANK_DATE;
 + (NSArray *) getAllKeysinPList:(NSString *)PList;
 + (NSString *) getSaveRankOfPoll:(NSString*)pollid;
 
-
 @end

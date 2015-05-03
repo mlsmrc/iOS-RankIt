@@ -9,8 +9,9 @@
 @property (strong,nonatomic) NSString *name;
 @property (strong,nonatomic) Poll *poll;
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
-- (IBAction)vota:(id)sender;
 @property (weak,nonatomic) IBOutlet UILabel *fourth;
 @property (weak,nonatomic) IBOutlet UILabel *fifth;
+
+- (IBAction)vota:(id)sender;
 
 @end
