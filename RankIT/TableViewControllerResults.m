@@ -14,9 +14,15 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
+    /* Variabile che conterrà la subview da rimuovere */
+    UIView *subView;
+    
+    /* Messaggio nella schermata Home */
+    UILabel *messageLabel;
+    
 }
 
-@synthesize poll,candidate,classificaFinale,flussoFrom;
+@synthesize poll,candidate,classificaFinale,flussoFrom,tableView;
 
 - (void)viewDidLoad {
     
@@ -27,6 +33,22 @@
     
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
     classificaFinale=[conn getOptimalResultsOfPoll:poll];
+    
+    /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
+    messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    messageLabel.font = [UIFont fontWithName:FONT_HOME size:20];
+    messageLabel.textColor = [UIColor darkGrayColor];
+    messageLabel.numberOfLines = 0;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    messageLabel.tag = 1;
+    [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
+    
+    /* Gestione di 0 voti del poll e della connessione */
+    if ([classificaFinale count] == 0 || classificaFinale==nil) {
+        
+        /* Stampa del messaggio di notifica */
+        [self printMessageError];
+    }
     
 }
 
@@ -40,7 +62,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[poll candidates] count];
+    return [classificaFinale count];
     
 }
 
@@ -116,6 +138,24 @@
         destViewController.c = candidate;
         
     }
+    
+}
+
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+- (void) printMessageError {
+    
+    /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    /* Assegna il messaggio a seconda dei casi */
+    if(classificaFinale!=nil)
+        messageLabel.text = NO_RANKING;
+    
+    else messageLabel.text = SERVER_UNREACHABLE;
+    
+    /* Aggiunge la SubView con il messaggio da visualizzare */
+    [tableView addSubview:messageLabel];
+    [tableView sendSubviewToBack:messageLabel];
     
 }
 

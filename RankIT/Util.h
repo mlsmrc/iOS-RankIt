@@ -23,6 +23,13 @@
 /* Stringa per la search bar */
 FOUNDATION_EXPORT NSString *NO_RESULTS;
 
+/* Stringhe per messaggi da stampare a video */
+
+FOUNDATION_EXPORT NSString *EMPTY_POLLS_LIST;
+FOUNDATION_EXPORT NSString *EMPTY_VOTED_POLLS_LIST;
+FOUNDATION_EXPORT NSString *EMPTY_MY_POLLS_LIST;
+FOUNDATION_EXPORT NSString *NO_RANKING;
+
 /* Stringhe per il pulsante di ritorno schermata */
 FOUNDATION_EXPORT NSString *SEARCH;
 FOUNDATION_EXPORT NSString *BACK;
