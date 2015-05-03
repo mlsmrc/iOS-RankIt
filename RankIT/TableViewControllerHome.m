@@ -284,7 +284,6 @@
     CGRect newPosition = VotiPoll.frame;
     newPosition.origin.x= X_FOR_VOTES;
     VotiPoll.frame = newPosition;
-
     
     return cell;
     

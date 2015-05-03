@@ -243,7 +243,6 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     
     else return [allMyPollsDetails count];
     
-    
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -405,18 +404,21 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                     /* Controllo connessione */
                     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
                     bool response;
-                    if([networkReachability currentReachabilityStatus]==NotReachable) {
+                    
+                    if([networkReachability currentReachabilityStatus] == NotReachable) {
+                        
                         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
                         response = [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST];
                         [AlertDelete dismissViewControllerAnimated:YES completion:nil];
                         
                     }
+                    
                     else
                         response = false;
-            
                     
                     /* Gestione della risposta */
                     UIAlertController *OkAlertDelete;
+                    
                     if(response)
                         OkAlertDelete = [UIAlertController alertControllerWithTitle:@"Operazione completata!" message:@"Sondaggio Eliminato." preferredStyle:UIAlertControllerStyleActionSheet];
                     
@@ -445,10 +447,10 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                 
                 UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                     
-                                         /* Handler del cancel */
-                                         [AlertDelete dismissViewControllerAnimated:YES completion:nil];
+                    /* Handler del cancel */
+                    [AlertDelete dismissViewControllerAnimated:YES completion:nil];
                                          
-                                     }];
+                }];
             
                 /* Aggiunta pulsanti all'alert */
                 [AlertDelete addAction:ok];
@@ -490,6 +492,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             
             /* Controllo connessione */
             Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+            
             if([networkReachability currentReachabilityStatus]==NotReachable) {
                 AlertReset = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE preferredStyle:UIAlertControllerStyleActionSheet];
                 
@@ -516,6 +519,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
             
             else if(p.votes==1)
                 AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Sei sicuro di voler eliminare l'unico voto del sondaggio?" preferredStyle:UIAlertControllerStyleActionSheet];
+            
             else {
                 
                 AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Il sondaggio non ha nessun voto da eliminare." preferredStyle:UIAlertControllerStyleActionSheet];
@@ -526,6 +530,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                     [AlertReset dismissViewControllerAnimated:YES completion:nil];
                                              
                 }];
+                
                 /* Aggiunta pulsanti all'alert */
                 [AlertReset addAction:ok];
                 
@@ -645,14 +650,14 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //if (self.tableView == self.searchDisplayController.searchResultsTableView) {
-        [self performSegueWithIdentifier:@"showMyPollResults" sender:self];
-    //}
+    [self performSegueWithIdentifier:@"showMyPollResults" sender:self];
+    
 }
     
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showMyPollResults"]) {
+        
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Poll *p = [allMyPollsDetails objectAtIndex:indexPath.row];
 
@@ -662,6 +667,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
         
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_MY_POLL,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
+    
     }
     
 }
@@ -677,6 +683,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
 - (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
         
         [UIView animateWithDuration:0.25 animations:^{

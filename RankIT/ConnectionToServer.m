@@ -3,9 +3,8 @@
 #import "Candidate.h"
 #import "File.h"
 
-/* Stringhe che appariranno a video per feedback di connessione e lista poll vuota */
+/* Stringa che apparirà a video per feedback di connessione */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
-
 
 NSMutableDictionary *dizionarioPolls;
 NSMutableDictionary *dizionarioPollsVotati;
