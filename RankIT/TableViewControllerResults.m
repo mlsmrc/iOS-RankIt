@@ -92,7 +92,7 @@
     if(indexPath.row == 0)           image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
     else if(indexPath.row == 1)      image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
     else if(indexPath.row == 2)      image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
-    else                            image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
+    else                             image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
     
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = c.candName;
@@ -100,7 +100,7 @@
     /* Nome su più linee */
     NamePoll.adjustsFontSizeToFitWidth  = NO;
     NamePoll.numberOfLines = 0;
-    NamePoll.font = [UIFont fontWithName:FONT_HOME size:16];
+    NamePoll.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
     
     return cell;
 
@@ -153,7 +153,17 @@
     
 }
 
-/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+/* Metodo che gestisce il ri-carimento dell view */
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+}
+
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza voti */
 - (void) printMessageError {
     
     /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
