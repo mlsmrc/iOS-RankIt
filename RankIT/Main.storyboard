@@ -186,7 +186,7 @@
         <!--Classifica-->
         <scene sceneID="4Qm-hK-eTj">
             <objects>
-                <viewController id="8bW-IS-BaO" customClass="TableViewControllerResults" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="8bW-IS-BaO" customClass="TableViewControllerResults" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LAD-tP-2x6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -721,8 +721,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="rXt-wh-Phe"/>
-        <segue reference="Orh-LF-ieg"/>
         <segue reference="cQm-Ga-xje"/>
+        <segue reference="Orh-LF-ieg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
