@@ -39,9 +39,10 @@
     /* Campo per l'api utile per scaricare i poll */
     int start;
     
-    /* Booleano per indicare quando i poll da scaricare sono finiti e non si deve aggiornare allPublicPollsDetails */
+    /* Booleano per indicare se si può/deve aggiornare e scaricare i poll nuovi */
     BOOL UPLOAD;
     
+    UIRefreshControl *footerRefreshControl;
 }
 
 - (void) viewDidLoad {
@@ -106,20 +107,28 @@
     [refreshControl addTarget:self action:@selector(refreshPolls)  forControlEvents:UIControlEventValueChanged];
     refreshControl.tag = 0;
     [self.tableView addSubview:refreshControl];
+    
 }
 
 /* Funzione per scaricare i primi 10 poll una volta che si refresha la TableView */
 - (void) refreshPolls
 {
-    start=0;
+    /* Puoi scaricare poll */
+    UPLOAD=YES;
+    
+    /* Pulisci tutto quello scaricato in precedenza */
     [allPublicPolls removeAllObjects];
     [allPublicPollsDetails removeAllObjects];
+    
+    /* Inizia il download da 0 */
+    start=0;
     [self DownloadPolls:start];
 }
 
 /* Download poll pubblici dal server */
 - (void) DownloadPolls:(int)startPoll {
     
+    NSLog(@"start %d",startPoll);
     Connection = [[ConnectionToServer alloc]init];
     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:[NSString stringWithFormat:@"%d",startPoll]];
     allPublicPolls = Connection.getDizionarioPolls;
@@ -437,6 +446,7 @@
 /* Funzione che gestisce lo scroll dall'alto verso il basso per caricare ulteriori poll se ce ne sono di altri non caricati */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    NSLog(@"Chiamata");
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     if (endScrolling >= scrollView.contentSize.height && UPLOAD==YES)
