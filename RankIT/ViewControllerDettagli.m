@@ -6,6 +6,7 @@
 #import "Util.h"
 #import "File.h"
 
+
 @interface ViewControllerDettagli ()
 
 @end
@@ -25,6 +26,12 @@
     NSString *ID = [NSString stringWithFormat:@"%d",[p pollId]];
     cands = [conn getCandidatesWithPollId:ID];
     
+    
+    /* Controllo se il poll è stato eliminato dal proprietario */
+    if ([cands count]==0) {
+        UIAlertView *alertDelPoll = [[UIAlertView alloc]initWithTitle:@"Attenzione" message:@"Il sondaggio è stato eliminato dal proprietario" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alertDelPoll show];
+    }
     /* Tutti i settaggi del caso */
     name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
     name.text = p.pollName;
@@ -302,6 +309,20 @@
         }
         
     }
+    
+}
+
+/* Funzione delegate per i Popup della view */
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    /* Titolo del bottone cliccato */
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    
+        
+    if([title isEqualToString:@"Ok"])
+        /* Vai alla Home */
+        [self.navigationController popToRootViewControllerAnimated:TRUE];
     
 }
 

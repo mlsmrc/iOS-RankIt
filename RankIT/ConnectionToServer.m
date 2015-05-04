@@ -8,7 +8,6 @@ NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprova
 NSString *SERVER_UNREACHABLE_2 = @"Server non raggiungibile!";
 
 NSMutableDictionary *dizionarioPolls;
-NSMutableDictionary *dizionarioPollsVotati;
 
 @implementation ConnectionToServer {
     
@@ -195,14 +194,8 @@ NSMutableDictionary *dizionarioPollsVotati;
 /*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
 - (NSMutableDictionary*) getDizionarioPollsVotati {
     
-    [self scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
-    NSMutableDictionary *allPolls = [self getDizionarioPolls];
-    NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc] init];
-    
-    /* Controllo presenza di connessione */
-    if(allPolls==nil)
-        return nil;
-    
+    /* Dizionario di tutti i poll votati */
+    NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc]init];
     /* Contiene i pollid di tutti i poll votati */
     NSArray *VotesPListKeys = [File getAllKeysinPList:VOTES_PLIST];
     
@@ -210,10 +203,10 @@ NSMutableDictionary *dizionarioPollsVotati;
         return PollVotati;
     
     /* Aggiungi i poll vodati nel dizionario */
-    for(NSString* key in [allPolls allKeys])
-        if([VotesPListKeys containsObject:key])
-            [PollVotati setObject:[allPolls objectForKey:key] forKey:key];
-    
+    for(NSString* pollid in VotesPListKeys) {
+        [self scaricaPollsWithPollId:pollid andUserId:@"" andStart:@""];
+        [PollVotati addEntriesFromDictionary:dizionarioPolls];
+    }
     return PollVotati;
     
 }

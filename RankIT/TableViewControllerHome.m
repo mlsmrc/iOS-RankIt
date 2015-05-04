@@ -36,11 +36,22 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
+    /* Campo per l'api utile per scaricare i poll */
+    int start;
+    
+    /* Booleano per indicare quando i poll da scaricare sono finiti e non si deve aggiornare allPublicPollsDetails */
+    BOOL UPLOAD;
+    
 }
 
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    
+    /* Puoi scaricare i poll */
+    UPLOAD = YES;
+    allPublicPollsDetails = [[NSMutableArray alloc]init];
+    start=0;
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -69,8 +80,8 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    /* Download iniziale di tutti i poll pubblici */
-    [self DownloadPolls];
+    /* Download iniziale dei poll pubblici da 0 a 9 (start è = 0) */
+    [self DownloadPolls:start];
     
     /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
     if(allPublicPolls==nil || [allPublicPolls count]==0)
@@ -92,39 +103,46 @@
     
     /* Questa è la parte di codice che definisce il refresh da parte della TableView */
     refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(refreshPolls)  forControlEvents:UIControlEventValueChanged];
     refreshControl.tag = 0;
     [self.tableView addSubview:refreshControl];
-    
-    /* Visualizza i poll pubblici nella Home */
-    [self HomePolls];
-    
+}
+
+/* Funzione per scaricare i primi 10 poll una volta che si refresha la TableView */
+- (void) refreshPolls
+{
+    start=0;
+    [allPublicPolls removeAllObjects];
+    [allPublicPollsDetails removeAllObjects];
+    [self DownloadPolls:start];
 }
 
 /* Download poll pubblici dal server */
-- (void) DownloadPolls {
+- (void) DownloadPolls:(int)startPoll {
     
-     Connection = [[ConnectionToServer alloc]init];
-     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:@""];
-     allPublicPolls = Connection.getDizionarioPolls;
+    Connection = [[ConnectionToServer alloc]init];
+    [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:[NSString stringWithFormat:@"%d",startPoll]];
+    allPublicPolls = Connection.getDizionarioPolls;
      
-     if(allPublicPolls!=nil && [allPublicPolls count] != 0)
-     {
-         
+    if(allPublicPolls!=nil && [allPublicPolls count] != 0)
+    {
         [self CreatePollsDetails];
         [self.tableView reloadData];
          
-     }
-     
-     [self HomePolls];
+    }
+    
+    if ([allPublicPolls count]<10) {
+        UPLOAD=NO;
+    }
+    [self HomePolls];
     
 }
 
 /* Estrapolazione dei dettagli dei poll pubblici ritornati dal server */
 - (void) CreatePollsDetails {
-    
+
     NSString *value;
-    allPublicPollsDetails = [[NSMutableArray alloc]init];
+
     
     /* Scorre il dizionario e recupera i dettagli necessari */
     for(id key in allPublicPolls) {
@@ -139,6 +157,7 @@
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
+ 
         [allPublicPollsDetails addObject:p];
         
     }
@@ -367,8 +386,11 @@
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* Ogni volta che la view appare vengono scaricati i poll pubblici */
-    [self DownloadPolls];
+    /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
+    start=0;
+    [allPublicPolls removeAllObjects];
+    [allPublicPollsDetails removeAllObjects];
+    [self DownloadPolls:start];
     
 }
 
@@ -408,6 +430,20 @@
             
         }];
         
+    }
+    
+}
+
+/* Funzione che gestisce lo scroll dall'alto verso il basso per caricare ulteriori poll se ce ne sono di altri non caricati */
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
+    scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+    if (endScrolling >= scrollView.contentSize.height && UPLOAD==YES)
+    {
+        /* Scarica i successivi 10 */
+        start+=10;
+        [self DownloadPolls:start];
     }
     
 }
