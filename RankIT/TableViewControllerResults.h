@@ -9,6 +9,5 @@
 @property (strong,nonatomic) Candidate *candidate;
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) NSMutableArray *classificaFinale;
-@property int flussoFrom;
 
 @end

@@ -11,7 +11,7 @@ NSString *SEARCH = @"Cerca";
 NSString *BACK = @"";
 NSString *BACK_TO_HOME = @"Home";
 NSString *BACK_TO_VOTED = @"Votati";
-NSString *BACK_TO_MY_POLL = @"";
+NSString *BACK_TO_MY_POLL = @"I Miei Sond.";
 NSString *BACK_TO_RANKING = @"Classifica";
 
 /* Stringhe per messaggio da stampare a video */

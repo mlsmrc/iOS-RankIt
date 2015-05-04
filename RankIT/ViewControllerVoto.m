@@ -142,7 +142,7 @@
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];
     alert.tag = VOTI_OK;
-    alert = [alert initWithTitle:@"Esito" message:@"Votazione effettuata con successo!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    alert = [alert initWithTitle:@"Esito Votazione" message:@"Votazione effettuata con successo!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     [alert show];
     
 }

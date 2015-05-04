@@ -186,7 +186,7 @@
         <!--Classifica-->
         <scene sceneID="4Qm-hK-eTj">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="8bW-IS-BaO" customClass="TableViewControllerResults" sceneMemberID="viewController">
+                <viewController id="8bW-IS-BaO" customClass="TableViewControllerResults" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LAD-tP-2x6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -365,7 +365,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageView" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="49" width="220" height="185"/>
+                                        <rect key="frame" x="50" y="48" width="220" height="186"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -720,9 +720,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="La6-x6-MN5"/>
-        <segue reference="cQm-Ga-xje"/>
+        <segue reference="rXt-wh-Phe"/>
         <segue reference="Orh-LF-ieg"/>
+        <segue reference="cQm-Ga-xje"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

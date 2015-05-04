@@ -25,6 +25,9 @@
     /* Array per i risultati di ricerca */
     NSArray *searchResults;
     
+    /* Oggetto per il refresh da TableView */
+    UIRefreshControl *refreshControl;
+    
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
@@ -82,6 +85,11 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
+    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
+    refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
+    refreshControl.tag = 0;
+    [self.tableView addSubview:refreshControl];
     
     /* Visualizza i poll votati nella schermata "Votati" */
     [self VotedPolls];
@@ -171,6 +179,9 @@
         
     }
     
+    /* Conclude il refresh (Sparisce l'animazione) */
+    [refreshControl endRefreshing];
+    
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll votati */
@@ -254,16 +265,13 @@
             
             indexPath = [self.tableView indexPathForSelectedRow];
             p = [allVotedPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
         }
         
         TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
         destViewController.poll = p;
-        destViewController.flussoFrom = FROM_VOTATI;
-        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-        self.navigationItem.backBarButtonItem = backButton;
         
     }
     

@@ -22,7 +22,7 @@
     
 }
 
-@synthesize poll,candidate,classificaFinale,flussoFrom,tableView;
+@synthesize poll,candidate,classificaFinale,tableView;
 
 - (void)viewDidLoad {
     
@@ -118,9 +118,6 @@
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = poll;
-        
-        /* Flusso dati */
-        destViewController.flussoFrom = flussoFrom;
         
     }
     
