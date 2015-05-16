@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
@@ -75,7 +75,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="Ukz-nf-C31">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oWi-6Q-xer"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oWi-6Q-xer">
+                            <connections>
+                                <segue destination="Jif-wR-hl8" kind="push" id="pz6-eI-UJU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="FfY-og-xyt" id="Vih-ae-VGk"/>
@@ -151,7 +155,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showVotedResults" id="rXt-wh-Phe"/>
+                                            <segue destination="ZFu-R7-fwx" kind="push" identifier="showGraphResult" id="n0U-LL-mOO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -336,18 +340,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9I-iV-smj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3308" y="-952"/>
+            <point key="canvasLocation" x="4372" y="-952"/>
         </scene>
         <!--Candidato-->
         <scene sceneID="LcI-fm-IkF">
             <objects>
                 <viewController id="jPN-O7-jyp" customClass="ViewControllerCandidates" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqz-Ha-QqF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OqZ-M8-A06">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wgW-Xa-FIn">
@@ -365,7 +369,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageView" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="48" width="220" height="208"/>
+                                        <rect key="frame" x="50" y="48" width="220" height="185.5"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -390,7 +394,7 @@
             <objects>
                 <viewController title="Dettagli Poll" hidesBottomBarWhenPushed="YES" id="zPC-dB-2ah" customClass="ViewControllerDettagli" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d40-Ix-fq5">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gG7-GW-Suq">
@@ -579,11 +583,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyPollCell" rowHeight="75" id="1OR-py-LQ5" customClass="UMTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyPollCell" rowHeight="75" id="1OR-py-LQ5" customClass="UMTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="1OR-py-LQ5" id="05I-8o-NWE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageCell" id="bYn-Fn-TmJ">
@@ -591,14 +595,14 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YOb-6q-aq3">
-                                                    <rect key="frame" x="88" y="17" width="232" height="21"/>
+                                                    <rect key="frame" x="88" y="17" width="199" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scadenza" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gel-EZ-KW8">
-                                                    <rect key="frame" x="88" y="38" width="149" height="21"/>
+                                                    <rect key="frame" x="88" y="38" width="128" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -617,7 +621,7 @@
                                             <outlet property="Nome" destination="YOb-6q-aq3" id="1gf-bc-DcE"/>
                                             <outlet property="Scadenza" destination="gel-EZ-KW8" id="o8n-2O-vp8"/>
                                             <outlet property="cell" destination="05I-8o-NWE" id="imp-0g-nbt"/>
-                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showMyPollResults" id="La6-x6-MN5"/>
+                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showMyPollResults" id="fBq-jI-cdf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -705,6 +709,107 @@
             </objects>
             <point key="canvasLocation" x="418" y="2046"/>
         </scene>
+        <!--Classifica-->
+        <scene sceneID="zG0-AI-kKb">
+            <objects>
+                <viewController id="ZFu-R7-fwx" customClass="ViewControllerGraphResults" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f1k-fJ-dip">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="Xb6-YZ-sA8">
+                                <rect key="frame" x="0.0" y="17" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classifica" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tl2-Rm-O91">
+                                <rect key="frame" x="175" y="338" width="170" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VotedBy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nsm-Hl-Nrn">
+                                <rect key="frame" x="175" y="374" width="170" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classifica:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lvr-Eu-Dr6">
+                                <rect key="frame" x="52" y="338" width="79" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votato da:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8VG-Mw-k0a">
+                                <rect key="frame" x="52" y="373" width="79" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Classifica" id="CwR-zc-Zdr">
+                        <barButtonItem key="rightBarButtonItem" title="Dettagli" id="LeY-Hc-6pp"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="classifica" destination="Tl2-Rm-O91" id="KdI-e6-VEY"/>
+                        <outlet property="grafico" destination="Xb6-YZ-sA8" id="iel-5V-UWc"/>
+                        <outlet property="scrittaClassifica" destination="lvr-Eu-Dr6" id="CXK-0D-1mt"/>
+                        <outlet property="scrittaVoted" destination="8VG-Mw-k0a" id="RpN-xT-ZK4"/>
+                        <outlet property="votedBy" destination="Nsm-Hl-Nrn" id="IbP-o4-qP2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g6R-S1-Sc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2284" y="686"/>
+        </scene>
+        <!--Crea Poll-->
+        <scene sceneID="gBW-3i-0qa">
+            <objects>
+                <viewController id="Jif-wR-hl8" customClass="ViewControllerAddPoll" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gDz-Xh-Y2D" customClass="XLFormDateCell">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Crea Poll" id="Sjj-1t-TOT">
+                        <barButtonItem key="rightBarButtonItem" title="Avanti" id="uVP-F6-459">
+                            <connections>
+                                <segue destination="QhE-1O-ydT" kind="push" identifier="summary" id="F6p-jq-NgG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FV9-aY-xbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2473" y="-1281"/>
+        </scene>
+        <!--View Controller Summary Poll-->
+        <scene sceneID="ElF-pd-wRY">
+            <objects>
+                <viewController id="QhE-1O-ydT" customClass="ViewControllerSummaryPoll" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="emX-eR-qOk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="byk-0P-EgS">
+                        <barButtonItem key="rightBarButtonItem" title="Invia" id="QNs-8M-JxN">
+                            <connections>
+                                <action selector="send:" destination="QhE-1O-ydT" id="WYf-vS-6yA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aVn-Z5-F8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3646" y="-1315"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Credits" width="25" height="25"/>
@@ -720,9 +825,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="La6-x6-MN5"/>
         <segue reference="Hlg-m2-3g4"/>
-        <segue reference="Zgg-cI-oMW"/>
+        <segue reference="Orh-LF-ieg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
