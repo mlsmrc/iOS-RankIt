@@ -11,6 +11,7 @@
 #import "XLFormImageSelectorCell.h"
 #import "ConnectionToServer.h"
 #import "Candidate.h"
+#import "File.h"
 
 
 @implementation ViewControllerSummaryPoll
@@ -191,7 +192,8 @@ rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
     NSString *pollName = summaryResult[keyPollName];
     NSString *pollDesc = summaryResult[keyPollDesc];
     NSDate *deadLine = summaryResult[keyPollDeadLine];
-    BOOL private = summaryResult[keyPollPrivate];
+    BOOL private = (summaryResult[keyPollPrivate] == false || summaryResult[keyPollPrivate] == (id)[NSNull null]  ? false : true);
+    
     
     
    NSMutableArray *pollCand =  [self createCandidate:dataInput]; //creazione di un array di candidates del poll con CandName - CandDesc
@@ -200,7 +202,7 @@ rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
     /*
      * Creazione nuovo Poll
      */
-    _poll = [[Poll alloc] initPollWithUserID:@"prova" withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
+    _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
     
     
     return _poll;

@@ -229,7 +229,7 @@ NSMutableDictionary *dizionarioPolls;
     
     else
         return false;
-
+    
 }
 
 /* Elimina il poll */
@@ -255,12 +255,29 @@ NSMutableDictionary *dizionarioPolls;
 
 - (NSMutableDictionary*) getResultsOfPoll:(Poll*)poll {
     
+    NSString* url = [URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat: @"%d", poll.pollId]];
+    
+    url=[url stringByReplacingOccurrencesOfString:@"_FORCE_" withString:@""];
+    
+    /* Creazione della richiesta ed invio */
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    /* Viene controllato se la risposta del server è diversa da nil (connessione assente) */
+    if(response!=nil) {
+        
+        /* Esito positivo: parsing del JSON nel dizionario polls (una entry per ogni poll) */
+        NSMutableDictionary *results = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+        
+        
+        return results;
+        
+    }
     return nil;
     
 }
-
 - (NSMutableArray *) getOptimalResultsOfPoll:(Poll*)poll {
-
+    
     NSString* url = [URL_GET_RESULTS stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat: @"%d", poll.pollId]];
     
     url=[url stringByReplacingOccurrencesOfString:@"_FORCE_" withString:@""];
@@ -284,11 +301,10 @@ NSMutableDictionary *dizionarioPolls;
         
         NSMutableArray * classifiche=[[results valueForKey:@"optimalnotiesdata"]valueForKey:@"pattern"];
         
-        /* PER ORA FACCIAMO COSì, MA SOLO PER EVITARE I CRASH */
         if([classifiche count]==0) {
             
             classifiche = [[results valueForKey:@"optimaldata"]valueForKey:@"pattern"];
-        
+            
         }
         
         NSMutableArray * classificaOttimale=[[NSMutableArray alloc]init];
@@ -310,6 +326,9 @@ NSMutableDictionary *dizionarioPolls;
             
         }
         
+        classificaOttimale[j]=classificaFinale;
+        
+        // array del tipo [C,A,B,A>B=C] con l'ultima stringa per disambiguare la classifica
         return classificaOttimale;
         
     }
@@ -317,5 +336,9 @@ NSMutableDictionary *dizionarioPolls;
     return nil;
     
 }
+
+
+
+
 
 @end

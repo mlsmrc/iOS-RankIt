@@ -46,8 +46,8 @@
     
     /* Gestione di 0 voti nel poll e della connessione */
     if ([classificaFinale count] == 0 || classificaFinale==nil)
-    
-        /* Stampa del messaggio di notifica */
+        
+    /* Stampa del messaggio di notifica */
         [self printMessageError];
     
 }
@@ -62,7 +62,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [classificaFinale count];
+    return [classificaFinale count]-1;
     
 }
 
@@ -87,11 +87,35 @@
     
     Candidate *c = candidates[indexCand];
     
+    // classifica con pattern completo del tipo A=B>C
+    NSString *classifica=[classificaFinale objectAtIndex:[classificaFinale count]-1];
+    
+    
+    NSMutableArray * rankLabels=[[NSMutableArray alloc]init];
+    
+    int j=1;
+    for(int i=0;i<[classifica length];i++)
+    {
+        
+        if(i==0)
+            [rankLabels addObject:[NSString stringWithFormat:@"%d",j]];
+        
+        else if(i!=0 && i%2==1 && [classifica characterAtIndex:i]=='=')
+            [rankLabels addObject:[NSString stringWithFormat:@"%d",j]];
+        
+        else if(i!=0 && i%2==1 &&[classifica characterAtIndex:i]=='>')
+        {
+            j++;
+            [rankLabels addObject:[NSString stringWithFormat:@"%d",j]];
+            
+        }
+    }
+    
     /* Visualizzazione del risultato nella cella */
     UIImageView *image = (UIImageView *)[cell viewWithTag:100];
-    if(indexPath.row == 0)           image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
-    else if(indexPath.row == 1)      image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
-    else if(indexPath.row == 2)      image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
+    if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"1"])           image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
+    else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"2"])      image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
+    else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"3"])      image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
     else                             image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
     
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
@@ -103,7 +127,7 @@
     NamePoll.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];
     
     return cell;
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -113,7 +137,7 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
+    
     if([segue.identifier isEqualToString:@"showVotedResultsDetails"]) {
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
@@ -139,7 +163,7 @@
         else                            indexCand = 4;
         
         candidate = poll.candidates[indexCand];
-
+        
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_RANKING,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
         
@@ -177,5 +201,6 @@
     [tableView sendSubviewToBack:messageLabel];
     
 }
+
 
 @end

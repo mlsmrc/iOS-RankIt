@@ -14,7 +14,6 @@
 #define RESET_POLL 1
 #define EDIT_POLL 0
 
-NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397625afd44";
 
 @interface UIViewController ()
 
@@ -110,8 +109,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
     Connection = [[ConnectionToServer alloc]init];
     
     /* Connessione di prova */
-    //[Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
-    [Connection scaricaPollsWithPollId:@"" andUserId:USER_TEST andStart:@""];
+    [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
     
     
     allMyPolls = [Connection getDizionarioPolls];
@@ -447,7 +445,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                         
                         /* Se c'è connessione, elimina il poll e ricarica la schermata */
                         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-                        [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST];
+                        [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:[File getUDID]];
                         [AlertDelete dismissViewControllerAnimated:YES completion:nil];
                         
                         /* Dopo l'eliminazione è utile ricaricare i vari contenuti */
@@ -592,7 +590,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                 /* Handler dell'ok */
                 ConnectionToServer *Conn = [[ConnectionToServer alloc]init];
                 
-                if([Conn resetPollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST]) {
+                if([Conn resetPollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:[File getUDID]]) {
                     
                     /* Se c'è connessione, resetta i voti del poll */
                     [p setVotes:0];
@@ -722,7 +720,7 @@ NSString *USER_TEST = @"693333a879834e2888fffcdadc0d127bee9d18e9583c45859ffb6397
                         
                         /* Se c'è connessione, elimina il poll e ricarica la schermata */
                         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-                        [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:USER_TEST];
+                        [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:[File getUDID]];
                         [AlertDelete dismissViewControllerAnimated:YES completion:nil];
                         
                         /* Dopo l'eliminazione è utile ricaricare i vari contenuti */

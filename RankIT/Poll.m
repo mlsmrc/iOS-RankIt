@@ -7,7 +7,7 @@
 
 @implementation Poll
 
-NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"unlisted\":_PVT_FLAG_,\"candidates\":[_CANDIDATES_STRING_]}";
+NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\"polldescription\":\"_POLL_DESCRIPTION_\",\"pollimage\":\"\",\"deadline\":\"_DEADLINE_\",\"userid\":\"_USER_ID_\",\"unlisted\":\"_PVT_FLAG_\",\"candidates\":[_CANDIDATES_STRING_]}";
 
 @synthesize pollId,pollName,pollDescription,resultsType,deadline,userID,pvtPoll,lastUpdate,votes,mine,candidates;
 
@@ -23,9 +23,6 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
     self = [super init];
     
     if(self) {
-        
-        /* Lettura UDID dal file Info.plist */
-        ID = [File getUDID];
         
         pollId = 0;
         userID = ID;
