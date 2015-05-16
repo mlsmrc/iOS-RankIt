@@ -55,7 +55,7 @@
     
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-
+    
     name = [candidateNames objectAtIndex:indexPath.row];
     
     /* Visualizzazione Candidato nella cella */
@@ -137,7 +137,8 @@
         
     }
     
-    [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:poll.userID andRanking:ranking];
+    /* Invio voto al server */
+    [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:[File getUDID] andRanking:ranking];
     
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];
@@ -149,7 +150,7 @@
 
 /* Funzione delegate per i Popup della view */
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
+    
     /* Titolo del bottone cliccato */
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
@@ -158,11 +159,11 @@
         
         if([title isEqualToString:@"Ok"])
             
-            /* Vai alla Home */
+        /* Vai alla Home */
             [self.navigationController popToRootViewControllerAnimated:TRUE];
-
+        
     }
-
+    
 }
 
 @end

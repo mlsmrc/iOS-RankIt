@@ -128,16 +128,15 @@
 /* Download poll pubblici dal server */
 - (void) DownloadPolls:(int)startPoll {
     
-    NSLog(@"start %d",startPoll);
     Connection = [[ConnectionToServer alloc]init];
     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:[NSString stringWithFormat:@"%d",startPoll]];
     allPublicPolls = Connection.getDizionarioPolls;
-     
+    
     if(allPublicPolls!=nil && [allPublicPolls count] != 0)
     {
         [self CreatePollsDetails];
         [self.tableView reloadData];
-         
+        
     }
     
     if ([allPublicPolls count]<10) {
@@ -149,9 +148,9 @@
 
 /* Estrapolazione dei dettagli dei poll pubblici ritornati dal server */
 - (void) CreatePollsDetails {
-
+    
     NSString *value;
-
+    
     
     /* Scorre il dizionario e recupera i dettagli necessari */
     for(id key in allPublicPolls) {
@@ -166,7 +165,7 @@
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
- 
+        
         [allPublicPollsDetails addObject:p];
         
     }
@@ -260,12 +259,12 @@
                     ((UILabel *)view).font = [UIFont fontWithName:FONT_HOME size:20];
                     ((UILabel *)view).textColor = [UIColor darkGrayColor];
                     ((UILabel *)view).text = NO_RESULTS;
-
+                    
                 }
             }
-        
+            
         }
-    
+        
         else [self.searchDisplayController.searchResultsTableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
         
         return [searchResults count];
@@ -346,7 +345,7 @@
             p = [searchResults objectAtIndex:indexPath.row];
             backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
-
+            
             
         }
         
@@ -361,7 +360,7 @@
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = p;
-                
+        
     }
     
 }
@@ -446,7 +445,6 @@
 /* Funzione che gestisce lo scroll dall'alto verso il basso per caricare ulteriori poll se ce ne sono di altri non caricati */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"Chiamata");
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     if (endScrolling >= scrollView.contentSize.height && UPLOAD==YES)
