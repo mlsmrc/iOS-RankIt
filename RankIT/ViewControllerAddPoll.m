@@ -260,7 +260,7 @@ XLFormSectionDescriptor *multivaluedSection; //section contenente i candidates
         }
     }
     
-    NSLog(@"%@",_result[kPollPrivate]);
+    //NSLog(@"%@",_result[kPollPrivate]);
     
     return _result;
 

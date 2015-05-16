@@ -68,7 +68,7 @@ NSString *const kFormImageSelectorCellImageRequest = @"imageRequest";
                                                 }
                                             }
                                             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                NSLog(@"Failed to download image");
+                                                //NSLog(@"Failed to download image");
                                             }];
     }
 }

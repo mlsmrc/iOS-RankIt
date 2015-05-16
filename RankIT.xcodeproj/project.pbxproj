@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		435E2F121B079F5C0093C12F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E2F111B079F5C0093C12F /* Accelerate.framework */; };
+		435E2F141B079F620093C12F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E2F131B079F620093C12F /* QuartzCore.framework */; };
+		435E2F151B079FB80093C12F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43630E561B07755A0027121C /* libCorePlot-CocoaTouch.a */; };
 		43630DCF1B0772ED0027121C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630DCE1B0772ED0027121C /* main.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630DDD1B0772ED0027121C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43630DDC1B0772ED0027121C /* Images.xcassets */; };
 		43630DEC1B0772ED0027121C /* RankITTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630DEB1B0772ED0027121C /* RankITTests.m */; };
@@ -17,7 +20,6 @@
 		43630E831B07755A0027121C /* ConnectionToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E011B0775590027121C /* ConnectionToServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630E841B07755A0027121C /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E521B07755A0027121C /* File.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630E851B07755A0027121C /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E541B07755A0027121C /* Font.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
-		43630E871B07755A0027121C /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43630E561B07755A0027121C /* libCorePlot-CocoaTouch.a */; };
 		43630E881B07755A0027121C /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E591B07755A0027121C /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630E891B07755A0027121C /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E5B1B07755A0027121C /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630E8A1B07755A0027121C /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E5D1B07755A0027121C /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		435E2F111B079F5C0093C12F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		435E2F131B079F620093C12F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43630DC91B0772ED0027121C /* RankIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43630DCD1B0772ED0027121C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43630DCE1B0772ED0027121C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -214,8 +218,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				435E2F151B079FB80093C12F /* libCorePlot-CocoaTouch.a in Frameworks */,
+				435E2F141B079F620093C12F /* QuartzCore.framework in Frameworks */,
+				435E2F121B079F5C0093C12F /* Accelerate.framework in Frameworks */,
 				7F3784A8D312DC1BCCDAADAF /* libPods.a in Frameworks */,
-				43630E871B07755A0027121C /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +238,8 @@
 		038A29845BA6804D14E69BCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				435E2F131B079F620093C12F /* QuartzCore.framework */,
+				435E2F111B079F5C0093C12F /* Accelerate.framework */,
 				E03C4AF010983E2928862585 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -244,6 +252,15 @@
 				AC6DF755FF9103F29F04B2A4 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		435E2F0C1B079DF50093C12F /* CorePlot */ = {
+			isa = PBXGroup;
+			children = (
+				43630E561B07755A0027121C /* libCorePlot-CocoaTouch.a */,
+				43630E021B0775590027121C /* CorePlotHeaders */,
+			);
+			name = CorePlot;
 			sourceTree = "<group>";
 		};
 		43630DC01B0772ED0027121C = {
@@ -270,6 +287,7 @@
 		43630DCB1B0772ED0027121C /* RankIT */ = {
 			isa = PBXGroup;
 			children = (
+				435E2F0C1B079DF50093C12F /* CorePlot */,
 				43630EA01B0776440027121C /* ViewControllerAddPoll.h */,
 				43630EA11B0776440027121C /* ViewControllerAddPoll.m */,
 				43630EA21B0776440027121C /* ViewControllerSummaryPoll.h */,
@@ -285,13 +303,11 @@
 				43630DFF1B0775590027121C /* Candidate.m */,
 				43630E001B0775590027121C /* ConnectionToServer.h */,
 				43630E011B0775590027121C /* ConnectionToServer.m */,
-				43630E021B0775590027121C /* CorePlotHeaders */,
 				43630E511B07755A0027121C /* File.h */,
 				43630E521B07755A0027121C /* File.m */,
 				43630E531B07755A0027121C /* Font.h */,
 				43630E541B07755A0027121C /* Font.m */,
 				43630E551B07755A0027121C /* Images.xcassets */,
-				43630E561B07755A0027121C /* libCorePlot-CocoaTouch.a */,
 				43630E571B07755A0027121C /* MyPollCellFiles */,
 				43630E621B07755A0027121C /* Poll.h */,
 				43630E631B07755A0027121C /* Poll.m */,
@@ -738,6 +754,11 @@
 			baseConfigurationReference = CFB7C97F006FFD5A984449F3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RankIT/CorePlotHeaders",
+					"$(PROJECT_DIR)/RankIT",
+				);
 				INFOPLIST_FILE = RankIT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -753,6 +774,11 @@
 			baseConfigurationReference = AC6DF755FF9103F29F04B2A4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RankIT/CorePlotHeaders",
+					"$(PROJECT_DIR)/RankIT",
+				);
 				INFOPLIST_FILE = RankIT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

@@ -137,11 +137,11 @@ rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
     
     Poll *newPoll = [self createPoll:formValues]; //creiamo un nuovo poll
     
-    NSString *result =  [self postPoll:newPoll];
+    [self postPoll:newPoll];
     
-    NSLog(@"%@",[newPoll toJSON]);
+    //NSLog(@"%@",[newPoll toJSON]);
     
-    NSLog(@"%@",result);
+    //NSLog(@"%@",result);
     
     
 

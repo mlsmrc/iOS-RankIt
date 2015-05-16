@@ -54,7 +54,7 @@
     [self initPlot];
     
     //inizio delle rilevazioni
-    
+
     [super viewDidAppear:animated];
     
     self.scrittaClassifica.hidden=false;
@@ -92,7 +92,7 @@
 -(void)configureGraph {
     // 1 - Create the graph
     CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
-    //    [graph applyTheme:[CPTTheme themeNamed:kCPT]];
+//    [graph applyTheme:[CPTTheme themeNamed:kCPT]];
     self.hostView.hostedGraph = graph;
     // 2 - Set graph title
     //NSString *title = @"sigma";
@@ -170,63 +170,63 @@
     
     // 2 - Create the three plots
     /*optimalPlot = [[CPTScatterPlot alloc] init];
-     optimalPlot.dataSource = self;
-     optimalPlot.identifier =@"TIES";
-     CPTColor *xColor = [CPTColor blackColor];
-     [graph addPlot:optimalPlot toPlotSpace:plotSpace];
-     
-     
-     optimalTiesPlot = [[CPTScatterPlot alloc] init];
-     optimalTiesPlot.dataSource = self;
-     optimalTiesPlot.identifier = @"NOTIES";
-     CPTColor *yColor = [CPTColor redColor];
-     [graph addPlot:optimalPlot toPlotSpace:plotSpace];
-     
-     
-     // 3 - Set up plot space
-     [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:optimalPlot,optimalTiesPlot, nil]];
-     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-     [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
-     plotSpace.xRange = xRange;
-     
-     
-     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-     [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
-     plotSpace.yRange = yRange;
-     
-     // 4 - Create styles and symbols
-     CPTMutableLineStyle *optimalLineStyle = [optimalPlot.dataLineStyle mutableCopy];
-     optimalLineStyle.lineWidth = 0.0;
-     
-     
-     
-     
-     optimalPlot.dataLineStyle = optimalLineStyle;
-     
-     
-     CPTMutableLineStyle *xSymbolLineStyle = [CPTMutableLineStyle lineStyle];
-     xSymbolLineStyle.lineColor = xColor;
-     CPTPlotSymbol *xSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-     xSymbol.fill = [CPTFill fillWithColor:[CPTColor blackColor]];
-     xSymbol.lineStyle = xSymbolLineStyle;
-     xSymbol.size = CGSizeMake(6.0f,6.0f);
-     optimalPlot.plotSymbol = xSymbol;
-     
-     
-     
-     CPTMutableLineStyle *optimalTiesLineStyle = [optimalTiesPlot.dataLineStyle mutableCopy];
-     optimalTiesLineStyle.lineWidth = 0.0;
-     
-     optimalTiesPlot.dataLineStyle = optimalTiesLineStyle;
-     CPTMutableLineStyle *ySymbolLineStyle = [CPTMutableLineStyle lineStyle];
-     ySymbolLineStyle.lineColor = yColor;
-     CPTPlotSymbol *ySymbol = [CPTPlotSymbol ellipsePlotSymbol];
-     ySymbol.fill = [CPTFill fillWithColor:[CPTColor redColor]];
-     ySymbol.lineStyle = ySymbolLineStyle;
-     ySymbol.size = CGSizeMake(6.0f,6.0f);
-     optimalTiesPlot.plotSymbol = ySymbol;*/
+    optimalPlot.dataSource = self;
+   optimalPlot.identifier =@"TIES";
+    CPTColor *xColor = [CPTColor blackColor];
+    [graph addPlot:optimalPlot toPlotSpace:plotSpace];
     
-}
+    
+    optimalTiesPlot = [[CPTScatterPlot alloc] init];
+    optimalTiesPlot.dataSource = self;
+    optimalTiesPlot.identifier = @"NOTIES";
+    CPTColor *yColor = [CPTColor redColor];
+    [graph addPlot:optimalPlot toPlotSpace:plotSpace];
+    
+    
+       // 3 - Set up plot space
+    [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:optimalPlot,optimalTiesPlot, nil]];
+    CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+    plotSpace.xRange = xRange;
+   
+    
+    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+    plotSpace.yRange = yRange;
+    
+    // 4 - Create styles and symbols
+    CPTMutableLineStyle *optimalLineStyle = [optimalPlot.dataLineStyle mutableCopy];
+    optimalLineStyle.lineWidth = 0.0;
+    
+   
+    
+   
+    optimalPlot.dataLineStyle = optimalLineStyle;
+    
+    
+    CPTMutableLineStyle *xSymbolLineStyle = [CPTMutableLineStyle lineStyle];
+    xSymbolLineStyle.lineColor = xColor;
+    CPTPlotSymbol *xSymbol = [CPTPlotSymbol ellipsePlotSymbol];
+    xSymbol.fill = [CPTFill fillWithColor:[CPTColor blackColor]];
+    xSymbol.lineStyle = xSymbolLineStyle;
+    xSymbol.size = CGSizeMake(6.0f,6.0f);
+    optimalPlot.plotSymbol = xSymbol;
+    
+    
+    
+    CPTMutableLineStyle *optimalTiesLineStyle = [optimalTiesPlot.dataLineStyle mutableCopy];
+    optimalTiesLineStyle.lineWidth = 0.0;
+
+    optimalTiesPlot.dataLineStyle = optimalTiesLineStyle;
+    CPTMutableLineStyle *ySymbolLineStyle = [CPTMutableLineStyle lineStyle];
+    ySymbolLineStyle.lineColor = yColor;
+    CPTPlotSymbol *ySymbol = [CPTPlotSymbol ellipsePlotSymbol];
+    ySymbol.fill = [CPTFill fillWithColor:[CPTColor redColor]];
+    ySymbol.lineStyle = ySymbolLineStyle;
+    ySymbol.size = CGSizeMake(6.0f,6.0f);
+    optimalTiesPlot.plotSymbol = ySymbol;*/
+    
+    }
 
 -(void)configureAxes {
     // 1 - Create styles
@@ -265,13 +265,13 @@
     
     NSMutableSet *xLabels = [NSMutableSet setWithCapacity:30];
     NSMutableSet *xLocations = [NSMutableSet setWithCapacity:30];
-    /*
-     for(int i=0;i<[optimalData count];i++)
-     {
-     
-     [xLocations addObject:[NSNumber numberWithFloat:i]];
-     
-     }*/
+   /*
+    for(int i=0;i<[optimalData count];i++)
+    {
+        
+        [xLocations addObject:[NSNumber numberWithFloat:i]];
+        
+    }*/
     x.axisLabels = xLabels;
     x.majorTickLocations = xLocations;
     
@@ -358,7 +358,7 @@
             [yMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(j)]];
         }
     }
-    y.axisLabels = yLabels;
+    y.axisLabels = yLabels;    
     y.majorTickLocations = yMajorLocations;
     y.minorTickLocations = yMinorLocations;
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
@@ -383,7 +383,7 @@
     
     if ([plot.identifier isEqual:@"NOTIES"] == YES) {
         
-        return [self.optimalNotiesData count];
+         return [self.optimalNotiesData count];
         
         
         //[[[CPDStockPriceStore sharedInstance] monthlyPrices:CPDTickerSymbolx] objectAtIndex:index];
@@ -401,11 +401,11 @@
     
     
     
-    
+  
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
             if ([plot.identifier isEqual:@"TIES"] == YES) {
-                NSLog(@"%f e indice %lu",[[self.optimalData objectAtIndex:index]mu],(unsigned long)index);
+                //NSLog(@"%f e indice %lu",[[self.optimalData objectAtIndex:index]mu],(unsigned long)index);
                 return [NSNumber numberWithFloat:[[self.optimalData objectAtIndex:index]mu]];
                 
                 
@@ -413,7 +413,7 @@
             }
             
             if ([plot.identifier isEqual:@"NOTIES"] == YES) {
-                NSLog(@"noties");
+                 //NSLog(@"noties");
                 return [NSNumber numberWithFloat:[[self.optimalNotiesData objectAtIndex:index]mu]];
                 
                 
@@ -438,7 +438,7 @@
                 
                 //[[[CPDStockPriceStore sharedInstance] monthlyPrices:CPDTickerSymbolx] objectAtIndex:index];
             }
-            
+        
             
             
     }
@@ -450,7 +450,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated{
     
-    
+ 
     
     
 }
@@ -460,32 +460,32 @@
 {
     classifica.hidden=false;
     votedBy.hidden=false;
-    
+   
     selectedIndex=index;
     Votazione *votazione;
     //CGPoint point=[plot plotAreaPointOfVisiblePointAtIndex:index];
-    
-    if ([plot.identifier isEqual:@"TIES"] == YES)
-    {
-        votazione=[optimalData objectAtIndex:index];
-        selectedPlot=[NSMutableString stringWithFormat:@"TIES"];
-        [tiesPlot reloadData];
-        
-        
-    }
+   
+     if ([plot.identifier isEqual:@"TIES"] == YES)
+     {
+         votazione=[optimalData objectAtIndex:index];
+         selectedPlot=[NSMutableString stringWithFormat:@"TIES"];
+         [tiesPlot reloadData];
+         
+         
+         }
     if ([plot.identifier isEqual:@"NOTIES"] == YES)
     {
-        votazione=[optimalNotiesData objectAtIndex:index];
-        selectedPlot=[NSMutableString stringWithFormat:@"NOTIES"];
-        [notiesPlot reloadData];
+       votazione=[optimalNotiesData objectAtIndex:index];
+       selectedPlot=[NSMutableString stringWithFormat:@"NOTIES"];
+         [notiesPlot reloadData];
     }
     votedBy.text=[NSString stringWithFormat:@"%f",[votazione votedby]];
     classifica.text=[votazione pattern];
-    
-    [self symbolForScatterPlot:plot recordIndex:index];
+   
+[self symbolForScatterPlot:plot recordIndex:index];
     [tiesPlot reloadData];
-    
-    [notiesPlot reloadData];
+   
+[notiesPlot reloadData];
 }
 
 - (CPTPlotSymbol *)symbolForScatterPlot:(CPTScatterPlot *)plot recordIndex:(NSUInteger)index
@@ -495,13 +495,13 @@
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
     lineStyle.lineColor = [CPTColor blackColor];
+   
+ 
+   
+  
+
     
-    
-    
-    
-    
-    
-    
+  
     if ([plot.identifier isEqual:@"TIES"] == YES&&index==selectedIndex&&[selectedPlot isEqualToString:@"TIES"])
     {
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
@@ -509,13 +509,13 @@
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
         return plotSymbol;
-        
+       
     }
     
     else if ([plot.identifier isEqual:@"TIES"] == YES&&index!=selectedIndex)
     {
         
-        
+    
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
         plotSymbol.fill=[CPTFill fillWithColor:[CPTColor blackColor]];
         plotSymbol.lineStyle=lineStyle;
@@ -536,7 +536,7 @@
     else  if ([plot.identifier isEqual:@"NOTIES"] == YES&&index!=selectedIndex)
         
     {
-        
+    
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
         plotSymbol.fill=[CPTFill fillWithColor:[CPTColor redColor]];
         plotSymbol.lineStyle=lineStyle;
@@ -553,7 +553,7 @@
     
     optimalData = [[NSMutableArray alloc] init];
     optimalNotiesData = [[NSMutableArray alloc] init];
-    
+
     dizionarioVotazioni=[[NSMutableDictionary alloc]init];
     
     ConnectionToServer *connection=[[ConnectionToServer alloc]init];
@@ -562,16 +562,17 @@
     NSMutableDictionary * optimalNotiesclassifiche=[results valueForKey:@"optimalnotiesdata"];
     NSMutableDictionary * optimalclassifiche=[results valueForKey:@"optimaldata"];
     
+    
     for(id key in optimalclassifiche )
     {
         Votazione *votazione=[[Votazione alloc] initWithPattern:[key valueForKey:@"pattern"] AndMu:[[key valueForKey:@"mu"]floatValue]AndSigma:[[key valueForKey:@"sigma"]floatValue] AndVotedBy:[[key valueForKey:@"votedby"]floatValue]];
         
         [optimalData addObject:votazione];
+      
         
         
         
-        
-        // [dizionarioVotazioni setObject:votazione forKey:[NSString stringWithFormat:@"%f;%f",punto.x,punto.y]];
+       // [dizionarioVotazioni setObject:votazione forKey:[NSString stringWithFormat:@"%f;%f",punto.x,punto.y]];
     }
     
     
@@ -581,27 +582,23 @@
         
         [optimalNotiesData addObject:votazione];
         CGPoint punto= CGPointMake([votazione mu], [votazione sigma]);
-        NSLog(@"%f",punto.x);
+        //NSLog(@"%f",punto.x);
         [dizionarioVotazioni setObject:votazione forKey:[NSString stringWithFormat:@"%f;%f",punto.x,punto.y]];
+        
+
     }
-    
-    
-    
-    NSLog(@"diz %@",optimalData);
-    
-    
-    
-    
+    //NSLog(@"diz %@",optimalData);
+   
 }
 /*
- 
- -(BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event atPoint:(CGPoint)point
- {
- // Handle down eve
- 
- NSLog(@"%f",point.x);
- return true;
- }
- */
+
+-(BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event atPoint:(CGPoint)point
+{
+    // Handle down eve
+    
+    NSLog(@"%f",point.x);
+    return true;
+}
+*/
 
 @end

@@ -301,11 +301,16 @@ NSMutableDictionary *dizionarioPolls;
         
         NSMutableArray * classifiche=[[results valueForKey:@"optimalnotiesdata"]valueForKey:@"pattern"];
         
+        /* PER ORA FACCIAMO COSì, MA SOLO PER EVITARE I CRASH */
         if([classifiche count]==0) {
             
             classifiche = [[results valueForKey:@"optimaldata"]valueForKey:@"pattern"];
             
         }
+        
+        /* Se la classifica è null i voti sono 0 e ritorno un oggetto vuoto */
+        if (classifiche==nil)
+            return [[NSMutableArray alloc]init];
         
         NSMutableArray * classificaOttimale=[[NSMutableArray alloc]init];
         NSString* classificaFinale=classifiche[0];
@@ -327,6 +332,7 @@ NSMutableDictionary *dizionarioPolls;
         }
         
         classificaOttimale[j]=classificaFinale;
+        //NSLog(@"%@",classificaOttimale);
         
         // array del tipo [C,A,B,A>B=C] con l'ultima stringa per disambiguare la classifica
         return classificaOttimale;

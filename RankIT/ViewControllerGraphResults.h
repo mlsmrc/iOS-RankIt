@@ -17,6 +17,7 @@
 
 @interface ViewControllerGraphResults : UIViewController <CPTPlotDataSource,CPTPlotSpaceDelegate,CPTScatterPlotDelegate,CPTScatterPlotDataSource>
 @property (strong, nonatomic) IBOutlet UIView *grafico;
+
 @property CPTScatterPlot *tiesPlot;
 @property CPTScatterPlot *notiesPlot;
 @property NSMutableString * selectedPlot;

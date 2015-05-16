@@ -838,8 +838,12 @@
             
         }
         
+        
+        //NSLog(@"%@",p);
+        
         TableViewControllerResults *destViewController = segue.destinationViewController;
         destViewController.poll = p;
+        
         
     }
     

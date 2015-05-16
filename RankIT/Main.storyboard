@@ -621,7 +621,7 @@
                                             <outlet property="Nome" destination="YOb-6q-aq3" id="1gf-bc-DcE"/>
                                             <outlet property="Scadenza" destination="gel-EZ-KW8" id="o8n-2O-vp8"/>
                                             <outlet property="cell" destination="05I-8o-NWE" id="imp-0g-nbt"/>
-                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showMyPollResults" id="fBq-jI-cdf"/>
+                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showMyPollResults" id="gGW-tc-nfS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -726,28 +726,28 @@
                                 <rect key="frame" x="175" y="338" width="170" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VotedBy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nsm-Hl-Nrn">
                                 <rect key="frame" x="175" y="374" width="170" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classifica:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lvr-Eu-Dr6">
                                 <rect key="frame" x="52" y="338" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votato da:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8VG-Mw-k0a">
                                 <rect key="frame" x="52" y="373" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -758,7 +758,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="classifica" destination="Tl2-Rm-O91" id="KdI-e6-VEY"/>
-                        <outlet property="grafico" destination="Xb6-YZ-sA8" id="iel-5V-UWc"/>
+                        <outlet property="grafico" destination="Xb6-YZ-sA8" id="UWv-SJ-UnM"/>
                         <outlet property="scrittaClassifica" destination="lvr-Eu-Dr6" id="CXK-0D-1mt"/>
                         <outlet property="scrittaVoted" destination="8VG-Mw-k0a" id="RpN-xT-ZK4"/>
                         <outlet property="votedBy" destination="Nsm-Hl-Nrn" id="IbP-o4-qP2"/>

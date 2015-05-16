@@ -1,5 +1,6 @@
 #import "TableViewControllerVotati.h"
 #import "TableViewControllerResults.h"
+#import "ViewControllerGraphResults.h"
 #import "ViewControllerDettagli.h"
 #import "ConnectionToServer.h"
 #import "APIurls.h"
@@ -227,7 +228,7 @@
                     ((UILabel *)view).text = NO_RESULTS;
                     
                 }
-            
+                
             }
             
         }
@@ -246,34 +247,38 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if([segue.identifier isEqualToString:@"showVotedResults"]) {
+    
+    NSIndexPath *indexPath = nil;
+    Poll *p = nil;
+    
+    if(self.searchDisplayController.active) {
         
-        NSIndexPath *indexPath = nil;
-        Poll *p = nil;
+        indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+        p = [searchResults objectAtIndex:indexPath.row];
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
         
-        if(self.searchDisplayController.active) {
-            
-            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            p = [searchResults objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
-            
-        }
-        
-        else {
-            
-            indexPath = [self.tableView indexPathForSelectedRow];
-            p = [allVotedPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
-        }
-        
-        TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
-        destViewController.poll = p;
         
     }
+    
+    else {
+        
+        indexPath = [self.tableView indexPathForSelectedRow];
+        p = [allVotedPollsDetails objectAtIndex:indexPath.row];
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_VOTED,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+        
+    }
+    if([segue.identifier isEqualToString:@"showVotedResults"]) {
+        TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
+        destViewController.poll = p;
+    }
+    else if([segue.identifier isEqualToString:@"showGraphResult"]) {
+        
+        ViewControllerGraphResults *destViewController = (ViewControllerGraphResults *)segue.destinationViewController;
+        destViewController.poll = p;
+    }
+    
     
 }
 
@@ -362,7 +367,7 @@
     
     [tableView setContentInset:UIEdgeInsetsZero];
     [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
-
+    
 }
 
 - (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
@@ -375,9 +380,9 @@
             
             for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
-        
+            
         }];
-    
+        
     }
     
 }
