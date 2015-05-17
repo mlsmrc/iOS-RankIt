@@ -45,7 +45,7 @@
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
     /* Gestione di 0 voti nel poll e della connessione */
-    if ([classificaFinale count] == 0 || classificaFinale==nil)
+    if([classificaFinale count] == 0 || classificaFinale==nil)
     
         /* Stampa del messaggio di notifica */
         [self printMessageError];
@@ -87,15 +87,13 @@
     
     Candidate *c = candidates[indexCand];
     
-    // classifica con pattern completo del tipo A=B>C
+    /* Classifica con pattern completo del tipo A=B>C */
     NSString *classifica=[classificaFinale objectAtIndex:[classificaFinale count]-1];
-    
-
     NSMutableArray * rankLabels=[[NSMutableArray alloc]init];
     
     int j=1;
-    for(int i=0;i<[classifica length];i++)
-    {
+    
+    for(int i=0;i<[classifica length];i++) {
     
         if(i==0)
         [rankLabels addObject:[NSString stringWithFormat:@"%d",j]];
@@ -103,21 +101,21 @@
         else if(i!=0 && i%2==1 && [classifica characterAtIndex:i]=='=')
             [rankLabels addObject:[NSString stringWithFormat:@"%d",j]];
         
-        else if(i!=0 && i%2==1 &&[classifica characterAtIndex:i]=='>')
-        {
+        else if(i!=0 && i%2==1 &&[classifica characterAtIndex:i]=='>') {
+            
             j++;
             [rankLabels addObject:[NSString stringWithFormat:@"%d",j]];
             
         }
+        
     }
-    //NSLog(@"pattern:%@ - ranked: %@",classifica,rankLabels);
     
     /* Visualizzazione del risultato nella cella */
     UIImageView *image = (UIImageView *)[cell viewWithTag:100];
-    if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"1"])           image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
-    else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"2"])      image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
-    else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"3"])      image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
-    else                             image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
+    if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"1"]) image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
+    else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"2"]) image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
+    else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"3"]) image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
+    else image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
     
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = c.candName;
@@ -175,7 +173,7 @@
     
 }
 
-/* Metodo che gestisce il ri-carimento dell view */
+/* Metodo che gestisce il ricarimento della view */
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];

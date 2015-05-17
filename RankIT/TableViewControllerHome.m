@@ -111,8 +111,8 @@
 }
 
 /* Funzione per scaricare i primi 10 poll una volta che si refresha la TableView */
-- (void) refreshPolls
-{
+- (void) refreshPolls {
+    
     /* Puoi scaricare poll */
     UPLOAD=YES;
     
@@ -123,6 +123,7 @@
     /* Inizia il download da 0 */
     start=0;
     [self DownloadPolls:start];
+    
 }
 
 /* Download poll pubblici dal server */
@@ -132,16 +133,16 @@
     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:[NSString stringWithFormat:@"%d",startPoll]];
     allPublicPolls = Connection.getDizionarioPolls;
     
-    if(allPublicPolls!=nil && [allPublicPolls count] != 0)
-    {
+    if(allPublicPolls!=nil && [allPublicPolls count] != 0) {
+        
         [self CreatePollsDetails];
         [self.tableView reloadData];
         
     }
     
-    if ([allPublicPolls count]<10) {
+    if([allPublicPolls count]<10)
         UPLOAD=NO;
-    }
+    
     [self HomePolls];
     
 }
@@ -383,7 +384,7 @@
     
 }
 
-/* Metodo che gestisce il ri-carimento dell view */
+/* Metodo che gestisce il ricarimento della view */
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -443,15 +444,17 @@
 }
 
 /* Funzione che gestisce lo scroll dall'alto verso il basso per caricare ulteriori poll se ce ne sono di altri non caricati */
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-    if (endScrolling >= scrollView.contentSize.height && UPLOAD==YES)
-    {
+    
+    if(endScrolling >= scrollView.contentSize.height && UPLOAD==YES) {
+        
         /* Scarica i successivi 10 */
         start+=10;
         [self DownloadPolls:start];
+        
     }
     
 }

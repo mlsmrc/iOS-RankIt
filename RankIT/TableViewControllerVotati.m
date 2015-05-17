@@ -243,10 +243,8 @@
     
 }
 
-/* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla Home che dai risultati di ricerca */
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
+/* Funzione che permette di visualizzare i risultati dei poll "Votati" */
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSIndexPath *indexPath = nil;
     Poll *p = nil;
@@ -258,7 +256,6 @@
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
         
-        
     }
     
     else {
@@ -269,19 +266,22 @@
         self.navigationItem.backBarButtonItem = backButton;
         
     }
+    
     if([segue.identifier isEqualToString:@"showVotedResults"]) {
+        
         TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
         destViewController.poll = p;
+        
     }
-    else if([segue.identifier isEqualToString:@"showGraphResult"]) {
+    
+    else if([segue.identifier isEqualToString:@"showGraphResults"]) {
         
         ViewControllerGraphResults *destViewController = (ViewControllerGraphResults *)segue.destinationViewController;
         destViewController.poll = p;
+        
     }
     
-    
 }
-
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -346,7 +346,7 @@
     
 }
 
-/* Metodo che gestisce il ri-carimento dell view */
+/* Metodo che gestisce il ricarimento della view */
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];

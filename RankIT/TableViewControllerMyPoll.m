@@ -322,7 +322,7 @@
     
 }
 
-/* Metodo che gestisce il ri-carimento dell view */
+/* Metodo che gestisce il ricarimento della view */
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -348,20 +348,19 @@
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.58f blue:0.0f alpha:1.0]title:@"Azzera"];
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
     
-    
     gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0f alpha:0.1f].CGColor,(id)[UIColor colorWithWhite:0.4f alpha:0.5f].CGColor,nil];
     
     return rightUtilityButtons;
     
 }
 
-/*- (NSArray *) leftButtons {
+/* - (NSArray *) leftButtons {
  
- NSMutableArray *leftUtilityButtons = [NSMutableArray new];
- [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
- return leftUtilityButtons;
+    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
+    return leftUtilityButtons;
  
- }*/
+}*/
 
 #pragma mark - SWTableViewDelegate
 
@@ -826,7 +825,6 @@
             backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
-            
         }
         
         else {
@@ -838,12 +836,8 @@
             
         }
         
-        
-        //NSLog(@"%@",p);
-        
         TableViewControllerResults *destViewController = segue.destinationViewController;
         destViewController.poll = p;
-        
         
     }
     

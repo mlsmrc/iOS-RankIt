@@ -160,7 +160,7 @@
         if([title isEqualToString:@"Ok"])
             
         /* Vai alla Home */
-            [self.navigationController popToRootViewControllerAnimated:TRUE];
+        [self.navigationController popToRootViewControllerAnimated:TRUE];
         
     }
     

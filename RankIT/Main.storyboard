@@ -155,7 +155,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ZFu-R7-fwx" kind="push" identifier="showGraphResult" id="n0U-LL-mOO"/>
+                                            <segue destination="ZFu-R7-fwx" kind="push" identifier="showGraphResults" id="n0U-LL-mOO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -347,11 +347,11 @@
             <objects>
                 <viewController id="jPN-O7-jyp" customClass="ViewControllerCandidates" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqz-Ha-QqF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OqZ-M8-A06">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wgW-Xa-FIn">
@@ -369,7 +369,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageView" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="48" width="220" height="185"/>
+                                        <rect key="frame" x="50" y="48" width="220" height="207"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -712,7 +712,7 @@
         <!--Classifica-->
         <scene sceneID="zG0-AI-kKb">
             <objects>
-                <viewController id="ZFu-R7-fwx" customClass="ViewControllerGraphResults" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="ZFu-R7-fwx" customClass="ViewControllerGraphResults" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f1k-fJ-dip">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -766,12 +766,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6R-S1-Sc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2284" y="686"/>
+            <point key="canvasLocation" x="2284" y="692"/>
         </scene>
         <!--Crea Poll-->
         <scene sceneID="gBW-3i-0qa">
             <objects>
-                <viewController id="Jif-wR-hl8" customClass="ViewControllerAddPoll" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Jif-wR-hl8" customClass="ViewControllerAddPoll" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gDz-Xh-Y2D" customClass="XLFormDateCell">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -787,7 +787,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FV9-aY-xbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2473" y="-1281"/>
+            <point key="canvasLocation" x="2717" y="-1349"/>
         </scene>
         <!--View Controller Summary Poll-->
         <scene sceneID="ElF-pd-wRY">
@@ -808,7 +808,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVn-Z5-F8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3646" y="-1315"/>
+            <point key="canvasLocation" x="3364" y="-1349"/>
         </scene>
     </scenes>
     <resources>
@@ -826,7 +826,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Hlg-m2-3g4"/>
-        <segue reference="Orh-LF-ieg"/>
+        <segue reference="Zgg-cI-oMW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

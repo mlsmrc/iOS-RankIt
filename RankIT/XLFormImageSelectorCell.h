@@ -1,12 +1,11 @@
-
 #import "XLFormBaseCell.h"
-
-
 
 @interface XLFormImageSelectorCell : XLFormBaseCell
 
-@property (nonatomic, readonly) UIImageView * imageView;
-@property (nonatomic, readonly) UILabel * textLabel;
+@property (readonly,nonatomic) UIImageView *imageView;
+@property (readonly,nonatomic) UILabel *textLabel;
 
-extern NSString * const XLFormImageSelectorCellCustom; //tag identificativo classe custom cell
+/* Tag identificativo classe custom cell */
+extern NSString *const XLFormImageSelectorCellCustom;
+
 @end
