@@ -45,7 +45,12 @@
 		43630EA61B0776440027121C /* ViewControllerAddPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA11B0776440027121C /* ViewControllerAddPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630EA71B0776440027121C /* ViewControllerSummaryPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA31B0776440027121C /* ViewControllerSummaryPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630EA81B0776440027121C /* XLFormImageSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA51B0776440027121C /* XLFormImageSelectorCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
-		7F3784A8D312DC1BCCDAADAF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E03C4AF010983E2928862585 /* libPods.a */; };
+		C2F4EA8C1B11B7EA00CF11A8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */; };
+		C2F4EA8E1B11B83B00CF11A8 /* libPods-AXRatingView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */; };
+		C2F4EA901B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8F1B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a */; };
+		C2F4EA921B11B84500CF11A8 /* libPods-XLDataLoader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA911B11B84500CF11A8 /* libPods-XLDataLoader.a */; };
+		C2F4EA941B11B84A00CF11A8 /* libPods-XLForm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA931B11B84A00CF11A8 /* libPods-XLForm.a */; };
+		C2F4EA961B11B84F00CF11A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA951B11B84F00CF11A8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +213,12 @@
 		43630EA41B0776440027121C /* XLFormImageSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormImageSelectorCell.h; sourceTree = "<group>"; };
 		43630EA51B0776440027121C /* XLFormImageSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormImageSelectorCell.m; sourceTree = "<group>"; };
 		AC6DF755FF9103F29F04B2A4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/../build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
+		C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AXRatingView.a"; path = "Pods/../build/Debug-iphoneos/libPods-AXRatingView.a"; sourceTree = "<group>"; };
+		C2F4EA8F1B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-JVFloatLabeledTextField.a"; path = "Pods/../build/Debug-iphoneos/libPods-JVFloatLabeledTextField.a"; sourceTree = "<group>"; };
+		C2F4EA911B11B84500CF11A8 /* libPods-XLDataLoader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-XLDataLoader.a"; path = "Pods/../build/Debug-iphoneos/libPods-XLDataLoader.a"; sourceTree = "<group>"; };
+		C2F4EA931B11B84A00CF11A8 /* libPods-XLForm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-XLForm.a"; path = "Pods/../build/Debug-iphoneos/libPods-XLForm.a"; sourceTree = "<group>"; };
+		C2F4EA951B11B84F00CF11A8 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		CFB7C97F006FFD5A984449F3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E03C4AF010983E2928862585 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -217,10 +228,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F4EA961B11B84F00CF11A8 /* libPods.a in Frameworks */,
+				C2F4EA941B11B84A00CF11A8 /* libPods-XLForm.a in Frameworks */,
+				C2F4EA921B11B84500CF11A8 /* libPods-XLDataLoader.a in Frameworks */,
+				C2F4EA901B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a in Frameworks */,
+				C2F4EA8E1B11B83B00CF11A8 /* libPods-AXRatingView.a in Frameworks */,
+				C2F4EA8C1B11B7EA00CF11A8 /* libPods-AFNetworking.a in Frameworks */,
 				435E2F151B079FB80093C12F /* libCorePlot-CocoaTouch.a in Frameworks */,
 				435E2F141B079F620093C12F /* QuartzCore.framework in Frameworks */,
 				435E2F121B079F5C0093C12F /* Accelerate.framework in Frameworks */,
-				7F3784A8D312DC1BCCDAADAF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +253,12 @@
 		038A29845BA6804D14E69BCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C2F4EA951B11B84F00CF11A8 /* libPods.a */,
+				C2F4EA931B11B84A00CF11A8 /* libPods-XLForm.a */,
+				C2F4EA911B11B84500CF11A8 /* libPods-XLDataLoader.a */,
+				C2F4EA8F1B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a */,
+				C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */,
+				C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */,
 				435E2F131B079F620093C12F /* QuartzCore.framework */,
 				435E2F111B079F5C0093C12F /* Accelerate.framework */,
 				E03C4AF010983E2928862585 /* libPods.a */,
@@ -824,6 +846,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RankIT",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -846,6 +869,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RankIT",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

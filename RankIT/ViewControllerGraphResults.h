@@ -18,10 +18,14 @@
 @property NSMutableArray *optimalNotiesData;
 @property NSMutableDictionary *dizionarioVotazioni;
 @property Poll *poll;
-@property (weak,nonatomic) IBOutlet UILabel *scrittaClassifica;
-@property (weak,nonatomic) IBOutlet UILabel *scrittaVoted;
+
 @property NSUInteger selectedIndex;
-@property (weak,nonatomic) IBOutlet UILabel *classifica;
-@property (weak,nonatomic) IBOutlet UILabel *votedBy;
+
+@property NSArray * plotArray;
+@property CPTPlotSpaceAnnotation *annotation;
+
+@property (weak, nonatomic) IBOutlet UITextView *risposte;
+
+@property NSMutableArray *candidates;
 
 @end

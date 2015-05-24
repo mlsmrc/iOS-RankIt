@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2C287F94-6A2A-4509-9C53-25D1A42CAAE0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Pods</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</key>
+		<string>https://github.com/mulasmarco/iOS-RankIt.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Pods/Pods.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mulasmarco/iOS-RankIt.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBDB6D073D093AB5EF35E7216FEC27C0CC81A048</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOS-RankIt</string>
+		</dict>
+	</array>
+</dict>
+</plist>

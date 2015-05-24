@@ -10,16 +10,14 @@
 @implementation ViewControllerGraphResults
 
 @synthesize tiesPlot,notiesPlot,poll,optimalData,optimalNotiesData,selectedPlot;
-@synthesize grafico,classifica,votedBy,dizionarioVotazioni,selectedIndex;
+@synthesize grafico,dizionarioVotazioni,selectedIndex,plotArray,annotation,risposte,candidates;
 
 
 - (void) viewDidLoad {
     
     selectedIndex=-1;
-    classifica.hidden=true;
-    votedBy.hidden=true;
-    self.scrittaClassifica.hidden=true;
-    self.scrittaVoted.hidden=true;
+   
+  
     
 }
 
@@ -37,13 +35,51 @@
     
     [self inizializzaArrays];
     
+    
+    
+    
+    
+    
     /* Settaggio del grafico e visualizzazione */
     [self initPlot];
     
-    /* Inizio delle rilevazioni */
+    NSMutableArray *lettere=[[NSMutableArray alloc]init];
+    [lettere addObject:@"A) "];
+    [lettere addObject:@"B) "];
+    [lettere addObject:@"C) "];
+    [lettere addObject:@"D) "];
+    [lettere addObject:@"E) "];
+    
+    
+    
+   
+   
+  
+    NSMutableString* risposteLabel = [NSMutableString stringWithCapacity:500];
+    for (int i=0;i<[candidates count];i++)
+    {
+        
+        
+      
+            [risposteLabel appendFormat:@"%@", [lettere objectAtIndex:i ]];
+            [risposteLabel appendFormat:@"%@\n\n", [candidates objectAtIndex:i ]];
+        
+        
+      
+        
+        
+       
+        //risposteLabel=[risposteLabel stringByAppendingString:[candidates objectAtIndex:i]];
+       // risposteLabel=[risposteLabel stringByAppendingString:@"\n"];
+    }
+    
+     risposte.text=risposteLabel;
+    risposte.textColor=[UIColor lightGrayColor];
+    
+
+    
     [super viewDidAppear:animated];
-    self.scrittaClassifica.hidden=false;
-    self.scrittaVoted.hidden=false;
+ 
     
 }
 
@@ -54,6 +90,7 @@
     [self configureGraph];
     [self configurePlots];
     [self configureAxes];
+   // [self configureLegend];
     
 }
 
@@ -87,7 +124,7 @@
     
     /* Enable user interactions forplot space */
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
-    plotSpace.allowsUserInteraction = YES;
+    plotSpace.allowsUserInteraction = NO;
     
 }
 
@@ -111,7 +148,9 @@
     [graph addPlot:notiesPlot toPlotSpace:plotSpace];
     
     /* Set up plot space */
-    [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:tiesPlot, notiesPlot, nil]];
+
+    plotArray=[NSArray arrayWithObjects:tiesPlot, notiesPlot, nil];
+    [plotSpace scaleToFitPlots:plotArray];
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
     [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
     plotSpace.xRange = xRange;
@@ -126,23 +165,13 @@
     tiesPlot.dataLineStyle = tiesLineStyle;
     CPTMutableLineStyle *tiesSymbolLineStyle = [CPTMutableLineStyle lineStyle];
     tiesSymbolLineStyle.lineColor = tiesColor;
-    CPTPlotSymbol *tiesSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-    tiesSymbol.fill = [CPTFill fillWithColor:tiesColor];
-    tiesSymbol.lineStyle = tiesSymbolLineStyle;
-    tiesSymbol.size = CGSizeMake(6.0f, 6.0f);
-    tiesPlot.plotSymbol = tiesSymbol;
-    CPTMutableLineStyle *notiesLineStyle = [notiesPlot.dataLineStyle mutableCopy];
-    notiesLineStyle.lineWidth = 0.0;
-    notiesLineStyle.lineColor = notiesColor;
-    notiesPlot.dataLineStyle = notiesLineStyle;
+   
     CPTMutableLineStyle *notiesSymbolLineStyle = [CPTMutableLineStyle lineStyle];
     notiesSymbolLineStyle.lineColor = notiesColor;
-    CPTPlotSymbol *notiesSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-    notiesSymbol.fill = [CPTFill fillWithColor:notiesColor];
-    notiesSymbol.lineStyle = notiesSymbolLineStyle;
-    notiesSymbol.size = CGSizeMake(6.0f, 6.0f);
-    notiesPlot.plotSymbol = notiesSymbol;
+    notiesSymbolLineStyle.lineWidth = 0.0;
+    notiesPlot.dataLineStyle=notiesSymbolLineStyle;
     notiesPlot.plotSymbolMarginForHitDetection=6.0f;
+    
     tiesPlot.plotSymbolMarginForHitDetection=6.0f;
     tiesPlot.delegate=self;
     notiesPlot.delegate=self;
@@ -153,124 +182,83 @@
     
     /* Create styles */
     CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
-    axisTitleStyle.color = [CPTColor blackColor];
+    axisTitleStyle.color = [CPTColor lightGrayColor];
     axisTitleStyle.fontName = @"Helvetica-Ultralight";
+    
+
     axisTitleStyle.fontSize = 12.0f;
     CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
     axisLineStyle.lineWidth = 2.0f;
+    axisLineStyle.lineColor=[CPTColor lightGrayColor];
     CPTMutableTextStyle *axisTextStyle = [[CPTMutableTextStyle alloc] init];
-    axisTextStyle.color = [CPTColor blackColor];
+    axisTextStyle.color = [CPTColor lightGrayColor];
     axisTextStyle.fontName = @"Helvetica-Ultralight";
     axisTextStyle.fontSize = 12.0f;
     CPTMutableLineStyle *tickLineStyle = [CPTMutableLineStyle lineStyle];
-    tickLineStyle.lineColor = [CPTColor blackColor];
+    tickLineStyle.lineColor = [CPTColor lightGrayColor];
     tickLineStyle.lineWidth = 0.0f;
     CPTMutableLineStyle *gridLineStyle = [CPTMutableLineStyle lineStyle];
-    tickLineStyle.lineColor = [CPTColor blackColor];
+    gridLineStyle.lineColor = [CPTColor lightGrayColor];
     tickLineStyle.lineWidth = 0.0f;
     
     /* Get axis set */
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
     
-    /* Configure x-axis */
+    /* Configure y-axis */
     CPTXYAxis *x = axisSet.xAxis;
-    
-    NSString *tit = [NSString stringWithFormat: @"mu"];
-    x.title = tit;
+    x.title = @"mu";
     x.titleTextStyle = axisTitleStyle;
-    x.titleOffset = 2.0f;
+    x.titleOffset = -28.0f;
     x.axisLineStyle = axisLineStyle;
-    x.labelingPolicy = CPTAxisLabelingPolicyNone;
+
+    x.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
     x.labelTextStyle = axisTextStyle;
+    x.labelOffset = -22.0f;
+    
     x.majorTickLineStyle = axisLineStyle;
-    x.majorTickLength = 8.0f;
-    x.tickDirection = CPTSignNegative;
+    x.majorTickLength = 4.0f;
+    x.minorTickLength = 2.0f;
+    x.tickDirection = CPTSignPositive;
     
-    NSMutableSet *xLabels = [NSMutableSet setWithCapacity:30];
-    NSMutableSet *xLocations = [NSMutableSet setWithCapacity:30];
-    x.axisLabels = xLabels;
-    x.majorTickLocations = xLocations;
-    
-    CGFloat xMax = 5.0f;
-    NSInteger majorIncrement = 1;
-    NSInteger minorIncrement = 1;
+ 
+    NSMutableSet *xLabels = [NSMutableSet set];
     NSMutableSet *xMajorLocations = [NSMutableSet set];
     NSMutableSet *xMinorLocations = [NSMutableSet set];
-    
-    for(NSInteger j = -xMax; j <= xMax; j += minorIncrement) {
-        
-        NSUInteger mod = j % majorIncrement;
-        
-        if(mod == 0) {
-            
-            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%li", (long)j] textStyle:x.labelTextStyle];
-            NSDecimal location = CPTDecimalFromInteger(j);
-            label.tickLocation = location;
-            label.offset = -x.majorTickLength - x.labelOffset;
-            if(label)
-                [xLabels addObject:label];
-            
-            [xMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
-        }
-        
-        else
-            [xMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(j)]];
-    
-    }
-    
     x.axisLabels = xLabels;
     x.majorTickLocations = xMajorLocations;
-    x.minorTickLocations =  xMinorLocations;
+    x.minorTickLocations = xMinorLocations;
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
-    x.tickDirection=CPTSignPositive;
+  
+   
+  x.majorIntervalLength=[[NSNumber numberWithDouble:0.5]decimalValue];
+ 
     
     /* Configure y-axis */
     CPTXYAxis *y = axisSet.yAxis;
     y.title = @"sigma";
     y.titleTextStyle = axisTitleStyle;
-    y.titleOffset = -20.0f;
+    y.titleOffset = -36.0f;
     y.axisLineStyle = axisLineStyle;
     y.majorGridLineStyle = gridLineStyle;
-    y.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
+    y.labelingPolicy = CPTAxisLabelingPolicyFixedInterval;
+    
+    y.majorIntervalLength=[[NSNumber numberWithDouble:0.5]decimalValue];
     y.labelTextStyle = axisTextStyle;
-    y.labelOffset = 16.0f;
+    y.labelOffset = -25.0f;
     y.majorTickLineStyle = axisLineStyle;
     y.majorTickLength = 4.0f;
     y.minorTickLength = 2.0f;
     y.tickDirection = CPTSignPositive;
-    
-    CGFloat yMax = 5.0f;
+    y.labelingPolicy=CPTAxisLabelingPolicyAutomatic;
+   
     NSMutableSet *yLabels = [NSMutableSet set];
     NSMutableSet *yMajorLocations = [NSMutableSet set];
     NSMutableSet *yMinorLocations = [NSMutableSet set];
-    
-    for(NSInteger j = -yMax; j <= yMax; j += minorIncrement) {
-        
-        NSUInteger mod = j % majorIncrement;
-        
-        if(mod == 0) {
-            
-            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%li", (long)j] textStyle:y.labelTextStyle];
-            NSDecimal location = CPTDecimalFromInteger(j);
-            label.tickLocation = location;
-            label.offset = -y.majorTickLength - y.labelOffset;
-            
-            if(label)
-                [yLabels addObject:label];
-            
-            [yMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
-        }
-        
-        else
-            [yMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(j)]];
-        
-    }
-    
+
     y.axisLabels = yLabels;    
     y.majorTickLocations = yMajorLocations;
     y.minorTickLocations = yMinorLocations;
-    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
+
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
 
 }
@@ -325,16 +313,20 @@
 
 - (void) scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index {
     
-    classifica.hidden=false;
-    votedBy.hidden=false;
+  
     selectedIndex=index;
     Votazione *votazione;
+    
+    CPTColor *color;
+    
+    if(annotation!=nil)
+ [self.hostView.hostedGraph.plotAreaFrame.plotArea removeAnnotation:annotation];
     
     if([plot.identifier isEqual:@"TIES"] == YES) {
         
         votazione=[optimalData objectAtIndex:index];
         selectedPlot=[NSMutableString stringWithFormat:@"TIES"];
-        [tiesPlot reloadData];
+        color=[CPTColor redColor];
          
     }
     
@@ -342,12 +334,31 @@
         
        votazione=[optimalNotiesData objectAtIndex:index];
        selectedPlot=[NSMutableString stringWithFormat:@"NOTIES"];
-       [notiesPlot reloadData];
+        color=[CPTColor purpleColor];
     
     }
     
-    votedBy.text=[NSString stringWithFormat:@"%f",[votazione votedby]];
-    classifica.text=[votazione pattern];
+    
+    NSNumber *x = [ NSNumber numberWithFloat:[votazione mu]];
+    NSNumber *y = [ NSNumber numberWithFloat:[votazione sigma]];
+    NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
+    annotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:plot.plotSpace anchorPlotPoint:anchorPoint];
+
+    
+    NSString *label=[NSString stringWithFormat:@"%@ \n(%.3f,%.3f)",[votazione pattern],[votazione mu],[votazione sigma]];
+
+    CPTMutableTextStyle *style=[[CPTMutableTextStyle alloc]init];
+    style.color=color;
+    style.fontSize=7.0;
+ 
+    CPTTextLayer *textLayer = [[CPTTextLayer alloc] initWithText:label style:style];
+    
+    annotation.contentLayer = textLayer;
+    annotation.displacement = CGPointMake(-10.0f, -20.0f);
+    [self.hostView.hostedGraph.plotAreaFrame.plotArea addAnnotation:annotation];
+    
+    
+  
     [self symbolForScatterPlot:plot recordIndex:index];
     [tiesPlot reloadData];
     [notiesPlot reloadData];
@@ -358,11 +369,16 @@
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
     lineStyle.lineColor = [CPTColor blackColor];
+    
+    
+ 
+    
    
     if([plot.identifier isEqual:@"TIES"] == YES&&index==selectedIndex&&[selectedPlot isEqualToString:@"TIES"]) {
         
-        CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor whiteColor]];
+        CPTPlotSymbol *plotSymbol = [CPTPlotSymbol diamondPlotSymbol];
+        plotSymbol.size = CGSizeMake(12.0f, 12.0f);
+         plotSymbol.fill=[CPTFill fillWithColor:[CPTColor redColor]];
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
         return plotSymbol;
@@ -371,8 +387,9 @@
     
     else if([plot.identifier isEqual:@"TIES"] == YES&&index!=selectedIndex) {
         
-        CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor blackColor]];
+        CPTPlotSymbol *plotSymbol = [CPTPlotSymbol diamondPlotSymbol];
+         plotSymbol.size = CGSizeMake(6.0f, 6.0f);
+        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor redColor]];
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
         return plotSymbol;
@@ -381,7 +398,8 @@
     else if([plot.identifier isEqual:@"NOTIES"] == YES&&index==selectedIndex&&[selectedPlot isEqualToString:@"NOTIES"]) {
         
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor whiteColor]];
+         plotSymbol.size = CGSizeMake(12.0f, 12.0f);
+        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor purpleColor]];
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
         return plotSymbol;
@@ -391,7 +409,8 @@
     else if([plot.identifier isEqual:@"NOTIES"] == YES&&index!=selectedIndex) {
     
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor redColor]];
+         plotSymbol.size = CGSizeMake(6.0f, 6.0f);
+        plotSymbol.fill=[CPTFill fillWithColor:[CPTColor purpleColor]];
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
         return plotSymbol;
@@ -402,12 +421,26 @@
 
 }
 
+-(void) configureLegend
+{
+
+    CPTGraph *graph =self.hostView.hostedGraph;
+   graph.legend = [CPTLegend legendWithGraph:graph];
+    graph.legend.numberOfColumns=1;
+    graph.legend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
+    graph.legend.cornerRadius = 5.0;
+   // graph.legend.swatchSize = CGSizeMake(120.0, 125.0);
+    graph.legendAnchor = CPTRectAnchorBottom;
+    graph.legendDisplacement = CGPointMake(105.0, 255.0);
+}
+
 - (void) inizializzaArrays{
     
     optimalData = [[NSMutableArray alloc] init];
     optimalNotiesData = [[NSMutableArray alloc] init];
     dizionarioVotazioni=[[NSMutableDictionary alloc]init];
     ConnectionToServer *connection=[[ConnectionToServer alloc]init];
+    candidates=[connection getCandidatesWithPollId:[NSString stringWithFormat:@"%d",[poll pollId]]];
     NSMutableDictionary* results=[connection getResultsOfPoll:poll];
     NSMutableDictionary * optimalNotiesclassifiche=[results valueForKey:@"optimalnotiesdata"];
     NSMutableDictionary * optimalclassifiche=[results valueForKey:@"optimaldata"];
