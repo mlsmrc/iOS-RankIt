@@ -143,6 +143,7 @@
     /* Invio voto al server */
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     resultConnection = [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:[File getUDID] andRanking:ranking];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     
     /* Popup per voto sottomesso */

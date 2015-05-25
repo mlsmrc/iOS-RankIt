@@ -84,6 +84,14 @@
     if ([Util compareDate:[NSDate new] WithDate:p.deadline]==1) {
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
     }
+    /* Se un poll è stato eliminato viene fatto vedere un messaggio a video */
+    if ([cands count]<3) {
+        [self.scrollView setHidden:YES];
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+        UIAlertView *alert = [UIAlertView alloc];
+        alert = [alert initWithTitle:@"Attenzione!" message:@"Sondaggio eliminato dal proprietario." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+    }
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *
      * I valori che vedete servono per spaziare tra gli oggetti e sono stati scelti empiricamente.                            */

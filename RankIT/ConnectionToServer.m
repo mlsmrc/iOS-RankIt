@@ -7,7 +7,7 @@
 /* Stringhe che appariranno a video per feedback di connessione */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *SERVER_UNREACHABLE_2 = @"Server non raggiungibile!";
-NSString *TIMEOUT = @"Timeout di connessione!";
+NSString *TIMEOUT = @"Server non raggiungibile o sondaggio non trovato.";
 
 NSMutableDictionary *dizionarioPolls;
 
@@ -158,9 +158,12 @@ NSMutableDictionary *dizionarioPolls;
     
     /* Invio della richiesta POST */
     NSData *response = [self sendPostRequestWithPostURL:URL_SUBMIT_RANKING AndParametersString:ParPost];
-    
+    NSLog(@"%@\n\n",[response description]);
     if (response!=nil) {
-        
+        [self scaricaPollsWithPollId:pollId andUserId:@"" andStart:@""];
+        if ([dizionarioPolls valueForKey:@"pollid"]==nil)
+            return false;
+
         /* Aggiungi votazione in Vota.plist */
         [File writeOnPListRanking:ranking OfPoll:pollId];
         
