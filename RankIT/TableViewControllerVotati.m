@@ -38,10 +38,12 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
+    UIActivityIndicatorView *spinner;
+    
 }
 
 - (void) viewDidLoad {
-    
+    NSLog(@"viewDidLoad3");
     [super viewDidLoad];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -64,18 +66,19 @@
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    
-    /* Download iniziale di tutti i poll votati */
-    [self DownloadPolls];
-    
-    /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
-    if(allVotedPolls==nil || [allVotedPolls count]==0)
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    /* Altrimenti prende i nomi dei poll votati da visualizzare */
-    else [self CreatePollsDetails];
-    
-    searchResults = [[NSArray alloc]init];
+
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setColor:[UIColor grayColor]];
+    spinner.center = CGPointMake(width/2, (height/2)-44);
+    [self.view addSubview:spinner];
+
+    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
+    refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
+    refreshControl.tag = 0;
+    [self.tableView addSubview:refreshControl];
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
     messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
@@ -86,15 +89,26 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
-    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
-    refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
-    refreshControl.tag = 0;
-    [self.tableView addSubview:refreshControl];
+    searchResults = [[NSArray alloc]init];
+
+}
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"ViewDidAppear3");
     
-    /* Visualizza i poll votati nella schermata "Votati" */
-    [self VotedPolls];
     
+    
+    
+    /* Download iniziale di tutti i poll votati */
+    [self DownloadPolls];
+    
+    /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
+    if(allVotedPolls==nil || [allVotedPolls count]==0)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [spinner stopAnimating];
+    [self.tableView setHidden:NO];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
 }
 
 /* Download poll votati dal server */
@@ -123,7 +137,6 @@
     for(id key in allVotedPolls) {
         
         value = [allVotedPolls objectForKey:key];
-        
         Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
                                          withName:[value valueForKey:@"pollname"]
                                   withDescription:[value valueForKey:@"polldescription"]
@@ -132,16 +145,16 @@
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
-        
-        [allVotedPollsDetails addObject:p];
-        
+        if (p.votes!=0) {
+            [allVotedPollsDetails addObject:p];
+        }
     }
     
 }
 
 /* Visualizzazione poll votati nella schermata "Votati" */
 - (void) VotedPolls {
-    
+
     if(allVotedPolls!=nil) {
         
         if([allVotedPolls count] != 0) {
@@ -162,7 +175,7 @@
             [self.tableView reloadData];
             
             /* Stampa del messaggio di notifica */
-            [self printMessaggeError];
+            [self printMessageError];
             
         }
         
@@ -172,11 +185,11 @@
     else {
         
         /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza connessione */
-        [allVotedPollsDetails removeAllObjects];
-        [self.tableView reloadData];
+        //[allVotedPollsDetails removeAllObjects];
+        //[self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
-        [self printMessaggeError];
+        [self printMessageError];
         
     }
     
@@ -186,10 +199,11 @@
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll votati */
-- (void) printMessaggeError {
+- (void) printMessageError {
     
     /* Background senza linee e definizione del messaggio di assenza poll votati o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
     /* Assegna il messaggio a seconda dei casi */
     if(allVotedPolls!=nil)
@@ -338,17 +352,9 @@
     
 }
 
-/* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
-    
-}
-
 /* Metodo che gestisce il ricarimento della view */
 - (void) viewWillAppear:(BOOL)animated {
-    
+        NSLog(@"viewWillAppear3");
     [super viewWillAppear:animated];
     
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
@@ -357,9 +363,13 @@
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* Ogni volta che la view appare vengono scaricati i poll votati */
-    [self DownloadPolls];
+    //allVotedPollsDetails = [[NSMutableArray alloc]init];
+    //allVotedPolls = [[NSMutableDictionary alloc] init];
+    //[self.tableView reloadData];
     
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
+    //[self VotedPolls];
 }
 
 /* Funzioni utili ad una corretta visualizzazione della table view e della search bar */

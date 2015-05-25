@@ -44,10 +44,12 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
+    UIActivityIndicatorView *spinner;
+    
 }
 
 - (void) viewDidLoad {
-    
+    NSLog(@"viewDidLoad");
     [super viewDidLoad];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -66,23 +68,25 @@
             X_FOR_VOTES = IPHONE_4_4S_5_5S;
         
     }
+   
+    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
+    
+    refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
+    refreshControl.tag = 0;
+    [self.tableView addSubview:refreshControl];
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    /* Download iniziale di tutti i poll */
-    [self DownloadPolls];
-    
-    /* Se non c'è connessione o non ci sono poll , il background della TableView è senza linee */
-    if(allMyPolls==nil || [allMyPolls count]==0)
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    /* Altrimenti prende i nomi dei poll da visualizzare */
-    else [self CreatePollsDetails];
-    
-    searchResults = [[NSArray alloc]init];
-    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setColor:[UIColor grayColor]];
+    spinner.center = CGPointMake(width/2, (height/2)-44);
+    [self.view addSubview:spinner];
+  
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
     messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     messageLabel.font = [UIFont fontWithName:FONT_HOME size:20];
@@ -92,15 +96,27 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
-    /* Questa è la parte di codice che definisce il refresh da parte della TableView */
-    refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
-    refreshControl.tag = 0;
-    [self.tableView addSubview:refreshControl];
+    searchResults = [[NSArray alloc]init];
     
-    /* Visualizza i poll nella schermata "I Miei Sondaggi" */
-    [self MyPolls];
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"ViewDidAppear");
     
+    
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
+    /* Download iniziale di tutti i poll */
+    [self DownloadPolls];
+    
+    /* Se non c'è connessione o non ci sono poll , il background della TableView è senza linee */
+    if(allMyPolls==nil || [allMyPolls count]==0)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [spinner stopAnimating];
+    [self.tableView setHidden:NO];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
 }
 
 /* Download poll dal server */
@@ -265,7 +281,7 @@
     
     Poll *p;
     
-    //[cell setLeftUtilityButtons:[self leftButtons] WithButtonWidth:58.0f];
+    [cell setLeftUtilityButtons:[self leftButtons] WithButtonWidth:58.0f];
     [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:58.0f];
     cell.delegate = self;
     
@@ -313,15 +329,8 @@
     return YES;
     
 }
-
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
-    
-}
-
 - (void) viewWillAppear:(BOOL)animated {
+    NSLog(@"viewWillAppear");
     
     [super viewWillAppear:animated];
     
@@ -331,9 +340,13 @@
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
     [File clearSaveRank];
     
-    /* Ogni volta che la view appare vengono scaricati i poll creati */
-    [self DownloadPolls];
+    //allMyPollsDetails = [[NSMutableArray alloc]init];
+    //allMyPolls = [[NSMutableDictionary alloc] init];
+    //[self.tableView reloadData];
     
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
+    //[self MyPolls];
 }
 
 /* Gestione barra dei bottoni con swipe */
@@ -352,13 +365,13 @@
     
 }
 
-/* - (NSArray *) leftButtons {
+ - (NSArray *) leftButtons {
  
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
+     [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:0.0f green:0.4f blue:1.0f alpha:1.0] icon:[UIImage imageNamed:@"Share"]];
     return leftUtilityButtons;
  
-}*/
+}
 
 #pragma mark - SWTableViewDelegate
 

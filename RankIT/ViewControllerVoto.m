@@ -11,6 +11,9 @@
 @end
 
 @implementation ViewControllerVoto
+{
+    bool resultConnection;
+}
 
 @synthesize candidateNames,candidateChars,name,poll,tableView,fourth,fifth;
 
@@ -138,12 +141,14 @@
     }
     
     /* Invio voto al server */
-    [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:[File getUDID] andRanking:ranking];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    resultConnection = [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:[File getUDID] andRanking:ranking];
+    
     
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];
     alert.tag = VOTI_OK;
-    alert = [alert initWithTitle:@"Esito Votazione" message:@"Votazione effettuata con successo!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     [alert show];
     
 }
@@ -157,7 +162,7 @@
     /* L'alert view conseguente ad una votazione effettuata */
     if(alertView.tag == VOTI_OK) {
         
-        if([title isEqualToString:@"Ok"])
+        if([title isEqualToString:@"Ok"] && resultConnection==true)
             
         /* Vai alla Home */
         [self.navigationController popToRootViewControllerAnimated:TRUE];

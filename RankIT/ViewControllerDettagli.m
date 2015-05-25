@@ -11,27 +11,59 @@
 
 @end
 
-@implementation ViewControllerDettagli
+@implementation ViewControllerDettagli {
+    
+    /* Spinner per il ricaricamento della Schermata */
+    UIActivityIndicatorView *spinner;
+    
+}
 
 @synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota;
 
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    
+    /* Setta la spaziatura per i voti corretta per ogni IPhone */
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,415)];
+    
+    /* Setup spinner per il ricaricamento della Home */
+    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setColor:[UIColor grayColor]];
+    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-44);
+    [self.view addSubview:spinner];
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Nasconde la view e fa partire l'animazione dello spinner */
+    [spinner startAnimating];
+    [scrollView setHidden:YES];
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
     
     /* Download dei candidates */
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
     NSString *ID = [NSString stringWithFormat:@"%d",[p pollId]];
     cands = [conn getCandidatesWithPollId:ID];
     
+    /* Si ferma l'animazione dello spinner e riappare la view e */
+    [spinner stopAnimating];
+    [self.scrollView setHidden:NO];
     
-    /* Controllo se il poll è stato eliminato dal proprietario */
-    if ([cands count]==0) {
-        UIAlertView *alertDelPoll = [[UIAlertView alloc]initWithTitle:@"Attenzione" message:@"Il sondaggio è stato eliminato dal proprietario" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        [alertDelPoll show];
-    }
     /* Tutti i settaggi del caso */
     name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
     name.text = p.pollName;
@@ -48,6 +80,11 @@
     description.selectable = false;
     [description sizeToFit];
     
+    /* Se è un poll scaduto non viene permessa la votazione */
+    if ([Util compareDate:[NSDate new] WithDate:p.deadline]==1) {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    }
+    
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *
      * I valori che vedete servono per spaziare tra gli oggetti e sono stati scelti empiricamente.                            */
     CGRect frame;
@@ -63,21 +100,24 @@
     deadline.frame = frame;
     currentY += deadline.frame.size.height;
     frame = image.frame;
-    currentY += 28;
+    currentY += 17;
     frame.origin.y = currentY;
     image.frame = frame;
     currentY += image.frame.size.height;
     frame = description.frame;
-    frame.origin.y = currentY;
+    frame.origin.y = currentY+8;
     description.frame = frame;
     currentY += description.frame.size.height;
+    [tableView reloadData];
     frame = tableView.frame;
     currentY += 20;
     frame.origin.y = currentY;
-    frame.size.height = (([cands count]*CELL_HEIGHT)+175);
+    frame.size.height = (([cands count]*CELL_HEIGHT)+110);
     tableView.frame = frame;
     currentY += tableView.frame.size.height;
-    [scrollView setContentSize:CGSizeMake(320,currentY-40)];
+    [scrollView setContentSize:CGSizeMake(320,currentY+25)];
+    
+    [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 
@@ -118,20 +158,6 @@
     }
     
     return cell;
-    
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
-    
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
 }
 

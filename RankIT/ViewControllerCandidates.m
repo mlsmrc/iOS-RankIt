@@ -1,5 +1,6 @@
 #import "ViewControllerCandidates.h"
 #import "Font.h"
+#import "Util.h"
 
 @interface ViewControllerCandidates ()
 @end
@@ -44,6 +45,8 @@
     description.frame = frame;
     currentY += description.frame.size.height;
     [scrollView setContentSize:CGSizeMake(320,currentY+10)];
+    
+    
     
 }
 

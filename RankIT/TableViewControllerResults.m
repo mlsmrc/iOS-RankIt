@@ -19,21 +19,25 @@
     
     /* Messaggio nella schermata Home */
     UILabel *messageLabel;
-    
+ 
+    UIActivityIndicatorView *spinner;
 }
 
 @synthesize poll,candidate,classificaFinale,tableView;
 
 - (void)viewDidLoad {
-    
+    NSLog(@"viewDidLoad2");
     [super viewDidLoad];
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    /* Scarica i risultati per il poll selezionato */
-    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-    classificaFinale = [conn getOptimalResultsOfPoll:poll];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setColor:[UIColor grayColor]];
+    spinner.center = CGPointMake(width/2, (height/2)-44);
+    [self.view addSubview:spinner];
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
     messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
@@ -44,12 +48,27 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
+}
+-(void) viewDidAppear:(BOOL)animated
+{
+    /* Scarica i risultati per il poll selezionato */
+    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+    classificaFinale = [conn getOptimalResultsOfPoll:poll];
+    
+    
+    
     /* Gestione di 0 voti nel poll e della connessione */
     if([classificaFinale count] == 0 || classificaFinale==nil)
-    
-        /* Stampa del messaggio di notifica */
+        
+    /* Stampa del messaggio di notifica */
         [self printMessageError];
     
+    [spinner stopAnimating];
+    [self.tableView setHidden:NO];
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+
 }
 
 #pragma mark - Table view data source
@@ -176,10 +195,8 @@
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza voti */

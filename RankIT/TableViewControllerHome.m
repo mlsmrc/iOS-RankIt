@@ -42,7 +42,12 @@
     /* Booleano per indicare se si può/deve aggiornare e scaricare i poll nuovi */
     BOOL UPLOAD;
     
+    /* Refresh control per i poll aggiuntivi */
     UIRefreshControl *footerRefreshControl;
+    
+    /* Spinner per il ricaricamento della Home */
+    UIActivityIndicatorView *spinner;
+    
 }
 
 - (void) viewDidLoad {
@@ -57,6 +62,7 @@
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
     
     if(screenWidth == IPHONE_6_WIDTH)
         X_FOR_VOTES = IPHONE_6;
@@ -81,16 +87,6 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    /* Download iniziale dei poll pubblici da 0 a 9 (start è = 0) */
-    [self DownloadPolls:start];
-    
-    /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
-    if(allPublicPolls==nil || [allPublicPolls count]==0)
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    /* Altrimenti prende i nomi dei poll pubblici da visualizzare */
-    else [self CreatePollsDetails];
-    
     searchResults = [[NSArray alloc]init];
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
@@ -107,6 +103,51 @@
     [refreshControl addTarget:self action:@selector(refreshPolls)  forControlEvents:UIControlEventValueChanged];
     refreshControl.tag = 0;
     [self.tableView addSubview:refreshControl];
+    
+    /* Setup spinner per il ricaricamento della Home */
+    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setColor:[UIColor grayColor]];
+    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-44);
+    [self.view addSubview:spinner];
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
+    [File clearSaveRank];
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
+    start = 0;
+    [allPublicPolls removeAllObjects];
+    [allPublicPollsDetails removeAllObjects];
+    
+    /* Nasconde la table view e fa partire l'animazione dello spinner */
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    /* Download iniziale dei poll pubblici da 0 a 9 (start è = 0) */
+    [self DownloadPolls:start];
+    
+    /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
+    if(allPublicPolls==nil || [allPublicPolls count]==0)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    /* Si ferma l'animazione dello spinner e riappare la table view */
+    [spinner stopAnimating];
+    [self.tableView setHidden:NO];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 
@@ -373,31 +414,6 @@
         [self performSegueWithIdentifier:@"showPollDetails" sender:self];
         
     }
-    
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
-    
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
-    [File clearSaveRank];
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
-    /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
-    start=0;
-    [allPublicPolls removeAllObjects];
-    [allPublicPollsDetails removeAllObjects];
-    [self DownloadPolls:start];
     
 }
 

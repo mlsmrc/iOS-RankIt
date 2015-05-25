@@ -3,9 +3,11 @@
 #import "Candidate.h"
 #import "File.h"
 
+#define TIMEOUT_INTERVAL 1
 /* Stringhe che appariranno a video per feedback di connessione */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";
 NSString *SERVER_UNREACHABLE_2 = @"Server non raggiungibile!";
+NSString *TIMEOUT = @"Timeout di connessione!";
 
 NSMutableDictionary *dizionarioPolls;
 
@@ -28,6 +30,7 @@ NSMutableDictionary *dizionarioPolls;
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
+    request.timeoutInterval=TIMEOUT_INTERVAL;
     
     /* Invio richiesta e ritorno la risposta del server*/
     return [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
@@ -47,7 +50,8 @@ NSMutableDictionary *dizionarioPolls;
     url=[url stringByReplacingOccurrencesOfString:@"_START_" withString:[NSString stringWithFormat:@"%@",start]];
     
     /* Creazione della richiesta ed invio */
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    request.timeoutInterval = TIMEOUT_INTERVAL;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     /* Allocazione del dizionario che conterrà i poll scaricati per una determinata connessione */
@@ -110,7 +114,10 @@ NSMutableDictionary *dizionarioPolls;
     NSString * url=[URL_GET_CANDIDATES stringByReplacingOccurrencesOfString:@"_POLL_ID_" withString:[NSString stringWithFormat:@"%@",pollId]];
     
     /* Creazione della richiesta ed invio */
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    /* Timeout connessione */
+    request.timeoutInterval=TIMEOUT_INTERVAL;
     
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
@@ -134,6 +141,9 @@ NSMutableDictionary *dizionarioPolls;
         }
         
     }
+    /* Timeout di connessione */
+    else
+        arrayCandidates=nil;
     
     return arrayCandidates;
     
@@ -141,17 +151,23 @@ NSMutableDictionary *dizionarioPolls;
 
 /*  Funzione che dato il pollid, lo userid e la stringa che corrisponde alla votazione  *
  *  inserisce la votazione relativa al poll al server                                   */
-- (void) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking {
+- (BOOL) submitRankingWithPollId:(NSString*)pollId andUserId:(NSString*)userId andRanking:(NSString*) ranking {
     
     /* Preparazione dati richiesta POST */
     NSString *ParPost = [NSString stringWithFormat:@"pollid=%@&userid=%@&ranking=%@",pollId,userId,ranking];
     
     /* Invio della richiesta POST */
-    [self sendPostRequestWithPostURL:URL_SUBMIT_RANKING AndParametersString:ParPost];
+    NSData *response = [self sendPostRequestWithPostURL:URL_SUBMIT_RANKING AndParametersString:ParPost];
     
+    if (response!=nil) {
+        
+        /* Aggiungi votazione in Vota.plist */
+        [File writeOnPListRanking:ranking OfPoll:pollId];
+        
+        return true;
+    }
     
-    /* Aggiungi votazione in Vota.plist */
-    [File writeOnPListRanking:ranking OfPoll:pollId];
+    return false;
     
 }
 
@@ -196,6 +212,7 @@ NSMutableDictionary *dizionarioPolls;
     
     /* Dizionario di tutti i poll votati */
     NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc]init];
+    
     /* Contiene i pollid di tutti i poll votati */
     NSArray *VotesPListKeys = [File getAllKeysinPList:VOTES_PLIST];
     
@@ -205,7 +222,15 @@ NSMutableDictionary *dizionarioPolls;
     /* Aggiungi i poll vodati nel dizionario */
     for(NSString* pollid in VotesPListKeys) {
         [self scaricaPollsWithPollId:pollid andUserId:@"" andStart:@""];
-        [PollVotati addEntriesFromDictionary:dizionarioPolls];
+        if (dizionarioPolls==nil)
+            return nil;
+        else
+        {
+            NSString *p=[dizionarioPolls valueForKey:pollid];
+            NSLog(@"%@",p);
+            if([p valueForKey:@"votes"]!=0)
+                [PollVotati addEntriesFromDictionary:dizionarioPolls];
+        }
     }
     return PollVotati;
     
