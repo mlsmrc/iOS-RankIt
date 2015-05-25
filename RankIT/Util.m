@@ -26,9 +26,20 @@ int IPHONE_6 = 295;
 int IPHONE_6Plus = 335;
 int X_FOR_VOTES = 245;
 
-/* Larghezza degli schermi di IPhone6 e IPhone6+ */
+/* Larghezza degli schermi di IPhone6,6+ */
 float IPHONE_6_WIDTH = 375;
 float IPHONE_6Plus_WIDTH = 414;
+
+/* Spaziatura grafico per diversi IPhone */
+int GRAFICO_IPHONE_4_4S = 55;
+int GRAFICO_IPHONE_5_5S = -30;
+int GRAFICO_IPHONE_6 = -80;
+int GRAFICO_IPHONE_6Plus = -115;
+
+/* Lunghezza degli schermi di tutti di IPhone5,5S,6,6+ */
+float IPHONE_5_5S_HEIGHT = 568;
+float IPHONE_6_HEIGHT = 667;
+float IPHONE_6Plus_HEIGHT = 736;
 
 /* Ritorna l'oggetto utile a formattare la data - funzione statica */
 +(NSDateFormatter*) getDateFormatter {

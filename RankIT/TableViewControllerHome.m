@@ -376,7 +376,6 @@
     
 }
 
-/* Metodo che fa apparire momentaneamente la scroll bar per far capire all'utente che il contenuto è scrollabile */
 - (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
@@ -384,7 +383,6 @@
     
 }
 
-/* Metodo che gestisce il ricarimento della view */
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];

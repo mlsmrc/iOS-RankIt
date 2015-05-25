@@ -16,9 +16,9 @@ FOUNDATION_EXPORT NSString *SAVE_RANK_DATE;
 + (BOOL) SaveRank:(NSString *)rank OfPoll:(NSString *)pollId;
 
 /* Funzioni di lettura */
-+ (NSString*) getRankingOfPoll:(int)pollid;
-+ (NSString*) getRankDateOfPoll:(int)pollid;
-+ (NSString*) getUDID;
++ (NSString *) getRankingOfPoll:(int)pollid;
++ (NSString *) getRankDateOfPoll:(int)pollid;
++ (NSString *) getUDID;
 + (NSArray *) getAllKeysinPList:(NSString *)PList;
 + (NSString *) getSaveRankOfPoll:(NSString*)pollid;
 

@@ -9,7 +9,6 @@
 
 @interface ViewControllerGraphResults : UIViewController <CPTPlotDataSource,CPTPlotSpaceDelegate,CPTScatterPlotDelegate,CPTScatterPlotDataSource>
 
-@property (strong,nonatomic) IBOutlet UIView *grafico;
 @property CPTScatterPlot *tiesPlot;
 @property CPTScatterPlot *notiesPlot;
 @property NSMutableString *selectedPlot;
@@ -18,14 +17,13 @@
 @property NSMutableArray *optimalNotiesData;
 @property NSMutableDictionary *dizionarioVotazioni;
 @property Poll *poll;
-
 @property NSUInteger selectedIndex;
-
-@property NSArray * plotArray;
+@property NSArray *plotArray;
 @property CPTPlotSpaceAnnotation *annotation;
-
-@property (weak, nonatomic) IBOutlet UITextView *risposte;
-
 @property NSMutableArray *candidates;
+
+@property (strong,nonatomic) IBOutlet UIView *grafico;
+@property (weak, nonatomic) IBOutlet UITextView *risposte;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

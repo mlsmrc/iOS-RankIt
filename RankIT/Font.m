@@ -13,5 +13,7 @@ NSString *FONT_DETTAGLI_POLL_BOLD = @"Avenir-Heavy";
 NSString *FONT_CANDIDATES = @"Avenir-Heavy";
 NSString *FONT_CANDIDATES_NAME = @"Avenir-Book";
 NSString *FONT_CANDIDATES_DESCRIPTION = @"Avenir-Book";
+NSString *GRAPH_AXIS_NAME = @"Avenire-Light";
+NSString *GRAPH_TEXT = @"Avenir-Book";
 
 @end

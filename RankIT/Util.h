@@ -38,9 +38,20 @@ FOUNDATION_EXPORT int IPHONE_6;
 FOUNDATION_EXPORT int IPHONE_6Plus;
 FOUNDATION_EXPORT int X_FOR_VOTES;
 
-/* Larghezza degli schermi di IPhone6 e IPhone6+ */
+/* Larghezza degli schermi di IPhone6,6+ */
 FOUNDATION_EXPORT float IPHONE_6_WIDTH;
 FOUNDATION_EXPORT float IPHONE_6Plus_WIDTH;
+
+/* Spaziatura grafico per diversi IPhone */
+FOUNDATION_EXPORT int GRAFICO_IPHONE_4_4S;
+FOUNDATION_EXPORT int GRAFICO_IPHONE_5_5S;
+FOUNDATION_EXPORT int GRAFICO_IPHONE_6;
+FOUNDATION_EXPORT int GRAFICO_IPHONE_6Plus;
+
+/* Lunghezza degli schermi di tutti di IPhone5,5S,6,6+ */
+FOUNDATION_EXPORT float IPHONE_5_5S_HEIGHT;
+FOUNDATION_EXPORT float IPHONE_6_HEIGHT;
+FOUNDATION_EXPORT float IPHONE_6Plus_HEIGHT;
 
 + (NSDateFormatter*) getDateFormatter;
 + (int) compareDate:(NSDate *)first WithDate:(NSDate *)second;
