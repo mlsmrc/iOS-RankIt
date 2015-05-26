@@ -55,9 +55,9 @@
     }
     
     risposte.text = risposteLabel;
-    risposte.textColor = [UIColor lightGrayColor];
+    risposte.textColor = [UIColor blackColor];
     risposte.selectable = true;
-    risposte.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:13];
+    risposte.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:15];
     risposte.backgroundColor = [UIColor clearColor];
     risposte.textAlignment = NSTextAlignmentNatural;
     risposte.selectable = false;
@@ -93,7 +93,7 @@
     
     frame = risposte.frame;
     frame.origin.y = currentY;
-    frame.origin.x += 12;
+    frame.origin.x += 15;
     risposte.frame = frame;
     currentY += risposte.frame.size.height;
     [scrollView setContentSize:CGSizeMake(320,currentY-15)];

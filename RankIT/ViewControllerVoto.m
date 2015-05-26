@@ -83,7 +83,7 @@
 }
 
 /* Funzioni che permettono di stilare la classifica mediante drag & drop delle celle */
-- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL) tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return NO;
     
@@ -125,7 +125,7 @@
 }
 
 /* Invio della classifica al server */
-- (IBAction)vota:(id)sender {
+- (IBAction) vota:(id)sender {
     
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
     NSMutableString *ranking = [[NSMutableString alloc]initWithString:@""];
@@ -144,7 +144,6 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     resultConnection = [conn submitRankingWithPollId:[NSString stringWithFormat:@"%d",poll.pollId]  andUserId:[File getUDID] andRanking:ranking];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
     
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];

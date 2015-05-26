@@ -104,7 +104,7 @@
     refreshControl.tag = 0;
     [self.tableView addSubview:refreshControl];
     
-    /* Setup spinner per il ricaricamento della Home */
+    /* Setup spinner */
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [spinner setColor:[UIColor grayColor]];
     spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-44);
@@ -237,7 +237,7 @@
             [self.tableView reloadData];
             
             /* Stampa del messaggio di notifica */
-            [self printMessaggeError];
+            [self printMessageError];
             
         }
         
@@ -251,7 +251,7 @@
         [self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
-        [self printMessaggeError];
+        [self printMessageError];
         
     }
     
@@ -261,7 +261,7 @@
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
-- (void) printMessaggeError {
+- (void) printMessageError {
     
     /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -323,7 +323,7 @@
     Poll *p;
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil)
+    if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
@@ -376,12 +376,12 @@
 /* Funzioni che permettono di accedere alla descrizione di un determinato poll sia dalla schermata "Home" che dai risultati di ricerca */
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"showPollDetails"]) {
+    if([segue.identifier isEqualToString:@"showPollDetails"]) {
         
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
         
-        if (self.searchDisplayController.active) {
+        if(self.searchDisplayController.active) {
             
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
             p = [searchResults objectAtIndex:indexPath.row];
@@ -409,7 +409,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.tableView == self.searchDisplayController.searchResultsTableView) {
+    if(self.tableView == self.searchDisplayController.searchResultsTableView) {
         
         [self performSegueWithIdentifier:@"showPollDetails" sender:self];
         
@@ -427,13 +427,13 @@
 
 - (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         
         CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            for (UIView *subview in self.view.subviews)
+            for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformMakeTranslation(0,statusBarFrame.size.height);
             
         }];
@@ -444,11 +444,11 @@
 
 - (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            for (UIView *subview in self.view.subviews)
+            for(UIView *subview in self.view.subviews)
                 subview.transform = CGAffineTransformIdentity;
             
         }];

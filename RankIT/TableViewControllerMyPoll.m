@@ -44,12 +44,13 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
+    /* Spinner per il ricaricamento della schermata "I Miei Sondaggi" */
     UIActivityIndicatorView *spinner;
     
 }
 
 - (void) viewDidLoad {
-    NSLog(@"viewDidLoad");
+   
     [super viewDidLoad];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -70,7 +71,6 @@
     }
    
     /* Questa è la parte di codice che definisce il refresh da parte della TableView */
-    
     refreshControl = [[UIRefreshControl alloc]init];
     [refreshControl addTarget:self action:@selector(DownloadPolls) forControlEvents:UIControlEventValueChanged];
     refreshControl.tag = 0;
@@ -96,15 +96,30 @@
     messageLabel.tag = 1;
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
+    /* Setup spinner */
     searchResults = [[NSArray alloc]init];
     
 }
 
--(void) viewDidAppear:(BOOL)animated
-{
-    NSLog(@"ViewDidAppear");
+- (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
     
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
+    [File clearSaveRank];
+    
+    /* Nasconde la table view e fa partire l'animazione dello spinner */
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
+    
+}
+
+
+- (void) viewDidAppear:(BOOL)animated {
+        
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
     /* Download iniziale di tutti i poll */
@@ -114,9 +129,11 @@
     if(allMyPolls==nil || [allMyPolls count]==0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    /* Si ferma l'animazione dello spinner e riappare la table view */
     [spinner stopAnimating];
     [self.tableView setHidden:NO];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
 }
 
 /* Download poll dal server */
@@ -191,7 +208,7 @@
             [self.tableView reloadData];
             
             /* Stampa del messaggio di notifica */
-            [self printMessaggeError];
+            [self printMessageError];
             
         }
         
@@ -205,7 +222,7 @@
         [self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
-        [self printMessaggeError];
+        [self printMessageError];
         
     }
     
@@ -215,7 +232,7 @@
 }
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll */
-- (void) printMessaggeError {
+- (void) printMessageError {
     
     /* Background senza linee e definizione del messaggio di assenza poll o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -300,7 +317,6 @@
     DeadlinePoll.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
     DeadlinePoll.font = [UIFont fontWithName:FONT_HOME size:12];
     
-    
     UILabel *VotiPoll = (UILabel *)[cell viewWithTag:103];
     VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];
     VotiPoll.font = [UIFont fontWithName:FONT_HOME size:12];
@@ -329,25 +345,6 @@
     return YES;
     
 }
-- (void) viewWillAppear:(BOOL)animated {
-    NSLog(@"viewWillAppear");
-    
-    [super viewWillAppear:animated];
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
-    [File clearSaveRank];
-    
-    //allMyPollsDetails = [[NSMutableArray alloc]init];
-    //allMyPolls = [[NSMutableDictionary alloc] init];
-    //[self.tableView reloadData];
-    
-    [spinner startAnimating];
-    [self.tableView setHidden:YES];
-    //[self MyPolls];
-}
 
 /* Gestione barra dei bottoni con swipe */
 - (NSArray *) rightButtons {
@@ -365,7 +362,7 @@
     
 }
 
- - (NSArray *) leftButtons {
+- (NSArray *) leftButtons {
  
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
      [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:0.0f green:0.4f blue:1.0f alpha:1.0] icon:[UIImage imageNamed:@"Share"]];
@@ -529,8 +526,6 @@
             if(self.tableView == self.searchDisplayController.searchResultsTableView) {
                 
                 cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                
-                
                 p = [searchResults objectAtIndex:cellIndexPath.row];
                 
             }
@@ -824,12 +819,12 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"showMyPollResults"]) {
+    if([segue.identifier isEqualToString:@"showMyPollResults"]) {
         
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
         
-        if (self.searchDisplayController.active) {
+        if(self.searchDisplayController.active) {
             
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
             p = [searchResults objectAtIndex:indexPath.row];

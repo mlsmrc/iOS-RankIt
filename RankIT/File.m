@@ -66,9 +66,8 @@ NSString *VOTES_PLIST_DATE = @"VotesDate.strings";
     
     NSMutableDictionary *votesPList;
     
-    if([fileManager fileExistsAtPath:filePath]) {
+    if([fileManager fileExistsAtPath:filePath])
         votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    }
     
     else
         votesPList = [[NSMutableDictionary alloc] init];

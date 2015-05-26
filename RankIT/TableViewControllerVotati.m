@@ -38,12 +38,13 @@
     /* Pulsante di ritorno schermata precedente */
     UIBarButtonItem *backButton;
     
+    /* Spinner per il ricaricamento della schermata "Votati" */
     UIActivityIndicatorView *spinner;
     
 }
 
 - (void) viewDidLoad {
-    NSLog(@"viewDidLoad3");
+    
     [super viewDidLoad];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -67,6 +68,7 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 
+    /* Setup spinner */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -92,12 +94,24 @@
     searchResults = [[NSArray alloc]init];
 
 }
--(void) viewDidAppear:(BOOL)animated
-{
-    NSLog(@"ViewDidAppear3");
+
+- (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
     
+    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
+    [File clearSaveRank];
     
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    /* Nasconde la table view e fa partire l'animazione dello spinner */
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
     
     /* Download iniziale di tutti i poll votati */
     [self DownloadPolls];
@@ -106,9 +120,11 @@
     if(allVotedPolls==nil || [allVotedPolls count]==0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    /* Si ferma l'animazione dello spinner e riappare la table view */
     [spinner stopAnimating];
     [self.tableView setHidden:NO];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+
 }
 
 /* Download poll votati dal server */
@@ -145,9 +161,10 @@
                                    withLastUpdate:[value valueForKey:@"updated"]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
-        if (p.votes!=0) {
+        
+        if(p.votes!=0)
             [allVotedPollsDetails addObject:p];
-        }
+        
     }
     
 }
@@ -185,8 +202,8 @@
     else {
         
         /* Rimuove tutte le celle dei poll per mostrare il messaggio di assenza connessione */
-        //[allVotedPollsDetails removeAllObjects];
-        //[self.tableView reloadData];
+        [allVotedPollsDetails removeAllObjects];
+        [self.tableView reloadData];
         
         /* Stampa del messaggio di notifica */
         [self printMessageError];
@@ -350,26 +367,6 @@
     
     return YES;
     
-}
-
-/* Metodo che gestisce il ricarimento della view */
-- (void) viewWillAppear:(BOOL)animated {
-        NSLog(@"viewWillAppear3");
-    [super viewWillAppear:animated];
-    
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
-    [File clearSaveRank];
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
-    //allVotedPollsDetails = [[NSMutableArray alloc]init];
-    //allVotedPolls = [[NSMutableDictionary alloc] init];
-    //[self.tableView reloadData];
-    
-    [spinner startAnimating];
-    [self.tableView setHidden:YES];
-    //[self VotedPolls];
 }
 
 /* Funzioni utili ad una corretta visualizzazione della table view e della search bar */

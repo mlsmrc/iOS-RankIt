@@ -20,18 +20,20 @@
     /* Messaggio nella schermata Home */
     UILabel *messageLabel;
  
+    /* Spinner per il ricaricamento della view dei risultati */
     UIActivityIndicatorView *spinner;
 }
 
 @synthesize poll,candidate,classificaFinale,tableView;
 
 - (void)viewDidLoad {
-    NSLog(@"viewDidLoad2");
+    
     [super viewDidLoad];
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    /* Setup spinner */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -49,37 +51,46 @@
     [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
 }
--(void) viewDidAppear:(BOOL)animated
-{
-    /* Scarica i risultati per il poll selezionato */
-    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-    classificaFinale = [conn getOptimalResultsOfPoll:poll];
+
+- (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
     
-    
-    /* Gestione di 0 voti nel poll e della connessione */
-    if([classificaFinale count] == 0 || classificaFinale==nil)
-        
-    /* Stampa del messaggio di notifica */
-        [self printMessageError];
-    
-    [spinner stopAnimating];
-    [self.tableView setHidden:NO];
+    /* Nasconde la table view e fa partire l'animazione dello spinner */
+    [spinner startAnimating];
+    [self.tableView setHidden:YES];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    
+    /* Scarica i risultati per il poll selezionato */
+    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+    classificaFinale = [conn getOptimalResultsOfPoll:poll];
+    
+    /* Gestione di 0 voti nel poll e della connessione */
+    if([classificaFinale count] == 0 || classificaFinale==nil)
+        [self printMessageError];
+    
+    /* Si ferma l'animazione dello spinner e riappare la table view */
+    [spinner stopAnimating];
+    [self.tableView setHidden:NO];
+    [self.tableView reloadData];
+    
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 1;
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [classificaFinale count]-1;
     
@@ -148,7 +159,7 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     
     [self performSegueWithIdentifier:@"showCandRankDetails" sender:self];
     
@@ -192,13 +203,6 @@
     
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    [spinner startAnimating];
-    [self.tableView setHidden:YES];
-}
-
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza voti */
 - (void) printMessageError {
     
@@ -209,7 +213,7 @@
     if(classificaFinale!=nil)
         messageLabel.text = NO_RANKING;
     
-    else messageLabel.text = SERVER_UNREACHABLE;
+    else messageLabel.text = TIMEOUT;
     
     /* Aggiunge la SubView con il messaggio da visualizzare */
     [tableView addSubview:messageLabel];

@@ -16,6 +16,9 @@
     /* Spinner per il ricaricamento della Schermata */
     UIActivityIndicatorView *spinner;
     
+    /* Messaggio nella schermata Home */
+    UILabel *messageLabel;
+    
 }
 
 @synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota;
@@ -32,11 +35,20 @@
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320,415)];
     
-    /* Setup spinner per il ricaricamento della Home */
+    /* Setup spinner */
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [spinner setColor:[UIColor grayColor]];
     spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-44);
     [self.view addSubview:spinner];
+    
+    /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
+    messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    messageLabel.font = [UIFont fontWithName:FONT_HOME size:20];
+    messageLabel.textColor = [UIColor darkGrayColor];
+    messageLabel.numberOfLines = 0;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    messageLabel.tag = 1;
+    [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
     
 }
 
@@ -81,17 +93,12 @@
     [description sizeToFit];
     
     /* Se è un poll scaduto non viene permessa la votazione */
-    if ([Util compareDate:[NSDate new] WithDate:p.deadline]==1) {
+    if([Util compareDate:[NSDate new] WithDate:p.deadline]==1)
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    }
+    
     /* Se un poll è stato eliminato viene fatto vedere un messaggio a video */
-    if ([cands count]<3) {
-        [self.scrollView setHidden:YES];
-        [self.navigationItem.rightBarButtonItem setEnabled:NO];
-        UIAlertView *alert = [UIAlertView alloc];
-        alert = [alert initWithTitle:@"Attenzione!" message:@"Sondaggio eliminato dal proprietario." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        [alert show];
-    }
+    if([cands count]<3)
+        [self printMessageError];
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *
      * I valori che vedete servono per spaziare tra gli oggetti e sono stati scelti empiricamente.                            */
@@ -126,6 +133,18 @@
     [scrollView setContentSize:CGSizeMake(320,currentY+25)];
     
     [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
+}
+
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+- (void) printMessageError {
+    
+    [self.scrollView setHidden:YES];
+    messageLabel.text = TIMEOUT;
+    
+    /* Aggiunge la SubView con il messaggio da visualizzare */
+    [self.view addSubview:messageLabel];
+    [self.view sendSubviewToBack:messageLabel];
     
 }
 
