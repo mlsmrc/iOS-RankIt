@@ -369,8 +369,6 @@
     /* Titolo del bottone cliccato */
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    
-        
     if([title isEqualToString:@"Ok"])
         /* Vai alla Home */
         [self.navigationController popToRootViewControllerAnimated:TRUE];
