@@ -10,9 +10,11 @@
 
 @end
 
-@implementation ViewControllerVoto
-{
+@implementation ViewControllerVoto {
+    
+    /* Per controllare se c'è timeout di connessione */
     bool resultConnection;
+
 }
 
 @synthesize candidateNames,candidateChars,name,poll,tableView,fourth,fifth;
