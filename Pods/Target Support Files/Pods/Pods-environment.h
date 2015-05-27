@@ -54,23 +54,11 @@
 #define COCOAPODS_VERSION_MINOR_AXRatingView 0
 #define COCOAPODS_VERSION_PATCH_AXRatingView 3
 
-// CCBottomRefreshControl
-#define COCOAPODS_POD_AVAILABLE_CCBottomRefreshControl
-#define COCOAPODS_VERSION_MAJOR_CCBottomRefreshControl 0
-#define COCOAPODS_VERSION_MINOR_CCBottomRefreshControl 5
-#define COCOAPODS_VERSION_PATCH_CCBottomRefreshControl 0
-
 // JVFloatLabeledTextField
 #define COCOAPODS_POD_AVAILABLE_JVFloatLabeledTextField
 #define COCOAPODS_VERSION_MAJOR_JVFloatLabeledTextField 1
 #define COCOAPODS_VERSION_MINOR_JVFloatLabeledTextField 0
 #define COCOAPODS_VERSION_PATCH_JVFloatLabeledTextField 2
-
-// Masonry
-#define COCOAPODS_POD_AVAILABLE_Masonry
-#define COCOAPODS_VERSION_MAJOR_Masonry 0
-#define COCOAPODS_VERSION_MINOR_Masonry 6
-#define COCOAPODS_VERSION_PATCH_Masonry 1
 
 // XLDataLoader
 #define COCOAPODS_POD_AVAILABLE_XLDataLoader

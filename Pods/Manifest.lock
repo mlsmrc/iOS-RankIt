@@ -21,10 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AXRatingView (1.0.3)
-  - CCBottomRefreshControl (0.5):
-    - Masonry
   - JVFloatLabeledTextField (1.0.2)
-  - Masonry (0.6.1)
   - XLDataLoader (1.1.0):
     - AFNetworking (~> 2.0)
   - XLForm (3.0.0)
@@ -32,7 +29,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - AXRatingView (= 1.0.3)
-  - CCBottomRefreshControl
   - JVFloatLabeledTextField (= 1.0.2)
   - XLDataLoader (~> 1.1)
   - XLForm (from `https://github.com/xmartlabs/XLForm.git`)
@@ -49,10 +45,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   AXRatingView: ccaadc1bbda99a4b7e1d556059482d2b933a9f4e
-  CCBottomRefreshControl: 2cfdbd6f5be5181f5f070637605981d5557e8e32
   JVFloatLabeledTextField: 58a3a32cfb800e5b224f676987e7c13abf50a14d
-  Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   XLDataLoader: 7d466e086f4b6ecd144e880be8232adbe80aef52
   XLForm: 10fc7eb9e2d5df21a515fa3a794f4e26319abd0e
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.36.4

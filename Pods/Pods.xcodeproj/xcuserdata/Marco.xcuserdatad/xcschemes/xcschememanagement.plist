@@ -6,83 +6,63 @@
 	<dict>
 		<key>Pods-AFNetworking.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Pods-AXRatingView.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-CCBottomRefreshControl.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods-JVFloatLabeledTextField.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-Masonry.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>Pods-XLDataLoader.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>Pods-XLForm.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D6771F983D9B2137F5B3A30</key>
+		<key>3AB66518B6CD43FB90B34286</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1658A55024D8CE7C0C9CD8BD</key>
+		<key>40634C1A9947602DB1714A3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1E56D6C21BCEDA665CDCF0CB</key>
+		<key>4B181386F2C53FB026833C0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>543F44C7AED9F53B705D56E4</key>
+		<key>53380F87277EBD9A5AB18C7D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C98B11CEB7C9D6B1E5F590F</key>
+		<key>632AD8C17551938CE498F951</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9580CE3956B691D593D7683E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AE845518415972CB55607A13</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DCD04D66973660B32A5E3304</key>
+		<key>98DCE2BB4CEE58115943C2FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
