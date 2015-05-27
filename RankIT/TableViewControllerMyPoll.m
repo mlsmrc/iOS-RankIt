@@ -10,9 +10,8 @@
 #import "UMTableViewCell.h"
 #import "Reachability.h"
 
-#define DELETE_POLL 2
-#define RESET_POLL 1
-#define EDIT_POLL 0
+#define DELETE_POLL 1
+#define RESET_POLL 0
 
 
 @interface UIViewController ()
@@ -382,7 +381,6 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     
     NSMutableArray *rightUtilityButtons = [[NSMutableArray alloc] init];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]title:@"Modif."];
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.58f blue:0.0f alpha:1.0]title:@"Azzera"];
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0]title:@"Elimina"];
     
@@ -403,12 +401,6 @@
 - (void) swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     
     switch (index) {
-            
-        case EDIT_POLL: {
-            
-            break;
-        
-        }
             
         case RESET_POLL: {
             
