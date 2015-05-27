@@ -6,7 +6,6 @@
 #import "Util.h"
 #import "File.h"
 
-
 @interface ViewControllerDettagli ()
 
 @end
@@ -19,13 +18,18 @@
     /* Messaggio nella schermata Home */
     UILabel *messageLabel;
     
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
+    
 }
 
-@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota;
+@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota,FLAG;
 
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    
+    FLAGS = [[NSMutableArray alloc]init];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -54,12 +58,22 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    FLAG = [[File readFromReload:@"FLAG_DETTAGLI"] intValue];
+    
+    [FLAGS removeAllObjects];
+    [FLAGS addObject:@"DETTAGLI"];
+    [File writeOnReload:@"1" ofFlags:FLAGS];
+    
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
     /* Nasconde la view e fa partire l'animazione dello spinner */
-    [spinner startAnimating];
-    [scrollView setHidden:YES];
+    if(FLAG == 0) {
+        
+        [spinner startAnimating];
+        [scrollView setHidden:YES];
+        
+    }
     
 }
 
@@ -67,38 +81,51 @@
     
     [super viewDidAppear:animated];
     
-    /* Download dei candidates */
-    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-    NSString *ID = [NSString stringWithFormat:@"%d",[p pollId]];
-    cands = [conn getCandidatesWithPollId:ID];
+    if(FLAG == 0) {
+        
+        /* Download dei candidates */
+        ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+        NSString *ID = [NSString stringWithFormat:@"%d",[p pollId]];
+        cands = [conn getCandidatesWithPollId:ID];
     
-    /* Si ferma l'animazione dello spinner e riappare la view e */
-    [spinner stopAnimating];
-    [self.scrollView setHidden:NO];
+        /* Si ferma l'animazione dello spinner e riappare la view e */
+        [spinner stopAnimating];
+        [self.scrollView setHidden:NO];
     
-    /* Tutti i settaggi del caso */
-    name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
-    name.text = p.pollName;
+        /* Tutti i settaggi del caso */
+        name.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_BOLD size:21];
+        name.text = p.pollName;
     
-    deadline.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];
-    deadline.textColor = [UIColor redColor];
-    deadline.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
+        deadline.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];
+        deadline.textColor = [UIColor redColor];
+        deadline.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
     
-    description.selectable = true;
-    description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:16];
-    description.backgroundColor = [UIColor clearColor];
-    description.textAlignment = NSTextAlignmentNatural;
-    description.text = p.pollDescription;
-    description.selectable = false;
-    [description sizeToFit];
+        description.selectable = true;
+        description.font = [UIFont fontWithName:FONT_DETTAGLI_POLL size:16];
+        description.backgroundColor = [UIColor clearColor];
+        description.textAlignment = NSTextAlignmentNatural;
+        description.text = p.pollDescription;
+        description.selectable = false;
+        [description sizeToFit];
+        
+        image.image = [UIImage imageNamed:@"PlaceholderImageView"];
+        image.contentMode = UIViewContentModeScaleAspectFit;
+        image.layer.cornerRadius = image.frame.size.width/2;
+        image.clipsToBounds = YES;
     
-    /* Se è un poll scaduto non viene permessa la votazione */
-    if([Util compareDate:[NSDate new] WithDate:p.deadline]==1)
-        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+        /* Se è un poll scaduto non viene permessa la votazione */
+        if([Util compareDate:[NSDate new] WithDate:p.deadline]==1)
+            [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
-    /* Se un poll è stato eliminato viene fatto vedere un messaggio a video */
-    if([cands count]<3)
-        [self printMessageError];
+        /* Se un poll è stato eliminato o non c'è connessione, viene fatto vedere un messaggio a video e disibilitato il tasto "Vota" */
+        if([cands count]<3) {
+        
+            [self.navigationItem.rightBarButtonItem setEnabled:NO];
+            [self printMessageError];
+        
+        }
+        
+    }
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *
      * I valori che vedete servono per spaziare tra gli oggetti e sono stati scelti empiricamente.                            */
@@ -167,6 +194,12 @@
     c = [cands objectAtIndex:indexPath.row];
     
     /* Visualizzazione Candidato nella cella */
+    UIImageView *imagePoll = (UIImageView *) [cell viewWithTag:100];
+    imagePoll.image = [UIImage imageNamed:@"PlaceholderImageCell"];
+    imagePoll.contentMode = UIViewContentModeScaleAspectFit;
+    imagePoll.layer.cornerRadius = imagePoll.frame.size.width/2;
+    imagePoll.clipsToBounds = YES;
+    
     UILabel *NameCand = (UILabel *)[cell viewWithTag:101];
     NameCand.text = c.candName;
     NameCand.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:16];

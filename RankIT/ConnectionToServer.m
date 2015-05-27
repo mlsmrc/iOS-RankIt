@@ -3,7 +3,7 @@
 #import "Candidate.h"
 #import "File.h"
 
-#define TIMEOUT_INTERVAL 5
+#define TIMEOUT_INTERVAL 10
 
 /* Stringhe che appariranno a video per feedback di connessione */
 NSString *SERVER_UNREACHABLE = @"Server non raggiungibile!\nAggiorna per riprovare.";

@@ -5,5 +5,6 @@
 
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
 @property (weak,nonatomic) IBOutlet UISearchBar *searchBar;
+@property (readwrite,nonatomic) int FLAG_MYPOLL;
 
 @end

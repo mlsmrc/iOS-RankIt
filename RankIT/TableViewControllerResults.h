@@ -9,5 +9,6 @@
 @property (strong,nonatomic) Candidate *candidate;
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) NSMutableArray *classificaFinale;
+@property (readwrite,nonatomic) int FLAG;
 
 @end

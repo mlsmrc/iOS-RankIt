@@ -1,3 +1,4 @@
+#import "TableViewControllerHome.h"
 #import "TableViewControllerVotati.h"
 #import "TableViewControllerResults.h"
 #import "ViewControllerGraphResults.h"
@@ -41,11 +42,18 @@
     /* Spinner per il ricaricamento della schermata "Votati" */
     UIActivityIndicatorView *spinner;
     
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
+    
 }
+
+@synthesize FLAG_VOTATI;
 
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    
+    
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -99,30 +107,49 @@
     
     [super viewWillAppear:animated];
     
+    FLAG_VOTATI = [[File readFromReload:@"FLAG_VOTATI"] intValue];
+    
+    [FLAGS addObject:@"HOME"];
+    [FLAGS addObject:@"MYPOLL"];
+    [File writeOnReload:@"0" ofFlags:FLAGS];
+    
+    [FLAGS removeAllObjects];
+    [FLAGS addObject:@"VOTATI"];
+    [File writeOnReload:@"1" ofFlags:FLAGS];
+    
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
     [File clearSaveRank];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* Nasconde la table view e fa partire l'animazione dello spinner */
-    [spinner startAnimating];
-    [self.tableView setHidden:YES];
+    if(FLAG_VOTATI == 0) {
+    
+        /* Nasconde la table view e fa partire l'animazione dello spinner */
+        [spinner startAnimating];
+        [self.tableView setHidden:YES];
+        
+    }
     
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     
-    /* Download iniziale di tutti i poll votati */
-    [self DownloadPolls];
+    if(FLAG_VOTATI == 0) {
+        
+        /* Download iniziale di tutti i poll votati */
+        [self DownloadPolls];
     
-    /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
-    if(allVotedPolls==nil || [allVotedPolls count]==0)
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
+        if(allVotedPolls==nil || [allVotedPolls count]==0)
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    /* Si ferma l'animazione dello spinner e riappare la table view */
-    [spinner stopAnimating];
-    [self.tableView setHidden:NO];
+        /* Si ferma l'animazione dello spinner e riappare la table view */
+        [spinner stopAnimating];
+        [self.tableView setHidden:NO];
+        
+    }
+    
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
 
 }
@@ -133,10 +160,11 @@
     Connection = [[ConnectionToServer alloc]init];
     allVotedPolls = [Connection getDizionarioPollsVotati];
     
-    if(allVotedPolls!=nil && [allVotedPolls count] != 0)
-    {
+    if(allVotedPolls!=nil && [allVotedPolls count] != 0) {
+        
         [self CreatePollsDetails];
         [self.tableView reloadData];
+    
     }
     
     [self VotedPolls];
@@ -164,6 +192,13 @@
         
         if(p.votes!=0)
             [allVotedPollsDetails addObject:p];
+        
+    }
+    
+    if([allVotedPollsDetails count] == 0) {
+        
+        allVotedPolls = [[NSMutableDictionary alloc]init];
+        [self printMessageError];
         
     }
     
@@ -220,7 +255,6 @@
     
     /* Background senza linee e definizione del messaggio di assenza poll votati o assenza connessione */
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     
     /* Assegna il messaggio a seconda dei casi */
     if(allVotedPolls!=nil)
@@ -334,6 +368,12 @@
         p = [allVotedPollsDetails objectAtIndex:indexPath.row];
     
     /* Visualizzazione del poll nella cella */
+    UIImageView *imagePoll = (UIImageView *) [cell viewWithTag:100];
+    imagePoll.image = [UIImage imageNamed:@"PlaceholderImageCell"];
+    imagePoll.contentMode = UIViewContentModeScaleAspectFit;
+    imagePoll.layer.cornerRadius = imagePoll.frame.size.width/2;
+    imagePoll.clipsToBounds = YES;
+    
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = p.pollName;
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];

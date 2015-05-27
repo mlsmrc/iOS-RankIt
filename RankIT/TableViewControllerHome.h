@@ -7,5 +7,6 @@ FOUNDATION_EXPORT NSString *SEARCH;
 FOUNDATION_EXPORT NSString *BACK;
 
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
+@property (readwrite,nonatomic) int FLAG_HOME;
 
 @end

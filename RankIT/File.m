@@ -6,11 +6,12 @@ NSString *INFO_PLIST = @"Info";
 NSString *CUSTOM_UDID = @"CustomUDID";
 NSString *SAVE_RANK = @"SaveRank.strings";
 NSString *VOTES_PLIST_DATE = @"VotesDate.strings";
+NSString *RELOAD = @"Reload.strings";
 
 @implementation File: NSObject
 
 /* Dato un pollid e la classifica, scrive all'interno del file Votes.strings la votazione effettuata */
-+ (BOOL) writeOnPListRanking: (NSString*)ranking OfPoll:(NSString*)pollid {
++ (BOOL) writeOnPListRanking:(NSString*)ranking OfPoll:(NSString*)pollid {
     
     return [File writeString:ranking forKey:pollid inPList:VOTES_PLIST];
 
@@ -132,7 +133,6 @@ NSString *VOTES_PLIST_DATE = @"VotesDate.strings";
 /* Elimina il contenuto ad un file generico */
 + (BOOL) clearFile:(NSString*)File {
     
-    
     NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:File];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
@@ -150,6 +150,41 @@ NSString *VOTES_PLIST_DATE = @"VotesDate.strings";
     
     return [self readStringforKey:pollid inPList:SAVE_RANK];
 
+}
+
+/* Scrive il valore del flag sul file di Reload */
++ (void) writeOnReload:(NSString *)value ofFlags:(NSMutableArray*)FLAGS {
+    
+    NSString *view;
+    
+    for(int i=0;i<[FLAGS count];i++) {
+        
+        if([[FLAGS objectAtIndex:i] isEqualToString:(@"HOME")])
+            view = @"FLAG_HOME";
+        
+        if([[FLAGS objectAtIndex:i] isEqualToString:(@"MYPOLL")])
+            view = @"FLAG_MYPOLL";
+        
+        if([[FLAGS objectAtIndex:i] isEqualToString:(@"VOTATI")])
+            view = @"FLAG_VOTATI";
+        
+        if([[FLAGS objectAtIndex:i] isEqualToString:(@"DETTAGLI")])
+            view = @"FLAG_DETTAGLI";
+        
+        if([[FLAGS objectAtIndex:i] isEqualToString:(@"RISULTATI")])
+            view = @"FLAG_RISULTATI";
+
+        [File writeString:value forKey:view inPList:RELOAD];
+        
+    }
+    
+}
+
+/* Data una chiave, legge all'interno del file Reload.strings e ritorna il valore */
++ (NSString*) readFromReload:(NSString*)key {
+    
+    return [File readStringforKey:key inPList:RELOAD];
+    
 }
 
 @end

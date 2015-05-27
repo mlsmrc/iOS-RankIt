@@ -26,6 +26,11 @@
     description.selectable = false;
     [description sizeToFit];
     
+    image.image = [UIImage imageNamed:@"PlaceholderImageView"];
+    image.contentMode = UIViewContentModeScaleAspectFit;
+    image.layer.cornerRadius = image.frame.size.width/2;
+    image.clipsToBounds = YES;
+    
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *
      * I valori che vedete servono per spaziare tra gli oggetti e sono stati scelti empiricamente.                            */
     CGRect frame;
@@ -45,8 +50,6 @@
     description.frame = frame;
     currentY += description.frame.size.height;
     [scrollView setContentSize:CGSizeMake(320,currentY+10)];
-    
-    
     
 }
 

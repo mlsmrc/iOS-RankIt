@@ -2,6 +2,7 @@
 #import "ViewControllerCandidates.h"
 #import "ViewControllerDettagli.h"
 #import "Font.h"
+#import "File.h"
 #import "Candidate.h"
 #import "Util.h"
 
@@ -22,13 +23,19 @@
  
     /* Spinner per il ricaricamento della view dei risultati */
     UIActivityIndicatorView *spinner;
+    
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
+    
 }
 
-@synthesize poll,candidate,classificaFinale,tableView;
+@synthesize poll,candidate,classificaFinale,tableView,FLAG;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    FLAGS = [[NSMutableArray alloc]init];
     
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -56,29 +63,43 @@
     
     [super viewWillAppear:animated];
     
-    /* Nasconde la table view e fa partire l'animazione dello spinner */
-    [spinner startAnimating];
-    [self.tableView setHidden:YES];
+    FLAG = [[File readFromReload:@"FLAG_RISULTATI"] intValue];
+    
+    [FLAGS removeAllObjects];
+    [FLAGS addObject:@"RISULTATI"];
+    [File writeOnReload:@"1" ofFlags:FLAGS];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    
+    if(FLAG == 0) {
+        
+        /* Nasconde la table view e fa partire l'animazione dello spinner */
+        [spinner startAnimating];
+        [self.tableView setHidden:YES];
+        
+    }
 
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     
-    /* Scarica i risultati per il poll selezionato */
-    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-    classificaFinale = [conn getOptimalResultsOfPoll:poll];
+    if(FLAG == 0) {
+        
+        /* Scarica i risultati per il poll selezionato */
+        ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+        classificaFinale = [conn getOptimalResultsOfPoll:poll];
     
-    /* Gestione di 0 voti nel poll e della connessione */
-    if([classificaFinale count] == 0 || classificaFinale==nil)
-        [self printMessageError];
+        /* Gestione di 0 voti nel poll e della connessione */
+        if([classificaFinale count] == 0 || classificaFinale==nil)
+            [self printMessageError];
     
-    /* Si ferma l'animazione dello spinner e riappare la table view */
-    [spinner stopAnimating];
-    [self.tableView setHidden:NO];
-    [self.tableView reloadData];
+        /* Si ferma l'animazione dello spinner e riappare la table view */
+        [spinner stopAnimating];
+        [self.tableView setHidden:NO];
+        [self.tableView reloadData];
+    
+    }
     
 }
 
@@ -171,6 +192,9 @@
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = poll;
+        [FLAGS removeAllObjects];
+        [FLAGS addObject:@"DETTAGLI"];
+        [File writeOnReload:@"0" ofFlags:FLAGS];
         
     }
     

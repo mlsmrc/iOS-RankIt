@@ -48,11 +48,20 @@
     /* Spinner per il ricaricamento della Home */
     UIActivityIndicatorView *spinner;
     
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
+    
 }
+
+@synthesize FLAG_HOME;
 
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    
+    FLAGS = [[NSMutableArray alloc]init];
+    [FLAGS addObject:@"HOME"];
+    [File writeOnReload:@"0" ofFlags:FLAGS];
     
     /* Puoi scaricare i poll */
     UPLOAD = YES;
@@ -116,20 +125,34 @@
     
     [super viewWillAppear:animated];
     
+    FLAG_HOME = [[File readFromReload:@"FLAG_HOME"] intValue];
+    
+    [FLAGS addObject:@"MYPOLL"];
+    [FLAGS addObject:@"VOTATI"];
+    [File writeOnReload:@"0" ofFlags:FLAGS];
+    
+    [FLAGS removeAllObjects];
+    [FLAGS addObject:@"HOME"];
+    [File writeOnReload:@"1" ofFlags:FLAGS];
+    
     /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
     [File clearSaveRank];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
-    start = 0;
-    [allPublicPolls removeAllObjects];
-    [allPublicPollsDetails removeAllObjects];
+    if(FLAG_HOME == 0) {
     
-    /* Nasconde la table view e fa partire l'animazione dello spinner */
-    [spinner startAnimating];
-    [self.tableView setHidden:YES];
+        /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
+        start = 0;
+        [allPublicPolls removeAllObjects];
+        [allPublicPollsDetails removeAllObjects];
+    
+        /* Nasconde la table view e fa partire l'animazione dello spinner */
+        [spinner startAnimating];
+        [self.tableView setHidden:YES];
+        
+    }
     
 }
 
@@ -137,16 +160,21 @@
     
     [super viewDidAppear:animated];
     
-    /* Download iniziale dei poll pubblici da 0 a 9 (start è = 0) */
-    [self DownloadPolls:start];
+    if(FLAG_HOME == 0) {
+        
+        /* Download dei poll pubblici da 0 a 9 (start è = 0) */
+        [self DownloadPolls:start];
     
-    /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
-    if(allPublicPolls==nil || [allPublicPolls count]==0)
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
+        if(allPublicPolls==nil || [allPublicPolls count]==0)
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    /* Si ferma l'animazione dello spinner e riappare la table view */
-    [spinner stopAnimating];
-    [self.tableView setHidden:NO];
+        /* Si ferma l'animazione dello spinner e riappare la table view */
+        [spinner stopAnimating];
+        [self.tableView setHidden:NO];
+        
+    }
+    
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
@@ -337,6 +365,12 @@
         p = [allPublicPollsDetails objectAtIndex:indexPath.row];
     
     /* Visualizzazione del poll nella cella */
+    UIImageView *imagePoll = (UIImageView *) [cell viewWithTag:100];
+    imagePoll.image = [UIImage imageNamed:@"PlaceholderImageCell"];
+    imagePoll.contentMode = UIViewContentModeScaleAspectFit;
+    imagePoll.layer.cornerRadius = imagePoll.frame.size.width/2;
+    imagePoll.clipsToBounds = YES;
+    
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = p.pollName;
     NamePoll.font = [UIFont fontWithName:FONT_HOME size:18];
@@ -349,7 +383,7 @@
     VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];
     VotiPoll.font = [UIFont fontWithName:FONT_HOME size:12];
     
-    /* Muovo la posizione dei voti a seconda del telefono */
+    /* Muove la posizione dei voti a seconda del telefono */
     CGRect newPosition = VotiPoll.frame;
     newPosition.origin.x= X_FOR_VOTES;
     VotiPoll.frame = newPosition;
@@ -402,6 +436,10 @@
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = p;
+        
+        [FLAGS removeAllObjects];
+        [FLAGS addObject:@"DETTAGLI"];
+        [File writeOnReload:@"0" ofFlags:FLAGS];
         
     }
     

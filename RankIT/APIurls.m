@@ -1,5 +1,4 @@
 /* Classe contenente soltanto gli URL relativi alle API di "RankIT" */
-
 #import "APIurls.h"
 
 NSString *URL_API = @"http://www.sapienzaapps.it/rateitapp";

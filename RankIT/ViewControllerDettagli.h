@@ -6,6 +6,7 @@
 
 @property (strong,nonatomic) Poll *p;
 @property (strong,nonatomic) Candidate *c;
+@property (readwrite,nonatomic) int FLAG;
 @property (strong,nonatomic) NSMutableArray* cands;
 @property (weak,nonatomic) IBOutlet UILabel *name;
 @property (weak,nonatomic) IBOutlet UITextView *description;
