@@ -36,7 +36,7 @@ XLFormRowDescriptor *mRow;
 XLFormDescriptor *mFormDescriptor;
 
 @implementation ViewControllerModPoll
-@synthesize p;
+@synthesize p,candidates;
 
 - (instancetype) initWithCoder:(NSCoder *)coder
 {
@@ -119,14 +119,31 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Set up the row template */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollCandidates rowType:XLFormRowDescriptorTypeText];
-    
     [[mRow cellConfig] setObject:@"Risposta" forKey:@"textField.placeholder"];
     mMultivaluedSection.multivaluedTag = @"textFieldRow";
-    mMultivaluedSection.multivaluedRowTemplate = mRow;
-    [mForm addFormSection:mMultivaluedSection];
-    self.form = mForm;
     
-    return [super initWithForm:mForm];
+    /* Adding exsisting row representing candidates */
+    
+    
+    for(NSString *cand in candidates)
+    {
+    
+        mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollCandidates rowType:XLFormRowDescriptorTypeText];
+        [[mRow cellConfig] setObject:@"Risposta" forKey:@"textField.placeholder"];
+    
+        mRow.value = [[NSString alloc] initWithFormat:@"%@", cand] ;
+        
+        [mMultivaluedSection addFormRow:mRow];
+    
+        /* End Adding existing row representing candidates */
+    
+        mMultivaluedSection.multivaluedRowTemplate = mRow;
+        [mForm addFormSection:mMultivaluedSection];
+    }
+    
+        self.form = mForm;
+    
+        return [super initWithForm:mForm];
     
 }
 
@@ -277,6 +294,37 @@ XLFormDescriptor *mFormDescriptor;
     return nil;
     
 }
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([[segue identifier] isEqualToString:(@"modPollResult")]) {
+        
+        [self getFormValues];
+        ViewControllerSummaryPoll *vc = (ViewControllerSummaryPoll*) [segue destinationViewController ];
+        vc.summaryResult = _result;
+        vc.isModified = true;
+        vc.oldCandidates = candidates;
+        vc.pollId = p.pollId;
+        
+    
+        
+        
+    }
+    
+}
+
+
+- (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    if([identifier isEqualToString:@"modPollResult"] && [self validateForm])
+    {
+        return YES;
+    }
+        return NO;
+    
+}
+
+
 
 
 @end

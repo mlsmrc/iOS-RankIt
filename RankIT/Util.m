@@ -59,9 +59,71 @@ float IPHONE_6Plus_HEIGHT = 736;
 /* Comparatore di date */
 +(int) compareDate:(NSDate *)first WithDate:(NSDate *)second {
     
-    NSString *f = [first description];
-    NSString *s = [second description];
-    return ([f compare:s]);
+    NSDateFormatter *fd = [Util getDateFormatter];
+    
+    NSDateComponents *First = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:first];
+    
+    NSDateComponents *Second = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[fd dateFromString:[second description]]];
+    
+    int yearFirst = (int)[First year];
+    int monthFirst = (int)[First month];
+    int dayFirst = (int)[First day];
+    int hourFirst = (int)[First hour];
+    int minuteFirst = (int)[First minute];
+    int yearSecond = (int)[Second year];
+    int monthSecond = (int)[Second month];
+    int daySecond = (int)[Second day];
+    int hourSecond = (int)[Second hour];
+    int minuteSecond = (int)[Second minute];
+    
+    if(yearFirst > yearSecond)
+        return 1;
+    
+    else if(yearFirst<yearSecond)
+        return -1;
+    
+    else {
+        
+        if(monthFirst > monthSecond)
+            return 1;
+        
+        else if(monthFirst < monthSecond)
+            return -1;
+        
+        else {
+            
+            if(dayFirst < daySecond)
+                return -1;
+            
+            else if(dayFirst > daySecond)
+                return 1;
+            
+            else {
+                
+                if(hourFirst < hourSecond)
+                    return -1;
+                
+                else if(hourFirst > hourSecond)
+                    return 1;
+                
+                else {
+                    
+                    if(minuteFirst < minuteSecond)
+                        return -1;
+                    
+                    else if(minuteFirst > minuteSecond)
+                        return 1;
+                    
+                    else
+                        return 0;
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
     
 }
 
@@ -69,9 +131,9 @@ float IPHONE_6Plus_HEIGHT = 736;
 + (NSString *) toStringUserFriendlyDate:(NSString *) data
 {
     NSDateFormatter *fd = [Util getDateFormatter];
-    NSDateComponents *compToDay = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSDateComponents *compToDay = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[[NSDate alloc]init]];
     
-    NSDateComponents *compData = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[fd dateFromString:data]];
+    NSDateComponents *compData = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[fd dateFromString:data]];
     
     int yearToDay = (int)[compToDay year];
     int monthToDay = (int)[compToDay month];
@@ -83,6 +145,7 @@ float IPHONE_6Plus_HEIGHT = 736;
     int dayData = (int)[compData day];
     int hourData = (int)[compData hour];
     int minuteData = (int)[compData minute];
+    
     NSArray *monthStrings = [[NSArray alloc] initWithObjects:@"Gennaio", @"Febbraio", @"Marzo", @"Aprile", @"Maggio", @"Giugno", @"Luglio", @"Agosto", @"Settembre", @"Ottobre", @"Novembre", @"Dicembre", nil];
     
     if(yearToDay>yearData)
@@ -110,32 +173,32 @@ float IPHONE_6Plus_HEIGHT = 736;
             else {
                 
                 if(hourToDay < hourData)
-                    return [NSString stringWithFormat:@"Scadrà alle %d",hourData];
+                    return [NSString stringWithFormat:@"Scadrà alle %d circa",hourData];
                 
-                else if(dayToDay > dayData)
+                else if(hourToDay > hourData)
                     return @"Sondaggio scaduto!";
                 
                 else {
                     
                     if(minuteToDay < minuteData)
-                        return [NSString stringWithFormat:@"Scadrà alle %d:%d",hourData,minuteData];
+                        [NSString stringWithFormat:(minuteData>=10 ? @"Scadrà alle %d:%d" : @"Scadrà alle %d:0%d"),hourData,minuteData];
                     
                     else if(minuteToDay > minuteData)
                         return @"Sondaggio scaduto!";
                     
                     else
-                        return @"Il sondaggio sta per scadere!";
-                
+                        return @"In scadenza";
+                    
                 }
-            
+                
             }
-        
+            
         }
-    
+        
     }
-
+    
     return @"";
-
+    
 }
 
 @end

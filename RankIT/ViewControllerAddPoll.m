@@ -263,6 +263,7 @@ XLFormSectionDescriptor *multivaluedSection;
         [self getFormValues];
         ViewControllerSummaryPoll *vc = (ViewControllerSummaryPoll*) [segue destinationViewController ];
         vc.summaryResult = _result;
+        vc.isModified = false;
         
     }
     

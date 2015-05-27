@@ -407,11 +407,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="y9R-Xn-ucq"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="y9R-Xn-ucq">
+                        <barButtonItem key="rightBarButtonItem" title="Avanti" id="qet-0H-SpX">
+                            <connections>
+                                <segue destination="QhE-1O-ydT" kind="push" identifier="modPollResult" id="Y9F-6e-5hV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emD-bM-KVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3460" y="505"/>
+            <point key="canvasLocation" x="4216" y="409"/>
         </scene>
         <!--Dettagli Poll-->
         <scene sceneID="Bua-UN-JOU">
@@ -805,7 +812,7 @@
             <objects>
                 <viewController id="QhE-1O-ydT" customClass="ViewControllerSummaryPoll" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="emX-eR-qOk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -946,6 +953,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="X5T-i7-2dj"/>
+        <segue reference="Y9F-6e-5hV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

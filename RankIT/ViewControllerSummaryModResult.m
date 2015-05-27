@@ -1,4 +1,12 @@
-#import "ViewControllerSummaryPoll.h"
+//
+//  ViewControllerSummaryModResult.m
+//  RankIT
+//
+//  Created by Giulio  Salierno on 27/05/15.
+//  Copyright (c) 2015 Giulio Salierno. All rights reserved.
+//
+
+#import "ViewControllerSummaryModResult.h"
 #import "XLFormSectionDescriptor.h"
 #import "XLFormImageSelectorCell.h"
 #import "ConnectionToServer.h"
@@ -6,64 +14,55 @@
 #import "File.h"
 
 
-@implementation ViewControllerSummaryPoll {
-    
-    XLFormDescriptor *summaryForm;
-    XLFormSectionDescriptor *summarySection;
-    XLFormRowDescriptor *summaryRow;
-    XLFormDescriptor *summaryformDescriptor;
-    
+@interface ViewControllerSummaryModResult ()
+
+@end
+
+
+@implementation ViewControllerSummaryModResult
+{
+
+    XLFormDescriptor *modSummaryForm;
+    XLFormSectionDescriptor *modSummarySection;
+    XLFormRowDescriptor *modSummaryRow;
+    XLFormDescriptor *modSummaryformDescriptor;
 }
 
-@synthesize summaryResult,pollDescResult,isModified,oldCandidates,pollId;
+@synthesize oldPoll,candidates,mSummaryResult,mPollDescResult;
 
-/* Tag riconoscimento row Nome Poll */
-NSString *const keyPollName = @"kPollName";
 
-/* Tag riconoscimento row Descrizione Poll */
-NSString *const keyPollDesc = @"kPollDesc";
 
-/* Tag riconoscimento row visibilità Poll */
-NSString *const keyPollPrivate = @"kPrivate";
-
-/* Tag riconoscimento row scadenza */
-NSString *const keyPollDeadLine = @"kPollDeadLine";
-
-/* Tag riconoscimento row candidates */
-NSString *const keyPollCandidates = @"textFieldRow";
-
-- (id) Initalize
-{
+- (id) Initalize {
     
-    NSString *pollName = summaryResult[keyPollName];
-    NSString *pollDesc = summaryResult[keyPollDesc];
-    NSMutableArray *candidates = summaryResult[keyPollCandidates];
-    NSDate *deadLine =  summaryResult[keyPollDeadLine];
+    NSString *pollName = mSummaryResult[@"kPollName"];
+    NSString *pollDesc = mSummaryResult[@"kPollDesc"];
+    NSMutableArray *candidates = mSummaryResult[@"textFieldRow"];
+    NSDate *deadLine =  mSummaryResult[@"kPollDeadLine"];
     
-    /* Date Formatter for showing date */
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    /* Date Formatter forshowing date */
+     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy HH:mm"];
-
+    
     /* Initializing view */
-    summaryForm = [XLFormDescriptor formDescriptorWithTitle:@"Riepilogo "];
+    modSummaryForm = [XLFormDescriptor formDescriptorWithTitle:@"Riepilogo "];
     
     /* Prima Sezione */
-    summarySection = [XLFormSectionDescriptor formSection];
-    summarySection.footerTitle = [NSString stringWithFormat:@"Scadenza: %@",[dateFormat stringFromDate:deadLine]];
+    modSummarySection = [XLFormSectionDescriptor formSection];
+    modSummarySection.footerTitle = [NSString stringWithFormat:@"Scadenza: %@",[dateFormat stringFromDate:deadLine]];
     
-    [summaryForm addFormSection:summarySection];
+    [modSummaryForm addFormSection:modSummarySection];
     
     /* PollName */
-    summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"PollName" rowType:XLFormRowDescriptorTypeTwitter title:@"Nome Poll: "];
-    summaryRow.disabled = @YES;
-    summaryRow.value = pollName;
-    [summarySection addFormRow:summaryRow];
+    modSummaryForm = [XLFormRowDescriptor formRowDescriptorWithTag:@"PollName" rowType:XLFormRowDescriptorTypeTwitter title:@"Nome Poll: "];
+    modSummaryForm.disabled = @YES;
+    modSummaryRow.value = pollName;
+    [modSummarySection addFormRow:modSummaryRow];
     
     /* Descrizione */
-    summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"PollDesc" rowType:XLFormRowDescriptorTypeTwitter title:@"Descrizione: "];
-    summaryRow.disabled =@YES;
-    summaryRow.value = pollDesc;
-    [summarySection addFormRow:summaryRow];
+    modSummaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"PollDesc" rowType:XLFormRowDescriptorTypeTwitter title:@"Descrizione: "];
+    modSummaryRow.disabled =@YES;
+    modSummaryRow.value = pollDesc;
+    [modSummarySection addFormRow:modSummaryRow];
     
     /* Seconda Sezione Dinamica Candidate + Desc Candidate Not editable *
      * MultivaluedSection section                                       */
@@ -74,37 +73,36 @@ NSString *const keyPollCandidates = @"textFieldRow";
     for( NSString * candidate in candidates) {
         
         /* Creiamo una nuova Sezione */
-        summarySection = [XLFormSectionDescriptor formSectionWithTitle:@"" sectionOptions:XLFormSectionOptionNone];
-
-        [summaryForm addFormSection:summarySection];
+        modSummarySection = [XLFormSectionDescriptor formSectionWithTitle:@"" sectionOptions:XLFormSectionOptionNone];
+        
+        [modSummaryForm addFormSection:modSummarySection];
         
         /* Creiamo una nuova row per l'aggiunta di una foto del candidate *
          * Image Poll Row                                                 */
         
-        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageSelectorCellCustom];
-        [summarySection addFormRow:summaryRow];
+        modSummaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageSelectorCellCustom];
+        [modSummarySection addFormRow:modSummaryRow];
         
         /* Creiamo una nuova riga corrispondente alla risposta */
-        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandName %d",countRow] rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
-                      
-        [[summaryRow cellConfig] setObject:@"Add a new tag" forKey:@"textField.placeholder"];
-        summaryRow.value = [candidate copy];
-        summaryRow.disabled=@YES;
-        [summarySection addFormRow:summaryRow];
+        modSummaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandName %d",countRow] rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
+        
+        [[modSummaryRow cellConfig] setObject:@"Add a new tag" forKey:@"textField.placeholder"];
+        modSummaryRow.value = [candidate copy];
+        modSummaryRow.disabled=@YES;
+        [modSummarySection addFormRow:modSummaryRow];
         
         /* Creiamo una nuova riga per poter permettere l'aggiunta di una eventuale descrizione all'utente */
-        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandDesc %d",countRow] rowType:XLFormRowDescriptorTypeTextView];
+        modSummaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandDesc %d",countRow] rowType:XLFormRowDescriptorTypeTextView];
         
-        summaryRow.value = [self getDescrByCand:candidate];
-        [summaryRow.cellConfigAtConfigure setObject:@"Aggiungi una descrizione..." forKey:@"textView.placeholder"];
-        [summarySection addFormRow:summaryRow];
+        [modSummaryRow.cellConfigAtConfigure setObject:@"Aggiungi una descrizione..." forKey:@"textView.placeholder"];
+        [modSummarySection addFormRow:modSummaryRow];
         
         countRow++;
-    
+        
     }
- 
-    self.form = summaryForm;
-    return [super initWithForm:summaryForm];
+    
+    self.form = modSummaryForm;
+    return [super initWithForm:modSummaryForm];
     
 }
 
@@ -125,7 +123,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
 /* Il metodo  si occupa di estrarre i dati dal form */
 - (NSMutableDictionary *) getFormValues {
     
-    pollDescResult =   [NSMutableDictionary dictionary];
+    mPollDescResult =   [NSMutableDictionary dictionary];
     
     for(XLFormSectionDescriptor * section in self.form.formSections) {
         
@@ -134,7 +132,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
             for(XLFormRowDescriptor * row in section.formRows) {
                 
                 if(row.tag && ![row.tag isEqualToString:@""])
-                    [pollDescResult setObject:(row.value ?: [NSNull null]) forKey:row.tag];
+                    [mPollDescResult setObject:(row.value ?: [NSNull null]) forKey:row.tag];
             }
             
         }
@@ -150,13 +148,13 @@ NSString *const keyPollCandidates = @"textFieldRow";
                 
             }
             
-            [pollDescResult setObject:multiValuedValuesArray forKey:section.multivaluedTag];
-        
+            [mPollDescResult setObject:multiValuedValuesArray forKey:section.multivaluedTag];
+            
         }
         
     }
     
-    return pollDescResult;
+    return mPollDescResult;
     
 }
 
@@ -165,10 +163,10 @@ NSString *const keyPollCandidates = @"textFieldRow";
 - (Poll *) createPoll:(NSMutableDictionary *) dataInput {
     
     /* Estrazione dati dal dictionary passato in input */
-    NSString *pollName = summaryResult[keyPollName];
-    NSString *pollDesc = summaryResult[keyPollDesc];
-    NSDate *deadLine = summaryResult[keyPollDeadLine];
-    BOOL private = (summaryResult[keyPollPrivate] == false || summaryResult[keyPollPrivate] == (id)[NSNull null]  ? false : true);
+    NSString *pollName = mSummaryResult[@"kPollName"];
+    NSString *pollDesc = mSummaryResult[@"kPollDesc"];
+    NSDate *deadLine = mSummaryResult[@"kPollDeadLine"];
+    BOOL private = (mSummaryResult[@"kPollDeadLine"] == false || mSummaryResult[@"kPollDeadLine"] == (id)[NSNull null]  ? false : true);
     NSMutableArray *pollCand =  [self createCandidate:dataInput]; //creazione di un array di candidates del poll con CandName - CandDesc
     
     
@@ -177,26 +175,20 @@ NSString *const keyPollCandidates = @"textFieldRow";
     _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
     
     return _poll;
-
+    
 }
 
 
 /* Il metodo si occupa dell'invio del poll al server */
-- (NSString *) postPoll:(Poll*) newPoll
-{
+- (NSString *) postPoll:(Poll*) newPoll {
     
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-    
-    if(isModified)
-        [self removeOldPoll:pollId];
-    
-    
     return [conn addPollWithPoll:newPoll];
     
 }
 
 - (void) viewDidLoad {
-
+    
     [self Initalize];
     [super viewDidLoad];
     
@@ -242,33 +234,11 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
--(NSString *)getDescrByCand:(NSString *)candid
-{
-    for(Candidate *cand in oldCandidates)
-    {
-        if([cand.candName isEqualToString:candid])
-            return cand.candDescription;
-    
-    }
-
-    return @"";
-}
-
-
--(int) removeOldPoll:(int) pollid
-{
-    ConnectionToServer *conn = [[ConnectionToServer alloc] init];
-    
-    return [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",pollid] AndUserID:[File getUDID]];
-    
-    
-}
-
-
 - (void) didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
     
 }
+
 
 @end

@@ -115,7 +115,7 @@
         image.clipsToBounds = YES;
     
         /* Se è un poll scaduto non viene permessa la votazione */
-        if([Util compareDate:[NSDate new] WithDate:p.deadline]==1)
+        if([Util compareDate:[[NSDate alloc]init] WithDate:p.deadline]==1)
             [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
         /* Se un poll è stato eliminato o non c'è connessione, viene fatto vedere un messaggio a video e disibilitato il tasto "Vota" */
@@ -401,6 +401,7 @@
         ViewControllerModPoll *vc = (ViewControllerModPoll*) [segue destinationViewController ];
         
         vc.p = p; //passiamo il poll da modificare alla view successiva
+        vc.candidates = self.cands; //passiamo i candidates alla vista successiva 
         
         
     }

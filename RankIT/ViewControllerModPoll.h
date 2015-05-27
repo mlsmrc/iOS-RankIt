@@ -8,6 +8,7 @@
 
 #import "XLFormViewController.h"
 #import "XLFormImageSelectorCell.h"
+#import "ViewControllerSummaryPoll.h"
 #import "XLForm.h"
 #import "Poll.h"
 #import <UIKit/UIKit.h>
@@ -20,5 +21,8 @@
 
 /*Conterrà il Poll da modificare proveniente dalla view precedente*/
 @property (strong,nonatomic) Poll *p;
+
+/*Conterrà i candidates per il poll passato */
+@property(strong,nonatomic) NSMutableArray *candidates;
 
 @end
