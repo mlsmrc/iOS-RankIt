@@ -35,6 +35,7 @@ XLFormSectionDescriptor *mSection;
 XLFormRowDescriptor *mRow;
 XLFormDescriptor *mFormDescriptor;
 
+
 @implementation ViewControllerModPoll
 @synthesize p,candidates;
 
@@ -105,7 +106,11 @@ XLFormDescriptor *mFormDescriptor;
     
     /* isPrivate */
     mRow = [XLFormRowDescriptor  formRowDescriptorWithTag:TPollPrivate rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Privato"];
-    mRow.value = (p.pvtPoll == true ? @YES : @NO);
+    
+    if(p.pvtPoll == true) //Se il pool è privato switch su ON
+        mRow.value =@YES;
+    
+    
     [mSection addFormRow:mRow];
     mSection.footerTitle =@"Nota: Rendendo il sondaggio privato non sarà visibile sulla Home di RankIT";
     
@@ -184,6 +189,8 @@ XLFormDescriptor *mFormDescriptor;
     }
     
 }
+
+
 
 /* Utilizzata per validare l'input inserito dall'utente */
 -(BOOL) validateForm {
@@ -277,6 +284,7 @@ XLFormDescriptor *mFormDescriptor;
         }
         
     }
+    
     
     return _result;
     

@@ -26,6 +26,7 @@
 @property int pollId;
 
 
+
 /* Old Candidates */
 
 @property (strong,nonatomic) NSMutableArray *oldCandidates;

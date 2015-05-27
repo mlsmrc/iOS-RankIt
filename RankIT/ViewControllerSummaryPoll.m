@@ -168,13 +168,20 @@ NSString *const keyPollCandidates = @"textFieldRow";
     NSString *pollName = summaryResult[keyPollName];
     NSString *pollDesc = summaryResult[keyPollDesc];
     NSDate *deadLine = summaryResult[keyPollDeadLine];
-    BOOL private = (summaryResult[keyPollPrivate] == false || summaryResult[keyPollPrivate] == (id)[NSNull null]  ? false : true);
+    BOOL private = false;
+    
+    if(summaryResult[keyPollPrivate] != (id)[NSNull null])
+        private = [summaryResult[keyPollPrivate] boolValue];
+            
+    
     NSMutableArray *pollCand =  [self createCandidate:dataInput]; //creazione di un array di candidates del poll con CandName - CandDesc
     
     
     /* Creazione nuovo Poll */
     
     _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
+    
+
     
     return _poll;
 
@@ -187,7 +194,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
     
-    if(isModified)
+    if(isModified) //se stiamo modificando un pool eliminiamo il vecchio
         [self removeOldPoll:pollId];
     
     
@@ -242,6 +249,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
+/*Dato un candidates il metodo restituisce la descrizion in caso di modifica poll*/
 -(NSString *)getDescrByCand:(NSString *)candid
 {
     for(Candidate *cand in oldCandidates)
@@ -254,7 +262,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     return @"";
 }
 
-
+/* Il metodo si occupa di eliminare i poll vecchi in modifica*/
 -(int) removeOldPoll:(int) pollid
 {
     ConnectionToServer *conn = [[ConnectionToServer alloc] init];
