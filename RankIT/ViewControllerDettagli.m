@@ -42,7 +42,7 @@
     /* Setup spinner */
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [spinner setColor:[UIColor grayColor]];
-    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-44);
+    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-150);
     [self.view addSubview:spinner];
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */

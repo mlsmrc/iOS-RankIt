@@ -53,7 +53,7 @@
     
     [super viewDidLoad];
     
-    
+    FLAGS = [[NSMutableArray alloc]init];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -81,7 +81,7 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [spinner setColor:[UIColor grayColor]];
-    spinner.center = CGPointMake(width/2, (height/2)-44);
+    spinner.center = CGPointMake(width/2, (height/2)-125);
     [self.view addSubview:spinner];
 
     /* Questa è la parte di codice che definisce il refresh da parte della TableView */

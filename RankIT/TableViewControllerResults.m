@@ -45,7 +45,7 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [spinner setColor:[UIColor grayColor]];
-    spinner.center = CGPointMake(width/2, (height/2)-44);
+    spinner.center = CGPointMake(width/2, (height/2)-150);
     [self.view addSubview:spinner];
     
     /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */

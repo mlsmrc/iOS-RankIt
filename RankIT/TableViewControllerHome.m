@@ -116,7 +116,7 @@
     /* Setup spinner */
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [spinner setColor:[UIColor grayColor]];
-    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-44);
+    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-125);
     [self.view addSubview:spinner];
     
 }
