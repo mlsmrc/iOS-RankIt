@@ -5,6 +5,8 @@
 #import "Font.h"
 #import "File.h"
 #import "Util.h"
+#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
+
 
 @interface UIViewController ()
 
@@ -42,14 +44,13 @@
     /* Booleano per indicare se si può/deve aggiornare e scaricare i poll nuovi */
     BOOL UPLOAD;
     
-    /* Refresh control per i poll aggiuntivi */
-    UIRefreshControl *footerRefreshControl;
-    
     /* Spinner per il ricaricamento della Home */
     UIActivityIndicatorView *spinner;
     
     /* Array di flag che permette il corretto ricaricamento delle view principali */
     NSMutableArray *FLAGS;
+    
+    UIRefreshControl *buttonRefreshControl;
     
 }
 
@@ -118,7 +119,10 @@
     [spinner setColor:[UIColor grayColor]];
     spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-125);
     [self.view addSubview:spinner];
-    
+    buttonRefreshControl = [UIRefreshControl new];
+    buttonRefreshControl.triggerVerticalOffset = 100.;
+    [buttonRefreshControl addTarget:self action:@selector(buttonRefresh) forControlEvents:UIControlEventValueChanged];
+    self.tableView.bottomRefreshControl = buttonRefreshControl;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -497,7 +501,7 @@
 
 /* Funzione che gestisce lo scroll dall'alto verso il basso per caricare ulteriori poll se ce ne sono di altri non caricati */
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
+    [buttonRefreshControl setHidden:NO];
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     
@@ -508,7 +512,14 @@
         [self DownloadPolls:start];
         
     }
+    [buttonRefreshControl setHidden:YES];
     
+}
+
+
+- (void) buttonRefresh
+{
+    /* Funzione vuota che serve solo per gestire la rotellina di caricamento in basso */
 }
 
 @end
