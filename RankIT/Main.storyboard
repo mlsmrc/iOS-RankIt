@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gk2-zu-o1D">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -59,6 +59,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QqL-dR-An5">
+                                                    <rect key="frame" x="34" y="24" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -153,6 +157,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0Sl-R5-4mT">
+                                                    <rect key="frame" x="34" y="24" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -390,6 +398,21 @@
             </objects>
             <point key="canvasLocation" x="3308" y="-176"/>
         </scene>
+        <!--View Controller Mod Poll-->
+        <scene sceneID="IzY-x9-9Ad">
+            <objects>
+                <viewController id="tLA-cY-L2F" customClass="ViewControllerModPoll" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wci-eH-rs3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="y9R-Xn-ucq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="emD-bM-KVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3460" y="505"/>
+        </scene>
         <!--Dettagli Poll-->
         <scene sceneID="Bua-UN-JOU">
             <objects>
@@ -616,6 +639,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="sKN-JT-7Xt">
+                                                    <rect key="frame" x="34" y="24" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -884,6 +911,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Modifica" id="mhr-gt-Uvc">
                             <connections>
                                 <action selector="VotaPressed:" destination="S7m-EW-wRQ" id="u4F-BV-zYK"/>
+                                <segue destination="tLA-cY-L2F" kind="push" identifier="modPoll" id="JXJ-OX-DrY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -917,7 +945,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Zgg-cI-oMW"/>
+        <segue reference="X5T-i7-2dj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
