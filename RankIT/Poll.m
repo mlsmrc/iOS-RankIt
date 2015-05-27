@@ -49,7 +49,9 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
          withDescription: (NSString *) Description
          withResultsType: (int) rType
             withDeadline: (NSDate *) Deadline
+             withPrivate: (BOOL) Private
           withLastUpdate: (NSDate *) LastUpdate
+                withMine: (int) Mine
           withCandidates: (NSMutableArray *) cand
                withVotes:(int)Votes
 {
@@ -63,8 +65,9 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
         resultsType = rType;
         deadline = Deadline;
         lastUpdate = LastUpdate;
+        mine = Mine;
         candidates = cand;
-        
+        pvtPoll = Private;
         votes = Votes;
 
         /* Inizializzazione formattatore date */

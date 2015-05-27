@@ -199,8 +199,26 @@
 - (void) DownloadPolls:(int)startPoll {
     
     Connection = [[ConnectionToServer alloc]init];
+    NSString *value;
+    NSMutableDictionary *allMyPolls = [[NSMutableDictionary alloc]init];
+    
+    /* Scarica i poll dell'utente */
+    if (startPoll==0) {
+        [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:[NSString stringWithFormat:@"%d",startPoll]];
+        allMyPolls = Connection.getDizionarioPolls;
+        for(id key in allMyPolls)
+        {
+            value = [allMyPolls objectForKey:key];
+            if ([value valueForKey:@"unlisted"]==0)
+                [allMyPolls removeObjectForKey:key];
+        }
+    }
+    
+    
+    /* Scarica poll pubblici */
     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:[NSString stringWithFormat:@"%d",startPoll]];
     allPublicPolls = Connection.getDizionarioPolls;
+    [allPublicPolls setValuesForKeysWithDictionary:allMyPolls];
     
     if(allPublicPolls!=nil && [allPublicPolls count] != 0) {
         
@@ -232,9 +250,13 @@
                                   withDescription:[value valueForKey:@"polldescription"]
                                   withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
                                      withDeadline:[value valueForKey:@"deadline"]
+                                      withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
                                    withLastUpdate:[value valueForKey:@"updated"]
+                                         withMine:[[value valueForKey:@"mine"] intValue]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
+
+        
         
         [allPublicPollsDetails addObject:p];
         
@@ -382,6 +404,22 @@
     UILabel *VotiPoll = (UILabel *)[cell viewWithTag:103];
     VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];
     VotiPoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    
+    /* Immagine se e solo se poll privato */
+    if (p.pvtPoll==true) {
+        UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
+        imagePrivate.image = [UIImage imageNamed:@"Unlisted"];
+        imagePrivate.contentMode = UIViewContentModeScaleAspectFit;
+        imagePrivate.layer.cornerRadius = imagePrivate.frame.size.width/2;
+        imagePrivate.clipsToBounds = YES;
+    }
+    else
+    {
+        UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
+        imagePrivate.image = [UIImage new];
+    }
+
+    
     
     /* Muove la posizione dei voti a seconda del telefono */
     CGRect newPosition = VotiPoll.frame;

@@ -195,9 +195,11 @@
         Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
                                          withName:[value valueForKey:@"pollname"]
                                   withDescription:[value valueForKey:@"polldescription"]
-                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0)
+                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
                                      withDeadline:[value valueForKey:@"deadline"]
+                                      withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
                                    withLastUpdate:[value valueForKey:@"updated"]
+                                         withMine:[[value valueForKey:@"mine"] intValue]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
         
@@ -349,6 +351,20 @@
     UILabel *VotiPoll = (UILabel *)[cell viewWithTag:103];
     VotiPoll.text = [NSString stringWithFormat:@"Voti: %d",p.votes];
     VotiPoll.font = [UIFont fontWithName:FONT_HOME size:12];
+    
+    /* Immagine se e solo se poll privato */
+    if (p.pvtPoll==true) {
+        UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
+        imagePrivate.image = [UIImage imageNamed:@"Unlisted"];
+        imagePrivate.contentMode = UIViewContentModeScaleAspectFit;
+        imagePrivate.layer.cornerRadius = imagePrivate.frame.size.width/2;
+        imagePrivate.clipsToBounds = YES;
+    }
+    else
+    {
+        UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
+        imagePrivate.image = [UIImage new];
+    }
     
     /* Muove la posizione dei voti a seconda del telefono */
     CGRect newPosition = VotiPoll.frame;

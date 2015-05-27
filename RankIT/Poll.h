@@ -19,7 +19,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
     NSString *userID;
     BOOL pvtPoll;
     NSDate *lastUpdate;
-    int *mine;
+    int mine;
     int votes;
     NSMutableArray *candidates;
     
@@ -38,7 +38,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 @property (readwrite,nonatomic) BOOL pvtPoll;
 @property (readonly,nonatomic) NSDate *lastUpdate;
 @property (readwrite,nonatomic) int votes;
-@property (readonly,nonatomic) int *mine;
+@property (readonly,nonatomic) int mine;
 @property (readwrite,nonatomic) NSMutableArray *candidates;
 
 /* Costruttore per l'aggiunta di un nuovo Poll */
@@ -55,7 +55,9 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
          withDescription: (NSString *) Description
          withResultsType: (int) rType
             withDeadline: (NSDate *) Deadline
+             withPrivate: (BOOL) Private
           withLastUpdate: (NSDate *) LastUpdate
+                withMine: (int) mine
           withCandidates: (NSMutableArray *) cand
                withVotes:(int)Votes;
 
