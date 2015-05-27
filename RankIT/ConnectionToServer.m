@@ -17,6 +17,9 @@ NSMutableDictionary *dizionarioPolls;
     /* Dizionario che conterrà i poll scaricati per una determinata connessione */
     NSMutableDictionary *dizionarioPolls;
     
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
+    
 }
 
 - (NSData *) sendPostRequestWithPostURL: (NSString*) postURL AndParametersString:(NSString *)parameters {
@@ -174,6 +177,10 @@ NSMutableDictionary *dizionarioPolls;
 
         /* Aggiungi votazione in Vota.plist */
         [File writeOnPListRanking:ranking OfPoll:pollId];
+        
+        FLAGS = [[NSMutableArray alloc]init];
+        [FLAGS addObject:@"HOME"];
+        [File writeOnReload:@"0" ofFlags:FLAGS];
         
         return true;
     }

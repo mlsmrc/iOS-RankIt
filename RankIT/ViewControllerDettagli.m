@@ -97,7 +97,7 @@
         name.text = p.pollName;
     
         deadline.font = [UIFont fontWithName:FONT_DETTAGLI_POLL_LIGHT size:14];
-        deadline.textColor = [UIColor redColor];
+        deadline.textColor = [UIColor blackColor];
         deadline.text = [Util toStringUserFriendlyDate:(NSString *)p.deadline];
     
         description.selectable = true;
