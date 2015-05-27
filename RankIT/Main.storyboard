@@ -395,7 +395,7 @@
             <objects>
                 <viewController title="Dettagli Poll" hidesBottomBarWhenPushed="YES" id="zPC-dB-2ah" customClass="ViewControllerDettagli" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d40-Ix-fq5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gG7-GW-Suq">
@@ -414,7 +414,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="287" height="74"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageCell" id="2IT-k1-LoL">
+                                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2IT-k1-LoL">
                                                             <rect key="frame" x="14" y="4" width="65" height="65"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                         </imageView>
@@ -798,7 +798,6 @@
     <resources>
         <image name="Credits" width="25" height="25"/>
         <image name="Home" width="25" height="25"/>
-        <image name="ImageCell" width="180" height="180"/>
         <image name="MyPoll" width="25" height="25"/>
         <image name="Votati" width="25" height="25"/>
     </resources>
