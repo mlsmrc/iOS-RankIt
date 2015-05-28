@@ -180,6 +180,7 @@ NSMutableDictionary *dizionarioPolls;
         
         FLAGS = [[NSMutableArray alloc]init];
         [FLAGS addObject:@"HOME"];
+        [FLAGS addObject:@"VOTATI"];
         [File writeOnReload:@"0" ofFlags:FLAGS];
         
         return true;

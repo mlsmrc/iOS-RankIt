@@ -144,7 +144,7 @@
         [self DownloadPolls];
     
         /* Se non c'è connessione o non ci sono poll votati, il background della TableView è senza linee */
-        if(allVotedPolls==nil || [allVotedPolls count]==0)
+        if((allVotedPolls==nil || [allVotedPolls count]==0) && (allMyPolls==nil || [allMyPolls count]==0))
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
@@ -161,11 +161,12 @@
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
-    allVotedPolls = [Connection getDizionarioPollsVotati];
+    //allVotedPolls = [Connection getDizionarioPollsVotati];
+    allVotedPolls = [[NSMutableDictionary alloc]init];
     [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
     allMyPolls = [Connection getDizionarioPolls];
     
-    if(allVotedPolls!=nil && [allVotedPolls count] != 0) {
+    if((allVotedPolls!=nil && [allVotedPolls count] != 0) || (allMyPolls!=nil && [allMyPolls count]!= 0)) {
         
         [self CreatePollsDetails];
         [self.tableView reloadData];
@@ -229,9 +230,9 @@
 /* Visualizzazione poll votati nella schermata "Votati" */
 - (void) VotedPolls {
 
-    if(allVotedPolls!=nil) {
+    if(allVotedPolls!=nil || allMyPolls!=nil) {
         
-        if([allVotedPolls count] != 0) {
+        if([allVotedPolls count] != 0 || [allMyPolls count] != 0) {
             
             /* Rimuoviamo la subview aggiunta per il messaggio d'errore */
             subView  = [self.tableView viewWithTag:1];
