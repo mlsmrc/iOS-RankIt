@@ -239,9 +239,9 @@
     notiesSymbolLineStyle.lineColor = notiesColor;
     notiesSymbolLineStyle.lineWidth = 0.0;
     notiesPlot.dataLineStyle=notiesSymbolLineStyle;
-    notiesPlot.plotSymbolMarginForHitDetection=6.0f;
+    notiesPlot.plotSymbolMarginForHitDetection=9.0f;
     
-    tiesPlot.plotSymbolMarginForHitDetection=6.0f;
+    tiesPlot.plotSymbolMarginForHitDetection=9.0f;
     tiesPlot.delegate=self;
     notiesPlot.delegate=self;
     
@@ -375,6 +375,19 @@
     
 }
 
+-(void) removeAnnotation
+{
+    
+    if(annotation!=nil)
+        [self.hostView.hostedGraph.plotAreaFrame.plotArea removeAnnotation:annotation];
+    annotation=nil;
+    [tiesPlot reloadData];
+    [notiesPlot reloadData];
+}
+
+
+
+
 - (void) scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index {
     
     selectedIndex = index;
@@ -382,8 +395,7 @@
     
     CPTColor *color;
     
-    if(annotation!=nil)
-     [self.hostView.hostedGraph.plotAreaFrame.plotArea removeAnnotation:annotation];
+    [self removeAnnotation];
     
     if([plot.identifier isEqual:@"TIES"] == YES) {
         
@@ -408,12 +420,12 @@
     NSString *label=[NSString stringWithFormat:@"%@ \n(%.3f,%.3f)",[votazione pattern],[votazione mu],[votazione sigma]];
     CPTMutableTextStyle *style=[[CPTMutableTextStyle alloc]init];
     style.color=color;
-    style.fontSize=7.0;
+    style.fontSize=9.0;
     CPTTextLayer *textLayer = [[CPTTextLayer alloc] initWithText:label style:style];
     annotation.contentLayer = textLayer;
-    annotation.displacement = CGPointMake(-10.0f, -20.0f);
+    annotation.displacement = CGPointMake(-15.0f, -20.0f);
     [self.hostView.hostedGraph.plotAreaFrame.plotArea addAnnotation:annotation];
-    [self symbolForScatterPlot:plot recordIndex:index];
+   // [self symbolForScatterPlot:plot recordIndex:index];
     [tiesPlot reloadData];
     [notiesPlot reloadData];
 
@@ -438,7 +450,7 @@
     else if([plot.identifier isEqual:@"TIES"] == YES&&index!=selectedIndex) {
         
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol diamondPlotSymbol];
-        plotSymbol.size = CGSizeMake(6.0f, 6.0f);
+        plotSymbol.size = CGSizeMake(9.0f, 9.0f);
         plotSymbol.fill=[CPTFill fillWithColor:[CPTColor redColor]];
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
@@ -460,7 +472,7 @@
     else if([plot.identifier isEqual:@"NOTIES"] == YES&&index!=selectedIndex) {
     
         CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-        plotSymbol.size = CGSizeMake(6.0f, 6.0f);
+        plotSymbol.size = CGSizeMake(9.0f, 9.0f);
         plotSymbol.fill=[CPTFill fillWithColor:[CPTColor purpleColor]];
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
@@ -482,6 +494,15 @@
     graph.legendAnchor = CPTRectAnchorBottom;
     graph.legendDisplacement = CGPointMake(105.0, 255.0);
 
+}
+
+-(BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event atPoint:(CGPoint)point
+{
+     selectedIndex=-1;
+    [self removeAnnotation];
+   
+    
+    return true;
 }
 
 - (void) inizializzaArrays {
