@@ -33,7 +33,7 @@
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
-    /* Messaggio nella schermata Votati */
+    /* Messaggio nella schermata "Votati" */
     UILabel *messageLabel;
     
     /* Pulsante di ritorno schermata precedente */
@@ -390,16 +390,20 @@
     
     /* Immagine se e solo se poll privato */
     if (p.pvtPoll==true) {
+        
         UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
         imagePrivate.image = [UIImage imageNamed:@"Unlisted"];
         imagePrivate.contentMode = UIViewContentModeScaleAspectFit;
         imagePrivate.layer.cornerRadius = imagePrivate.frame.size.width/2;
         imagePrivate.clipsToBounds = YES;
+    
     }
-    else
-    {
+    
+    else {
+        
         UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
         imagePrivate.image = [UIImage new];
+    
     }
     
     /* Muovo la posizione dei voti a seconda del telefono */

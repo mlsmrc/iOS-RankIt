@@ -42,7 +42,7 @@ float IPHONE_6_HEIGHT = 667;
 float IPHONE_6Plus_HEIGHT = 736;
 
 /* Ritorna l'oggetto utile a formattare la data - funzione statica */
-+(NSDateFormatter*) getDateFormatter {
++ (NSDateFormatter*) getDateFormatter {
     
     NSDateFormatter *DF = [[NSDateFormatter alloc] init];
     DF.timeStyle = NSDateFormatterNoStyle;
@@ -57,7 +57,7 @@ float IPHONE_6Plus_HEIGHT = 736;
 }
 
 /* Comparatore di date */
-+(int) compareDate:(NSDate *)first WithDate:(NSDate *)second {
++ (int) compareDate:(NSDate *)first WithDate:(NSDate *)second {
     
     NSDateFormatter *fd = [Util getDateFormatter];
     
@@ -79,7 +79,7 @@ float IPHONE_6Plus_HEIGHT = 736;
     if(yearFirst > yearSecond)
         return 1;
     
-    else if(yearFirst<yearSecond)
+    else if(yearFirst < yearSecond)
         return -1;
     
     else {
@@ -128,8 +128,8 @@ float IPHONE_6Plus_HEIGHT = 736;
 }
 
 /* Ritorna la stringa data in maniera più user friendly, già pronta per stamparla a video */
-+ (NSString *) toStringUserFriendlyDate:(NSString *) data
-{
++ (NSString *) toStringUserFriendlyDate:(NSString *) data {
+    
     NSDateFormatter *fd = [Util getDateFormatter];
     NSDateComponents *compToDay = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[[NSDate alloc]init]];
     
@@ -148,47 +148,50 @@ float IPHONE_6Plus_HEIGHT = 736;
     
     NSArray *monthStrings = [[NSArray alloc] initWithObjects:@"Gennaio", @"Febbraio", @"Marzo", @"Aprile", @"Maggio", @"Giugno", @"Luglio", @"Agosto", @"Settembre", @"Ottobre", @"Novembre", @"Dicembre", nil];
     
+    NSString *friendlyDate=@"";
+    
     if(yearToDay>yearData)
-        return @"Sondaggio scaduto!";
+        friendlyDate=@"Sondaggio scaduto!";
     
     else if(yearToDay<yearData)
-        return [NSString stringWithFormat:@"Scadrà nel %d",yearData];
+        friendlyDate=[NSString stringWithFormat:@"Scadrà nel %d",yearData];
     
     else {
         
         if(monthToDay < monthData)
-            return [NSString stringWithFormat:@"Scadrà a %@",monthStrings[monthData-1]];
+            friendlyDate=[NSString stringWithFormat:@"Scadrà a %@",monthStrings[monthData-1]];
         
         else if(monthToDay > monthData)
-            return @"Sondaggio scaduto!";
+            friendlyDate=@"Sondaggio scaduto!";
         
         else {
             
             if(dayToDay < dayData)
-                return [NSString stringWithFormat:@"Scadrà il %d",dayData];
+                friendlyDate=[NSString stringWithFormat:@"Scadrà il %d",dayData];
             
             else if(dayToDay > dayData)
-                return @"Sondaggio scaduto!";
+                friendlyDate=@"Sondaggio scaduto!";
             
             else {
                 
                 if(hourToDay < hourData)
-                    return [NSString stringWithFormat:@"Scadrà alle %d circa",hourData];
+                    friendlyDate=[NSString stringWithFormat:@"Scadrà alle %d circa",hourData];
                 
                 else if(hourToDay > hourData)
-                    return @"Sondaggio scaduto!";
+                    friendlyDate=@"Sondaggio scaduto!";
                 
                 else {
                     
                     if(minuteToDay < minuteData)
-                        [NSString stringWithFormat:(minuteData>=10 ? @"Scadrà alle %d:%d" : @"Scadrà alle %d:0%d"),hourData,minuteData];
+                        
+                        friendlyDate=[NSString stringWithFormat:@"Scadrà fra %d minuti",(minuteData-minuteToDay)];
                     
                     else if(minuteToDay > minuteData)
-                        return @"Sondaggio scaduto!";
+                        friendlyDate=@"Sondaggio scaduto!";
                     
                     else
-                        return @"In scadenza";
-                    
+                        friendlyDate=@"In scadenza";
+                
                 }
                 
             }
@@ -197,7 +200,7 @@ float IPHONE_6Plus_HEIGHT = 736;
         
     }
     
-    return @"";
+    return friendlyDate;
     
 }
 

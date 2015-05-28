@@ -130,15 +130,18 @@
 /* Invio della classifica al server */
 - (IBAction) vota:(id)sender {
     
-    if ([Util compareDate:[NSDate new] WithDate:poll.deadline]) {
+    if([Util compareDate:[NSDate new] WithDate:poll.deadline]==1) {
+        
         /* Popup per voto sottomesso */
         UIAlertView *alert = [UIAlertView alloc];
         alert.tag = VOTO_SCADUTO;
         alert = [alert initWithTitle:@"Esito Votazione" message:@"Sondaggio scaduto!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [alert show];
+    
     }
-    else
-    {
+    
+    else {
+        
         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
         NSMutableString *ranking = [[NSMutableString alloc]initWithString:@""];
         
@@ -160,6 +163,7 @@
         alert.tag = VOTO_OK;
         alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [alert show];
+    
     }
     
 }
@@ -175,14 +179,16 @@
         
         if([title isEqualToString:@"Ok"] && resultConnection==true)
             
-        /* Vai alla Home */
+            /* Vai alla Home */
             [self.navigationController popToRootViewControllerAnimated:TRUE];
         
     }
-    else if (alertView.tag == VOTO_SCADUTO && [title isEqualToString:@"Ok"])
-    {
+    
+    else if (alertView.tag == VOTO_SCADUTO && [title isEqualToString:@"Ok"]) {
+        
         /* Vai alla Home */
         [self.navigationController popToRootViewControllerAnimated:TRUE];
+    
     }
     
 }

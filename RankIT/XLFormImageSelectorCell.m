@@ -94,7 +94,7 @@ NSString *const kFormImageSelectorCellImageRequest = @"imageRequest";
 
 #pragma mark - LayoutConstraints
 
--(void) addLayoutConstraints {
+- (void) addLayoutConstraints {
     
     NSDictionary *uiComponents = @{ @"image" : self.imageView,
                                     @"text"  : self.textLabel};
@@ -228,7 +228,7 @@ NSString *const kFormImageSelectorCellImageRequest = @"imageRequest";
     
 }
 
--(UILabel *)textLabel {
+- (UILabel *) textLabel {
     
     if(_textLabel) return _textLabel;
     _textLabel = [UILabel autolayoutView];

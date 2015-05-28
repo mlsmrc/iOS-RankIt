@@ -42,7 +42,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
 @property (readwrite,nonatomic) NSMutableArray *candidates;
 
 /* Costruttore per l'aggiunta di un nuovo Poll */
--(id)initPollWithUserID: (NSString *) ID
+-(id) initPollWithUserID: (NSString *) ID
                withName: (NSString *) Name
         withDescription: (NSString *) Description
            withDeadline: (NSDate *) Deadline
@@ -50,7 +50,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
          withCandidates: (NSMutableArray *) cand;
 
 /* Costruttore per creare un oggetto Poll da visualizzare in Home */
-- (id)initPollWithPollID: (int) PollID
+- (id) initPollWithPollID: (int) PollID
                 withName: (NSString *) Name
          withDescription: (NSString *) Description
          withResultsType: (int) rType
@@ -59,7 +59,7 @@ FOUNDATION_EXPORT NSString *POLL_JSON;
           withLastUpdate: (NSDate *) LastUpdate
                 withMine: (int) mine
           withCandidates: (NSMutableArray *) cand
-               withVotes:(int)Votes;
+               withVotes:(int) Votes;
 
 - (NSString *) toJSON;
 - (void) setLastUpdate;

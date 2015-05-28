@@ -18,7 +18,7 @@
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
-    /* Messaggio nella schermata Home */
+    /* Messaggio nella schermata della classifica */
     UILabel *messageLabel;
  
     /* Spinner per il ricaricamento della view dei risultati */
@@ -91,7 +91,7 @@
         classificaFinale = [conn getOptimalResultsOfPoll:poll];
     
         /* Gestione di 0 voti nel poll e della connessione */
-        if([classificaFinale count] == 0 || classificaFinale==nil)
+        if([classificaFinale count] == 0 || classificaFinale == nil)
             [self printMessageError];
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
@@ -192,6 +192,7 @@
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = poll;
+        destViewController.FLAG_ITEM = 1;
         [FLAGS removeAllObjects];
         [FLAGS addObject:@"DETTAGLI"];
         [File writeOnReload:@"0" ofFlags:FLAGS];

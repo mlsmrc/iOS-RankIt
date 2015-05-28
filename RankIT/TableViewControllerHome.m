@@ -30,7 +30,7 @@
     /* Variabile che conterrà la subview da rimuovere */
     UIView *subView;
     
-    /* Messaggio nella schermata Home */
+    /* Messaggio nella schermata "Home" */
     UILabel *messageLabel;
     
     /* Pulsante di ritorno schermata precedente */
@@ -45,7 +45,7 @@
     /* Refresh control per i poll aggiuntivi */
     UIRefreshControl *footerRefreshControl;
     
-    /* Spinner per il ricaricamento della Home */
+    /* Spinner per il ricaricamento della "Home" */
     UIActivityIndicatorView *spinner;
     
     /* Array di flag che permette il corretto ricaricamento delle view principali */
@@ -202,20 +202,23 @@
     NSString *value;
     NSMutableDictionary *allMyPolls = [[NSMutableDictionary alloc]init];
     
-    /* Scarica i poll dell'utente */
-    if (startPoll==0) {
+    /* Scarica i poll dell'utente e ne filtra i privati */
+    if(startPoll==0) {
+        
         [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:[NSString stringWithFormat:@"%d",startPoll]];
         allMyPolls = Connection.getDizionarioPolls;
-        for(id key in allMyPolls)
-        {
+        
+        for(id key in allMyPolls) {
+            
             value = [allMyPolls objectForKey:key];
-            if ([value valueForKey:@"unlisted"]==0)
+            if([value valueForKey:@"unlisted"]==0)
                 [allMyPolls removeObjectForKey:key];
+        
         }
+    
     }
     
-    
-    /* Scarica poll pubblici */
+    /* Scarica i poll pubblici */
     [Connection scaricaPollsWithPollId:@"" andUserId:@"" andStart:[NSString stringWithFormat:@"%d",startPoll]];
     allPublicPolls = Connection.getDizionarioPolls;
     [allPublicPolls setValuesForKeysWithDictionary:allMyPolls];
@@ -407,20 +410,22 @@
     
     /* Immagine se e solo se poll privato */
     if (p.pvtPoll==true) {
+        
         UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
         imagePrivate.image = [UIImage imageNamed:@"Unlisted"];
         imagePrivate.contentMode = UIViewContentModeScaleAspectFit;
         imagePrivate.layer.cornerRadius = imagePrivate.frame.size.width/2;
         imagePrivate.clipsToBounds = YES;
+    
     }
-    else
-    {
+    
+    else {
+        
         UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
         imagePrivate.image = [UIImage new];
+    
     }
 
-    
-    
     /* Muove la posizione dei voti a seconda del telefono */
     CGRect newPosition = VotiPoll.frame;
     newPosition.origin.x= X_FOR_VOTES;
@@ -474,6 +479,7 @@
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;
         destViewController.p = p;
+        destViewController.FLAG_ITEM = 0;
         
         [FLAGS removeAllObjects];
         [FLAGS addObject:@"DETTAGLI"];

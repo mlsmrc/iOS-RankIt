@@ -46,7 +46,7 @@ XLFormSectionDescriptor *multivaluedSection;
 - (id) Initialize {
     
     formDescriptor = [XLFormDescriptor formDescriptorWithTitle:@"Text Fields"];
-    form = [XLFormDescriptor formDescriptorWithTitle:@"Crea Poll"];
+    form = [XLFormDescriptor formDescriptorWithTitle:@"Crea Sondaggio"];
     
     /* First section */
     section = [XLFormSectionDescriptor formSection];
@@ -110,7 +110,7 @@ XLFormSectionDescriptor *multivaluedSection;
 }
 
 /* Override dell'handler per la gestione della aggiunta delle righe rappresentanti candidates imponendo vincoli */
--(void) formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
+- (void) formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
     
     [super formRowHasBeenAdded:formRow atIndexPath:indexPath];
     
@@ -129,7 +129,7 @@ XLFormSectionDescriptor *multivaluedSection;
 }
 
 /* Override per il ripristino dell'add candidates in caso di eliminazione row */
--(void) formRowHasBeenRemoved:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
+- (void) formRowHasBeenRemoved:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
     
     [super formRowHasBeenRemoved:formRow atIndexPath:indexPath];
 
@@ -148,7 +148,7 @@ XLFormSectionDescriptor *multivaluedSection;
 }
 
 /* Utilizzata per validare l'input inserito dall'utente */
--(BOOL) validateForm {
+- (BOOL) validateForm {
     
     __block BOOL isValidName = true;
     __block BOOL isValidDesc = true;

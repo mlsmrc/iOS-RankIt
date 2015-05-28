@@ -5,7 +5,6 @@
 #import "Candidate.h"
 #import "File.h"
 
-
 @implementation ViewControllerSummaryPoll {
     
     XLFormDescriptor *summaryForm;
@@ -32,8 +31,7 @@ NSString *const keyPollDeadLine = @"kPollDeadLine";
 /* Tag riconoscimento row candidates */
 NSString *const keyPollCandidates = @"textFieldRow";
 
-- (id) Initalize
-{
+- (id) Initalize {
     
     NSString *pollName = summaryResult[keyPollName];
     NSString *pollDesc = summaryResult[keyPollDesc];
@@ -71,7 +69,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* Tag identificativo unico per riconoscimento righe */
     int countRow = 0;
     
-    for( NSString * candidate in candidates) {
+    for(NSString *candidate in candidates) {
         
         /* Creiamo una nuova Sezione */
         summarySection = [XLFormSectionDescriptor formSectionWithTitle:@"" sectionOptions:XLFormSectionOptionNone];
@@ -80,7 +78,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         /* Creiamo una nuova row per l'aggiunta di una foto del candidate *
          * Image Poll Row                                                 */
-        
         summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageSelectorCellCustom];
         [summarySection addFormRow:summaryRow];
         
@@ -107,7 +104,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
     return [super initWithForm:summaryForm];
     
 }
-
 
 /* Handler per la gestione delle action da intraprendere in seguito al tap del invio del form */
 - (IBAction) send:(id)sender {
@@ -160,7 +156,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
-
 /* Il metodo si occupa di creare un nuovo Poll dato un Dictionary contenente i dati per popolarlo */
 - (Poll *) createPoll:(NSMutableDictionary *) dataInput {
     
@@ -172,31 +167,24 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
     if(summaryResult[keyPollPrivate] != (id)[NSNull null])
         private = [summaryResult[keyPollPrivate] boolValue];
-            
     
     NSMutableArray *pollCand =  [self createCandidate:dataInput]; //creazione di un array di candidates del poll con CandName - CandDesc
     
-    
     /* Creazione nuovo Poll */
-    
     _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
-    
-
     
     return _poll;
 
 }
 
-
 /* Il metodo si occupa dell'invio del poll al server */
-- (NSString *) postPoll:(Poll*) newPoll
-{
+- (NSString *) postPoll:(Poll*) newPoll {
     
     ConnectionToServer *conn = [[ConnectionToServer alloc]init];
     
-    if(isModified) //se stiamo modificando un pool eliminiamo il vecchio
+    /* Se stiamo modificando un pool eliminiamo il vecchio */
+    if(isModified)
         [self removeOldPoll:pollId];
-    
     
     return [conn addPollWithPoll:newPoll];
     
@@ -209,20 +197,16 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
-
 /* Il metodo si occupa di creare un array di candidates costituenti il poll */
-
 - (NSMutableArray *) createCandidate:(NSMutableDictionary *)inputCandidates {
     
     /* Array candidates poll */
     NSMutableArray *candidates = [[NSMutableArray alloc] init];
     
     /* Iteriamo su tutte le chiavi della collezione */
-    
     for( NSString *key in inputCandidates.allKeys) {
         
         /* Se abbiamo trovato un nome di un candidate */
-        
         if([key rangeOfString:@"CandName"].location != NSNotFound) {
             
             /* Recupero CandName */
@@ -250,10 +234,10 @@ NSString *const keyPollCandidates = @"textFieldRow";
 }
 
 /*Dato un candidates il metodo restituisce la descrizion in caso di modifica poll*/
--(NSString *)getDescrByCand:(NSString *)candid
-{
-    for(Candidate *cand in oldCandidates)
-    {
+- (NSString *)getDescrByCand:(NSString *)candid {
+    
+    for(Candidate *cand in oldCandidates) {
+        
         if([cand.candName isEqualToString:candid])
             return cand.candDescription;
     
@@ -263,19 +247,10 @@ NSString *const keyPollCandidates = @"textFieldRow";
 }
 
 /* Il metodo si occupa di eliminare i poll vecchi in modifica*/
--(int) removeOldPoll:(int) pollid
-{
+- (int) removeOldPoll:(int) pollid {
+    
     ConnectionToServer *conn = [[ConnectionToServer alloc] init];
-    
     return [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",pollid] AndUserID:[File getUDID]];
-    
-    
-}
-
-
-- (void) didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
     
 }
 

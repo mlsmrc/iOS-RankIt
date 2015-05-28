@@ -137,7 +137,6 @@
     
 }
 
-
 - (void) viewDidAppear:(BOOL)animated {
     
     if(FLAG_MYPOLL == 0) {
@@ -354,16 +353,19 @@
     
     /* Immagine se e solo se poll privato */
     if (p.pvtPoll==true) {
+        
         UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
         imagePrivate.image = [UIImage imageNamed:@"Unlisted"];
         imagePrivate.contentMode = UIViewContentModeScaleAspectFit;
         imagePrivate.layer.cornerRadius = imagePrivate.frame.size.width/2;
         imagePrivate.clipsToBounds = YES;
     }
-    else
-    {
+    
+    else {
+        
         UIImageView *imagePrivate = (UIImageView *) [cell viewWithTag:104];
         imagePrivate.image = [UIImage new];
+    
     }
     
     /* Muove la posizione dei voti a seconda del telefono */

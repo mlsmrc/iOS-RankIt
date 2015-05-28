@@ -16,7 +16,7 @@
     /* Spinner per il ricaricamento della Schermata */
     UIActivityIndicatorView *spinner;
     
-    /* Messaggio nella schermata Home */
+    /* Messaggio nella schermata "Dettagli" */
     UILabel *messageLabel;
     
     /* Array di flag che permette il corretto ricaricamento delle view principali */
@@ -24,7 +24,7 @@
     
 }
 
-@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota,FLAG;
+@synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota,FLAG,FLAG_ITEM;
 
 - (void) viewDidLoad {
     
@@ -115,7 +115,7 @@
         image.clipsToBounds = YES;
     
         /* Se è un poll scaduto non viene permessa la votazione */
-        if([Util compareDate:[[NSDate alloc]init] WithDate:p.deadline]==1)
+        if([Util compareDate:[[NSDate alloc]init] WithDate:p.deadline]==1 && FLAG_ITEM == 0)
             [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
         /* Se un poll è stato eliminato o non c'è connessione, viene fatto vedere un messaggio a video e disibilitato il tasto "Vota" */
@@ -256,8 +256,7 @@
         
     }
     
-    else if([segue.identifier isEqualToString:@"showVoteView"])
-    {
+    else if([segue.identifier isEqualToString:@"showVoteView"]) {
         
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
@@ -396,51 +395,59 @@
         
     }
     
-    else if ([[segue identifier] isEqualToString:@"modPoll"])
-    {
-        ViewControllerModPoll *vc = (ViewControllerModPoll*) [segue destinationViewController ];
+    else if ([[segue identifier] isEqualToString:@"modPoll"]) {
         
-        vc.p = p; //passiamo il poll da modificare alla view successiva
-        vc.candidates = self.cands; //passiamo i candidates alla vista successiva 
+        ViewControllerModPoll *vc = (ViewControllerModPoll*) [segue destinationViewController];
         
+        /* Passiamo il poll da modificare alla view successiva */
+        vc.p = p;
+        
+        /* Passiamo i candidates alla view successiva */
+        vc.candidates = self.cands;
         
     }
+    
 }
 
 /* shouldPerformSegueWithIdentifier verifica che il poll che stiamo andando a modificare non sia già stato votato */
-
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     
     if([identifier isEqualToString:@"modPoll"] && p.votes == 0)
-    {
         return YES;
     
-    }else if([identifier isEqualToString:@"modPoll"] && p.votes > 0)
-    {
-        [self errorHandlerModifyPoll]; //lanciamo un alert in quanto il poll è già stato votato
+    else if([identifier isEqualToString:@"modPoll"] && p.votes > 0) {
+        
+        /* Lanciamo un alert in quanto il poll è già stato votato */
+        [self errorHandlerModifyPoll];
         return NO;
-    }else
-    {
-        return YES;
+    
     }
+    
+    else
+        return YES;
+
 }
 
 /* Error Handler in caso di modifica pool già votato */
-
-- (void) errorHandlerModifyPoll
-{
-
+- (void) errorHandlerModifyPoll {
     
+    UIAlertController *AlertEdit;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Message"
-                                                    message:@"This is a test"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-
+    /* Alert edit */
+    AlertEdit = [UIAlertController alertControllerWithTitle:@"Impossibile modificare!" message:@"Questo sondaggio possiede dei voti.\nResettalo prima di modificarlo." preferredStyle:UIAlertControllerStyleActionSheet];
     
+    /* Creazione pulsanti */
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        /* Rientro dell'alert */
+        [AlertEdit dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
     
+    /* Aggiunta pulsante all'alert */
+    [AlertEdit addAction:ok];
+    
+    [self presentViewController:AlertEdit animated:YES completion:nil];
 
 }
 
@@ -455,9 +462,5 @@
         [self.navigationController popToRootViewControllerAnimated:TRUE];
     
 }
-
-
-
-
 
 @end

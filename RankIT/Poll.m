@@ -12,7 +12,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 @synthesize pollId,pollName,pollDescription,resultsType,deadline,userID,pvtPoll,lastUpdate,votes,mine,candidates;
 
 /* Costruttore per l'aggiunta di un nuovo Poll */
-- (id)initPollWithUserID: (NSString *) ID
+- (id) initPollWithUserID: (NSString *) ID
                 withName: (NSString *) Name
          withDescription: (NSString *) Description
             withDeadline: (NSDate *) Deadline
@@ -44,7 +44,7 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
 }
 
 /* Costruttore per creare un oggetto Poll da visualizzare in Home */
-- (id)initPollWithPollID: (int) PollID
+- (id) initPollWithPollID: (int) PollID
                 withName: (NSString *) Name
          withDescription: (NSString *) Description
          withResultsType: (int) rType
@@ -53,8 +53,9 @@ NSString *POLL_JSON = @"{\"pollid\":\"_POLL_ID_\",\"pollname\":\"_POLL_NAME_\",\
           withLastUpdate: (NSDate *) LastUpdate
                 withMine: (int) Mine
           withCandidates: (NSMutableArray *) cand
-               withVotes:(int)Votes
+               withVotes:(int) Votes
 {
+    
     self = [super init];
     
     if(self) {

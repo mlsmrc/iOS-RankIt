@@ -9,20 +9,61 @@
 
 @end
 
-@implementation ViewControllerGraphResults
+@implementation ViewControllerGraphResults {
+    
+    /* Spinner per il ricaricamento della Home */
+    UIActivityIndicatorView *spinner;
+    
+    /* Messaggio nella schermata del grafico */
+    UILabel *messageLabel;
+    
+    /* Flag che ci permette di capire se il poll non ha voti */
+    int NO_VOTES;
+    
+}
 
 @synthesize tiesPlot,notiesPlot,poll,optimalData,optimalNotiesData,selectedPlot;
 @synthesize scrollView,grafico,dizionarioVotazioni,selectedIndex,plotArray,annotation,risposte,candidates;
 
-
 - (void) viewDidLoad {
     
     selectedIndex = -1;
+    
+    NO_VOTES = 0;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
+    /* Dichiarazione della label da mostrare in caso di non connessione o assenza di poll */
+    messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    messageLabel.font = [UIFont fontWithName:FONT_HOME size:20];
+    messageLabel.textColor = [UIColor darkGrayColor];
+    messageLabel.numberOfLines = 0;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    messageLabel.tag = 1;
+    [messageLabel setFrame:CGRectOffset(messageLabel.bounds, CGRectGetMidX(self.view.frame) - CGRectGetWidth(self.view.bounds)/2, CGRectGetMidY(self.view.frame) - CGRectGetHeight(self.view.bounds)/1.3)];
+    
+    /* Setup spinner */
+    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setColor:[UIColor grayColor]];
+    spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-150);
+    [self.view addSubview:spinner];
+
    
 }
 
-#pragma mark - UIViewController lifecycle methods
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+        
+    /* Nasconde la view e fa partire l'animazione dello spinner */
+    [spinner startAnimating];
+    [self.scrollView setHidden:YES];
+    
+}
 
+#pragma mark - UIViewController lifecycle methods
 - (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
@@ -30,74 +71,86 @@
     /* Inseriamo i primi  valori random in modo da tarare automaticamente il grafico su quei valori */
     [self inizializzaArrays];
     
-    [scrollView setScrollEnabled:YES];
-    [scrollView setContentSize:CGSizeMake(320,415)];
+    if(candidates == nil || NO_VOTES == 1)
+        [self printMessageError];
     
-    /* Settaggio del grafico e visualizzazione */
-    [self initPlot];
-    
-    [grafico sizeToFit];
-    
-    NSMutableArray *lettere=[[NSMutableArray alloc]init];
-    [lettere addObject:@"A) "];
-    [lettere addObject:@"B) "];
-    [lettere addObject:@"C) "];
-    [lettere addObject:@"D) "];
-    [lettere addObject:@"E) "];
-    
-    NSMutableString* risposteLabel = [NSMutableString stringWithCapacity:500];
-    
-    for(int i=0;i<[candidates count];i++) {
-        
-        [risposteLabel appendFormat:@"%@", [lettere objectAtIndex:i ]];
-        [risposteLabel appendFormat:@"%@\n\n", [candidates objectAtIndex:i ]];
-    
-    }
-    
-    risposte.text = risposteLabel;
-    risposte.textColor = [UIColor blackColor];
-    risposte.selectable = true;
-    risposte.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:15];
-    risposte.backgroundColor = [UIColor clearColor];
-    risposte.textAlignment = NSTextAlignmentNatural;
-    risposte.selectable = false;
-    [risposte sizeToFit];
-    
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGRect frame;
-    CGFloat currentY = 15;
-    frame = grafico.frame;
-    frame.origin.y = currentY;
-    frame.origin.x -= 2;
-    grafico.frame = frame;
-    currentY += grafico.frame.size.height;
-    
-    if(screenHeight == IPHONE_5_5S_HEIGHT)
-        currentY += GRAFICO_IPHONE_5_5S;
-        
     else {
         
-        if(screenHeight == IPHONE_6_HEIGHT)
-            currentY += GRAFICO_IPHONE_6;
+        [scrollView setScrollEnabled:YES];
+        [scrollView setContentSize:CGSizeMake(320,415)];
+    
+        /* Settaggio del grafico e visualizzazione */
+        [self initPlot];
+    
+        [grafico sizeToFit];
+    
+        NSMutableArray *lettere=[[NSMutableArray alloc]init];
+        [lettere addObject:@"A) "];
+        [lettere addObject:@"B) "];
+        [lettere addObject:@"C) "];
+        [lettere addObject:@"D) "];
+        [lettere addObject:@"E) "];
+    
+        NSMutableString* risposteLabel = [NSMutableString stringWithCapacity:500];
+    
+        for(int i=0;i<[candidates count];i++) {
+        
+            [risposteLabel appendFormat:@"%@", [lettere objectAtIndex:i]];
+            [risposteLabel appendFormat:@"%@\n\n", [candidates objectAtIndex:i]];
+    
+        }
+    
+        risposte.text = risposteLabel;
+        risposte.textColor = [UIColor blackColor];
+        risposte.selectable = true;
+        risposte.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:15];
+        risposte.backgroundColor = [UIColor clearColor];
+        risposte.textAlignment = NSTextAlignmentNatural;
+        risposte.selectable = false;
+        [risposte sizeToFit];
+    
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGRect frame;
+        CGFloat currentY = 15;
+        frame = grafico.frame;
+        frame.origin.y = currentY;
+        frame.origin.x -= 2;
+        grafico.frame = frame;
+        currentY += grafico.frame.size.height;
+    
+        if(screenHeight == IPHONE_5_5S_HEIGHT)
+            currentY += GRAFICO_IPHONE_5_5S;
         
         else {
         
-            if(screenHeight == IPHONE_6Plus_HEIGHT)
-                currentY += GRAFICO_IPHONE_6Plus;
+            if(screenHeight == IPHONE_6_HEIGHT)
+                currentY += GRAFICO_IPHONE_6;
+        
+            else {
+        
+                if(screenHeight == IPHONE_6Plus_HEIGHT)
+                    currentY += GRAFICO_IPHONE_6Plus;
             
-            else currentY += GRAFICO_IPHONE_4_4S;
+                else currentY += GRAFICO_IPHONE_4_4S;
+        
+            }
         
         }
+    
+        frame = risposte.frame;
+        frame.origin.y = currentY;
+        frame.origin.x += 15;
+        risposte.frame = frame;
+        currentY += risposte.frame.size.height;
+        [scrollView setContentSize:CGSizeMake(320,currentY-15)];
+    
+        /* Si ferma l'animazione dello spinner e riappare la view */
+        [spinner stopAnimating];
+        [self.scrollView setHidden:NO];
+    
+        [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
         
     }
-    
-    frame = risposte.frame;
-    frame.origin.y = currentY;
-    frame.origin.x += 15;
-    risposte.frame = frame;
-    currentY += risposte.frame.size.height;
-    [scrollView setContentSize:CGSizeMake(320,currentY-15)];
-    [scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 
@@ -324,7 +377,7 @@
 
 - (void) scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index {
     
-    selectedIndex=index;
+    selectedIndex = index;
     Votazione *votazione;
     
     CPTColor *color;
@@ -334,9 +387,9 @@
     
     if([plot.identifier isEqual:@"TIES"] == YES) {
         
-        votazione=[optimalData objectAtIndex:index];
-        selectedPlot=[NSMutableString stringWithFormat:@"TIES"];
-        color=[CPTColor redColor];
+        votazione = [optimalData objectAtIndex:index];
+        selectedPlot = [NSMutableString stringWithFormat:@"TIES"];
+        color = [CPTColor redColor];
          
     }
     
@@ -390,6 +443,7 @@
         plotSymbol.lineStyle=lineStyle;
         plot.plotSymbol=plotSymbol;
         return plotSymbol;
+    
     }
     
     else if([plot.identifier isEqual:@"NOTIES"] == YES&&index==selectedIndex&&[selectedPlot isEqualToString:@"NOTIES"]) {
@@ -434,28 +488,49 @@
     
     optimalData = [[NSMutableArray alloc] init];
     optimalNotiesData = [[NSMutableArray alloc] init];
-    dizionarioVotazioni=[[NSMutableDictionary alloc]init];
-    ConnectionToServer *connection=[[ConnectionToServer alloc]init];
-    candidates=[connection getCandidatesWithPollId:[NSString stringWithFormat:@"%d",[poll pollId]]];
-    NSMutableDictionary* results=[connection getResultsOfPoll:poll];
-    NSMutableDictionary * optimalNotiesclassifiche=[results valueForKey:@"optimalnotiesdata"];
-    NSMutableDictionary * optimalclassifiche=[results valueForKey:@"optimaldata"];
+    dizionarioVotazioni = [[NSMutableDictionary alloc]init];
+    ConnectionToServer *connection = [[ConnectionToServer alloc]init];
+    candidates = [connection getCandidatesWithPollId:[NSString stringWithFormat:@"%d",[poll pollId]]];
+    NSMutableDictionary *results = [connection getResultsOfPoll:poll];
+    
+    if([results count] == 1)
+        NO_VOTES = 1;
+    
+    NSMutableDictionary *optimalNotiesclassifiche = [results valueForKey:@"optimalnotiesdata"];
+    NSMutableDictionary *optimalclassifiche = [results valueForKey:@"optimaldata"];
     
     for(id key in optimalclassifiche ) {
         
-        Votazione *votazione=[[Votazione alloc] initWithPattern:[key valueForKey:@"pattern"] AndMu:[[key valueForKey:@"mu"]floatValue]AndSigma:[[key valueForKey:@"sigma"]floatValue] AndVotedBy:[[key valueForKey:@"votedby"]floatValue]];
+        Votazione *votazione = [[Votazione alloc] initWithPattern:[key valueForKey:@"pattern"] AndMu:[[key valueForKey:@"mu"]floatValue]AndSigma:[[key valueForKey:@"sigma"]floatValue] AndVotedBy:[[key valueForKey:@"votedby"]floatValue]];
         [optimalData addObject:votazione];
       
     }
     
     for(id key in optimalNotiesclassifiche ) {
         
-        Votazione *votazione=[[Votazione alloc] initWithPattern:[key valueForKey:@"pattern"] AndMu:[[key valueForKey:@"mu"]floatValue]AndSigma:[[key valueForKey:@"sigma"]floatValue] AndVotedBy:[[key valueForKey:@"votedby"]floatValue]];
+        Votazione *votazione = [[Votazione alloc] initWithPattern:[key valueForKey:@"pattern"] AndMu:[[key valueForKey:@"mu"]floatValue]AndSigma:[[key valueForKey:@"sigma"]floatValue] AndVotedBy:[[key valueForKey:@"votedby"]floatValue]];
         [optimalNotiesData addObject:votazione];
-        CGPoint punto= CGPointMake([votazione mu], [votazione sigma]);
+        CGPoint punto = CGPointMake([votazione mu], [votazione sigma]);
         [dizionarioVotazioni setObject:votazione forKey:[NSString stringWithFormat:@"%f;%f",punto.x,punto.y]];
     
     }
+    
+}
+
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+- (void) printMessageError {
+    
+    [spinner stopAnimating];
+    
+    /* Assegna il messaggio a seconda dei casi */
+    if(candidates!=nil)
+        messageLabel.text = NO_RANKING;
+    
+    else messageLabel.text = TIMEOUT;
+    
+    /* Aggiunge la SubView con il messaggio da visualizzare */
+    [self.view addSubview:messageLabel];
+    [self.view sendSubviewToBack:messageLabel];
     
 }
 

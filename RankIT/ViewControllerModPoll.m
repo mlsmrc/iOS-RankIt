@@ -1,11 +1,3 @@
-//
-//  ViewControllerModPoll.m
-//  
-//
-//  Created by Giulio  Salierno on 27/05/15.
-//
-//
-
 #import "ViewControllerModPoll.h"
 
 @interface ViewControllerModPoll ()
@@ -35,14 +27,13 @@ XLFormSectionDescriptor *mSection;
 XLFormRowDescriptor *mRow;
 XLFormDescriptor *mFormDescriptor;
 
-
 @implementation ViewControllerModPoll
 @synthesize p,candidates;
 
-- (instancetype) initWithCoder:(NSCoder *)coder
-{
+- (instancetype) initWithCoder:(NSCoder *)coder {
     
     self = [super initWithCoder:coder];
+    
     if(self)
         [self Initialize];
     
@@ -64,7 +55,7 @@ XLFormDescriptor *mFormDescriptor;
 - (id) Initialize {
     
     mFormDescriptor = [XLFormDescriptor formDescriptorWithTitle:@"Text Fields"];
-    mForm = [XLFormDescriptor formDescriptorWithTitle:@"Modifica Poll"];
+    mForm = [XLFormDescriptor formDescriptorWithTitle:@"Modifica"];
     
     /* First section */
     mSection = [XLFormSectionDescriptor formSection];
@@ -130,8 +121,7 @@ XLFormDescriptor *mFormDescriptor;
     /* Adding exsisting row representing candidates */
     
     
-    for(NSString *cand in candidates)
-    {
+    for(NSString *cand in candidates) {
     
         mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollCandidates rowType:XLFormRowDescriptorTypeText];
         [[mRow cellConfig] setObject:@"Risposta" forKey:@"textField.placeholder"];
@@ -153,7 +143,7 @@ XLFormDescriptor *mFormDescriptor;
 }
 
 /* Override dell'handler per la gestione della aggiunta delle righe rappresentanti candidates imponendo vincoli */
--(void) formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
+- (void) formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
     
     [super formRowHasBeenAdded:formRow atIndexPath:indexPath];
     
@@ -172,7 +162,7 @@ XLFormDescriptor *mFormDescriptor;
 }
 
 /* Override per il ripristino dell'add candidates in caso di eliminazione row */
--(void) formRowHasBeenRemoved:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
+- (void) formRowHasBeenRemoved:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
     
     [super formRowHasBeenRemoved:formRow atIndexPath:indexPath];
     
@@ -190,10 +180,8 @@ XLFormDescriptor *mFormDescriptor;
     
 }
 
-
-
 /* Utilizzata per validare l'input inserito dall'utente */
--(BOOL) validateForm {
+- (BOOL) validateForm {
     
     __block BOOL isValidName = true;
     __block BOOL isValidDesc = true;
@@ -251,9 +239,9 @@ XLFormDescriptor *mFormDescriptor;
 }
 
 /* Il metodo  si occupa di estrarre i dati dal form */
--(NSMutableDictionary * ) getFormValues {
+- (NSMutableDictionary *) getFormValues {
     
-    _result =   [NSMutableDictionary dictionary];
+    _result = [NSMutableDictionary dictionary];
     
     for(XLFormSectionDescriptor * section in self.form.formSections) {
         
@@ -314,25 +302,17 @@ XLFormDescriptor *mFormDescriptor;
         vc.oldCandidates = candidates;
         vc.pollId = p.pollId;
         
-    
-        
-        
     }
     
 }
-
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     
     if([identifier isEqualToString:@"modPollResult"] && [self validateForm])
-    {
         return YES;
-    }
-        return NO;
+    
+    return NO;
     
 }
-
-
-
 
 @end
