@@ -10,19 +10,20 @@ FOUNDATION_EXPORT NSString *SAVE_RANK_DATE;
 FOUNDATION_EXPORT NSString *RELOAD;
 
 /* Funzioni di scrittura */
-+ (BOOL) writeOnPListRanking:(NSString*)ranking OfPoll:(NSString*)pollid;
-+ (BOOL) writeOnPListRankDateOfPoll:(NSString*)pollid;
++ (BOOL) writeOnPListRanking:(NSString *)ranking OfPoll:(NSString *)pollid;
++ (BOOL) writeOnPListRankDateOfPoll:(NSString *)pollid;
 + (BOOL) writeUDID;
 + (BOOL) clearSaveRank;
 + (BOOL) SaveRank:(NSString *)rank OfPoll:(NSString *)pollId;
-+ (void) writeOnReload:(NSString *)value ofFlags:(NSMutableArray*)FLAGS;
++ (BOOL) clearFile:(NSString *)File;
++ (void) writeOnReload:(NSString *)value ofFlags:(NSMutableArray *)FLAGS;
 
 /* Funzioni di lettura */
 + (NSString *) getRankingOfPoll:(int)pollid;
 + (NSString *) getRankDateOfPoll:(int)pollid;
 + (NSString *) getUDID;
-+ (NSArray *) getAllKeysinPList:(NSString*)PList;
-+ (NSString *) getSaveRankOfPoll:(NSString*)pollid;
-+ (NSString *) readFromReload:(NSString*)key;
++ (NSArray *) getAllKeysinPList:(NSString *)PList;
++ (NSString *) getSaveRankOfPoll:(NSString *)pollid;
++ (NSString *) readFromReload:(NSString *)key;
 
 @end

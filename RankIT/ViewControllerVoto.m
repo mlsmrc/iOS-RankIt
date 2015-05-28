@@ -16,9 +16,6 @@
     /* Per controllare se c'è timeout di connessione */
     bool resultConnection;
     
-    /* Flag che permette di capire se un poll è già stato votato */
-    int FLAG_ALREADY_VOTE;
-    
 }
 
 @synthesize candidateNames,candidateChars,name,poll,tableView,fourth,fifth;
@@ -47,12 +44,6 @@
     
     else if([candidateNames count] == 4)
         [fifth setHidden:YES];
-    
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    
-    FLAG_ALREADY_VOTE = 0;
     
 }
 
@@ -171,21 +162,7 @@
         UIAlertView *alert = [UIAlertView alloc];
         alert.tag = VOTO_OK;
         
-        /* Contiene i pollid di tutti i poll votati dall'utente */
-        NSArray *VotesPListKeys = [File getAllKeysinPList:VOTES_PLIST];
-        
-        for(id key in VotesPListKeys) {
-            
-            if([VotesPListKeys containsObject:key])
-                FLAG_ALREADY_VOTE = 1;
-            
-        }
-        
-        if(FLAG_ALREADY_VOTE == 1 && poll.votes!=0)
-            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!\nIl tuo voto è stato sovrascritto al precedente." : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        
-        else
-            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         
         [alert show];
     

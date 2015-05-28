@@ -130,7 +130,7 @@ NSString *RELOAD = @"Reload.strings";
 }
 
 /* Elimina il contenuto ad un file generico */
-+ (BOOL) clearFile:(NSString*)File {
++ (BOOL) clearFile:(NSString *)File {
     
     NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:File];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -152,7 +152,7 @@ NSString *RELOAD = @"Reload.strings";
 }
 
 /* Scrive il valore del flag sul file di Reload */
-+ (void) writeOnReload:(NSString *)value ofFlags:(NSMutableArray*)FLAGS {
++ (void) writeOnReload:(NSString *)value ofFlags:(NSMutableArray *)FLAGS {
     
     NSString *view;
     
