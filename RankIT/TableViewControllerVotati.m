@@ -161,8 +161,7 @@
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
-    //allVotedPolls = [Connection getDizionarioPollsVotati];
-    allVotedPolls = [[NSMutableDictionary alloc]init];
+    allVotedPolls = [Connection getDizionarioPollsVotati];
     [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
     allMyPolls = [Connection getDizionarioPolls];
     
