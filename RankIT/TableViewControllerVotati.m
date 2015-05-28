@@ -180,32 +180,28 @@
 - (void) CreatePollsDetails {
     
     NSString *value;
+    NSMutableDictionary *aux = [[NSMutableDictionary alloc]init];
     allVotedPollsDetails = [[NSMutableArray alloc]init];
     
-    /* Scorre il dizionario dei poll votati, li filtra e recupera i dettagli necessari */
-    for(id key in allVotedPolls) {
-        
-        value = [allVotedPolls objectForKey:key];
-        Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
-                                         withName:[value valueForKey:@"pollname"]
-                                  withDescription:[value valueForKey:@"polldescription"]
-                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
-                                     withDeadline:[value valueForKey:@"deadline"]
-                                      withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
-                                   withLastUpdate:[value valueForKey:@"updated"]
-                                         withMine:[[value valueForKey:@"mine"] intValue]
-                                   withCandidates:nil
-                                        withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
-        
-        if(p.mine==0)
-            [allVotedPollsDetails addObject:p];
-        
-    }
-    
-    /* Scorre il dizionario dei poll dell'utente, li filtra e recupera i dettagli necessari */
+    /* Elimina eventuali duplicati */
     for(id key in allMyPolls) {
         
         value = [allMyPolls objectForKey:key];
+        [aux setObject:value forKey:key];
+        
+    }
+    
+    for(id key in allVotedPolls) {
+        
+        value = [allVotedPolls objectForKey:key];
+        [aux setObject:value forKey:key];
+        
+    }
+    
+    /* Scorre i poll votati e dell'utente recuperandone i dettagli */
+    for(id key in aux) {
+        
+        value = [aux objectForKey:key];
         Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
                                          withName:[value valueForKey:@"pollname"]
                                   withDescription:[value valueForKey:@"polldescription"]
@@ -220,7 +216,7 @@
         [allVotedPollsDetails addObject:p];
         
     }
-
+    
     if([allVotedPollsDetails count] == 0) {
         
         allVotedPolls = [[NSMutableDictionary alloc]init];

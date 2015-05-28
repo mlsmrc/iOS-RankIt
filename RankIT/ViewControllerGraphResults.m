@@ -375,18 +375,15 @@
     
 }
 
--(void) removeAnnotation
-{
+- (void) removeAnnotation {
     
     if(annotation!=nil)
         [self.hostView.hostedGraph.plotAreaFrame.plotArea removeAnnotation:annotation];
     annotation=nil;
     [tiesPlot reloadData];
     [notiesPlot reloadData];
+
 }
-
-
-
 
 - (void) scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index {
     
@@ -425,7 +422,6 @@
     annotation.contentLayer = textLayer;
     annotation.displacement = CGPointMake(-15.0f, -20.0f);
     [self.hostView.hostedGraph.plotAreaFrame.plotArea addAnnotation:annotation];
-   // [self symbolForScatterPlot:plot recordIndex:index];
     [tiesPlot reloadData];
     [notiesPlot reloadData];
 
@@ -496,13 +492,13 @@
 
 }
 
--(BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event atPoint:(CGPoint)point
-{
+- (BOOL) plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(id)event atPoint:(CGPoint)point {
+    
      selectedIndex=-1;
     [self removeAnnotation];
-   
     
     return true;
+    
 }
 
 - (void) inizializzaArrays {

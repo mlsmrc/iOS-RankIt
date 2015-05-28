@@ -124,9 +124,6 @@
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* Eliminazione della classifica salvata al momento del passaggio da dettagli poll a root */
-    //[File clearSaveRank];
-    
     if(FLAG_MYPOLL == 0) {
         
         /* Nasconde la table view e fa partire l'animazione dello spinner */
