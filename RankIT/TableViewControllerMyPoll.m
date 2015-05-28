@@ -22,7 +22,7 @@
     /* Oggetto per la connessione al server */
     ConnectionToServer *Connection;
     
-    /* Dizionario dei poll */
+    /* Dizionario dei poll dell'utente */
     NSMutableDictionary *allMyPolls;
     
     /* Array dei poll che verranno visualizzati */
@@ -124,8 +124,8 @@
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
-    [File clearSaveRank];
+    /* Eliminazione della classifica salvata al momento del passaggio da dettagli poll a root */
+    //[File clearSaveRank];
     
     if(FLAG_MYPOLL == 0) {
         
@@ -159,14 +159,13 @@
     
 }
 
-/* Download poll dal server */
+/* Download poll dell'utente dal server */
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
     
     /* Connessione */
     [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
-    
     allMyPolls = [Connection getDizionarioPolls];
     
     if(allMyPolls!=nil && [allMyPolls count] != 0) {
@@ -719,13 +718,13 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"showMyPollResults" sender:self];
+    [self performSegueWithIdentifier:@"showDetailsPollFromMyPoll" sender:self];
     
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if([segue.identifier isEqualToString:@"showMyPollResults"]) {
+    if([segue.identifier isEqualToString:@"showDetailsPollFromMyPoll"]) {
         
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
@@ -748,12 +747,12 @@
             
         }
         
-        TableViewControllerResults *destViewController = segue.destinationViewController;
-        destViewController.poll = p;
+        ViewControllerDettagli *destViewController = segue.destinationViewController;
+        destViewController.p = p;
         
+        destViewController.FLAG_ITEM = 1;
         [FLAGS removeAllObjects];
         [FLAGS addObject:@"DETTAGLI"];
-        [FLAGS addObject:@"RISULTATI"];
         [File writeOnReload:@"0" ofFlags:FLAGS];
         
     }

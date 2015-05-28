@@ -135,7 +135,7 @@
     [FLAGS addObject:@"HOME"];
     [File writeOnReload:@"1" ofFlags:FLAGS];
     
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
+    /* Eliminazione della classifica salvata al momento del passaggio da dettagli poll a root */
     [File clearSaveRank];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */

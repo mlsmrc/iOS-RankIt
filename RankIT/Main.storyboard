@@ -104,7 +104,7 @@
             </objects>
             <point key="canvasLocation" x="1689" y="-544"/>
         </scene>
-        <!--Votati-->
+        <!--Risultati-->
         <scene sceneID="gVS-qi-tXN">
             <objects>
                 <viewController id="RRm-OF-V2Y" customClass="TableViewControllerVotati" sceneMemberID="viewController">
@@ -164,7 +164,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ZFu-R7-fwx" kind="push" identifier="showGraphResults" id="n0U-LL-mOO"/>
+                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showVotedResults" id="MH3-if-kEN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -176,7 +176,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Votati" id="SEU-OY-5hy"/>
+                    <navigationItem key="navigationItem" title="Risultati" id="SEU-OY-5hy"/>
                     <connections>
                         <outlet property="searchBar" destination="5UN-wd-CAH" id="WRe-i4-ara"/>
                         <outlet property="searchDisplayController" destination="ri1-LE-DHp" id="2HC-UT-eSW"/>
@@ -194,7 +194,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1689" y="331"/>
+            <point key="canvasLocation" x="1641" y="331"/>
         </scene>
         <!--Classifica-->
         <scene sceneID="4Qm-hK-eTj">
@@ -243,9 +243,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Classifica" id="NYS-Gt-xlV">
-                        <barButtonItem key="rightBarButtonItem" title="Dettagli" id="EO1-ed-1LU">
+                        <barButtonItem key="rightBarButtonItem" title="Vota" id="EO1-ed-1LU">
                             <connections>
-                                <segue destination="S7m-EW-wRQ" kind="push" identifier="showVotedResultsDetails" id="Grd-p2-d13"/>
+                                <segue destination="lj8-aj-OLu" kind="push" identifier="showReVoteView" id="g17-WK-v9O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -255,18 +255,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAI-pf-oKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2284" y="-57"/>
+            <point key="canvasLocation" x="2225" y="331"/>
         </scene>
         <!--Crea la tua classifica-->
         <scene sceneID="Dmg-hj-CZ3">
             <objects>
                 <viewController id="lj8-aj-OLu" customClass="ViewControllerVoto" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7el-GI-q6N">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bWt-Xo-Hpe">
-                                <rect key="frame" x="33" y="0.0" width="287" height="504"/>
+                                <rect key="frame" x="33" y="0.0" width="287" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -356,11 +356,11 @@
             <objects>
                 <viewController id="jPN-O7-jyp" customClass="ViewControllerCandidates" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqz-Ha-QqF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OqZ-M8-A06">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wgW-Xa-FIn">
@@ -378,7 +378,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="48" width="220" height="207"/>
+                                        <rect key="frame" x="50" y="44" width="220" height="173"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -574,11 +574,11 @@
             </objects>
             <point key="canvasLocation" x="418" y="331"/>
         </scene>
-        <!--Votati-->
+        <!--Risultati-->
         <scene sceneID="kHp-f3-4kk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DUa-aK-nRk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Votati" image="Votati" id="ony-DF-Vd9"/>
+                    <tabBarItem key="tabBarItem" title="Risultati" image="Risultati" id="ony-DF-Vd9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="EcS-O8-nnQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -656,7 +656,7 @@
                                             <outlet property="Nome" destination="YOb-6q-aq3" id="1gf-bc-DcE"/>
                                             <outlet property="Scadenza" destination="gel-EZ-KW8" id="o8n-2O-vp8"/>
                                             <outlet property="cell" destination="05I-8o-NWE" id="imp-0g-nbt"/>
-                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showMyPollResults" id="gGW-tc-nfS"/>
+                                            <segue destination="S7m-EW-wRQ" kind="push" identifier="showDetailsPollFromMyPoll" id="OFl-YJ-bGV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -747,17 +747,17 @@
         <!--Classifica-->
         <scene sceneID="zG0-AI-kKb">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="ZFu-R7-fwx" customClass="ViewControllerGraphResults" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultWithGraph" hidesBottomBarWhenPushed="YES" id="ZFu-R7-fwx" customClass="ViewControllerGraphResults" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f1k-fJ-dip">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="L34-hm-BD3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="Var-Nm-LvF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="304"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -784,7 +784,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6R-S1-Sc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2284" y="692"/>
+            <point key="canvasLocation" x="2805" y="1186"/>
         </scene>
         <!--Crea Poll-->
         <scene sceneID="gBW-3i-0qa">
@@ -812,7 +812,7 @@
             <objects>
                 <viewController id="QhE-1O-ydT" customClass="ViewControllerSummaryPoll" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="emX-eR-qOk">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -833,7 +833,7 @@
             <objects>
                 <viewController title="Dettagli Poll" hidesBottomBarWhenPushed="YES" id="S7m-EW-wRQ" customClass="ViewControllerDettagli" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bfo-fX-Kei">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vCD-cu-7he">
@@ -905,7 +905,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="f38-Pe-NJ9">
-                                        <rect key="frame" x="50" y="68" width="220" height="229"/>
+                                        <rect key="frame" x="50" y="68" width="220" height="201"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -937,14 +937,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8I-D0-onN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2741" y="381"/>
+            <point key="canvasLocation" x="2805" y="331"/>
         </scene>
     </scenes>
     <resources>
         <image name="Credits" width="25" height="25"/>
         <image name="Home" width="25" height="25"/>
         <image name="MyPoll" width="25" height="25"/>
-        <image name="Votati" width="25" height="25"/>
+        <image name="Risultati" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -952,8 +952,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="X5T-i7-2dj"/>
         <segue reference="Y9F-6e-5hV"/>
+        <segue reference="Orh-LF-ieg"/>
+        <segue reference="g17-WK-v9O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -5,7 +5,7 @@
 
 @interface TableViewControllerResults : UIViewController
 
-@property (strong,nonatomic) Poll *poll;
+@property (strong,nonatomic) Poll *p;
 @property (strong,nonatomic) Candidate *candidate;
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) NSMutableArray *classificaFinale;

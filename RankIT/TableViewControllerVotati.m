@@ -21,6 +21,9 @@
     /* Dizionario dei poll votati */
     NSMutableDictionary *allVotedPolls;
     
+    /* Dizionario dei poll dell'utente */
+    NSMutableDictionary *allMyPolls;
+    
     /* Array dei poll votati che verranno visualizzati */
     NSMutableArray *allVotedPollsDetails;
     
@@ -117,7 +120,7 @@
     [FLAGS addObject:@"VOTATI"];
     [File writeOnReload:@"1" ofFlags:FLAGS];
     
-    /* Eliminazione della classifica salvata al momento del passaggio da vota poll a dettagli poll */
+    /* Eliminazione della classifica salvata al momento del passaggio da risultati a root */
     [File clearSaveRank];
     
     /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
@@ -154,11 +157,13 @@
 
 }
 
-/* Download poll votati dal server */
+/* Download poll votati dall'utente e poll dell'utente */
 - (void) DownloadPolls {
     
     Connection = [[ConnectionToServer alloc]init];
     allVotedPolls = [Connection getDizionarioPollsVotati];
+    [Connection scaricaPollsWithPollId:@"" andUserId:[File getUDID] andStart:@""];
+    allMyPolls = [Connection getDizionarioPolls];
     
     if(allVotedPolls!=nil && [allVotedPolls count] != 0) {
         
@@ -177,7 +182,7 @@
     NSString *value;
     allVotedPollsDetails = [[NSMutableArray alloc]init];
     
-    /* Scorre il dizionario e recupera i dettagli necessari */
+    /* Scorre il dizionario dei poll votati, li filtra e recupera i dettagli necessari */
     for(id key in allVotedPolls) {
         
         value = [allVotedPolls objectForKey:key];
@@ -188,15 +193,34 @@
                                      withDeadline:[value valueForKey:@"deadline"]
                                       withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
                                    withLastUpdate:[value valueForKey:@"updated"]
-                   withMine:[[value valueForKey:@"mine"] intValue]
+                                         withMine:[[value valueForKey:@"mine"] intValue]
                                    withCandidates:nil
                                         withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
         
-        if(p.votes!=0)
+        if(p.mine==0)
             [allVotedPollsDetails addObject:p];
         
     }
     
+    /* Scorre il dizionario dei poll dell'utente, li filtra e recupera i dettagli necessari */
+    for(id key in allMyPolls) {
+        
+        value = [allMyPolls objectForKey:key];
+        Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
+                                         withName:[value valueForKey:@"pollname"]
+                                  withDescription:[value valueForKey:@"polldescription"]
+                                  withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
+                                     withDeadline:[value valueForKey:@"deadline"]
+                                      withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
+                                   withLastUpdate:[value valueForKey:@"updated"]
+                                         withMine:[[value valueForKey:@"mine"] intValue]
+                                   withCandidates:nil
+                                        withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
+        
+        [allVotedPollsDetails addObject:p];
+        
+    }
+
     if([allVotedPollsDetails count] == 0) {
         
         allVotedPolls = [[NSMutableDictionary alloc]init];
@@ -337,7 +361,10 @@
     if([segue.identifier isEqualToString:@"showVotedResults"]) {
         
         TableViewControllerResults *destViewController = (TableViewControllerResults*)segue.destinationViewController;
-        destViewController.poll = p;
+        destViewController.p = p;
+        [FLAGS removeAllObjects];
+        [FLAGS addObject:@"RISULTATI"];
+        [File writeOnReload:@"0" ofFlags:FLAGS];
         
     }
     

@@ -1,6 +1,7 @@
 #import "TableViewControllerResults.h"
 #import "ViewControllerCandidates.h"
 #import "ViewControllerDettagli.h"
+#import "ViewControllerVoto.h"
 #import "Font.h"
 #import "File.h"
 #import "Candidate.h"
@@ -29,7 +30,7 @@
     
 }
 
-@synthesize poll,candidate,classificaFinale,tableView,FLAG;
+@synthesize p,candidate,classificaFinale,tableView,FLAG;
 
 - (void)viewDidLoad {
     
@@ -88,7 +89,7 @@
         
         /* Scarica i risultati per il poll selezionato */
         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-        classificaFinale = [conn getOptimalResultsOfPoll:poll];
+        classificaFinale = [conn getOptimalResultsOfPoll:p];
     
         /* Gestione di 0 voti nel poll e della connessione */
         if([classificaFinale count] == 0 || classificaFinale == nil)
@@ -125,7 +126,7 @@
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     
-    NSMutableArray *candidates = [poll candidates];
+    NSMutableArray *candidates = [p candidates];
     NSString *risp = [classificaFinale objectAtIndex:indexPath.row];
     
     /* Cattura dell'indice per estrarre il candidato */
@@ -188,14 +189,146 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if([segue.identifier isEqualToString:@"showVotedResultsDetails"]) {
+    if([segue.identifier isEqualToString:@"showReVoteView"]) {
         
-        ViewControllerDettagli *destViewController = segue.destinationViewController;
-        destViewController.p = poll;
-        destViewController.FLAG_ITEM = 1;
-        [FLAGS removeAllObjects];
-        [FLAGS addObject:@"DETTAGLI"];
-        [File writeOnReload:@"0" ofFlags:FLAGS];
+        backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+        
+        /* Init delle strutture utili per il segue */
+        ViewControllerVoto *destViewController = segue.destinationViewController;
+        destViewController.poll = p;
+        destViewController.candidateChars = [[NSMutableArray alloc]init];
+        destViewController.candidateNames = [[NSMutableArray alloc]init];
+        
+        /* Lettura di un ipotetico voto già dato al poll */
+        NSString *voti = [File getRankingOfPoll:p.pollId];
+        
+        /* Lettura di un ipotetica classifica salvata */
+        NSString *savedRank = [File getSaveRankOfPoll:[NSString stringWithFormat:@"%d",p.pollId]];
+        
+        /* Poll già votato in precedenza e non salvato */
+        if(voti!=NULL && savedRank == NULL) {
+            
+            /* Divide la classifica */
+            NSArray *arrayVoti = [voti componentsSeparatedByString:@","];
+            
+            /* Riassegnamento array in base al voto già dato al poll */
+            for(int i=0;i<[arrayVoti count];i++) {
+                
+                if([arrayVoti[i] containsString:@"a"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:0];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"b"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:1];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"c"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:2];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"d"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:3];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"e"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:4];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+            }
+            
+        }
+        
+        /* Classifica salvata */
+        else if((voti==NULL && savedRank!=NULL) || (voti!=NULL && savedRank!=NULL)) {
+            
+            /* Divide la classifica */
+            NSArray *arrayVoti = [savedRank componentsSeparatedByString:@","];
+            
+            /* Riassegnamento array in base al voto già dato al poll */
+            for(int i=0;i<[arrayVoti count];i++) {
+                
+                if([arrayVoti[i] containsString:@"a"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:0];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"b"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:1];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"c"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:2];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"d"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:3];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+                    
+                }
+                
+                if([arrayVoti[i] containsString:@"e"]) {
+                    
+                    candidate = [[p candidates] objectAtIndex:4];
+                    [destViewController.candidateChars addObject:candidate.candChar];
+                    [destViewController.candidateNames addObject:candidate.candName];
+
+                    
+                }
+                
+            }
+            
+        }
+        
+        /* Poll mai votato prima */
+        else {
+            
+            /* Inizializza normalmente l'array dei candidates */
+            for(int i=0;i<[[p candidates] count];i++) {
+                
+                candidate = [[p candidates] objectAtIndex:i];
+                [destViewController.candidateChars addObject:candidate.candChar];
+                [destViewController.candidateNames addObject:candidate.candName];
+
+                
+            }
+            
+        }
+
         
     }
     
@@ -216,7 +349,7 @@
         else if([candChar isEqual:@"D"])   indexCand = 3;
         else                            indexCand = 4;
         
-        candidate = poll.candidates[indexCand];
+        candidate = p.candidates[indexCand];
 
         backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_RANKING,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;

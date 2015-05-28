@@ -10,14 +10,14 @@ NSString *NO_RESULTS = @"Nessun risultato trovato";
 NSString *SEARCH = @"Cerca";
 NSString *BACK = @"";
 NSString *BACK_TO_HOME = @"Home";
-NSString *BACK_TO_VOTED = @"Votati";
+NSString *BACK_TO_VOTED = @"Risultati";
 NSString *BACK_TO_MY_POLL = @"I Miei Sond.";
 NSString *BACK_TO_RANKING = @"Classifica";
 
 /* Stringhe per messaggio da stampare a video */
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
 NSString *EMPTY_VOTED_POLLS_LIST = @"Non sono presenti sondaggi votati.\nVai sulla Home ed inizia a votare!";
-NSString *EMPTY_MY_POLLS_LIST = @"Non sono presenti sondaggi creati.\nVai sulla Home e crea il tuo primo sondaggio!";
+NSString *EMPTY_MY_POLLS_LIST = @"Non hai ancora creato nessun sondaggio.\nVai sulla Home e crea il tuo primo sondaggio!";
 NSString *NO_RANKING = @"Nessun risultato presente per il sondaggio selezionato.";
 
 /* Spaziatura voti per diversi IPhone */

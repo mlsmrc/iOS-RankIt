@@ -225,13 +225,13 @@ NSMutableDictionary *dizionarioPolls;
     
 }
 
-/*Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
+/* Ritorna il dizionario nel formato <pollid,poll> contenente solo i poll votati, leggendo dal file Votes.plist */
 - (NSMutableDictionary*) getDizionarioPollsVotati {
     
     /* Dizionario di tutti i poll votati */
     NSMutableDictionary *PollVotati = [[NSMutableDictionary alloc]init];
     
-    /* Contiene i pollid di tutti i poll votati */
+    /* Contiene i pollid di tutti i poll votati dall'utente */
     NSArray *VotesPListKeys = [File getAllKeysinPList:VOTES_PLIST];
     
     if([VotesPListKeys count]==0)

@@ -99,8 +99,7 @@ NSString *RELOAD = @"Reload.strings";
 + (NSArray *) getAllKeysinPList:(NSString *)PList {
     
     /* Catturo il path del file sulla Documents Directory */
-    NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:PList];
+    NSString *path = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
     
     /* Cattura del file Votes.plist in un dizionario */
     NSMutableDictionary *votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
