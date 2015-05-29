@@ -14,6 +14,7 @@
 #define RESET_POLL 0
 #define SHARE_POLL 0
 
+NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?id=_ID_";
 
 @interface UIViewController ()
 
@@ -53,7 +54,7 @@
 }
 
 @synthesize FLAG_MYPOLL;
-NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?_ID_=123";
+
 
 - (void) viewDidLoad {
    
