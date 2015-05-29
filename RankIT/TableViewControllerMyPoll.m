@@ -12,6 +12,7 @@
 
 #define DELETE_POLL 1
 #define RESET_POLL 0
+#define SHARE_POLL 0
 
 
 @interface UIViewController ()
@@ -529,7 +530,7 @@
                 
             }];
             
-            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
                 
                 /* Rientro dell'alert */
                 [AlertReset dismissViewControllerAnimated:YES completion:nil];
@@ -659,7 +660,7 @@
                     
                 }];
                 
-                UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
                     
                     /* Rientro dell'alert */
                     [AlertDelete dismissViewControllerAnimated:YES completion:nil];
@@ -681,6 +682,170 @@
             
         default:
             break;
+            
+    }
+    
+}
+
+- (void) swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    
+    switch (index) {
+            
+        case SHARE_POLL: {
+            
+            UIAlertController *linkCopy;
+            UIAlertAction *Ok;
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            
+            /* Salva la vecchia clipboard */
+            NSString *oldClipboardContent = pasteboard.string;
+            
+            /* Copia il link (TODO: generarlo correttamente, ora è una prova.) */
+            pasteboard.string = @"Generato da RankIT!";
+            
+            linkCopy = [UIAlertController alertControllerWithTitle:@"Link copiato correttamente!" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            Ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                
+                /* Rientro dell'alert di copia del link*/
+                [linkCopy dismissViewControllerAnimated:YES completion:nil];
+                
+                UIAlertController *alertShare;
+                UIAlertAction *Facebook;
+                UIAlertAction *GooglePlus;
+                UIAlertAction *Twitter;
+                UIAlertAction *WhatsApp;
+                UIAlertAction *Mail;
+                UIAlertAction *Messaggio;
+                UIAlertAction *Annulla;
+                
+                alertShare = [UIAlertController alertControllerWithTitle:@"Condividi il tuo sondaggio su:" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+                
+                
+                Facebook = [UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert e apertura Facebook Messenger */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    
+                    if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb-messenger:"]]) {
+                        
+                        /* Ripristina la vecchia clipboard */
+                        pasteboard.string = oldClipboardContent;
+
+                        /* Nel caso in cui non fosse installato */
+                        UIAlertView *alertError = [UIAlertView alloc];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        [alertError show];
+                        
+                    }
+                    
+                }];
+                
+                GooglePlus = [UIAlertAction actionWithTitle:@"Google+" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert e apertura Google+ */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    
+                    if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"gplus:"]]) {
+                        
+                        /* Ripristina la vecchia clipboard */
+                        pasteboard.string = oldClipboardContent;
+
+                        /* Nel caso in cui non fosse installato */
+                        UIAlertView *alertError = [UIAlertView alloc];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        [alertError show];
+                        
+                    }
+                    
+                }];
+                
+                Twitter = [UIAlertAction actionWithTitle:@"Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert e apertura Twitter */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    
+                    if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter:"]]) {
+                        
+                        /* Ripristina la vecchia clipboard */
+                        pasteboard.string = oldClipboardContent;
+
+                        /* Nel caso in cui non fosse installato */
+                        UIAlertView *alertError = [UIAlertView alloc];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        [alertError show];
+                        
+                    }
+                    
+                }];
+                
+                WhatsApp = [UIAlertAction actionWithTitle:@"WhatsApp" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert e apertura WhatsApp */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    
+                    if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"whatsapp:"]]) {
+                        
+                        /* Ripristina la vecchia clipboard */
+                        pasteboard.string = oldClipboardContent;
+
+                        /* Nel caso in cui non fosse installato */
+                        UIAlertView *alertError = [UIAlertView alloc];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        [alertError show];
+                        
+                    }
+                    
+                }];
+                
+                Mail = [UIAlertAction actionWithTitle:@"Mail" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert e apertura Mail */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:"]];
+                    
+                }];
+                
+                Messaggio = [UIAlertAction actionWithTitle:@"Messaggio" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert apertura Messaggi */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"sms:"]];
+                    
+                }];
+                
+                Annulla = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                    
+                    /* Ripristina la vecchia clipboard */
+                    pasteboard.string = oldClipboardContent;
+                    
+                    /* Rientro dell'alert */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    
+                }];
+                
+                /* Aggiunta pulsanti all'alert di condivisione */
+                [alertShare addAction:Facebook];
+                [alertShare addAction:GooglePlus];
+                [alertShare addAction:Twitter];
+                [alertShare addAction:WhatsApp];
+                [alertShare addAction:Mail];
+                [alertShare addAction:Messaggio];
+                [alertShare addAction:Annulla];
+                
+                /* Uscita dell'alert di condivisione */
+                [self presentViewController:alertShare animated:YES completion:nil];
+                
+            }];
+                        
+            [linkCopy addAction:Ok];
+            
+            /* Uscita dell'alert di copia del link */
+            [self presentViewController:linkCopy animated:YES completion:nil];
+            [cell hideUtilityButtonsAnimated:YES];
+            break;
+            
+        }
             
     }
     
