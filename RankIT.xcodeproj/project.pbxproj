@@ -39,13 +39,13 @@
 		43630E991B07755A0027121C /* ViewControllerGraphResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E7A1B07755A0027121C /* ViewControllerGraphResults.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630E9A1B07755A0027121C /* ViewControllerVoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E7C1B07755A0027121C /* ViewControllerVoto.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630E9B1B07755A0027121C /* Votazione.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630E7E1B07755A0027121C /* Votazione.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
-		43630E9C1B07755A0027121C /* Votes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43630E7F1B07755A0027121C /* Votes.strings */; };
 		43630E9F1B0775E60027121C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43630E9D1B0775D50027121C /* Main.storyboard */; };
 		43630EA61B0776440027121C /* ViewControllerAddPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA11B0776440027121C /* ViewControllerAddPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630EA71B0776440027121C /* ViewControllerSummaryPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA31B0776440027121C /* ViewControllerSummaryPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630EA81B0776440027121C /* XLFormImageSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA51B0776440027121C /* XLFormImageSelectorCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		437D24811B160D8900BAFD81 /* ViewControllerModPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D24801B160D8900BAFD81 /* ViewControllerModPoll.m */; };
 		6F0C0AFE1B14E9D500016295 /* Reload.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C0AFD1B14E9D500016295 /* Reload.strings */; };
+		6F5770701B17E45500987BD0 /* Voti.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F57706F1B17E45500987BD0 /* Voti.strings */; };
 		A90C67641B146AE800F0C5ED /* LaunchImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A90C67631B146AE800F0C5ED /* LaunchImage.xcassets */; };
 		C2F4EA8C1B11B7EA00CF11A8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */; };
 		C2F4EA8E1B11B83B00CF11A8 /* libPods-AXRatingView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */; };
@@ -205,7 +205,6 @@
 		43630E7C1B07755A0027121C /* ViewControllerVoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerVoto.m; sourceTree = "<group>"; };
 		43630E7D1B07755A0027121C /* Votazione.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Votazione.h; sourceTree = "<group>"; };
 		43630E7E1B07755A0027121C /* Votazione.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Votazione.m; sourceTree = "<group>"; };
-		43630E7F1B07755A0027121C /* Votes.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Votes.strings; sourceTree = "<group>"; };
 		43630E9D1B0775D50027121C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		43630EA01B0776440027121C /* ViewControllerAddPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerAddPoll.h; sourceTree = "<group>"; };
 		43630EA11B0776440027121C /* ViewControllerAddPoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerAddPoll.m; sourceTree = "<group>"; };
@@ -216,6 +215,7 @@
 		437D247F1B160D8900BAFD81 /* ViewControllerModPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerModPoll.h; sourceTree = "<group>"; };
 		437D24801B160D8900BAFD81 /* ViewControllerModPoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerModPoll.m; sourceTree = "<group>"; };
 		6F0C0AFD1B14E9D500016295 /* Reload.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Reload.strings; sourceTree = "<group>"; };
+		6F57706F1B17E45500987BD0 /* Voti.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Voti.strings; sourceTree = "<group>"; };
 		A90C67631B146AE800F0C5ED /* LaunchImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = LaunchImage.xcassets; path = ../LaunchImage.xcassets; sourceTree = "<group>"; };
 		AC6DF755FF9103F29F04B2A4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/../build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 				43630E741B07755A0027121C /* Util.m */,
 				6F0C0AFD1B14E9D500016295 /* Reload.strings */,
 				43630E661B07755A0027121C /* SaveRank.strings */,
-				43630E7F1B07755A0027121C /* Votes.strings */,
+				6F57706F1B17E45500987BD0 /* Voti.strings */,
 			);
 			name = Altro;
 			sourceTree = "<group>";
@@ -659,8 +659,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5770701B17E45500987BD0 /* Voti.strings in Resources */,
 				43630E9F1B0775E60027121C /* Main.storyboard in Resources */,
-				43630E9C1B07755A0027121C /* Votes.strings in Resources */,
 				43630DDD1B0772ED0027121C /* Images.xcassets in Resources */,
 				6F0C0AFE1B14E9D500016295 /* Reload.strings in Resources */,
 				43630E8F1B07755A0027121C /* SaveRank.strings in Resources */,

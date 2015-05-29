@@ -1,11 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "File.h"
 
-NSString *VOTES_PLIST = @"Votes.strings";
+NSString *VOTES_PLIST = @"Voti.strings";
 NSString *INFO_PLIST = @"Info";
 NSString *CUSTOM_UDID = @"CustomUDID";
 NSString *SAVE_RANK = @"SaveRank.strings";
-NSString *VOTES_PLIST_DATE = @"VotesDate.strings";
 NSString *RELOAD = @"Reload.strings";
 
 @implementation File: NSObject
@@ -17,25 +16,11 @@ NSString *RELOAD = @"Reload.strings";
 
 }
 
-/* Dato un pollid e la data, scrive all'interno del file VotesDate.strings la data relativa alla votazione effettuata */
-+ (BOOL) writeOnPListRankDateOfPoll:(NSString*)pollid {
-
-    return [File writeString: [[[NSDate alloc] init] description] forKey:pollid inPList:VOTES_PLIST_DATE];
-    
-}
-
-/* Dato un pollid, legge all'interno del file Votes.plist la votazione effettuata */
+/* Dato un pollid, legge all'interno del file Voti.plist la votazione effettuata */
 + (NSString*) getRankingOfPoll:(int)pollid {
     
     return [File readStringforKey:[NSString stringWithFormat:@"%d",pollid] inPList:VOTES_PLIST];
 
-}
-
-/* Dato un pollid, legge all'interno del file VotesDate.plist il giorno relativo alla votazione effettuata */
-+ (NSString*) getRankDateOfPoll:(int)pollid {
-    
-    return [File readStringforKey:[NSString stringWithFormat:@"%d",pollid] inPList:VOTES_PLIST_DATE];
-    
 }
 
 /* Lettura da info.plist dell'uuid salvato in precedenza. Se inesistente torna NULL */
@@ -53,15 +38,13 @@ NSString *RELOAD = @"Reload.strings";
 
 }
 
-/* Funzione generica privata che scrive una coppia <chiave,info> su una plist */
+/* Funzione generica che scrive una coppia <chiave,info> su una plist */
 + (BOOL) writeString:(NSString*)Info forKey:(NSString*)key inPList:(NSString *)PList {
     
     
-    NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:PList];
+    NSString *path = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
     
-    NSString *filePath = [[self applicationDocumentsDirectory].path
-                          stringByAppendingPathComponent:PList];
+    NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -71,7 +54,7 @@ NSString *RELOAD = @"Reload.strings";
         votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     
     else
-        votesPList = [[NSMutableDictionary alloc] init];
+        votesPList = [[NSMutableDictionary alloc]init];
     
     /* Aggiunta riga e scrittura su file */
     [votesPList setObject:Info forKey:key];
@@ -80,13 +63,11 @@ NSString *RELOAD = @"Reload.strings";
     
 }
 
-/* Funzione generica privata che legge una stringa da una plist data una chiave */
+/* Funzione generica che legge una stringa da una plist data una chiave */
 + (NSString *) readStringforKey:(NSString*)key inPList:(NSString *)PList {
     
-    
     /* Cattura il path del file sulla Documents Directory */
-    NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:PList];
+    NSString *path = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
     
     /* Cattura del file Votes.plist in un dizionario */
     NSMutableDictionary *votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
@@ -101,7 +82,7 @@ NSString *RELOAD = @"Reload.strings";
     /* Catturo il path del file sulla Documents Directory */
     NSString *path = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
     
-    /* Cattura del file Votes.plist in un dizionario */
+    /* Cattura del file Voti.plist in un dizionario */
     NSMutableDictionary *votesPList = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     
     return [votesPList allKeys];

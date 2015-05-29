@@ -16,6 +16,9 @@
     /* Per controllare se c'è timeout di connessione */
     bool resultConnection;
     
+    /* Flag utile per capire se un sondaggio è già stato votato */
+    int FLAG_ALREADY_VOTES;
+    
 }
 
 @synthesize candidateNames,candidateChars,name,poll,tableView,fourth,fifth;
@@ -46,6 +49,14 @@
         [fifth setHidden:YES];
     
 }
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    FLAG_ALREADY_VOTES = 0;
+    
+}
+
 
 /* Funzioni che permettono di visualizzare i nomi dei candidates nelle celle della schermata del voto */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -130,6 +141,12 @@
 /* Invio della classifica al server */
 - (IBAction) vota:(id)sender {
     
+    /* Contiene i pollid di tutti i poll votati dall'utente */
+    NSArray *VotesPListKeys = [File getAllKeysinPList:VOTES_PLIST];
+    
+    if([VotesPListKeys containsObject:[NSString stringWithFormat:@"%d",poll.pollId]] && poll.votes>0)
+        FLAG_ALREADY_VOTES = 1;
+    
     if([Util compareDate:[NSDate new] WithDate:poll.deadline]==1) {
         
         /* Popup per voto sottomesso */
@@ -162,7 +179,11 @@
         UIAlertView *alert = [UIAlertView alloc];
         alert.tag = VOTO_OK;
         
-        alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        if(FLAG_ALREADY_VOTES==1 && poll.votes>0)
+            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!\nIl tuo voto è stato sovrascritto al precedente." : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        
+        else
+            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         
         [alert show];
     

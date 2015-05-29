@@ -175,7 +175,7 @@ NSMutableDictionary *dizionarioPolls;
         if([dizionarioPolls count]==0)
             return false;
 
-        /* Aggiungi votazione in Vota.plist */
+        /* Aggiungi votazione in Voti.plist */
         [File writeOnPListRanking:ranking OfPoll:pollId];
         
         FLAGS = [[NSMutableArray alloc]init];
@@ -238,8 +238,8 @@ NSMutableDictionary *dizionarioPolls;
     if([VotesPListKeys count]==0)
         return PollVotati;
     
-    /* Aggiungi i poll vodati nel dizionario */
-    for(NSString* pollid in VotesPListKeys) {
+    /* Aggiungi i poll votati nel dizionario */
+    for(NSString *pollid in VotesPListKeys) {
         
         [self scaricaPollsWithPollId:pollid andUserId:@"" andStart:@""];
         
@@ -248,9 +248,9 @@ NSMutableDictionary *dizionarioPolls;
         
         else {
             
-            NSString *p=[dizionarioPolls valueForKey:pollid];
+            NSString *p = [dizionarioPolls objectForKey:pollid];
             
-            if([p valueForKey:@"votes"]!=0)
+            if(![[p valueForKey:@"votes"]isEqualToString:@"0"])
                 [PollVotati addEntriesFromDictionary:dizionarioPolls];
         
         }
