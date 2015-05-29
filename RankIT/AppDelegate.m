@@ -43,6 +43,13 @@
                                     withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
     NSLog(@"%d",p.pollId);
 
+    
+    
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    ViewControllerDettagli * vc = [ViewControllerDettagli new];
+    vc.p = p;
+    [navigationController presentViewController: vc animated:YES completion:nil];
+    
     return YES;
 }
 
@@ -75,14 +82,7 @@
 
 /* Funzione che apre */
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    ViewControllerDettagli * vc = [ViewControllerDettagli new];
-    
-    Poll *p = [[Poll alloc]initPollWithPollID:4 withName:@"prova" withDescription:@"prova" withResultsType:1 withDeadline:[NSDate new] withPrivate:false withLastUpdate:[NSDate new] withMine:1 withCandidates:nil withVotes:3];
-    
-    vc.p = p;
-    [navigationController presentViewController: vc animated:YES completion:nil];
+    NSLog(@"QUIQUI");
     
     
     
