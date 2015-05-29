@@ -53,6 +53,7 @@
 }
 
 @synthesize FLAG_MYPOLL;
+NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?_ID_=123";
 
 - (void) viewDidLoad {
    
@@ -700,8 +701,26 @@
             /* Salva la vecchia clipboard */
             NSString *oldClipboardContent = pasteboard.string;
             
+            /* Cattura del poll */
+            Poll *p;
+            
+            /* Indice della riga cliccata */
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            
+            if(self.tableView == self.searchDisplayController.searchResultsTableView) {
+                
+                cell.accessoryType = cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                p = [searchResults objectAtIndex:cellIndexPath.row];
+                
+            }
+            
+            else
+                p = [allMyPollsDetails objectAtIndex:cellIndexPath.row];
+            
+            
             /* Copia il link (TODO: generarlo correttamente, ora è una prova.) */
-            pasteboard.string = @"Generato da RankIT!";
+            pasteboard.string = [LINK_TO_SEND stringByReplacingOccurrencesOfString:@"_ID_"
+                                                                        withString:[NSString stringWithFormat:@"%d",p.pollId]];
             
             linkCopy = [UIAlertController alertControllerWithTitle:@"Link copiato correttamente!" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
             

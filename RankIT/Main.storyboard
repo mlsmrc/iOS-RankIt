@@ -423,7 +423,7 @@
         <!--Dettagli Poll-->
         <scene sceneID="Bua-UN-JOU">
             <objects>
-                <viewController title="Dettagli Poll" hidesBottomBarWhenPushed="YES" id="zPC-dB-2ah" customClass="ViewControllerDettagli" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DettagliPoll" title="Dettagli Poll" hidesBottomBarWhenPushed="YES" id="zPC-dB-2ah" customClass="ViewControllerDettagli" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d40-Ix-fq5">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -555,7 +555,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="shl-gZ-a0k">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Gk2-zu-o1D" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gk2-zu-o1D" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="mD0-Wb-3m4"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -952,9 +952,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="1DA-a0-GYX"/>
         <segue reference="Y9F-6e-5hV"/>
         <segue reference="Zgg-cI-oMW"/>
-        <segue reference="1DA-a0-GYX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
