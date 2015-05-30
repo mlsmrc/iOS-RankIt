@@ -164,7 +164,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="8bW-IS-BaO" kind="push" identifier="showVotedResults" id="MH3-if-kEN"/>
+                                            <segue destination="ZFu-R7-fwx" kind="push" identifier="showGraphResults" id="0C8-3w-KFK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -199,13 +199,13 @@
         <!--Classifica-->
         <scene sceneID="4Qm-hK-eTj">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="8bW-IS-BaO" customClass="TableViewControllerResults" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MedalResult" hidesBottomBarWhenPushed="YES" id="8bW-IS-BaO" customClass="TableViewControllerResults" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LAD-tP-2x6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="b3d-w6-8Xt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="505"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="618"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -262,11 +262,11 @@
             <objects>
                 <viewController id="lj8-aj-OLu" customClass="ViewControllerVoto" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7el-GI-q6N">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bWt-Xo-Hpe">
-                                <rect key="frame" x="33" y="0.0" width="287" height="504"/>
+                                <rect key="frame" x="33" y="0.0" width="287" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -356,11 +356,11 @@
             <objects>
                 <viewController id="jPN-O7-jyp" customClass="ViewControllerCandidates" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqz-Ha-QqF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OqZ-M8-A06">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wgW-Xa-FIn">
@@ -378,7 +378,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="44" width="220" height="220"/>
+                                        <rect key="frame" x="50" y="44" width="220" height="251"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -749,15 +749,15 @@
             <objects>
                 <viewController storyboardIdentifier="ResultWithGraph" hidesBottomBarWhenPushed="YES" id="ZFu-R7-fwx" customClass="ViewControllerGraphResults" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f1k-fJ-dip">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="L34-hm-BD3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="Var-Nm-LvF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="304"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -952,9 +952,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1DA-a0-GYX"/>
         <segue reference="Y9F-6e-5hV"/>
-        <segue reference="Zgg-cI-oMW"/>
+        <segue reference="g17-WK-v9O"/>
+        <segue reference="Orh-LF-ieg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
