@@ -1,6 +1,7 @@
 #import "ViewControllerAddPoll.h"
 #import "XLFormImageSelectorCell.h"
 #import "XLFormSectionDescriptor.h"
+#import "Font.h"
 
 /* Tag riconoscimento row Nome Poll */
 NSString *const kPollName = @"kPollName";
@@ -64,10 +65,12 @@ XLFormSectionDescriptor *multivaluedSection;
     /* Nome Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollName rowType:XLFormRowDescriptorTypeText];
     [row.cellConfigAtConfigure setObject:@"Nome Poll" forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18] forKey:@"textField.font"];
+
     row.required = YES;
     
     /* Binding regex validazione input */
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"At least 6, max 21 characters" regex:@".{6,21}$"]];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"At least 1, max 21 characters" regex:@".{1,21}$"]];
     [section addFormRow:row];
     
     /* Aggiunto alla root section */
@@ -77,11 +80,17 @@ XLFormSectionDescriptor *multivaluedSection;
     /* Terza Row Descrizione Poll */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollDesc rowType:XLFormRowDescriptorTypeTextView];
     [row.cellConfigAtConfigure setObject:@"Descrizione Poll" forKey:@"textView.placeholder"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18] forKey:@"textView.font"];
+
+
     [section addFormRow:row];
     
     /* Scadenza Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     row.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    [row.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
+
+    
     [section addFormRow:row];
     
     /* isPrivate */
@@ -100,9 +109,14 @@ XLFormSectionDescriptor *multivaluedSection;
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollCandidates rowType:XLFormRowDescriptorTypeText];
 
     [[row cellConfig] setObject:@"Risposta" forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18 ] forKey:@"textField.font"];
+
     multivaluedSection.multivaluedTag = @"textFieldRow";
+    
     multivaluedSection.multivaluedRowTemplate = row;
     [form addFormSection:multivaluedSection];
+    
+    
     self.form = form;
     
     return [super initWithForm:form];
@@ -171,21 +185,7 @@ XLFormSectionDescriptor *multivaluedSection;
             [self animateCell:cell];
         
         }
-        
-        else if([validationStatus.rowDescriptor.tag isEqualToString:kPollCandidates]) {
-            
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            cell.backgroundColor = [UIColor redColor];
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                cell.backgroundColor = [UIColor whiteColor];
-            }];
-            
-            isValidDesc = false;
-            [self animateCell:cell];
-            
-        }
-        
+    
     }];
     
     return (isValidName && isValidDesc ? true : false);
@@ -231,7 +231,7 @@ XLFormSectionDescriptor *multivaluedSection;
                 
                 if(row.value)
                     [multiValuedValuesArray addObject:row.value];
-                
+    
             }
             
             [_result setObject:multiValuedValuesArray forKey:section.multivaluedTag];
@@ -244,11 +244,45 @@ XLFormSectionDescriptor *multivaluedSection;
 
 }
 
-- (void) viewDidLoad {
+/* Il metodo si occupa di restituire il numero di candidates inseriti dall'utente */
+-(int) getCandidatesSize
+{
+    int candidateCount = 0;
+    
+    for(XLFormSectionDescriptor * section in self.form.formSections)
+    {
+        if(section.isMultivaluedSection) //se è la section dedicata all'aggiunta dei candidates
+        {
+            for(XLFormRowDescriptor * row in section.formRows)
+            {
+                if(row.value)
+                    candidateCount++;
+            }
+        
+        }
+        
+    }
+    
+    
+    return candidateCount;
 
+}
+
+- (void) viewDidLoad{
+    
     [super viewDidLoad];
 
 }
+
+/* previene l'hide della keyboard sullo swipe */
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+
+}
+
+
+
+
 
 - (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
     
@@ -271,11 +305,28 @@ XLFormSectionDescriptor *multivaluedSection;
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     
-    if([identifier isEqualToString:@"summary"] && [self validateForm])
+    if([identifier isEqualToString:@"summary"] && [self validateForm] && [self getCandidatesSize] > 2)
+    {
         return YES;
-    
+    }else if([self getCandidatesSize ] <= 2)
+    {
+        [self notEnoughCandidateAlert];
+        return NO;
+    }
     return NO;
-    
 }
 
+/*Alert Box not enough candidate */
+-(void) notEnoughCandidateAlert
+{
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
+                                                 message:@"Devi aggiungere almeno 3 risposte per creare un nuovo sondaggio"
+                                                delegate:self
+                                       cancelButtonTitle:@"Ok"
+                                       otherButtonTitles:nil];
+    
+    
+    [av show];
+
+}
 @end

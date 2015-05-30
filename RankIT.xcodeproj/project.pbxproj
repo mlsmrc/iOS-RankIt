@@ -44,10 +44,10 @@
 		43630EA71B0776440027121C /* ViewControllerSummaryPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA31B0776440027121C /* ViewControllerSummaryPoll.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		43630EA81B0776440027121C /* XLFormImageSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43630EA51B0776440027121C /* XLFormImageSelectorCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		437D24811B160D8900BAFD81 /* ViewControllerModPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D24801B160D8900BAFD81 /* ViewControllerModPoll.m */; };
+		43B961A91B1A2D4A000565C9 /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B961A81B1A2D4A000565C9 /* Credits.m */; };
 		6F0C0AFE1B14E9D500016295 /* Reload.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C0AFD1B14E9D500016295 /* Reload.strings */; };
 		6F5770701B17E45500987BD0 /* Voti.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F57706F1B17E45500987BD0 /* Voti.strings */; };
 		A90C67641B146AE800F0C5ED /* LaunchImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A90C67631B146AE800F0C5ED /* LaunchImage.xcassets */; };
-		A9D0C8731B1A07C1007D6AE1 /* ViewControllerCredits.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D0C8721B1A07C1007D6AE1 /* ViewControllerCredits.m */; };
 		A9D5DF8B1B18BB8F00FB1A25 /* ParamID.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9D5DF8A1B18BB8F00FB1A25 /* ParamID.strings */; };
 		C2F4EA8C1B11B7EA00CF11A8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */; };
 		C2F4EA8E1B11B83B00CF11A8 /* libPods-AXRatingView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */; };
@@ -216,11 +216,11 @@
 		43630EA51B0776440027121C /* XLFormImageSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormImageSelectorCell.m; sourceTree = "<group>"; };
 		437D247F1B160D8900BAFD81 /* ViewControllerModPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerModPoll.h; sourceTree = "<group>"; };
 		437D24801B160D8900BAFD81 /* ViewControllerModPoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerModPoll.m; sourceTree = "<group>"; };
+		43B961A71B1A2D4A000565C9 /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
+		43B961A81B1A2D4A000565C9 /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credits.m; sourceTree = "<group>"; };
 		6F0C0AFD1B14E9D500016295 /* Reload.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Reload.strings; sourceTree = "<group>"; };
 		6F57706F1B17E45500987BD0 /* Voti.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Voti.strings; sourceTree = "<group>"; };
 		A90C67631B146AE800F0C5ED /* LaunchImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = LaunchImage.xcassets; path = ../LaunchImage.xcassets; sourceTree = "<group>"; };
-		A9D0C8711B1A07C1007D6AE1 /* ViewControllerCredits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerCredits.h; sourceTree = "<group>"; };
-		A9D0C8721B1A07C1007D6AE1 /* ViewControllerCredits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerCredits.m; sourceTree = "<group>"; };
 		A9D5DF8A1B18BB8F00FB1A25 /* ParamID.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ParamID.strings; sourceTree = "<group>"; };
 		AC6DF755FF9103F29F04B2A4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/../build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
@@ -586,8 +586,8 @@
 		A9D0C8701B1A0794007D6AE1 /* Credits */ = {
 			isa = PBXGroup;
 			children = (
-				A9D0C8711B1A07C1007D6AE1 /* ViewControllerCredits.h */,
-				A9D0C8721B1A07C1007D6AE1 /* ViewControllerCredits.m */,
+				43B961A71B1A2D4A000565C9 /* Credits.h */,
+				43B961A81B1A2D4A000565C9 /* Credits.m */,
 			);
 			name = Credits;
 			sourceTree = "<group>";
@@ -734,7 +734,6 @@
 			files = (
 				43630E8D1B07755A0027121C /* Poll.m in Sources */,
 				43630E831B07755A0027121C /* ConnectionToServer.m in Sources */,
-				A9D0C8731B1A07C1007D6AE1 /* ViewControllerCredits.m in Sources */,
 				43630EA81B0776440027121C /* XLFormImageSelectorCell.m in Sources */,
 				43630E971B07755A0027121C /* ViewControllerCandidates.m in Sources */,
 				43630E8C1B07755A0027121C /* SWUtilityButtonView.m in Sources */,
@@ -754,6 +753,7 @@
 				43630E901B07755A0027121C /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				43630E9A1B07755A0027121C /* ViewControllerVoto.m in Sources */,
 				43630DCF1B0772ED0027121C /* main.m in Sources */,
+				43B961A91B1A2D4A000565C9 /* Credits.m in Sources */,
 				43630E811B07755A0027121C /* AppDelegate.m in Sources */,
 				437D24811B160D8900BAFD81 /* ViewControllerModPoll.m in Sources */,
 				43630E931B07755A0027121C /* TableViewControllerResults.m in Sources */,

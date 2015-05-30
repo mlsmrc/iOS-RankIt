@@ -11,7 +11,11 @@
     XLFormSectionDescriptor *summarySection;
     XLFormRowDescriptor *summaryRow;
     XLFormDescriptor *summaryformDescriptor;
+    NSArray *candWithChar;
+    NSString *serverResult;
     
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
 }
 
 @synthesize summaryResult,pollDescResult,isModified,oldCandidates,pollId;
@@ -33,6 +37,9 @@ NSString *const keyPollCandidates = @"textFieldRow";
 
 - (id) Initalize {
     
+    
+    candWithChar = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
+
     NSString *pollName = summaryResult[keyPollName];
     NSString *pollDesc = summaryResult[keyPollDesc];
     NSMutableArray *candidates = summaryResult[keyPollCandidates];
@@ -41,14 +48,13 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* Date Formatter for showing date */
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy HH:mm"];
-
+    
     /* Initializing view */
     summaryForm = [XLFormDescriptor formDescriptorWithTitle:@"Riepilogo "];
     
     /* Prima Sezione */
     summarySection = [XLFormSectionDescriptor formSection];
     summarySection.footerTitle = [NSString stringWithFormat:@"Scadenza: %@",[dateFormat stringFromDate:deadLine]];
-    
     [summaryForm addFormSection:summarySection];
     
     /* PollName */
@@ -69,11 +75,12 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* Tag identificativo unico per riconoscimento righe */
     int countRow = 0;
     
+    
     for(NSString *candidate in candidates) {
         
         /* Creiamo una nuova Sezione */
         summarySection = [XLFormSectionDescriptor formSectionWithTitle:@"" sectionOptions:XLFormSectionOptionNone];
-
+        
         [summaryForm addFormSection:summarySection];
         
         /* Creiamo una nuova row per l'aggiunta di una foto del candidate *
@@ -83,7 +90,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         /* Creiamo una nuova riga corrispondente alla risposta */
         summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandName %d",countRow] rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
-                      
+        
         [[summaryRow cellConfig] setObject:@"Add a new tag" forKey:@"textField.placeholder"];
         summaryRow.value = [candidate copy];
         summaryRow.disabled=@YES;
@@ -97,9 +104,9 @@ NSString *const keyPollCandidates = @"textFieldRow";
         [summarySection addFormRow:summaryRow];
         
         countRow++;
-    
+        
     }
- 
+    
     self.form = summaryForm;
     return [super initWithForm:summaryForm];
     
@@ -114,40 +121,93 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* Creiamo un nuovo poll */
     Poll *newPoll = [self createPoll:formValues];
     
-    [self postPoll:newPoll];
+    serverResult =  [self postPoll:newPoll];
+    
+    [self connectionHandler:self.isModified];
     
 }
 
+-(void) connectionHandler:(BOOL) modified
+{
+    NSString *addOk =@"Sondaggio creato con successo!";
+    NSString *modifiedOk=@"Sondaggio modificato correttamente!";
+    
+    /* Popup per voto sottomesso */
+    UIAlertView *alert = [UIAlertView alloc];
+    alert.tag = 1;
+    
+    if(!modified)
+    {
+    alert = [alert initWithTitle:@"Esito Aggiunta" message:(serverResult != (id)[NSNull null] ? addOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    }else
+        alert = [alert initWithTitle:@"Esito Modifica" message:(serverResult != (id)[NSNull null] ? modifiedOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [alert show];
+    
+}
+
+/* Funzione delegate per i Popup della view */
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    /* Titolo del bottone cliccato */
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    /* L'alert view conseguente ad una votazione effettuata */
+    if(alertView.tag == 1)
+    {
+        
+        if([title isEqualToString:@"Ok"] && serverResult != (id)[NSNull null] )
+        {
+             [FLAGS removeAllObjects];
+            
+            if(self.isModified)
+            {
+               
+                [FLAGS addObject:@"MYPOLL"];
+            
+            }
+            else
+            {
+                [FLAGS addObject:@"HOME"];
+        
+        
+            }
+            
+            
+            /* Vai alla Home */
+         
+            [File writeOnReload:@"0" ofFlags:FLAGS];
+
+            [self.navigationController popToRootViewControllerAnimated:TRUE];
+            
+        
+    }
+    
+    
+
+    }
+
+}
 /* Il metodo  si occupa di estrarre i dati dal form */
 - (NSMutableDictionary *) getFormValues {
     
     pollDescResult =   [NSMutableDictionary dictionary];
     
-    for(XLFormSectionDescriptor * section in self.form.formSections) {
+    for(XLFormSectionDescriptor * section in self.form.formSections)
+    {
         
-        if(!section.isMultivaluedSection){
+        if(!section.isMultivaluedSection)
+        {
             
-            for(XLFormRowDescriptor * row in section.formRows) {
+            for(XLFormRowDescriptor * row in section.formRows)
+            {
                 
                 if(row.tag && ![row.tag isEqualToString:@""])
                     [pollDescResult setObject:(row.value ?: [NSNull null]) forKey:row.tag];
+
             }
             
-        }
-        
-        else {
-            
-            NSMutableArray * multiValuedValuesArray = [NSMutableArray new];
-            
-            for(XLFormRowDescriptor * row in section.formRows) {
-                
-                if(row.value)
-                    [multiValuedValuesArray addObject:row.value];
-                
-            }
-            
-            [pollDescResult setObject:multiValuedValuesArray forKey:section.multivaluedTag];
-        
         }
         
     }
@@ -168,13 +228,14 @@ NSString *const keyPollCandidates = @"textFieldRow";
     if(summaryResult[keyPollPrivate] != (id)[NSNull null])
         private = [summaryResult[keyPollPrivate] boolValue];
     
+
     NSMutableArray *pollCand =  [self createCandidate:dataInput]; //creazione di un array di candidates del poll con CandName - CandDesc
     
     /* Creazione nuovo Poll */
-    _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
+    _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:(pollDesc == (id)[NSNull null] ? @"" : pollDesc) withDeadline:deadLine withPrivate:private withCandidates:pollCand];
     
     return _poll;
-
+    
 }
 
 /* Il metodo si occupa dell'invio del poll al server */
@@ -190,27 +251,37 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
-- (void) viewDidLoad {
-
+- (void) viewDidLoad
+{
+    
     [self Initalize];
     [super viewDidLoad];
+    FLAGS = [[NSMutableArray alloc]init];
     
 }
 
 /* Il metodo si occupa di creare un array di candidates costituenti il poll */
 - (NSMutableArray *) createCandidate:(NSMutableDictionary *)inputCandidates {
     
+    int candidateWithChar = 0; //cand char associato al candidate
+    
     /* Array candidates poll */
     NSMutableArray *candidates = [[NSMutableArray alloc] init];
     
+    /*Sorting keys */
+    NSArray *sortedKeys = [[inputCandidates allKeys] sortedArrayUsingSelector: @selector(compare:)];
+    
     /* Iteriamo su tutte le chiavi della collezione */
-    for( NSString *key in inputCandidates.allKeys) {
+    for( NSString *key in sortedKeys) {
         
         /* Se abbiamo trovato un nome di un candidate */
         if([key rangeOfString:@"CandName"].location != NSNotFound) {
             
             /* Recupero CandName */
             NSString *name = [inputCandidates objectForKey:key];
+            
+            NSLog(@"%@",name);
+
             
             /* Split per recuperare l'id del tag */
             NSArray *arrayWithTwoStrings = [key componentsSeparatedByString:@" "];
@@ -222,8 +293,10 @@ NSString *const keyPollCandidates = @"textFieldRow";
             NSString *desc = [inputCandidates objectForKey:descKey];
             
             /* Creazione nuovo candidate */
-            Candidate *cand = [[Candidate alloc] initCandicateWithChar:@"" andName:name andDescription:(desc == (id)[NSNull null] ? @"" : desc)];
+            Candidate *cand = [[Candidate alloc] initCandicateWithChar:candWithChar[candidateWithChar] andName:name andDescription:(desc == (id)[NSNull null] ? @"" : desc)];
             [candidates addObject:cand];
+            
+            candidateWithChar++;
             
         }
         
@@ -240,10 +313,17 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         if([cand.candName isEqualToString:candid])
             return cand.candDescription;
-    
+        
     }
-
+    
     return @"";
+}
+
+/* Hiding done Bar */
+- (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
+    
+    return nil;
+    
 }
 
 /* Il metodo si occupa di eliminare i poll vecchi in modifica*/
