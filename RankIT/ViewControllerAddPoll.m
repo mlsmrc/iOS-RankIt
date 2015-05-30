@@ -301,7 +301,7 @@ XLFormSectionDescriptor *multivaluedSection;
     if([identifier isEqualToString:@"summary"] && [self validateForm] && [self getCandidatesSize] > 2)
     {
         return YES;
-    }else if([self getCandidatesSize ] < 2)
+    }else if([self getCandidatesSize ] <= 2)
     {
         [self notEnoughCandidateAlert];
         return NO;
