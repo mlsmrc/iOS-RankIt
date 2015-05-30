@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RankIT/ViewControllerModPoll.m"
-            timestampString = "454451967.376548"
+            timestampString = "454672645.193366"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
+            landmarkName = "-notEnoughCandidateAlert"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -240,6 +240,22 @@
             startingLineNumber = "112"
             endingLineNumber = "112"
             landmarkName = "-Initialize"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RankIT/ViewControllerAddPoll.m"
+            timestampString = "454674704.171328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "-notEnoughCandidateAlert"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

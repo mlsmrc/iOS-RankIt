@@ -82,6 +82,9 @@ XLFormSectionDescriptor *multivaluedSection;
     /* Scadenza Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     row.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    [row.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
+
+    
     [section addFormRow:row];
     
     /* isPrivate */
