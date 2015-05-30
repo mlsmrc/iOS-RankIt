@@ -41,7 +41,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* Date Formatter for showing date */
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy HH:mm"];
-    
+
     /* Initializing view */
     summaryForm = [XLFormDescriptor formDescriptorWithTitle:@"Riepilogo "];
     
@@ -73,7 +73,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         /* Creiamo una nuova Sezione */
         summarySection = [XLFormSectionDescriptor formSectionWithTitle:@"" sectionOptions:XLFormSectionOptionNone];
-        
+
         [summaryForm addFormSection:summarySection];
         
         /* Creiamo una nuova row per l'aggiunta di una foto del candidate *
@@ -83,7 +83,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         /* Creiamo una nuova riga corrispondente alla risposta */
         summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandName %d",countRow] rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
-        
+                      
         [[summaryRow cellConfig] setObject:@"Add a new tag" forKey:@"textField.placeholder"];
         summaryRow.value = [candidate copy];
         summaryRow.disabled=@YES;
@@ -97,9 +97,9 @@ NSString *const keyPollCandidates = @"textFieldRow";
         [summarySection addFormRow:summaryRow];
         
         countRow++;
-        
-    }
     
+    }
+ 
     self.form = summaryForm;
     return [super initWithForm:summaryForm];
     
@@ -147,7 +147,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
             }
             
             [pollDescResult setObject:multiValuedValuesArray forKey:section.multivaluedTag];
-            
+        
         }
         
     }
@@ -174,7 +174,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:pollDesc withDeadline:deadLine withPrivate:private withCandidates:pollCand];
     
     return _poll;
-    
+
 }
 
 /* Il metodo si occupa dell'invio del poll al server */
@@ -191,7 +191,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
 }
 
 - (void) viewDidLoad {
-    
+
     [self Initalize];
     [super viewDidLoad];
     
@@ -240,17 +240,10 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         if([cand.candName isEqualToString:candid])
             return cand.candDescription;
-        
+    
     }
-    
-    return @"";
-}
 
-/* Hiding done Bar */
-- (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
-    
-    return nil;
-    
+    return @"";
 }
 
 /* Il metodo si occupa di eliminare i poll vecchi in modifica*/

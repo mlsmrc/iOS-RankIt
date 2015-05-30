@@ -6,6 +6,8 @@ NSString *INFO_PLIST = @"Info";
 NSString *CUSTOM_UDID = @"CustomUDID";
 NSString *SAVE_RANK = @"SaveRank.strings";
 NSString *RELOAD = @"Reload.strings";
+NSString *POLL_ID = @"PollID";
+NSString *PARAM_ID = @"ParamID.strings";
 
 @implementation File: NSObject
 
@@ -36,6 +38,21 @@ NSString *RELOAD = @"Reload.strings";
     NSString *uuid = [[NSUUID UUID] UUIDString];
     return [File writeString:uuid forKey:CUSTOM_UDID inPList:INFO_PLIST];
 
+}
+
+/* Scrive il  parametro poll_id quando si usa l'url scheme */
++ (BOOL) writeParameterID:(NSString *)pollID {
+    return [File writeString:pollID forKey:POLL_ID inPList:PARAM_ID];
+}
+
+/* Resetta il file contenente il parametro poll_id quand si usa l'url scheme */
++ (BOOL) clearParameterID {
+    return [self clearFile:PARAM_ID];
+}
+
+/* Legge il  parametro poll_id quando si usa l'url scheme */
++ (NSString *)readParameterID {
+    return [self readStringforKey:POLL_ID inPList:PARAM_ID];
 }
 
 /* Funzione generica che scrive una coppia <chiave,info> su una plist */

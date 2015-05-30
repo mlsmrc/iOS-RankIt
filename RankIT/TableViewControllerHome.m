@@ -56,8 +56,10 @@
 @synthesize FLAG_HOME;
 
 - (void) viewDidLoad {
-    
+
     [super viewDidLoad];
+
+    
     
     FLAGS = [[NSMutableArray alloc]init];
     [FLAGS addObject:@"HOME"];
@@ -65,7 +67,9 @@
     
     /* Puoi scaricare i poll */
     UPLOAD = YES;
+    
     allPublicPollsDetails = [[NSMutableArray alloc]init];
+    
     start=0;
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -122,48 +126,61 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    
+
     [super viewWillAppear:animated];
     
-    FLAG_HOME = [[File readFromReload:@"FLAG_HOME"] intValue];
-    
-    [FLAGS addObject:@"MYPOLL"];
-    [FLAGS addObject:@"VOTATI"];
-    [File writeOnReload:@"0" ofFlags:FLAGS];
-    
-    [FLAGS removeAllObjects];
-    [FLAGS addObject:@"HOME"];
-    [File writeOnReload:@"1" ofFlags:FLAGS];
-    
-    /* Eliminazione della classifica salvata al momento del passaggio da dettagli poll a root */
-    [File clearSaveRank];
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
-    if(FLAG_HOME == 0) {
-    
-        /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
-        start = 0;
-        [allPublicPolls removeAllObjects];
-        [allPublicPollsDetails removeAllObjects];
-    
-        /* Nasconde la table view e fa partire l'animazione dello spinner */
-        [spinner startAnimating];
-        [self.tableView setHidden:YES];
+    if ([File readParameterID]!=nil) {
         
+        
+        [self performSegueWithIdentifier:@"showPollDetails" sender:self];
+        
+    }
+    else
+    {
+        
+        FLAG_HOME = [[File readFromReload:@"FLAG_HOME"] intValue];
+        
+        [FLAGS addObject:@"MYPOLL"];
+        [FLAGS addObject:@"VOTATI"];
+        [File writeOnReload:@"0" ofFlags:FLAGS];
+        
+        [FLAGS removeAllObjects];
+        [FLAGS addObject:@"HOME"];
+        [File writeOnReload:@"1" ofFlags:FLAGS];
+        
+        /* Eliminazione della classifica salvata al momento del passaggio da dettagli poll a root */
+        [File clearSaveRank];
+        
+        
+        
+        /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+        
+        if(FLAG_HOME == 0) {
+            
+            /* Ogni volta che la view appare vengono scaricati i primi 10 poll pubblici */
+            start = 0;
+            [allPublicPolls removeAllObjects];
+            [allPublicPollsDetails removeAllObjects];
+            
+            /* Nasconde la table view e fa partire l'animazione dello spinner */
+            [spinner startAnimating];
+            [self.tableView setHidden:YES];
+            
+        }
     }
     
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    
+
     [super viewDidAppear:animated];
     
     if(FLAG_HOME == 0) {
         
         /* Download dei poll pubblici da 0 a 9 (start è = 0) */
         [self DownloadPolls:start];
+
     
         /* Se non c'è connessione o non ci sono poll pubblici, il background della TableView è senza linee */
         if(allPublicPolls==nil || [allPublicPolls count]==0)
@@ -458,7 +475,34 @@
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
         
-        if(self.searchDisplayController.active) {
+        
+        NSString *parameterID = [File readParameterID];
+         
+         if (parameterID!=nil) {
+             ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+             [conn scaricaPollsWithPollId:parameterID andUserId:@"" andStart:@""];
+             NSMutableDictionary *result = [conn getDizionarioPolls];
+             NSString *value = [result valueForKey:parameterID];
+         
+         
+             p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
+                                        withName:[value valueForKey:@"pollname"]
+                                 withDescription:[value valueForKey:@"polldescription"]
+                                 withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
+                                    withDeadline:[value valueForKey:@"deadline"]
+                                     withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
+                                  withLastUpdate:[value valueForKey:@"updated"]
+                                        withMine:[[value valueForKey:@"mine"] intValue]
+                                  withCandidates:nil
+                                       withVotes:[[value valueForKey:@"votes"] intValue]];
+         
+         
+             [File clearParameterID];
+             
+         }
+        else
+        {
+            if(self.searchDisplayController.active) {
             
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
             p = [searchResults objectAtIndex:indexPath.row];
@@ -466,15 +510,16 @@
             self.navigationItem.backBarButtonItem = backButton;
             
             
-        }
+            }
         
-        else {
+            else {
             
             indexPath = [self.tableView indexPathForSelectedRow];
             p = [allPublicPollsDetails objectAtIndex:indexPath.row];
             backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_HOME,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
             self.navigationItem.backBarButtonItem = backButton;
             
+            }
         }
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;

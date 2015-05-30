@@ -93,8 +93,6 @@ XLFormDescriptor *mFormDescriptor;
     /* Scadenza Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     mRow.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
-    [mRow.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
-
     [mSection addFormRow:mRow];
     
     /* isPrivate */
@@ -280,30 +278,6 @@ XLFormDescriptor *mFormDescriptor;
     
 }
 
-/* Il metodo si occupa di restituire il numero di candidates inseriti dall'utente */
--(int) getCandidatesSize
-{
-    int candidateCount = 0;
-    
-    for(XLFormSectionDescriptor * section in self.form.formSections)
-    {
-        if(section.isMultivaluedSection) //se è la section dedicata all'aggiunta dei candidates
-        {
-            for(XLFormRowDescriptor * row in section.formRows)
-            {
-                if(row.value)
-                    candidateCount++;
-            }
-            
-        }
-        
-    }
-    
-    
-    return candidateCount;
-    
-}
-
 - (void) viewDidLoad {
     
     [self Initialize];
@@ -334,29 +308,11 @@ XLFormDescriptor *mFormDescriptor;
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     
-    if([identifier isEqualToString:@"modPollResult"] && [self validateForm] && [self getCandidatesSize] > 2)
-    {
+    if([identifier isEqualToString:@"modPollResult"] && [self validateForm])
         return YES;
-    }else if([self getCandidatesSize ] <= 2)
-    {
-        [self notEnoughCandidateAlert];
-        return NO;
-    }
+    
     return NO;
     
 }
 
-/*Alert Box not enough candidate */
--(void) notEnoughCandidateAlert
-{
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                 message:@"Devi aggiungere almeno 3 risposte per modificare il sondaggio"
-                                                delegate:self
-                                       cancelButtonTitle:@"Ok"
-                                       otherButtonTitles:nil];
-    
-    
-    [av show];
-    
-}
 @end

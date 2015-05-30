@@ -47,6 +47,8 @@
 		6F0C0AFE1B14E9D500016295 /* Reload.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C0AFD1B14E9D500016295 /* Reload.strings */; };
 		6F5770701B17E45500987BD0 /* Voti.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F57706F1B17E45500987BD0 /* Voti.strings */; };
 		A90C67641B146AE800F0C5ED /* LaunchImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A90C67631B146AE800F0C5ED /* LaunchImage.xcassets */; };
+		A9D0C8731B1A07C1007D6AE1 /* ViewControllerCredits.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D0C8721B1A07C1007D6AE1 /* ViewControllerCredits.m */; };
+		A9D5DF8B1B18BB8F00FB1A25 /* ParamID.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9D5DF8A1B18BB8F00FB1A25 /* ParamID.strings */; };
 		C2F4EA8C1B11B7EA00CF11A8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */; };
 		C2F4EA8E1B11B83B00CF11A8 /* libPods-AXRatingView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */; };
 		C2F4EA901B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4EA8F1B11B84000CF11A8 /* libPods-JVFloatLabeledTextField.a */; };
@@ -217,6 +219,9 @@
 		6F0C0AFD1B14E9D500016295 /* Reload.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Reload.strings; sourceTree = "<group>"; };
 		6F57706F1B17E45500987BD0 /* Voti.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Voti.strings; sourceTree = "<group>"; };
 		A90C67631B146AE800F0C5ED /* LaunchImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = LaunchImage.xcassets; path = ../LaunchImage.xcassets; sourceTree = "<group>"; };
+		A9D0C8711B1A07C1007D6AE1 /* ViewControllerCredits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerCredits.h; sourceTree = "<group>"; };
+		A9D0C8721B1A07C1007D6AE1 /* ViewControllerCredits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerCredits.m; sourceTree = "<group>"; };
+		A9D5DF8A1B18BB8F00FB1A25 /* ParamID.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ParamID.strings; sourceTree = "<group>"; };
 		AC6DF755FF9103F29F04B2A4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C2F4EA8B1B11B7EA00CF11A8 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/../build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		C2F4EA8D1B11B83B00CF11A8 /* libPods-AXRatingView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AXRatingView.a"; path = "Pods/../build/Debug-iphoneos/libPods-AXRatingView.a"; sourceTree = "<group>"; };
@@ -314,6 +319,7 @@
 			children = (
 				437D247E1B160D4000BAFD81 /* Mod Poll */,
 				6F3077821B07CA8F0060ECA2 /* Add Poll */,
+				A9D0C8701B1A0794007D6AE1 /* Credits */,
 				6F3077831B07CACF0060ECA2 /* Altro */,
 				435E2F0C1B079DF50093C12F /* CorePlot */,
 				6F3077891B07CC4E0060ECA2 /* Delegate */,
@@ -507,6 +513,7 @@
 				6F0C0AFD1B14E9D500016295 /* Reload.strings */,
 				43630E661B07755A0027121C /* SaveRank.strings */,
 				6F57706F1B17E45500987BD0 /* Voti.strings */,
+				A9D5DF8A1B18BB8F00FB1A25 /* ParamID.strings */,
 			);
 			name = Altro;
 			sourceTree = "<group>";
@@ -574,6 +581,15 @@
 			);
 			name = Delegate;
 			path = MyPollCellFiles;
+			sourceTree = "<group>";
+		};
+		A9D0C8701B1A0794007D6AE1 /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				A9D0C8711B1A07C1007D6AE1 /* ViewControllerCredits.h */,
+				A9D0C8721B1A07C1007D6AE1 /* ViewControllerCredits.m */,
+			);
+			name = Credits;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -663,6 +679,7 @@
 				43630E9F1B0775E60027121C /* Main.storyboard in Resources */,
 				43630DDD1B0772ED0027121C /* Images.xcassets in Resources */,
 				6F0C0AFE1B14E9D500016295 /* Reload.strings in Resources */,
+				A9D5DF8B1B18BB8F00FB1A25 /* ParamID.strings in Resources */,
 				43630E8F1B07755A0027121C /* SaveRank.strings in Resources */,
 				A90C67641B146AE800F0C5ED /* LaunchImage.xcassets in Resources */,
 			);
@@ -717,6 +734,7 @@
 			files = (
 				43630E8D1B07755A0027121C /* Poll.m in Sources */,
 				43630E831B07755A0027121C /* ConnectionToServer.m in Sources */,
+				A9D0C8731B1A07C1007D6AE1 /* ViewControllerCredits.m in Sources */,
 				43630EA81B0776440027121C /* XLFormImageSelectorCell.m in Sources */,
 				43630E971B07755A0027121C /* ViewControllerCandidates.m in Sources */,
 				43630E8C1B07755A0027121C /* SWUtilityButtonView.m in Sources */,
@@ -854,7 +872,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RankIT/CorePlotHeaders",
@@ -868,7 +885,6 @@
 					"$(PROJECT_DIR)/RankIT",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -879,7 +895,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RankIT/CorePlotHeaders",
@@ -893,7 +908,6 @@
 					"$(PROJECT_DIR)/RankIT",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

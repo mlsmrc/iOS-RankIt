@@ -41,6 +41,9 @@
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     /* Setup spinner */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
@@ -363,9 +366,6 @@
 
 /* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza voti */
 - (void) printMessageError {
-    
-    /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Assegna il messaggio a seconda dei casi */
     if(classificaFinale!=nil)

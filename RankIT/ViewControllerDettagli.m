@@ -27,7 +27,7 @@
 @synthesize p,c,scrollView,name,description,image,deadline,cands,tableView,Vota,FLAG,FLAG_ITEM;
 
 - (void) viewDidLoad {
-    
+
     [super viewDidLoad];
     
     FLAGS = [[NSMutableArray alloc]init];
@@ -81,15 +81,17 @@
 - (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    
-    if(FLAG == 0) {
+
+    if(FLAG == 0 && p.deadline!=nil) {
+        
+        ConnectionToServer *conn = [[ConnectionToServer alloc]init];
         
         /* Download dei candidates */
-        ConnectionToServer *conn = [[ConnectionToServer alloc]init];
+        
         NSString *ID = [NSString stringWithFormat:@"%d",[p pollId]];
         cands = [conn getCandidatesWithPollId:ID];
-    
-        /* Si ferma l'animazione dello spinner e riappare la view e */
+
+        /* Si ferma l'animazione dello spinner e riappare la view */
         [spinner stopAnimating];
         [self.scrollView setHidden:NO];
     
@@ -126,6 +128,12 @@
         
         }
         
+    }
+    else
+    {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+        [spinner stopAnimating];
+        [self printMessageError];
     }
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *

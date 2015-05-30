@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 #import "ViewControllerDettagli.h"
-#import "ConnectionToServer.h"
+#import "File.h"
 
 @interface AppDelegate ()
 
@@ -10,45 +10,25 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     return YES;
 }
 
 /* Funzione che gestisce i parametri della url scheme */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    /* Gestione dell'input */
-    NSLog(@"url recieved: %@", url);
-    NSLog(@"query string: %@", [url query]);
-    NSLog(@"host: %@", [url host]);
-    NSLog(@"url path: %@", [url path]);
-    
     /* Parsing dei parametri */
     NSDictionary *dict = [self parseQueryString:[url query]];
-    NSLog(@"query dict: %@", dict);
     
-    /* Caricamento poll */
-    ConnectionToServer *conn = [ConnectionToServer new];
-    [conn scaricaPollsWithPollId:[dict valueForKey:@"id"] andUserId:@"" andStart:@""];
-    NSMutableDictionary *d = [conn getDizionarioPolls];
-    NSString *value = [d objectForKey:[dict valueForKey:@"id"]];
-    Poll *p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
-                                     withName:[value valueForKey:@"pollname"]
-                              withDescription:[value valueForKey:@"polldescription"]
-                              withResultsType:([[value valueForKey:@"results"] isEqual:@"full"]? 1:0 )
-                                 withDeadline:[value valueForKey:@"deadline"]
-                                  withPrivate:([[value valueForKey:@"unlisted"] isEqual:@"1"]? true:false)
-                               withLastUpdate:[value valueForKey:@"updated"]
-                                     withMine:[[value valueForKey:@"mine"] intValue]
-                               withCandidates:nil
-                                    withVotes:(int)[[value valueForKey:@"votes"] integerValue]];
-    NSLog(@"%d",p.pollId);
-
+    /* Passaggio di parametri */
+    NSString *parameterID = [dict valueForKey:@"id"];
+    [File writeParameterID:parameterID];
     
-    
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    ViewControllerDettagli * vc = [ViewControllerDettagli new];
-    vc.p = p;
-    [navigationController presentViewController: vc animated:YES completion:nil];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    UINavigationController *linkvota = [sb instantiateViewControllerWithIdentifier:@"TabBarController"];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = linkvota;
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -70,28 +50,20 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     
-    
-    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    
-
 
 }
 
 /* Funzione che apre */
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    NSLog(@"QUIQUI");
-    
-    
     
     
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
    
-    
     
 }
 

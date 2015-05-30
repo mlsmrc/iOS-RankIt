@@ -14,7 +14,7 @@
 #define RESET_POLL 0
 #define SHARE_POLL 0
 
-NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?id=_ID_";
+NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps.rankit/poll?id=_ID_";
 
 @interface UIViewController ()
 
@@ -723,6 +723,9 @@ NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?id=_ID_";
             pasteboard.string = [LINK_TO_SEND stringByReplacingOccurrencesOfString:@"_ID_"
                                                                         withString:[NSString stringWithFormat:@"%d",p.pollId]];
             
+            pasteboard.string = [pasteboard.string stringByReplacingOccurrencesOfString:@"_POLLNAME_"
+                                                                        withString:p.pollName];
+            
             linkCopy = [UIAlertController alertControllerWithTitle:@"Link copiato correttamente!" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
             
             Ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -735,11 +738,12 @@ NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?id=_ID_";
                 UIAlertAction *GooglePlus;
                 UIAlertAction *Twitter;
                 UIAlertAction *WhatsApp;
+                UIAlertAction *Telegram;
                 UIAlertAction *Mail;
                 UIAlertAction *Messaggio;
                 UIAlertAction *Annulla;
                 
-                alertShare = [UIAlertController alertControllerWithTitle:@"Condividi il tuo sondaggio su:" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+                alertShare = [UIAlertController alertControllerWithTitle:@"Condividi il tuo sondaggio via:" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 
                 Facebook = [UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -818,6 +822,25 @@ NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?id=_ID_";
                     
                 }];
                 
+                Telegram = [UIAlertAction actionWithTitle:@"Telegram" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    
+                    /* Rientro dell'alert e apertura Facebook Messenger */
+                    [alertShare dismissViewControllerAnimated:YES completion:nil];
+                    
+                    if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telegram:"]]) {
+                        
+                        /* Ripristina la vecchia clipboard */
+                        pasteboard.string = oldClipboardContent;
+                        
+                        /* Nel caso in cui non fosse installato */
+                        UIAlertView *alertError = [UIAlertView alloc];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        [alertError show];
+                        
+                    }
+                    
+                }];
+                
                 Mail = [UIAlertAction actionWithTitle:@"Mail" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                     
                     /* Rientro dell'alert e apertura Mail */
@@ -849,6 +872,7 @@ NSString *LINK_TO_SEND = @"rankit://it.sapienzaapps.rankit/poll?id=_ID_";
                 [alertShare addAction:GooglePlus];
                 [alertShare addAction:Twitter];
                 [alertShare addAction:WhatsApp];
+                [alertShare addAction:Telegram];
                 [alertShare addAction:Mail];
                 [alertShare addAction:Messaggio];
                 [alertShare addAction:Annulla];
