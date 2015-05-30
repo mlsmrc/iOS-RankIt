@@ -246,6 +246,13 @@ NSString *const keyPollCandidates = @"textFieldRow";
     return @"";
 }
 
+/* Hiding done Bar */
+- (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
+    
+    return nil;
+    
+}
+
 /* Il metodo si occupa di eliminare i poll vecchi in modifica*/
 - (int) removeOldPoll:(int) pollid {
     

@@ -143,8 +143,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "@interface ViewControllerSummaryPoll"
-            landmarkType = "2">
+            landmarkName = "oldCandidates"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RankIT/ViewControllerSummaryPoll.m"
-            timestampString = "454452287.095157"
+            timestampString = "454671713.640682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "@implementation ViewControllerSummaryPoll"
             landmarkType = "3">
          </BreakpointContent>
@@ -175,8 +175,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
             endingLineNumber = "27"
-            landmarkName = "pollId"
-            landmarkType = "19">
+            landmarkName = "@interface ViewControllerSummaryPoll"
+            landmarkType = "2">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RankIT/ViewControllerSummaryPoll.m"
-            timestampString = "454452287.095157"
+            timestampString = "454671713.640682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "@implementation ViewControllerSummaryPoll"
             landmarkType = "3">
          </BreakpointContent>
