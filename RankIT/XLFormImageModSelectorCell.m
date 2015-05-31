@@ -10,9 +10,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIView+XLFormAdditions.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
-#import "XLFormImageModSelectorCell.h"
 
-NSString *const XLFormImageModSelectorCellCustom = @"imagepicker";
+NSString *const XLFormImageModSelectorCellCustom = @"imagepicker_2";
 NSString *const FormImageSelectorCellDefaultImage = @"defaultImage";
 NSString *const FormImageSelectorCellImageRequest = @"imageRequest";
 
