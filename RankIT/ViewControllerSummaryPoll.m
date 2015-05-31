@@ -37,7 +37,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
 
 - (id) Initalize {
     
-    
     candWithChar = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
 
     NSString *pollName = summaryResult[keyPollName];
@@ -74,7 +73,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
     /* Tag identificativo unico per riconoscimento righe */
     int countRow = 0;
-    
     
     for(NSString *candidate in candidates) {
         
@@ -127,8 +125,8 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
--(void) connectionHandler:(BOOL) modified
-{
+- (void) connectionHandler:(BOOL) modified {
+    
     NSString *addOk =@"Sondaggio creato con successo!";
     NSString *modifiedOk=@"Sondaggio modificato correttamente!";
     
@@ -136,11 +134,13 @@ NSString *const keyPollCandidates = @"textFieldRow";
     UIAlertView *alert = [UIAlertView alloc];
     alert.tag = 1;
     
-    if(!modified)
-    {
-    alert = [alert initWithTitle:@"Esito Aggiunta" message:(serverResult != (id)[NSNull null] ? addOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    if(!modified) {
+        
+        alert = [alert initWithTitle:@"Esito Aggiunta" message:(serverResult != (id)[NSNull null] ? addOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     
-    }else
+    }
+    
+    else
         alert = [alert initWithTitle:@"Esito Modifica" message:(serverResult != (id)[NSNull null] ? modifiedOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     
     [alert show];
@@ -154,54 +154,46 @@ NSString *const keyPollCandidates = @"textFieldRow";
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
     /* L'alert view conseguente ad una votazione effettuata */
-    if(alertView.tag == 1)
-    {
+    if(alertView.tag == 1) {
         
-        if([title isEqualToString:@"Ok"] && serverResult != (id)[NSNull null] )
-        {
+        
+        if([title isEqualToString:@"Ok"] && serverResult != (id)[NSNull null] ) {
+            
              [FLAGS removeAllObjects];
             
-            if(self.isModified)
-            {
+            if(self.isModified) {
                
                 [FLAGS addObject:@"MYPOLL"];
             
             }
-            else
-            {
+            
+            else {
+                
                 [FLAGS addObject:@"HOME"];
-        
         
             }
             
-            
             /* Vai alla Home */
-         
             [File writeOnReload:@"0" ofFlags:FLAGS];
-
             [self.navigationController popToRootViewControllerAnimated:TRUE];
-            
         
-    }
-    
-    
+        }
 
     }
 
 }
+
 /* Il metodo  si occupa di estrarre i dati dal form */
 - (NSMutableDictionary *) getFormValues {
     
     pollDescResult =   [NSMutableDictionary dictionary];
     
-    for(XLFormSectionDescriptor * section in self.form.formSections)
-    {
+    for(XLFormSectionDescriptor * section in self.form.formSections) {
         
-        if(!section.isMultivaluedSection)
-        {
+        if(!section.isMultivaluedSection) {
             
-            for(XLFormRowDescriptor * row in section.formRows)
-            {
+            
+            for(XLFormRowDescriptor * row in section.formRows) {
                 
                 if(row.tag && ![row.tag isEqualToString:@""])
                     [pollDescResult setObject:(row.value ?: [NSNull null]) forKey:row.tag];
@@ -251,8 +243,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
     
     [self Initalize];
     [super viewDidLoad];
@@ -263,7 +254,8 @@ NSString *const keyPollCandidates = @"textFieldRow";
 /* Il metodo si occupa di creare un array di candidates costituenti il poll */
 - (NSMutableArray *) createCandidate:(NSMutableDictionary *)inputCandidates {
     
-    int candidateWithChar = 0; //cand char associato al candidate
+    /* Cand char associato al candidate */
+    int candidateWithChar = 0;
     
     /* Array candidates poll */
     NSMutableArray *candidates = [[NSMutableArray alloc] init];
@@ -279,9 +271,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
             
             /* Recupero CandName */
             NSString *name = [inputCandidates objectForKey:key];
-            
-            NSLog(@"%@",name);
-
             
             /* Split per recuperare l'id del tag */
             NSArray *arrayWithTwoStrings = [key componentsSeparatedByString:@" "];
@@ -306,7 +295,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
-/*Dato un candidates il metodo restituisce la descrizion in caso di modifica poll*/
+/* Dato un candidates il metodo restituisce la descrizion in caso di modifica poll*/
 - (NSString *)getDescrByCand:(NSString *)candid {
     
     for(Candidate *cand in oldCandidates) {

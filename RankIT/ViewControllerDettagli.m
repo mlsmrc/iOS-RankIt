@@ -129,11 +129,13 @@
         }
         
     }
-    else
-    {
+    
+    else {
+        
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
         [spinner stopAnimating];
         [self printMessageError];
+    
     }
     
     /* Queste righe di codice servono per rendere variabile, a seconda del contenuto, la lunghezza della view e dello scroll. *

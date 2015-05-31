@@ -12,6 +12,6 @@
 @property (weak,nonatomic) IBOutlet UILabel *fourth;
 @property (weak,nonatomic) IBOutlet UILabel *fifth;
 
-- (IBAction)vota:(id)sender;
+- (IBAction) vota:(id)sender;
 
 @end

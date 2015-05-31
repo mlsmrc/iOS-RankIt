@@ -26,6 +26,7 @@ XLFormSectionDescriptor *multivaluedSection;
 - (instancetype) initWithCoder:(NSCoder *)coder {
     
     self = [super initWithCoder:coder];
+    
     if(self)
         [self Initialize];
     
@@ -82,14 +83,12 @@ XLFormSectionDescriptor *multivaluedSection;
     [row.cellConfigAtConfigure setObject:@"Descrizione Poll" forKey:@"textView.placeholder"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18] forKey:@"textView.font"];
 
-
     [section addFormRow:row];
     
     /* Scadenza Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     row.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
     [row.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
-
     
     [section addFormRow:row];
     
@@ -206,13 +205,13 @@ XLFormSectionDescriptor *multivaluedSection;
 }
 
 /* Il metodo  si occupa di estrarre i dati dal form */
--(NSMutableDictionary * ) getFormValues {
+- (NSMutableDictionary *) getFormValues {
     
     _result =   [NSMutableDictionary dictionary];
 
     for(XLFormSectionDescriptor * section in self.form.formSections) {
         
-        if(!section.isMultivaluedSection){
+        if(!section.isMultivaluedSection) {
             
             for(XLFormRowDescriptor * row in section.formRows) {
                 
@@ -245,24 +244,25 @@ XLFormSectionDescriptor *multivaluedSection;
 }
 
 /* Il metodo si occupa di restituire il numero di candidates inseriti dall'utente */
--(int) getCandidatesSize
-{
+- (int) getCandidatesSize {
+    
     int candidateCount = 0;
     
-    for(XLFormSectionDescriptor * section in self.form.formSections)
-    {
-        if(section.isMultivaluedSection) //se è la section dedicata all'aggiunta dei candidates
-        {
-            for(XLFormRowDescriptor * row in section.formRows)
-            {
+    for(XLFormSectionDescriptor * section in self.form.formSections) {
+        
+        /* Se è la section dedicata all'aggiunta dei candidates */
+        if(section.isMultivaluedSection) {
+            
+            for(XLFormRowDescriptor * row in section.formRows) {
+                
                 if(row.value)
                     candidateCount++;
+            
             }
         
         }
         
     }
-    
     
     return candidateCount;
 
@@ -275,14 +275,10 @@ XLFormSectionDescriptor *multivaluedSection;
 }
 
 /* previene l'hide della keyboard sullo swipe */
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
 
 }
-
-
-
-
 
 - (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
     
@@ -305,20 +301,26 @@ XLFormSectionDescriptor *multivaluedSection;
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     
-    if([identifier isEqualToString:@"summary"] && [self validateForm] && [self getCandidatesSize] > 2)
-    {
+    if([identifier isEqualToString:@"summary"] && [self validateForm] && [self getCandidatesSize] > 2) {
+        
         return YES;
-    }else if([self getCandidatesSize ] <= 2)
-    {
+        
+    }
+    
+    else if([self getCandidatesSize ] <= 2) {
+        
         [self notEnoughCandidateAlert];
         return NO;
+    
     }
+    
     return NO;
+
 }
 
-/*Alert Box not enough candidate */
--(void) notEnoughCandidateAlert
-{
+/* Alert Box not enough candidate */
+- (void) notEnoughCandidateAlert {
+    
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
                                                  message:@"Devi aggiungere almeno 3 risposte per creare un nuovo sondaggio"
                                                 delegate:self
@@ -329,4 +331,5 @@ XLFormSectionDescriptor *multivaluedSection;
     [av show];
 
 }
+
 @end

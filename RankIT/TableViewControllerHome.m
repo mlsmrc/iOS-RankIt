@@ -59,8 +59,6 @@
 
     [super viewDidLoad];
 
-    
-    
     FLAGS = [[NSMutableArray alloc]init];
     [FLAGS addObject:@"HOME"];
     [File writeOnReload:@"0" ofFlags:FLAGS];
@@ -70,7 +68,7 @@
     
     allPublicPollsDetails = [[NSMutableArray alloc]init];
     
-    start=0;
+    start = 0;
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -131,12 +129,11 @@
     
     if ([File readParameterID]!=nil) {
         
-        
         [self performSegueWithIdentifier:@"showPollDetails" sender:self];
         
     }
-    else
-    {
+    
+    else {
         
         FLAG_HOME = [[File readFromReload:@"FLAG_HOME"] intValue];
         
@@ -168,6 +165,7 @@
             [self.tableView setHidden:YES];
             
         }
+    
     }
     
 }

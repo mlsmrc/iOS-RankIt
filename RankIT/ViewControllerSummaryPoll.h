@@ -22,7 +22,7 @@
 /* Se true siamo in una modifica */
 @property BOOL isModified;
 
-/* old pollID da eliminare */
+/* Old pollID da eliminare */
 @property int pollId;
 
 /* Old Candidates */

@@ -11,29 +11,8 @@ NSString *kReachabilityChangedNotification = @"kNetworkReachabilityChangedNotifi
 
 #define kShouldPrintReachabilityFlags 0
 
-static void PrintReachabilityFlags(SCNetworkReachabilityFlags flags, const char* comment) {
+static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info) {
     
- #if kShouldPrintReachabilityFlags
-
- NSLog(@"Reachability Flag Status: %c%c %c%c%c%c%c%c%c %s\n",
-       (flags & kSCNetworkReachabilityFlagsIsWWAN)				? 'W' : '-',
-       (flags & kSCNetworkReachabilityFlagsReachable)            ? 'R' : '-',
-       (flags & kSCNetworkReachabilityFlagsTransientConnection)  ? 't' : '-',
-       (flags & kSCNetworkReachabilityFlagsConnectionRequired)   ? 'c' : '-',
-       (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic)  ? 'C' : '-',
-       (flags & kSCNetworkReachabilityFlagsInterventionRequired) ? 'i' : '-',
-       (flags & kSCNetworkReachabilityFlagsConnectionOnDemand)   ? 'D' : '-',
-       (flags & kSCNetworkReachabilityFlagsIsLocalAddress)       ? 'l' : '-',
-       (flags & kSCNetworkReachabilityFlagsIsDirect)             ? 'd' : '-',
-       comment
-       );
-
- #endif
-    
-}
-
-static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info)
-{
     #pragma unused (target, flags)
 	NSCAssert(info != NULL, @"info was NULL in ReachabilityCallback");
 	NSCAssert([(__bridge NSObject*) info isKindOfClass: [Reachability class]], @"info was wrong class in ReachabilityCallback");
@@ -164,7 +143,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 - (NetworkStatus) localWiFiStatusForFlags:(SCNetworkReachabilityFlags)flags {
     
-	PrintReachabilityFlags(flags, "localWiFiStatusForFlags");
 	NetworkStatus returnValue = NotReachable;
 
 	if((flags & kSCNetworkReachabilityFlagsReachable) && (flags & kSCNetworkReachabilityFlagsIsDirect))
@@ -175,8 +153,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 }
 
 - (NetworkStatus) networkStatusForFlags:(SCNetworkReachabilityFlags)flags {
-    
-	PrintReachabilityFlags(flags, "networkStatusForFlags");
 	
     if((flags & kSCNetworkReachabilityFlagsReachable) == 0)
 		return NotReachable;

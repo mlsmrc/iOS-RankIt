@@ -49,7 +49,6 @@
     [spinner setColor:[UIColor grayColor]];
     spinner.center = CGPointMake(screenWidth/2,(screenHeight/2)-150);
     [self.view addSubview:spinner];
-
    
 }
 
@@ -60,6 +59,8 @@
     /* Nasconde la view e fa partire l'animazione dello spinner */
     [spinner startAnimating];
     [self.scrollView setHidden:YES];
+    
+    [self.scrollView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 
@@ -103,7 +104,7 @@
         risposte.text = risposteLabel;
         risposte.textColor = [UIColor blackColor];
         risposte.selectable = true;
-        risposte.font = [UIFont fontWithName:FONT_CANDIDATES_NAME size:15];
+        risposte.font = [UIFont fontWithName:FONT_CANDIDATES size:15];
         risposte.backgroundColor = [UIColor clearColor];
         risposte.textAlignment = NSTextAlignmentNatural;
         risposte.selectable = false;
@@ -194,7 +195,7 @@
     
     /* Enable user interactions forplot space */
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
-    plotSpace.allowsUserInteraction = NO;
+    plotSpace.allowsUserInteraction = YES;
     
 }
 
@@ -251,22 +252,20 @@
     
     /* Create styles */
     CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
-    axisTitleStyle.color = [CPTColor lightGrayColor];
+    axisTitleStyle.color = [CPTColor blueColor];
     axisTitleStyle.fontName = GRAPH_AXIS_NAME;
     
     axisTitleStyle.fontSize = 12.0f;
     CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
     axisLineStyle.lineWidth = 2.0f;
-    axisLineStyle.lineColor=[CPTColor lightGrayColor];
+    axisLineStyle.lineColor=[CPTColor blackColor];
     CPTMutableTextStyle *axisTextStyle = [[CPTMutableTextStyle alloc] init];
-    axisTextStyle.color = [CPTColor lightGrayColor];
+    axisTextStyle.color = [CPTColor blackColor];
     axisTextStyle.fontName = GRAPH_AXIS_NAME;
     axisTextStyle.fontSize = 12.0f;
     CPTMutableLineStyle *tickLineStyle = [CPTMutableLineStyle lineStyle];
-    tickLineStyle.lineColor = [CPTColor lightGrayColor];
+    tickLineStyle.lineColor = [CPTColor blackColor];
     tickLineStyle.lineWidth = 0.0f;
-    CPTMutableLineStyle *gridLineStyle = [CPTMutableLineStyle lineStyle];
-    gridLineStyle.lineColor = [CPTColor lightGrayColor];
     tickLineStyle.lineWidth = 0.0f;
     
     /* Get axis set */
@@ -303,7 +302,6 @@
     y.titleTextStyle = axisTitleStyle;
     y.titleOffset = -36.0f;
     y.axisLineStyle = axisLineStyle;
-    y.majorGridLineStyle = gridLineStyle;
     y.labelingPolicy = CPTAxisLabelingPolicyFixedInterval;
     
     y.majorIntervalLength=[[NSNumber numberWithDouble:0.5]decimalValue];
@@ -371,7 +369,7 @@
             
     }
     
-    return NULL;
+    return nil;
     
 }
 
@@ -379,6 +377,7 @@
     
     if(annotation!=nil)
         [self.hostView.hostedGraph.plotAreaFrame.plotArea removeAnnotation:annotation];
+    
     annotation=nil;
     [tiesPlot reloadData];
     [notiesPlot reloadData];
@@ -410,17 +409,24 @@
     
     }
     
-    NSNumber *x = [ NSNumber numberWithFloat:[votazione mu]];
-    NSNumber *y = [ NSNumber numberWithFloat:[votazione sigma]];
+    NSNumber *x = [NSNumber numberWithFloat:[votazione mu]];
+    NSNumber *y = [NSNumber numberWithFloat:[votazione sigma]];
     NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
     annotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:plot.plotSpace anchorPlotPoint:anchorPoint];
     NSString *label=[NSString stringWithFormat:@"%@ \n(%.3f,%.3f)",[votazione pattern],[votazione mu],[votazione sigma]];
+    CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
+    lineStyle.lineWidth = 1.0;
+    lineStyle.lineColor = [CPTColor blackColor];
     CPTMutableTextStyle *style=[[CPTMutableTextStyle alloc]init];
-    style.color=color;
-    style.fontSize=9.0;
+    style.color = color;
+    style.fontSize = 9.0;
     CPTTextLayer *textLayer = [[CPTTextLayer alloc] initWithText:label style:style];
+    textLayer.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
+    textLayer.borderLineStyle = lineStyle;
     annotation.contentLayer = textLayer;
-    annotation.displacement = CGPointMake(-15.0f, -20.0f);
+    annotation.contentLayer.zPosition=1.0;
+    annotation.displacement = CGPointMake(-20.0f, -20.0f);
+    
     [self.hostView.hostedGraph.plotAreaFrame.plotArea addAnnotation:annotation];
     [tiesPlot reloadData];
     [notiesPlot reloadData];

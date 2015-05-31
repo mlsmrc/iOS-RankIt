@@ -32,7 +32,7 @@
 
 @synthesize p,candidate,classificaFinale,tableView,FLAG;
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     
     [super viewDidLoad];
     
@@ -73,9 +73,6 @@
     [FLAGS addObject:@"RISULTATI"];
     [File writeOnReload:@"1" ofFlags:FLAGS];
     
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    
     if(FLAG == 0) {
         
         /* Nasconde la table view e fa partire l'animazione dello spinner */
@@ -88,6 +85,10 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
+    /* Se è un poll scaduto non viene permessa la votazione */
+    if([Util compareDate:[[NSDate alloc]init] WithDate:p.deadline]==1)
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    
     if(FLAG == 0) {
         
         /* Scarica i risultati per il poll selezionato */
@@ -95,8 +96,12 @@
         classificaFinale = [conn getOptimalResultsOfPoll:p];
     
         /* Gestione di 0 voti nel poll e della connessione */
-        if([classificaFinale count] == 0 || classificaFinale == nil)
+        if([classificaFinale count] == 0 || classificaFinale == nil) {
+            
+            [self.navigationItem.rightBarButtonItem setEnabled:NO];
             [self printMessageError];
+            
+        }
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
         [spinner stopAnimating];
@@ -108,7 +113,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 1;
@@ -128,6 +132,8 @@
     
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSMutableArray *candidates = [p candidates];
     NSString *risp = [classificaFinale objectAtIndex:indexPath.row];

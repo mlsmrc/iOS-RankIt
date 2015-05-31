@@ -42,17 +42,23 @@ NSString *PARAM_ID = @"ParamID.strings";
 
 /* Scrive il  parametro poll_id quando si usa l'url scheme */
 + (BOOL) writeParameterID:(NSString *)pollID {
+    
     return [File writeString:pollID forKey:POLL_ID inPList:PARAM_ID];
+    
 }
 
 /* Resetta il file contenente il parametro poll_id quand si usa l'url scheme */
 + (BOOL) clearParameterID {
+    
     return [self clearFile:PARAM_ID];
+    
 }
 
 /* Legge il  parametro poll_id quando si usa l'url scheme */
 + (NSString *)readParameterID {
+    
     return [self readStringforKey:POLL_ID inPList:PARAM_ID];
+    
 }
 
 /* Funzione generica che scrive una coppia <chiave,info> su una plist */
@@ -60,11 +66,8 @@ NSString *PARAM_ID = @"ParamID.strings";
     
     
     NSString *path = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
-    
     NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:PList];
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
     NSMutableDictionary *votesPList;
     
     if([fileManager fileExistsAtPath:filePath])

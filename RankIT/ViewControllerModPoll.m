@@ -91,7 +91,6 @@ XLFormDescriptor *mFormDescriptor;
     [mSection addFormRow:mRow];
     
     /* Scadenza Poll Row */
-
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     mRow.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
     [mRow.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
@@ -103,7 +102,6 @@ XLFormDescriptor *mFormDescriptor;
     
     if(p.pvtPoll == true) //Se il pool è privato switch su ON
         mRow.value =@YES;
-    
     
     [mSection addFormRow:mRow];
     mSection.footerTitle =@"Nota: Rendendo il sondaggio privato non sarà visibile sulla Home di RankIT";
@@ -122,8 +120,6 @@ XLFormDescriptor *mFormDescriptor;
     mMultivaluedSection.multivaluedTag = @"textFieldRow";
     
     /* Adding exsisting row representing candidates */
-    
-    
     for(NSString *cand in candidates) {
     
         mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollCandidates rowType:XLFormRowDescriptorTypeText];
@@ -134,13 +130,12 @@ XLFormDescriptor *mFormDescriptor;
         [mMultivaluedSection addFormRow:mRow];
     
         /* End Adding existing row representing candidates */
-    
         mMultivaluedSection.multivaluedRowTemplate = mRow;
         [mForm addFormSection:mMultivaluedSection];
+        
     }
     
         self.form = mForm;
-    
         return [super initWithForm:mForm];
     
 }
@@ -281,12 +276,6 @@ XLFormDescriptor *mFormDescriptor;
     
 }
 
-
-
-
-
-
-
 /* Il metodo si occupa di restituire il numero di candidates inseriti dall'utente */
 -(int) getCandidatesSize
 {
@@ -342,21 +331,26 @@ XLFormDescriptor *mFormDescriptor;
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     
-    if([identifier isEqualToString:@"modPollResult"] && [self validateForm] && [self getCandidatesSize] > 2)
-    {
+    if([identifier isEqualToString:@"modPollResult"] && [self validateForm] && [self getCandidatesSize] > 2) {
+        
         return YES;
-    }else if([self getCandidatesSize ] <= 2)
-    {
+        
+    }
+    
+    else if([self getCandidatesSize ] <= 2) {
+        
         [self notEnoughCandidateAlert];
         return NO;
+        
     }
+    
     return NO;
     
 }
 
-/*Alert Box not enough candidate */
--(void) notEnoughCandidateAlert
-{
+/* Alert Box not enough candidates */
+- (void) notEnoughCandidateAlert {
+    
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
                                                  message:@"Devi aggiungere almeno 3 risposte per modificare il sondaggio"
                                                 delegate:self
@@ -367,4 +361,5 @@ XLFormDescriptor *mFormDescriptor;
     [av show];
     
 }
+
 @end

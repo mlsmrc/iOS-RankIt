@@ -55,11 +55,9 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 
 @synthesize FLAG_MYPOLL;
 
-
 - (void) viewDidLoad {
    
     [super viewDidLoad];
-    
     FLAGS = [[NSMutableArray alloc]init];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -726,7 +724,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
             pasteboard.string = [pasteboard.string stringByReplacingOccurrencesOfString:@"_POLLNAME_"
                                                                         withString:p.pollName];
             
-            linkCopy = [UIAlertController alertControllerWithTitle:@"Link copiato correttamente!" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+            linkCopy = [UIAlertController alertControllerWithTitle:@"Link copiato negli appunti!" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
             
             Ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                 
