@@ -3,6 +3,8 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "File.h"
+#import "Font.h"
+
 
 NSDictionary *email;
 
@@ -76,6 +78,8 @@ NSDictionary *email;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Supervisore"];
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Prof. Emanuele Panizzi"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     [form addFormSection:section];
@@ -84,10 +88,14 @@ NSDictionary *email;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"User-Researchers"];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Vincenzo de Pinto"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Valentina Pizzo"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
@@ -97,19 +105,29 @@ NSDictionary *email;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Sviluppatori"];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Marco Finocchi"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Marco Mulas"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Giulio Salierno"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Lorenzo Spataro"];
+    [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
+
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
 
@@ -216,7 +234,7 @@ NSDictionary *email;
     [email setValue:@"mrcfinocchi@gmail.com" forKey:@"Marco Finocchi"];
     [email setValue:@"mlsmrc@gmail.com" forKey:@"Marco Mulas"];
     [email setValue:@"salierno.g92@gmail.com" forKey:@"Giulio Salierno"];
-    [email setValue:@"panizzi@di.uniroma1.it" forKey:@"Lorenzo Spataro"];
+    [email setValue:@"spataro.1467313@studenti.uniroma1.it" forKey:@"Lorenzo Spataro"];
     
 }
 
