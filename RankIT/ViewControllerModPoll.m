@@ -72,7 +72,7 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Nome Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollName rowType:XLFormRowDescriptorTypeText];
-    [mRow.cellConfigAtConfigure setObject:@"Nome Poll" forKey:@"textField.placeholder"];
+    [mRow.cellConfigAtConfigure setObject:@"Titolo" forKey:@"textField.placeholder"];
     mRow.value = p.pollName;
     mRow.required = YES;
     
@@ -86,7 +86,7 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Terza Row Descrizione Poll */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDesc rowType:XLFormRowDescriptorTypeTextView];
-    [mRow.cellConfigAtConfigure setObject:@"Descrizione Poll" forKey:@"textView.placeholder"];
+    [mRow.cellConfigAtConfigure setObject:@"Descrizione" forKey:@"textView.placeholder"];
     mRow.value = p.pollDescription;
     [mSection addFormRow:mRow];
     
@@ -100,7 +100,7 @@ XLFormDescriptor *mFormDescriptor;
     /* isPrivate */
     mRow = [XLFormRowDescriptor  formRowDescriptorWithTag:TPollPrivate rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Privato"];
     
-    if(p.pvtPoll == true) //Se il pool è privato switch su ON
+    if(p.pvtPoll == true)
         mRow.value =@YES;
     
     [mSection addFormRow:mRow];
@@ -149,7 +149,7 @@ XLFormDescriptor *mFormDescriptor;
     if(mMultivaluedSection.formRows.count == 6) {
         
         /* Change properties */
-        mMultivaluedSection.multivaluedAddButton.title = @"Poll Completo";
+        mMultivaluedSection.multivaluedAddButton.title = @"Candidati completati";
         mMultivaluedSection.multivaluedAddButton.disabled=@YES;
         
         /* refresh view */;
@@ -168,7 +168,7 @@ XLFormDescriptor *mFormDescriptor;
     if(mMultivaluedSection.formRows.count < 6) {
         
         /* Changing properties */
-        mMultivaluedSection.multivaluedAddButton.title = @"Aggiungi una risposta";
+        mMultivaluedSection.multivaluedAddButton.title = @"Aggiungi un candidato";
         mMultivaluedSection.multivaluedAddButton.disabled=@NO;
         
         /* refresh view */;
@@ -277,24 +277,24 @@ XLFormDescriptor *mFormDescriptor;
 }
 
 /* Il metodo si occupa di restituire il numero di candidates inseriti dall'utente */
--(int) getCandidatesSize
-{
+-(int) getCandidatesSize {
+    
     int candidateCount = 0;
     
-    for(XLFormSectionDescriptor * section in self.form.formSections)
-    {
-        if(section.isMultivaluedSection) //se è la section dedicata all'aggiunta dei candidates
-        {
-            for(XLFormRowDescriptor * row in section.formRows)
-            {
+    for(XLFormSectionDescriptor * section in self.form.formSections) {
+        
+        if(section.isMultivaluedSection) {
+            
+            for(XLFormRowDescriptor * row in section.formRows) {
+                
                 if(row.value)
                     candidateCount++;
+            
             }
             
         }
         
     }
-    
     
     return candidateCount;
     
@@ -304,6 +304,12 @@ XLFormDescriptor *mFormDescriptor;
     
     [self Initialize];
     [super viewDidLoad];
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 

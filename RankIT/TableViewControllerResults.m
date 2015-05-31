@@ -38,8 +38,8 @@
     
     FLAGS = [[NSMutableArray alloc]init];
     
-    /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    /* Background senza linee */
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     /* Setup spinner */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -77,9 +77,6 @@
         [self.tableView setHidden:YES];
         
     }
-    
-    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 
 }
 
@@ -128,6 +125,8 @@
     
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    
+    cell.selectionStyle = UITableViewCellEditingStyleNone;
     
     NSMutableArray *candidates = [p candidates];
     NSString *risp = [classificaFinale objectAtIndex:indexPath.row];
@@ -182,12 +181,6 @@
     
     return cell;
 
-}
-
-- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    
-    [self performSegueWithIdentifier:@"showCandRankDetails" sender:self];
-    
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -341,7 +334,7 @@
         NSString *candChar;
         candidate = nil;
         
-        indexPath = [self.tableView indexPathForSelectedRow];
+        indexPath = [self.tableView indexPathForCell:sender];
         candChar = [classificaFinale objectAtIndex:indexPath.row];
         
         /* Cattura dell'indice per estrarre il candidato */

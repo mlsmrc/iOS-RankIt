@@ -14,7 +14,7 @@
 #define RESET_POLL 0
 #define SHARE_POLL 0
 
-NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps.rankit/poll?id=_ID_";
+NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps.rankit/poll?id=_ID_ \nSe non hai ancora installato RankIT, scaricala da AppStore e riclicca su questo link!";
 
 @interface UIViewController ()
 

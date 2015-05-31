@@ -258,7 +258,7 @@
     axisTitleStyle.fontSize = 12.0f;
     CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
     axisLineStyle.lineWidth = 2.0f;
-    axisLineStyle.lineColor=[CPTColor blackColor];
+    axisLineStyle.lineColor = [CPTColor blackColor];
     CPTMutableTextStyle *axisTextStyle = [[CPTMutableTextStyle alloc] init];
     axisTextStyle.color = [CPTColor blackColor];
     axisTextStyle.fontName = GRAPH_AXIS_NAME;

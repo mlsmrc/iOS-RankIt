@@ -48,7 +48,7 @@ XLFormSectionDescriptor *multivaluedSection;
 - (id) Initialize {
     
     formDescriptor = [XLFormDescriptor formDescriptorWithTitle:@"Text Fields"];
-    form = [XLFormDescriptor formDescriptorWithTitle:@"Crea Sondaggio"];
+    form = [XLFormDescriptor formDescriptorWithTitle:@"Sondaggio"];
     
     /* First section */
     section = [XLFormSectionDescriptor formSection];
@@ -65,9 +65,7 @@ XLFormSectionDescriptor *multivaluedSection;
     
     /* Nome Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollName rowType:XLFormRowDescriptorTypeText];
-    [row.cellConfigAtConfigure setObject:@"Nome Poll" forKey:@"textField.placeholder"];
-    [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18] forKey:@"textField.font"];
-
+    [row.cellConfigAtConfigure setObject:@"Titolo" forKey:@"textField.placeholder"];
     row.required = YES;
     
     /* Binding regex validazione input */
@@ -80,8 +78,7 @@ XLFormSectionDescriptor *multivaluedSection;
     
     /* Terza Row Descrizione Poll */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollDesc rowType:XLFormRowDescriptorTypeTextView];
-    [row.cellConfigAtConfigure setObject:@"Descrizione Poll" forKey:@"textView.placeholder"];
-    [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18] forKey:@"textView.font"];
+    [row.cellConfigAtConfigure setObject:@"Descrizione" forKey:@"textView.placeholder"];
 
     [section addFormRow:row];
     
@@ -95,20 +92,19 @@ XLFormSectionDescriptor *multivaluedSection;
     /* isPrivate */
     row = [XLFormRowDescriptor  formRowDescriptorWithTag:kPollPrivate rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Privato"];
     [section addFormRow:row];
-    section.footerTitle =@"Nota: Rendendo il poll privato non sarà visibile sulla Home di RankIT";
+    section.footerTitle =@"Nota: Se il sondaggio è privato non sarà visibile sulla Home di RankIT.";
     
     /* Sezione dedicata all'aggiunta di candidates dinamica */
-    multivaluedSection = [XLFormSectionDescriptor  formSectionWithTitle:@"Candidates"
+    multivaluedSection = [XLFormSectionDescriptor  formSectionWithTitle:@"Candidati"
                                              sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
                                              sectionInsertMode:XLFormSectionInsertModeButton];
     
-    multivaluedSection.multivaluedAddButton.title = @"Aggiungi una risposta";
+    multivaluedSection.multivaluedAddButton.title = @"Aggiungi un candidato";
     
     /* Set up the row template */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollCandidates rowType:XLFormRowDescriptorTypeText];
 
-    [[row cellConfig] setObject:@"Risposta" forKey:@"textField.placeholder"];
-    [row.cellConfig setObject:[UIFont fontWithName:FONT_DETTAGLI_POLL size:18 ] forKey:@"textField.font"];
+    [[row cellConfig] setObject:@"Candidato" forKey:@"textField.placeholder"];
 
     multivaluedSection.multivaluedTag = @"textFieldRow";
     
@@ -131,7 +127,7 @@ XLFormSectionDescriptor *multivaluedSection;
     if(multivaluedSection.formRows.count == 6) {
         
         /* Change properties */
-        multivaluedSection.multivaluedAddButton.title = @"Poll Completo";
+        multivaluedSection.multivaluedAddButton.title = @"Candidati Completati";
         multivaluedSection.multivaluedAddButton.disabled=@YES;
       
         /* refresh view */;
@@ -150,7 +146,7 @@ XLFormSectionDescriptor *multivaluedSection;
     if(multivaluedSection.formRows.count < 6) {
         
         /* Changing properties */
-        multivaluedSection.multivaluedAddButton.title = @"Aggiungi una risposta";
+        multivaluedSection.multivaluedAddButton.title = @"Aggiungi un candidato";
         multivaluedSection.multivaluedAddButton.disabled=@NO;
         
         /* refresh view */;
@@ -274,6 +270,12 @@ XLFormSectionDescriptor *multivaluedSection;
 
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
+}
+
 /* previene l'hide della keyboard sullo swipe */
 - (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
@@ -322,7 +324,7 @@ XLFormSectionDescriptor *multivaluedSection;
 - (void) notEnoughCandidateAlert {
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                 message:@"Devi aggiungere almeno 3 risposte per creare un nuovo sondaggio"
+                                                 message:@"Devi aggiungere almeno 3 candidati per creare un nuovo sondaggio."
                                                 delegate:self
                                        cancelButtonTitle:@"Ok"
                                        otherButtonTitles:nil];

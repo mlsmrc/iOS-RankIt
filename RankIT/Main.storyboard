@@ -82,7 +82,7 @@
                     <navigationItem key="navigationItem" title="Home" id="Ukz-nf-C31">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oWi-6Q-xer">
                             <connections>
-                                <segue destination="Jif-wR-hl8" kind="push" id="pz6-eI-UJU"/>
+                                <segue destination="Jif-wR-hl8" kind="custom" customClass="Flip" id="pz6-eI-UJU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -209,11 +209,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="75" id="Mf5-HL-Grq">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="75" id="Mf5-HL-Grq">
                                         <rect key="frame" x="0.0" y="22" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mf5-HL-Grq" id="jHO-V1-anE">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="273" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Rr1-44-FBU">
@@ -221,7 +221,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome Candidato" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K0Y-jT-U6k">
-                                                    <rect key="frame" x="84" y="8" width="200" height="58"/>
+                                                    <rect key="frame" x="84" y="8" width="186" height="58"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -230,7 +230,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="jPN-O7-jyp" kind="push" identifier="showCandRankDetails" id="0HW-Sw-oSd"/>
+                                            <segue destination="jPN-O7-jyp" kind="custom" identifier="showCandRankDetails" trigger="accessoryAction" customClass="Dissolvenza" id="pNO-o0-nrZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -245,7 +245,7 @@
                     <navigationItem key="navigationItem" title="Classifica" id="NYS-Gt-xlV">
                         <barButtonItem key="rightBarButtonItem" title="Vota" id="EO1-ed-1LU">
                             <connections>
-                                <segue destination="lj8-aj-OLu" kind="push" identifier="showReVoteView" id="g17-WK-v9O"/>
+                                <segue destination="lj8-aj-OLu" kind="custom" identifier="showReVoteView" customClass="Flip" id="g17-WK-v9O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -262,11 +262,11 @@
             <objects>
                 <viewController id="lj8-aj-OLu" customClass="ViewControllerVoto" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7el-GI-q6N">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bWt-Xo-Hpe">
-                                <rect key="frame" x="33" y="0.0" width="287" height="455"/>
+                                <rect key="frame" x="33" y="0.0" width="287" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -356,11 +356,11 @@
             <objects>
                 <viewController id="jPN-O7-jyp" customClass="ViewControllerCandidates" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqz-Ha-QqF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OqZ-M8-A06">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wgW-Xa-FIn">
@@ -378,7 +378,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="44" width="220" height="197"/>
+                                        <rect key="frame" x="50" y="44" width="220" height="251"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -403,7 +403,7 @@
             <objects>
                 <viewController id="tLA-cY-L2F" customClass="ViewControllerModPoll" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wci-eH-rs3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -510,7 +510,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Vota" id="LuI-o9-qrd">
                             <connections>
                                 <action selector="VotaPressed:" destination="zPC-dB-2ah" id="9h1-p0-23F"/>
-                                <segue destination="lj8-aj-OLu" kind="push" identifier="showVoteView" id="1DA-a0-GYX"/>
+                                <segue destination="lj8-aj-OLu" kind="custom" identifier="showVoteView" customClass="Flip" id="1DA-a0-GYX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -768,7 +768,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="Jif-wR-hl8" customClass="ViewControllerAddPoll" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gDz-Xh-Y2D" customClass="XLFormDateCell">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -789,12 +789,12 @@
             <objects>
                 <viewController id="QhE-1O-ydT" customClass="ViewControllerSummaryPoll" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="emX-eR-qOk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="byk-0P-EgS">
-                        <barButtonItem key="rightBarButtonItem" title="Invia" id="QNs-8M-JxN">
+                        <barButtonItem key="rightBarButtonItem" title="Fatto" id="QNs-8M-JxN">
                             <connections>
                                 <action selector="send:" destination="QhE-1O-ydT" id="WYf-vS-6yA"/>
                             </connections>
@@ -895,7 +895,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Modifica" id="mhr-gt-Uvc">
                             <connections>
                                 <action selector="VotaPressed:" destination="S7m-EW-wRQ" id="u4F-BV-zYK"/>
-                                <segue destination="tLA-cY-L2F" kind="push" identifier="modPoll" id="JXJ-OX-DrY"/>
+                                <segue destination="tLA-cY-L2F" kind="custom" identifier="modPoll" customClass="Flip" id="JXJ-OX-DrY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -949,9 +949,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="g17-WK-v9O"/>
-        <segue reference="0HW-Sw-oSd"/>
+        <segue reference="pNO-o0-nrZ"/>
         <segue reference="Y9F-6e-5hV"/>
+        <segue reference="g17-WK-v9O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

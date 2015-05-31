@@ -57,7 +57,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     [summaryForm addFormSection:summarySection];
     
     /* PollName */
-    summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"PollName" rowType:XLFormRowDescriptorTypeTwitter title:@"Nome Poll: "];
+    summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"PollName" rowType:XLFormRowDescriptorTypeTwitter title:@"Titolo: "];
     summaryRow.disabled = @YES;
     summaryRow.value = pollName;
     [summarySection addFormRow:summaryRow];
@@ -87,7 +87,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
         [summarySection addFormRow:summaryRow];
         
         /* Creiamo una nuova riga corrispondente alla risposta */
-        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandName %d",countRow] rowType:XLFormRowDescriptorTypeTwitter title:@"Risposta: "];
+        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandName %d",countRow] rowType:XLFormRowDescriptorTypeTwitter title:@"Candidato: "];
         
         [[summaryRow cellConfig] setObject:@"Add a new tag" forKey:@"textField.placeholder"];
         summaryRow.value = [candidate copy];
@@ -98,7 +98,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
         summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat: @"CandDesc %d",countRow] rowType:XLFormRowDescriptorTypeTextView];
         
         summaryRow.value = [self getDescrByCand:candidate];
-        [summaryRow.cellConfigAtConfigure setObject:@"Aggiungi una descrizione..." forKey:@"textView.placeholder"];
+        [summaryRow.cellConfigAtConfigure setObject:@"Descrizione" forKey:@"textView.placeholder"];
         [summarySection addFormRow:summaryRow];
         
         countRow++;
@@ -248,6 +248,12 @@ NSString *const keyPollCandidates = @"textFieldRow";
     [self Initalize];
     [super viewDidLoad];
     FLAGS = [[NSMutableArray alloc]init];
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 
