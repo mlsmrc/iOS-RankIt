@@ -58,7 +58,7 @@
 - (void) viewDidLoad {
 
     [super viewDidLoad];
-
+    
     FLAGS = [[NSMutableArray alloc]init];
     [FLAGS addObject:@"HOME"];
     [File writeOnReload:@"0" ofFlags:FLAGS];
@@ -129,13 +129,17 @@
     
     if ([File readParameterID]!=nil) {
         
+        FLAG_HOME = -1;
         [self performSegueWithIdentifier:@"showPollDetails" sender:self];
         
     }
     
     else {
         
-        FLAG_HOME = [[File readFromReload:@"FLAG_HOME"] intValue];
+        if(FLAG_HOME != -1)
+            FLAG_HOME = [[File readFromReload:@"FLAG_HOME"] intValue];
+        
+        else FLAG_HOME = 0;
         
         [FLAGS addObject:@"MYPOLL"];
         [FLAGS addObject:@"VOTATI"];
@@ -147,8 +151,6 @@
         
         /* Eliminazione della classifica salvata al momento del passaggio da dettagli poll a root */
         [File clearSaveRank];
-        
-        
         
         /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];

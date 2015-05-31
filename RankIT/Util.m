@@ -16,8 +16,8 @@ NSString *BACK_TO_RANKING = @"Classifica";
 
 /* Stringhe per messaggio da stampare a video */
 NSString *EMPTY_POLLS_LIST = @"Non sono presenti sondaggi.\nProva ad aggiornare la Home.";
-NSString *EMPTY_VOTED_POLLS_LIST = @"Non sono presenti sondaggi votati.\nVai sulla Home ed inizia a votare!";
-NSString *EMPTY_MY_POLLS_LIST = @"Non hai ancora creato nessun sondaggio.\nVai sulla Home e crea il tuo primo sondaggio!";
+NSString *EMPTY_VOTED_POLLS_LIST = @"Nessun sondaggio votato.\nVai sulla Home ed inizia a votare!";
+NSString *EMPTY_MY_POLLS_LIST = @"Nessun sondaggio creato.\nVai sulla Home e crea il tuo primo sondaggio!";
 NSString *NO_RANKING = @"Nessun risultato presente per il sondaggio selezionato.";
 
 /* Spaziatura voti per diversi IPhone */

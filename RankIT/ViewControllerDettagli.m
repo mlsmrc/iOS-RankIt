@@ -81,7 +81,7 @@
 - (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-
+    
     if(FLAG == 0 && p.deadline!=nil) {
         
         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
@@ -130,7 +130,7 @@
         
     }
     
-    else {
+    else if (p.deadline==nil) {
         
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
         [spinner stopAnimating];
@@ -174,7 +174,7 @@
     
 }
 
-/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll pubblici */
+/* Funzione per la visualizzazione del messaggio di notifica di assenza connessione o assenza poll */
 - (void) printMessageError {
     
     [self.scrollView setHidden:YES];

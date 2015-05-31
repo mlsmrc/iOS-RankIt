@@ -2,10 +2,41 @@
 #import "XLFormSectionDescriptor.h"
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "File.h"
 
 NSDictionary *email;
 
-@implementation Credits
+@implementation Credits {
+
+    /* Array di flag che permette il corretto ricaricamento delle view principali */
+    NSMutableArray *FLAGS;
+
+}
+
+- (void) viewDidLoad:(BOOL)animated {
+    
+    [super viewDidLoad];
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    FLAGS = [[NSMutableArray alloc]init];
+    [FLAGS addObject:@"HOME"];
+    [FLAGS addObject:@"MYPOLL"];
+    [FLAGS addObject:@"VOTATI"];
+    [File writeOnReload:@"0" ofFlags:FLAGS];
+
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
+    
+}
 
 - (instancetype) initWithCoder:(NSCoder *)coder {
     
@@ -26,13 +57,6 @@ NSDictionary *email;
         [self Initialize];
     
     return self;
-    
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }
 

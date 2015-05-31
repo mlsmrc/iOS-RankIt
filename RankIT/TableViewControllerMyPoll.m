@@ -114,6 +114,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
     
     FLAG_MYPOLL = [[File readFromReload:@"FLAG_MYPOLL"] intValue];
     
+    [FLAGS removeAllObjects];
     [FLAGS addObject:@"HOME"];
     [FLAGS addObject:@"VOTATI"];
     [File writeOnReload:@"0" ofFlags:FLAGS];

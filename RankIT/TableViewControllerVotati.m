@@ -109,9 +109,10 @@
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
+
     FLAG_VOTATI = [[File readFromReload:@"FLAG_VOTATI"] intValue];
     
+    [FLAGS removeAllObjects];
     [FLAGS addObject:@"HOME"];
     [FLAGS addObject:@"MYPOLL"];
     [File writeOnReload:@"0" ofFlags:FLAGS];

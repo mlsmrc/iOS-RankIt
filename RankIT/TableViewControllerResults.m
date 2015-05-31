@@ -41,9 +41,6 @@
     /* Permette alle table view di non stampare celle vuote che vanno oltre quelle dei risultati */
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    /* Background senza linee e definizione del messaggio di assenza poll pubblici o assenza connessione */
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     /* Setup spinner */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
@@ -80,6 +77,9 @@
         [self.tableView setHidden:YES];
         
     }
+    
+    /* Deseleziona l'ultima cella cliccata ogni volta che riappare la view */
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 
 }
 
@@ -96,12 +96,8 @@
         classificaFinale = [conn getOptimalResultsOfPoll:p];
     
         /* Gestione di 0 voti nel poll e della connessione */
-        if([classificaFinale count] == 0 || classificaFinale == nil) {
-            
-            [self.navigationItem.rightBarButtonItem setEnabled:NO];
+        if([classificaFinale count] == 0 || classificaFinale == nil)
             [self printMessageError];
-            
-        }
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
         [spinner stopAnimating];
@@ -132,8 +128,6 @@
     
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSMutableArray *candidates = [p candidates];
     NSString *risp = [classificaFinale objectAtIndex:indexPath.row];
@@ -176,7 +170,7 @@
     if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"1"]) image = [image initWithImage:[UIImage imageNamed:@"GoldMedal"]];
     else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"2"]) image = [image initWithImage:[UIImage imageNamed:@"SilverMedal"]];
     else if([[rankLabels objectAtIndex:indexPath.row]isEqualToString:@"3"]) image = [image initWithImage:[UIImage imageNamed:@"BronzeMedal"]];
-    else image = [image initWithImage:[UIImage imageNamed:@"GreyMedal"]];
+    else image = [image initWithImage:[UIImage imageNamed:@"GrayMedal"]];
     
     UILabel *NamePoll = (UILabel *)[cell viewWithTag:101];
     NamePoll.text = c.candName;
@@ -377,7 +371,12 @@
     if(classificaFinale!=nil)
         messageLabel.text = NO_RANKING;
     
-    else messageLabel.text = TIMEOUT;
+    else {
+        
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+        messageLabel.text = TIMEOUT;
+        
+    }
     
     /* Aggiunge la SubView con il messaggio da visualizzare */
     [tableView addSubview:messageLabel];
