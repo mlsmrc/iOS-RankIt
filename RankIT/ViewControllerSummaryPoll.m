@@ -1,6 +1,7 @@
 #import "ViewControllerSummaryPoll.h"
 #import "XLFormSectionDescriptor.h"
 #import "XLFormImageSelectorCell.h"
+#import "XLFormImageModSelectorCell.h"
 #import "ConnectionToServer.h"
 #import "Candidate.h"
 #import "File.h"
@@ -13,6 +14,8 @@
     XLFormDescriptor *summaryformDescriptor;
     NSArray *candWithChar;
     NSString *serverResult;
+    
+    
     
     /* Array di flag che permette il corretto ricaricamento delle view principali */
     NSMutableArray *FLAGS;
@@ -36,6 +39,17 @@ NSString *const keyPollDeadLine = @"kPollDeadLine";
 NSString *const keyPollCandidates = @"textFieldRow";
 
 - (id) Initalize {
+    
+    /* determiniamo se ci troviamo in una modifica o in una aggiunta */
+    
+    NSString *imagePic ;
+    if(isModified)
+    {
+        
+        imagePic = XLFormImageModSelectorCellCustom;
+       
+    }else
+        imagePic = XLFormImageSelectorCellCustom;
     
     candWithChar = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
 
@@ -83,7 +97,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
         
         /* Creiamo una nuova row per l'aggiunta di una foto del candidate *
          * Image Poll Row                                                 */
-        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageSelectorCellCustom];
+        summaryRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:imagePic];
         [summarySection addFormRow:summaryRow];
         
         /* Creiamo una nuova riga corrispondente alla risposta */

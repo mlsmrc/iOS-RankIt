@@ -1,5 +1,5 @@
 #import "XLFormViewController.h"
-#import "XLFormImageSelectorCell.h"
+#import "XLFormImageModSelectorCell.h"
 #import "ViewControllerSummaryPoll.h"
 #import "XLForm.h"
 #import "Poll.h"

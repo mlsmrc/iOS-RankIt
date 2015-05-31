@@ -166,7 +166,7 @@ NSDictionary *email;
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
        // [mailer.mailComposeDelegate self];
         
-        mailer.mailComposeDelegate = self;
+        mailer.mailComposeDelegate = (id) self;
         [mailer setSubject:@"RankIT feedback"];
         NSArray *toRecipients = [NSArray arrayWithObjects:destEmail,nil];
         [mailer setToRecipients:toRecipients];

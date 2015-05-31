@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		433EF47D1B1BC6390087677F /* XLFormImageModSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 433EF47C1B1BC6390087677F /* XLFormImageModSelectorCell.m */; };
 		435E2F121B079F5C0093C12F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E2F111B079F5C0093C12F /* Accelerate.framework */; };
 		435E2F141B079F620093C12F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E2F131B079F620093C12F /* QuartzCore.framework */; };
 		435E2F151B079FB80093C12F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43630E561B07755A0027121C /* libCorePlot-CocoaTouch.a */; };
@@ -70,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		433EF47B1B1BC6390087677F /* XLFormImageModSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormImageModSelectorCell.h; sourceTree = "<group>"; };
+		433EF47C1B1BC6390087677F /* XLFormImageModSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormImageModSelectorCell.m; sourceTree = "<group>"; };
 		435E2F111B079F5C0093C12F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		435E2F131B079F620093C12F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43630DC91B0772ED0027121C /* RankIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,6 +483,8 @@
 			children = (
 				437D247F1B160D8900BAFD81 /* ViewControllerModPoll.h */,
 				437D24801B160D8900BAFD81 /* ViewControllerModPoll.m */,
+				433EF47B1B1BC6390087677F /* XLFormImageModSelectorCell.h */,
+				433EF47C1B1BC6390087677F /* XLFormImageModSelectorCell.m */,
 			);
 			name = "Mod Poll";
 			sourceTree = "<group>";
@@ -773,6 +778,7 @@
 				43630E8E1B07755A0027121C /* Reachability.m in Sources */,
 				43630E851B07755A0027121C /* Font.m in Sources */,
 				43630E8B1B07755A0027121C /* SWTableViewCell.m in Sources */,
+				433EF47D1B1BC6390087677F /* XLFormImageModSelectorCell.m in Sources */,
 				6FF24B731B1B753B00970F0C /* Dissolvenza.m in Sources */,
 				43630E841B07755A0027121C /* File.m in Sources */,
 			);

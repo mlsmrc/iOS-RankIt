@@ -1,4 +1,5 @@
 #import "ViewControllerModPoll.h"
+#import "Util.h"
 
 @interface ViewControllerModPoll ()
 
@@ -30,6 +31,7 @@ XLFormDescriptor *mFormDescriptor;
 @implementation ViewControllerModPoll
 @synthesize p,candidates;
 
+/*
 - (instancetype) initWithCoder:(NSCoder *)coder {
     
     self = [super initWithCoder:coder];
@@ -39,7 +41,7 @@ XLFormDescriptor *mFormDescriptor;
     
     return self;
     
-}
+}*/
 
 - (instancetype) init {
     
@@ -62,7 +64,7 @@ XLFormDescriptor *mFormDescriptor;
     [mForm addFormSection:mSection];
     
     /* Image Poll Row */
-    mRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageSelectorCellCustom];
+    mRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageModSelectorCellCustom];
     
     [mSection addFormRow:mRow];
     
@@ -92,8 +94,15 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Scadenza Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
-    mRow.value = p.deadline;
-    [mRow.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
+
+    
+    NSString * pDead = (NSString *) p.deadline;
+    
+    NSDateFormatter *DF = [Util getDateFormatter];
+    
+    mRow.value = [DF dateFromString:pDead];
+    
+    [mRow.cellConfigAtConfigure setObject:[DF dateFromString:pDead] forKey:@"minimumDate"];
 
     [mSection addFormRow:mRow];
     
