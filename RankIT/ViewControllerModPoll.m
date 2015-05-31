@@ -92,7 +92,7 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Scadenza Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
-    mRow.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    mRow.value = p.deadline;
     [mRow.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
 
     [mSection addFormRow:mRow];

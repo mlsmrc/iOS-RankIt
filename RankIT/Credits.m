@@ -10,6 +10,8 @@ NSDictionary *email;
 
     /* Array di flag che permette il corretto ricaricamento delle view principali */
     NSMutableArray *FLAGS;
+    
+    
 
 }
 
@@ -67,7 +69,7 @@ NSDictionary *email;
     XLFormRowDescriptor * row;
     
     /* Basic Information */
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"                               Ringraziamenti"];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
  
     /* Supervisione */
@@ -132,6 +134,8 @@ NSDictionary *email;
 
 /* Send Email Method */
 - (void) didTouchButton:(XLFormRowDescriptor *)sender {
+   
+    
     
     /* Destinatario */
     NSString *toEmail = [sender title];
@@ -142,7 +146,9 @@ NSDictionary *email;
     if([MFMailComposeViewController canSendMail]) {
         
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-        [mailer.mailComposeDelegate self];
+       // [mailer.mailComposeDelegate self];
+        
+        mailer.mailComposeDelegate = self;
         [mailer setSubject:@"RankIT feedback"];
         NSArray *toRecipients = [NSArray arrayWithObjects:destEmail,nil];
         [mailer setToRecipients:toRecipients];
@@ -161,8 +167,11 @@ NSDictionary *email;
         [alert show];
         
     }
+    
 
     [self deselectFormRow:sender];
+    
+  
 
 }
 
@@ -190,6 +199,9 @@ NSDictionary *email;
     
     /* Close the Mail Interface */
     [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    
+
     
 }
 
