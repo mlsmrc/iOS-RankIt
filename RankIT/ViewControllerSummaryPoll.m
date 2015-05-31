@@ -136,12 +136,12 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
     if(!modified) {
         
-        alert = [alert initWithTitle:@"Esito Aggiunta" message:(serverResult != (id)[NSNull null] ? addOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alert = [alert initWithTitle:@"Esito Aggiunta" message:(serverResult != nil ? addOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     
     }
     
     else
-        alert = [alert initWithTitle:@"Esito Modifica" message:(serverResult != (id)[NSNull null] ? modifiedOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alert = [alert initWithTitle:@"Esito Modifica" message:(serverResult != nil ? modifiedOk : SERVER_UNREACHABLE_2) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     
     [alert show];
     
@@ -156,22 +156,15 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* L'alert view conseguente ad una votazione effettuata */
     if(alertView.tag == 1) {
         
-        
-        if([title isEqualToString:@"Ok"] && serverResult != (id)[NSNull null] ) {
+        if([title isEqualToString:@"Ok"] && serverResult != nil) {
             
-             [FLAGS removeAllObjects];
+            [FLAGS removeAllObjects];
             
-            if(self.isModified) {
-               
+            if(self.isModified)
                 [FLAGS addObject:@"MYPOLL"];
             
-            }
-            
-            else {
-                
+            else
                 [FLAGS addObject:@"HOME"];
-        
-            }
             
             /* Vai alla Home */
             [File writeOnReload:@"0" ofFlags:FLAGS];
@@ -220,8 +213,8 @@ NSString *const keyPollCandidates = @"textFieldRow";
     if(summaryResult[keyPollPrivate] != (id)[NSNull null])
         private = [summaryResult[keyPollPrivate] boolValue];
     
-
-    NSMutableArray *pollCand =  [self createCandidate:dataInput]; //creazione di un array di candidates del poll con CandName - CandDesc
+    /* Creazione di un array di candidates del poll con CandName - CandDesc */
+    NSMutableArray *pollCand =  [self createCandidate:dataInput];
     
     /* Creazione nuovo Poll */
     _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:(pollDesc == (id)[NSNull null] ? @"" : pollDesc) withDeadline:deadLine withPrivate:private withCandidates:pollCand];
