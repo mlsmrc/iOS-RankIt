@@ -321,6 +321,14 @@ NSString *const keyPollCandidates = @"textFieldRow";
     return @"";
 }
 
+/* Previene l'hide della keyboard sullo swipe */
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    
+    
+}
+
+
 /* Hiding done Bar */
 - (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
     

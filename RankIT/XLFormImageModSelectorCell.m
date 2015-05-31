@@ -1,11 +1,3 @@
-//
-//  XLFormImageModSelectorCell.m
-//  RankIT
-//
-//  Created by Giulio  Salierno on 01/06/15.
-//  Copyright (c) 2015 Giulio Salierno. All rights reserved.
-//
-
 #import "XLFormImageModSelectorCell.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIView+XLFormAdditions.h"
@@ -257,6 +249,4 @@ NSString *const FormImageSelectorCellImageRequest = @"imageRequest";
     
 }
 
-
 @end
-

@@ -1,5 +1,4 @@
 /* Permette di fare il segue con dissolvenza */
-
 #import "Dissolvenza.h"
 
 @implementation Dissolvenza

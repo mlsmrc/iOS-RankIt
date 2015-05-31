@@ -5,16 +5,13 @@
 #import "File.h"
 #import "Font.h"
 
-
 NSDictionary *email;
 
 @implementation Credits {
-
+    
     /* Array di flag che permette il corretto ricaricamento delle view principali */
     NSMutableArray *FLAGS;
     
-    
-
 }
 
 - (void) viewDidLoad:(BOOL)animated {
@@ -32,7 +29,7 @@ NSDictionary *email;
     [FLAGS addObject:@"MYPOLL"];
     [FLAGS addObject:@"VOTATI"];
     [File writeOnReload:@"0" ofFlags:FLAGS];
-
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -71,15 +68,15 @@ NSDictionary *email;
     XLFormRowDescriptor * row;
     
     /* Basic Information */
-    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"               Università di Roma 'La Sapienza'"];
     [form addFormSection:section];
- 
+    
     /* Supervisione */
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Supervisore"];
-
+    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Prof. Emanuele Panizzi"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     [form addFormSection:section];
@@ -89,13 +86,13 @@ NSDictionary *email;
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Vincenzo de Pinto"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Valentina Pizzo"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
@@ -106,38 +103,38 @@ NSDictionary *email;
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Marco Finocchi"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
-    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Marco Mulas"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Giulio Salierno"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"key" rowType:XLFormRowDescriptorTypeButton title:@"Lorenzo Spataro"];
     [row.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
-
+    
     row.action.formSelector = @selector(didTouchButton:);
     [section addFormRow:row];
-
+    
     [form addFormSection:section];
-
+    
     /*Version Control*/
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
-
+    
     XLFormRowDescriptor *infoRowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:@"kInfo" rowType:XLFormRowDescriptorTypeInfo];
     infoRowDescriptor.title = @"Versione";
+    [infoRowDescriptor.cellConfig setObject:[UIFont fontWithName:FONT_HOME size:18 ] forKey:@"textLabel.font"];
     infoRowDescriptor.value = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     [section addFormRow:infoRowDescriptor];
@@ -145,15 +142,13 @@ NSDictionary *email;
     
     /* Set email */
     [self setEmail];
-
-     self.form = form;
+    
+    self.form = form;
     
 }
 
 /* Send Email Method */
 - (void) didTouchButton:(XLFormRowDescriptor *)sender {
-   
-    
     
     /* Destinatario */
     NSString *toEmail = [sender title];
@@ -164,14 +159,13 @@ NSDictionary *email;
     if([MFMailComposeViewController canSendMail]) {
         
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-       // [mailer.mailComposeDelegate self];
         
         mailer.mailComposeDelegate = (id) self;
         [mailer setSubject:@"RankIT feedback"];
         NSArray *toRecipients = [NSArray arrayWithObjects:destEmail,nil];
         [mailer setToRecipients:toRecipients];
         [self presentModalViewController:mailer animated:YES];
-      
+        
     }
     
     else {
@@ -186,13 +180,10 @@ NSDictionary *email;
         
     }
     
-
+    
     [self deselectFormRow:sender];
     
-  
-
 }
-
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     
@@ -217,9 +208,6 @@ NSDictionary *email;
     
     /* Close the Mail Interface */
     [self dismissViewControllerAnimated:YES completion:NULL];
-    
-    
-
     
 }
 

@@ -31,18 +31,6 @@ XLFormDescriptor *mFormDescriptor;
 @implementation ViewControllerModPoll
 @synthesize p,candidates;
 
-/*
-- (instancetype) initWithCoder:(NSCoder *)coder {
-    
-    self = [super initWithCoder:coder];
-    
-    if(self)
-        [self Initialize];
-    
-    return self;
-    
-}*/
-
 - (instancetype) init {
     
     self = [super init];
@@ -65,7 +53,6 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Image Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageModSelectorCellCustom];
-    
     [mSection addFormRow:mRow];
     
     /* Aggiunto alla root section */
@@ -94,16 +81,12 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Scadenza Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
-
     
     NSString * pDead = (NSString *) p.deadline;
-    
     NSDateFormatter *DF = [Util getDateFormatter];
     
     mRow.value = [DF dateFromString:pDead];
-    
     [mRow.cellConfigAtConfigure setObject:[DF dateFromString:pDead] forKey:@"minimumDate"];
-
     [mSection addFormRow:mRow];
     
     /* isPrivate */
@@ -113,7 +96,7 @@ XLFormDescriptor *mFormDescriptor;
         mRow.value =@YES;
     
     [mSection addFormRow:mRow];
-    mSection.footerTitle =@"Nota: Rendendo il sondaggio privato non sarà visibile sulla Home di RankIT";
+    mSection.footerTitle =@"Nota: Se il sondaggio è privato non sarà visibile sulla Home di RankIT.";
     
     
     /* Sezione dedicata all'aggiunta di candidates dinamica */
@@ -279,7 +262,6 @@ XLFormDescriptor *mFormDescriptor;
         }
         
     }
-    
     
     return _result;
     

@@ -378,7 +378,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="izQ-ZY-Jxr">
-                                        <rect key="frame" x="50" y="44" width="220" height="251"/>
+                                        <rect key="frame" x="50" y="44" width="220" height="220"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -418,7 +418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emD-bM-KVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4216" y="381"/>
+            <point key="canvasLocation" x="4216" y="331"/>
         </scene>
         <!--Dettagli Poll-->
         <scene sceneID="Bua-UN-JOU">

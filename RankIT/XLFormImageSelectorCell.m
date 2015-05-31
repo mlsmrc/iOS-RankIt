@@ -83,7 +83,7 @@ NSString *const kFormImageSelectorCellImageRequest = @"imageRequest";
 - (void) formDescriptorCellDidSelectedWithFormController:(XLFormViewController *)controller {
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:self.rowDescriptor.selectorTitle delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"Cancella", nil)
+                                                    cancelButtonTitle:NSLocalizedString(@"Annulla", nil)
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:NSLocalizedString(@"Scegli una Foto", @"Choose Existing Photo"), NSLocalizedString(@"Scatta una Foto", @"Take a Picture"), nil];
     
@@ -137,6 +137,13 @@ NSString *const kFormImageSelectorCellImageRequest = @"imageRequest";
     self.rowDescriptor.value = image;
     self.imageView.image = image;
 
+}
+
+/* Previene l'hide della keyboard sullo swipe */
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    
+    
 }
 
 - (void) updateConstraints {

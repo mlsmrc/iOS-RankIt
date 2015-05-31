@@ -1,11 +1,3 @@
-//
-//  XLFormImageModSelectorCell.h
-//  RankIT
-//
-//  Created by Giulio  Salierno on 01/06/15.
-//  Copyright (c) 2015 Giulio Salierno. All rights reserved.
-//
-
 #import "XLFormBaseCell.h"
 
 @interface XLFormImageModSelectorCell : XLFormBaseCell

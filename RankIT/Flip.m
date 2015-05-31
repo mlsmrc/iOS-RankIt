@@ -1,5 +1,4 @@
 /* Permette di fare il segue con il flip da sinistra */
-
 #import "Flip.h"
 
 @implementation Flip

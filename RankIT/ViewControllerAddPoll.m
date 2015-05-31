@@ -276,8 +276,9 @@ XLFormSectionDescriptor *multivaluedSection;
     
 }
 
-/* previene l'hide della keyboard sullo swipe */
+/* Previene l'hide della keyboard sullo swipe */
 - (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
     
 
 }
