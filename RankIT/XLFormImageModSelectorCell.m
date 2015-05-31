@@ -55,7 +55,7 @@ NSString *const FormImageSelectorCellImageRequest = @"imageRequest";
     [self.contentView addSubview:self.textLabel];
     [self addLayoutConstraints];
     [self.textLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:0];
-    [self setDefaultImage:[UIImage imageNamed:@"PlaceholderimageCell"]];
+    [self setDefaultImage:[UIImage imageNamed:@"PlaceholderImageCell"]];
     
 }
 
