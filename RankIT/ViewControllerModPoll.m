@@ -61,12 +61,12 @@ XLFormDescriptor *mFormDescriptor;
     
     /* Nome Poll Row */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollName rowType:XLFormRowDescriptorTypeText];
-    [mRow.cellConfigAtConfigure setObject:@"Titolo" forKey:@"textField.placeholder"];
+    [mRow.cellConfigAtConfigure setObject:@"Titolo (obbligatorio)" forKey:@"textField.placeholder"];
     mRow.value = p.pollName;
     mRow.required = YES;
     
-    /* Binding regex validazione input */
-    [mRow addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"At least 6, max 21 characters" regex:@".{6,21}$"]];
+    /* Binding regex validazione input (1-21 caratteri) */
+    [mRow addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"" regex:@".{1,}$"]];
     [mSection addFormRow:mRow];
     
     /* Aggiunto alla root section */
@@ -98,13 +98,12 @@ XLFormDescriptor *mFormDescriptor;
     [mSection addFormRow:mRow];
     mSection.footerTitle =@"Nota: Se il sondaggio è privato non sarà visibile sulla Home di RankIT.";
     
-    
     /* Sezione dedicata all'aggiunta di candidates dinamica */
-    mMultivaluedSection = [XLFormSectionDescriptor  formSectionWithTitle:@"Candidates"
+    mMultivaluedSection = [XLFormSectionDescriptor  formSectionWithTitle:@"Candidati (Minimo 3)"
                                                          sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
                                                       sectionInsertMode:XLFormSectionInsertModeButton];
     
-    mMultivaluedSection.multivaluedAddButton.title = @"Aggiungi una risposta";
+    mMultivaluedSection.multivaluedAddButton.title = @"Aggiungi un candidato";
     
     /* Set up the row template */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollCandidates rowType:XLFormRowDescriptorTypeText];
@@ -115,7 +114,7 @@ XLFormDescriptor *mFormDescriptor;
     for(NSString *cand in candidates) {
     
         mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollCandidates rowType:XLFormRowDescriptorTypeText];
-        [[mRow cellConfig] setObject:@"Risposta" forKey:@"textField.placeholder"];
+        [[mRow cellConfig] setObject:@"Candidato" forKey:@"textField.placeholder"];
     
         mRow.value = [[NSString alloc] initWithFormat:@"%@", cand] ;
         
@@ -127,8 +126,18 @@ XLFormDescriptor *mFormDescriptor;
         
     }
     
-        self.form = mForm;
-        return [super initWithForm:mForm];
+    /* Se avevamo già inserito 5 candidati disabilitiamo l'add */
+    if(mMultivaluedSection.formRows.count > 5) {
+        
+        /* Change properties */
+        mMultivaluedSection.multivaluedAddButton.title = @"Candidati completati";
+        mMultivaluedSection.multivaluedAddButton.disabled = @YES;
+        
+    }
+        
+    self.form = mForm;
+    
+    return [super initWithForm:mForm];
     
 }
 
@@ -137,12 +146,12 @@ XLFormDescriptor *mFormDescriptor;
     
     [super formRowHasBeenAdded:formRow atIndexPath:indexPath];
     
-    /* Se abbiamo aggiunto 5 righe disabilitiamo l'add */
-    if(mMultivaluedSection.formRows.count == 6) {
+    /* Se abbiamo aggiunto 5 candidati disabilitiamo l'add */
+    if(mMultivaluedSection.formRows.count > 5) {
         
         /* Change properties */
         mMultivaluedSection.multivaluedAddButton.title = @"Candidati completati";
-        mMultivaluedSection.multivaluedAddButton.disabled=@YES;
+        mMultivaluedSection.multivaluedAddButton.disabled = @YES;
         
         /* refresh view */;
         [super reloadFormRow:mMultivaluedSection.multivaluedAddButton ];
@@ -156,12 +165,12 @@ XLFormDescriptor *mFormDescriptor;
     
     [super formRowHasBeenRemoved:formRow atIndexPath:indexPath];
     
-    /* Se il numero di candidates residui è < 4 riabilitiamo l'add */
+    /* Se il numero di candidati è < 5 riabilitiamo l'add */
     if(mMultivaluedSection.formRows.count < 6) {
         
         /* Changing properties */
         mMultivaluedSection.multivaluedAddButton.title = @"Aggiungi un candidato";
-        mMultivaluedSection.multivaluedAddButton.disabled=@NO;
+        mMultivaluedSection.multivaluedAddButton.disabled = @NO;
         
         /* refresh view */;
         [super reloadFormRow:mMultivaluedSection.multivaluedAddButton];
@@ -187,7 +196,9 @@ XLFormDescriptor *mFormDescriptor;
             cell.backgroundColor = [UIColor redColor];
             
             [UIView animateWithDuration:0.3 animations:^{
+                
                 cell.backgroundColor = [UIColor whiteColor];
+            
             }];
             
             isValidName = false;
@@ -334,9 +345,9 @@ XLFormDescriptor *mFormDescriptor;
         
     }
     
-    else if([self getCandidatesSize ] <= 2) {
+    else {
         
-        [self notEnoughCandidateAlert];
+        [self WrongInputAlert];
         return NO;
         
     }
@@ -345,11 +356,11 @@ XLFormDescriptor *mFormDescriptor;
     
 }
 
-/* Alert Box not enough candidates */
-- (void) notEnoughCandidateAlert {
+/* Alert Box input errato */
+- (void) WrongInputAlert {
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                 message:@"Devi aggiungere almeno 3 risposte per modificare il sondaggio"
+                                                 message:@"Non stai rispettando i parametri di input richiesti!"
                                                 delegate:self
                                        cancelButtonTitle:@"Ok"
                                        otherButtonTitles:nil];

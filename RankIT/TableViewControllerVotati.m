@@ -139,6 +139,8 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
+    [super viewDidAppear:animated];
+    
     if(FLAG_VOTATI == 0) {
         
         /* Download iniziale di tutti i poll votati */
@@ -150,6 +152,7 @@
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
         [spinner stopAnimating];
+        [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
         [self.tableView setHidden:NO];
         
     }

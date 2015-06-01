@@ -58,6 +58,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 - (void) viewDidLoad {
    
     [super viewDidLoad];
+    
     FLAGS = [[NSMutableArray alloc]init];
     
     /* Setta la spaziatura per i voti corretta per ogni IPhone */
@@ -138,6 +139,8 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 
 - (void) viewDidAppear:(BOOL)animated {
     
+    [super viewDidAppear:animated];
+    
     if(FLAG_MYPOLL == 0) {
         
         /* Download iniziale di tutti i poll */
@@ -149,6 +152,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
         [spinner stopAnimating];
+        [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
         [self.tableView setHidden:NO];
         [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
         

@@ -56,7 +56,6 @@ XLFormSectionDescriptor *multivaluedSection;
     
     /* Image Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"" rowType:XLFormImageSelectorCellCustom];
-
     [section addFormRow:row];
     
     /* Aggiunto alla root section */
@@ -65,11 +64,11 @@ XLFormSectionDescriptor *multivaluedSection;
     
     /* Nome Poll Row */
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollName rowType:XLFormRowDescriptorTypeText];
-    [row.cellConfigAtConfigure setObject:@"Titolo" forKey:@"textField.placeholder"];
+    [row.cellConfigAtConfigure setObject:@"Titolo (obbligatorio)" forKey:@"textField.placeholder"];
     row.required = YES;
     
-    /* Binding regex validazione input */
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"At least 1, max 21 characters" regex:@".{1,21}$"]];
+    /* Binding regex validazione input (1-21 caratteri) */
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"" regex:@".{1,}$"]];
     [section addFormRow:row];
     
     /* Aggiunto alla root section */
@@ -95,7 +94,7 @@ XLFormSectionDescriptor *multivaluedSection;
     section.footerTitle =@"Nota: Se il sondaggio è privato non sarà visibile sulla Home di RankIT.";
     
     /* Sezione dedicata all'aggiunta di candidates dinamica */
-    multivaluedSection = [XLFormSectionDescriptor  formSectionWithTitle:@"Candidati"
+    multivaluedSection = [XLFormSectionDescriptor  formSectionWithTitle:@"Candidati (Minimo 3)"
                                              sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
                                              sectionInsertMode:XLFormSectionInsertModeButton];
     
@@ -111,7 +110,6 @@ XLFormSectionDescriptor *multivaluedSection;
     multivaluedSection.multivaluedRowTemplate = row;
     [form addFormSection:multivaluedSection];
     
-    
     self.form = form;
     
     return [super initWithForm:form];
@@ -121,10 +119,11 @@ XLFormSectionDescriptor *multivaluedSection;
 /* Override dell'handler per la gestione della aggiunta delle righe rappresentanti candidates imponendo vincoli */
 - (void) formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath {
     
+    [formRow addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"At least 1, max 21 characters" regex:@".{1,21}$"]];
     [super formRowHasBeenAdded:formRow atIndexPath:indexPath];
     
-    /* Se abbiamo aggiunto 5 righe disabilitiamo l'add */
-    if(multivaluedSection.formRows.count == 6) {
+    /* Se abbiamo aggiunto 5 candidati disabilitiamo l'add */
+    if(multivaluedSection.formRows.count > 5) {
         
         /* Change properties */
         multivaluedSection.multivaluedAddButton.title = @"Candidati Completati";
@@ -142,7 +141,7 @@ XLFormSectionDescriptor *multivaluedSection;
     
     [super formRowHasBeenRemoved:formRow atIndexPath:indexPath];
 
-    /* Se il numero di candidates residui è < 4 riabilitiamo l'add */
+    /* Se il numero di candidati è < 5 riabilitiamo l'add */
     if(multivaluedSection.formRows.count < 6) {
         
         /* Changing properties */
@@ -172,8 +171,10 @@ XLFormSectionDescriptor *multivaluedSection;
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             cell.backgroundColor = [UIColor redColor];
             
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:.3 animations:^{
+                
                 cell.backgroundColor = [UIColor whiteColor];
+                
             }];
             
             isValidName = false;
@@ -193,7 +194,7 @@ XLFormSectionDescriptor *multivaluedSection;
     animation.keyPath = @"position.x";
     animation.values =  @[ @0, @20, @-20, @10, @0];
     animation.keyTimes = @[@0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1];
-    animation.duration = 0.3;
+    animation.duration = .3;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animation.additive = YES;
     [cell.layer addAnimation:animation forKey:@"shake"];
@@ -244,12 +245,12 @@ XLFormSectionDescriptor *multivaluedSection;
     
     int candidateCount = 0;
     
-    for(XLFormSectionDescriptor * section in self.form.formSections) {
+    for(XLFormSectionDescriptor *section in self.form.formSections) {
         
         /* Se è la section dedicata all'aggiunta dei candidates */
         if(section.isMultivaluedSection) {
             
-            for(XLFormRowDescriptor * row in section.formRows) {
+            for(XLFormRowDescriptor *row in section.formRows) {
                 
                 if(row.value)
                     candidateCount++;
@@ -310,22 +311,22 @@ XLFormSectionDescriptor *multivaluedSection;
         
     }
     
-    else if([self getCandidatesSize ] <= 2) {
+    else {
         
-        [self notEnoughCandidateAlert];
+        [self WrongInputAlert];
         return NO;
-    
+        
     }
     
     return NO;
 
 }
 
-/* Alert Box not enough candidate */
-- (void) notEnoughCandidateAlert {
+/* Alert Box input errato */
+- (void) WrongInputAlert {
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                 message:@"Devi aggiungere almeno 3 candidati per creare un nuovo sondaggio."
+                                                 message:@"Non stai rispettando i parametri di input richiesti!"
                                                 delegate:self
                                        cancelButtonTitle:@"Ok"
                                        otherButtonTitles:nil];
