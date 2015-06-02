@@ -152,9 +152,8 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
         [spinner stopAnimating];
-        [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
+        [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
         [self.tableView setHidden:NO];
-        [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
         
     }
     
@@ -761,7 +760,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 
                         /* Nel caso in cui non fosse installato */
                         UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                         [alertError show];
                         
                     }
@@ -780,7 +779,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 
                         /* Nel caso in cui non fosse installato */
                         UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                         [alertError show];
                         
                     }
@@ -799,7 +798,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 
                         /* Nel caso in cui non fosse installato */
                         UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                         [alertError show];
                         
                     }
@@ -818,7 +817,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
 
                         /* Nel caso in cui non fosse installato */
                         UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                         [alertError show];
                         
                     }
@@ -837,7 +836,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                         
                         /* Nel caso in cui non fosse installato */
                         UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                         [alertError show];
                         
                     }

@@ -79,14 +79,21 @@ XLFormDescriptor *mFormDescriptor;
     mRow.value = p.pollDescription;
     [mSection addFormRow:mRow];
     
-    /* Scadenza Poll Row */
+    /* Scadenza Poll Row (Se il sondaggio fosse scaduto, spostiamo la data di default a "domani") */
     mRow = [XLFormRowDescriptor formRowDescriptorWithTag:TPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     
-    NSString * pDead = (NSString *) p.deadline;
-    NSDateFormatter *DF = [Util getDateFormatter];
+    if([Util compareDate:[[NSDate alloc]init] WithDate:p.deadline]==1)
+        mRow.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
     
-    mRow.value = [DF dateFromString:pDead];
-    [mRow.cellConfigAtConfigure setObject:[DF dateFromString:pDead] forKey:@"minimumDate"];
+    else {
+        
+        NSString * pDead = (NSString *) p.deadline;
+        NSDateFormatter *DF = [Util getDateFormatter];
+        mRow.value = [DF dateFromString:pDead];
+        
+    }
+    
+    [mRow.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
     [mSection addFormRow:mRow];
     
     /* isPrivate */
@@ -362,8 +369,8 @@ XLFormDescriptor *mFormDescriptor;
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
                                                  message:@"Non stai rispettando i parametri di input richiesti!"
                                                 delegate:self
-                                       cancelButtonTitle:@"Ok"
-                                       otherButtonTitles:nil];
+                                       cancelButtonTitle:nil
+                                       otherButtonTitles:@"Ok",nil];
     
     
     [av show];

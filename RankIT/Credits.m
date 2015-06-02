@@ -35,6 +35,7 @@ NSDictionary *email;
 - (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
+    [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
     
 }

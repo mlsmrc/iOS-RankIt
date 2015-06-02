@@ -85,7 +85,6 @@ XLFormSectionDescriptor *multivaluedSection;
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kPollDeadLine rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Scadenza"];
     row.value = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
     [row.cellConfigAtConfigure setObject:[NSDate new] forKey:@"minimumDate"];
-    
     [section addFormRow:row];
     
     /* isPrivate */
@@ -328,8 +327,8 @@ XLFormSectionDescriptor *multivaluedSection;
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
                                                  message:@"Non stai rispettando i parametri di input richiesti!"
                                                 delegate:self
-                                       cancelButtonTitle:@"Ok"
-                                       otherButtonTitles:nil];
+                                       cancelButtonTitle:nil
+                                       otherButtonTitles:@"Ok",nil];
     
     
     [av show];

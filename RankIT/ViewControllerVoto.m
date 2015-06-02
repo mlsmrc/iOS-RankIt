@@ -180,10 +180,10 @@
         alert.tag = VOTO_OK;
         
         if(FLAG_ALREADY_VOTES==1 && poll.votes>0)
-            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!\nIl tuo voto è stato sovrascritto al precedente." : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!\nIl tuo voto è stato sovrascritto al precedente." : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok",nil];
         
         else
-            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alert = [alert initWithTitle:@"Esito Votazione" message:(resultConnection == true ? @"Votazione effettuata con successo!" : TIMEOUT) delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok",nil];
         
         [alert show];
     

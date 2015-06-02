@@ -188,7 +188,7 @@
     
         /* Si ferma l'animazione dello spinner e riappare la table view */
         [spinner stopAnimating];
-        [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
+        [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
         [self.tableView setHidden:NO];
         
     }
