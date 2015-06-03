@@ -111,11 +111,8 @@ float IPHONE_6Plus_HEIGHT = 736;
                     if(minuteFirst < minuteSecond)
                         return -1;
                     
-                    else if(minuteFirst > minuteSecond)
+                    else if(minuteFirst >= minuteSecond)
                         return 1;
-                    
-                    else
-                        return 0;
                     
                 }
                 
@@ -124,6 +121,8 @@ float IPHONE_6Plus_HEIGHT = 736;
         }
         
     }
+    
+    return -1;
     
 }
 
@@ -148,49 +147,46 @@ float IPHONE_6Plus_HEIGHT = 736;
     
     NSArray *monthStrings = [[NSArray alloc] initWithObjects:@"Gennaio", @"Febbraio", @"Marzo", @"Aprile", @"Maggio", @"Giugno", @"Luglio", @"Agosto", @"Settembre", @"Ottobre", @"Novembre", @"Dicembre", nil];
     
-    NSString *friendlyDate=@"";
+    NSString *friendlyDate = @"";
     
     if(yearToDay>yearData)
-        friendlyDate=@"Sondaggio scaduto!";
+        friendlyDate = @"Sondaggio scaduto!";
     
     else if(yearToDay<yearData)
-        friendlyDate=[NSString stringWithFormat:@"Scadrà nel %d",yearData];
+        friendlyDate = [NSString stringWithFormat:@"Scadrà nel %d",yearData];
     
     else {
         
         if(monthToDay < monthData)
-            friendlyDate=[NSString stringWithFormat:@"Scadrà a %@",monthStrings[monthData-1]];
+            friendlyDate = [NSString stringWithFormat:@"Scadrà a %@",monthStrings[monthData-1]];
         
         else if(monthToDay > monthData)
-            friendlyDate=@"Sondaggio scaduto!";
+            friendlyDate = @"Sondaggio scaduto!";
         
         else {
             
             if(dayToDay < dayData)
-                friendlyDate=[NSString stringWithFormat:@"Scadrà il %d",dayData];
+                friendlyDate = [NSString stringWithFormat:@"Scadrà il %d",dayData];
             
             else if(dayToDay > dayData)
-                friendlyDate=@"Sondaggio scaduto!";
+                friendlyDate = @"Sondaggio scaduto!";
             
             else {
                 
                 if(hourToDay < hourData)
-                    friendlyDate=[NSString stringWithFormat:@"Scadrà alle %d circa",hourData];
+                    friendlyDate = [NSString stringWithFormat:@"Scadrà alle %d circa",hourData];
                 
                 else if(hourToDay > hourData)
-                    friendlyDate=@"Sondaggio scaduto!";
+                    friendlyDate = @"Sondaggio scaduto!";
                 
                 else {
                     
                     if(minuteToDay < minuteData)
                         
-                        friendlyDate=[NSString stringWithFormat:@"Scadrà fra %d minuti",(minuteData-minuteToDay)];
+                        friendlyDate = [NSString stringWithFormat:@"Scadrà fra %d minuti",(minuteData-minuteToDay)];
                     
-                    else if(minuteToDay > minuteData)
-                        friendlyDate=@"Sondaggio scaduto!";
-                    
-                    else
-                        friendlyDate=@"In scadenza";
+                    else if(minuteToDay >= minuteData)
+                        friendlyDate = @"Sondaggio scaduto!";
                 
                 }
                 

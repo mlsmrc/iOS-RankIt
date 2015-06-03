@@ -200,16 +200,16 @@ XLFormSectionDescriptor *multivaluedSection;
     
 }
 
-/* Il metodo  si occupa di estrarre i dati dal form */
+/* Il metodo si occupa di estrarre i dati dal form */
 - (NSMutableDictionary *) getFormValues {
     
-    _result =   [NSMutableDictionary dictionary];
+    _result = [NSMutableDictionary dictionary];
 
-    for(XLFormSectionDescriptor * section in self.form.formSections) {
+    for(XLFormSectionDescriptor *section in self.form.formSections) {
         
         if(!section.isMultivaluedSection) {
             
-            for(XLFormRowDescriptor * row in section.formRows) {
+            for(XLFormRowDescriptor *row in section.formRows) {
                 
                 if(row.tag && ![row.tag isEqualToString:@""])
                     [_result setObject:(row.value ?: [NSNull null]) forKey:row.tag];
@@ -220,9 +220,9 @@ XLFormSectionDescriptor *multivaluedSection;
         
         else {
             
-            NSMutableArray * multiValuedValuesArray = [NSMutableArray new];
+            NSMutableArray *multiValuedValuesArray = [NSMutableArray new];
             
-            for(XLFormRowDescriptor * row in section.formRows) {
+            for(XLFormRowDescriptor *row in section.formRows) {
                 
                 if(row.value)
                     [multiValuedValuesArray addObject:row.value];
@@ -324,15 +324,21 @@ XLFormSectionDescriptor *multivaluedSection;
 /* Alert Box input errato */
 - (void) WrongInputAlert {
     
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                 message:@"Non stai rispettando i parametri di input richiesti!"
-                                                delegate:self
-                                       cancelButtonTitle:nil
-                                       otherButtonTitles:@"Ok",nil];
+    UIAlertController *AlertWrongInput = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Non stai rispettando i parametri di input richiesti!" preferredStyle:UIAlertControllerStyleActionSheet];
     
+    /* Uscita dell'alert */
+    [self presentViewController:AlertWrongInput animated:YES completion:nil];
     
-    [av show];
-
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        /* Rientro dell'alert */
+        [AlertWrongInput dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+    [AlertWrongInput addAction:ok];
+    [self.tableView reloadData];
+    
 }
 
 @end

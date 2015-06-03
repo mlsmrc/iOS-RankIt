@@ -260,7 +260,6 @@
     
     NSString *value;
     
-    
     /* Scorre il dizionario e recupera i dettagli necessari */
     for(id key in allPublicPolls) {
         
@@ -476,15 +475,14 @@
         NSIndexPath *indexPath = nil;
         Poll *p = nil;
         
-        
         NSString *parameterID = [File readParameterID];
          
          if (parameterID!=nil) {
+             
              ConnectionToServer *conn = [[ConnectionToServer alloc]init];
              [conn scaricaPollsWithPollId:parameterID andUserId:@"" andStart:@""];
              NSMutableDictionary *result = [conn getDizionarioPolls];
              NSString *value = [result valueForKey:parameterID];
-         
          
              p = [[Poll alloc]initPollWithPollID:[[value valueForKey:@"pollid"] intValue]
                                         withName:[value valueForKey:@"pollname"]
@@ -497,30 +495,30 @@
                                   withCandidates:nil
                                        withVotes:[[value valueForKey:@"votes"] intValue]];
          
-         
              [File clearParameterID];
              
          }
-        else
-        {
+        
+        else {
+            
             if(self.searchDisplayController.active) {
             
-            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            p = [searchResults objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            
+                indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+                p = [searchResults objectAtIndex:indexPath.row];
+                backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(SEARCH,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+                self.navigationItem.backBarButtonItem = backButton;
             
             }
         
             else {
             
-            indexPath = [self.tableView indexPathForSelectedRow];
-            p = [allPublicPollsDetails objectAtIndex:indexPath.row];
-            backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_HOME,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
+                indexPath = [self.tableView indexPathForSelectedRow];
+                p = [allPublicPollsDetails objectAtIndex:indexPath.row];
+                backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(BACK_TO_HOME,returnbuttontitle) style: UIBarButtonItemStyleBordered target:nil action:nil];
+                self.navigationItem.backBarButtonItem = backButton;
             
             }
+            
         }
         
         ViewControllerDettagli *destViewController = segue.destinationViewController;

@@ -444,31 +444,6 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
             
             if(p.votes>0) {
                 
-                /* Controllo connessione */
-                Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-                
-                if([networkReachability currentReachabilityStatus] == NotReachable) {
-                    
-                    AlertReset = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE_2 preferredStyle:UIAlertControllerStyleActionSheet];
-                    
-                    ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                        
-                        /* Rientro dell'alert */
-                        [AlertReset dismissViewControllerAnimated:YES completion:nil];
-                        
-                    }];
-                    
-                    /* Aggiunta pulsanti all'alert */
-                    [AlertReset addAction:ok];
-                    
-                    /* Uscita dell'alert */
-                    [self presentViewController:AlertReset animated:YES completion:nil];
-                    
-                    [cell hideUtilityButtonsAnimated:YES];
-                    break;
-                    
-                }
-                
                 AlertReset = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Sei sicuro di voler azzerare i voti?" preferredStyle:UIAlertControllerStyleActionSheet];
                 
             }
@@ -503,6 +478,8 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                 
                 if([Conn resetPollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:[File getUDID]]) {
                     
+                    [AlertReset dismissViewControllerAnimated:YES completion:nil];
+                    
                     /* Se c'è connessione, resetta i voti del poll */
                     [p setVotes:0];
                     [allMyPolls setValue:p forKey:[NSString stringWithFormat:@"%ld",(long)index]];
@@ -516,19 +493,13 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                 else {
                     
                     /* Altrimenti notifica l'accaduto */
-                    UIAlertController *OkAlertReset = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE_2 preferredStyle:UIAlertControllerStyleActionSheet];
-                    
-                    /* Uscita dell'alert */
-                    [self presentViewController:OkAlertReset animated:YES completion:nil];
-                    
-                    UIAlertAction *okreset = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                        
-                        /* Rientro dell'alert */
-                        [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
-                        
-                    }];
-                    
-                    [OkAlertReset addAction:okreset];
+                    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Errore!"
+                    message:SERVER_UNREACHABLE_2
+                    delegate:self
+                    cancelButtonTitle:nil
+                    otherButtonTitles:@"Ok",nil];
+                     
+                    [av show];
                     
                 }
                 
@@ -580,7 +551,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                 AlertDelete = [UIAlertController alertControllerWithTitle:@"Impossibile eliminare!" message:@"Questo sondaggio possiede dei voti.\nResettalo prima di eliminarlo." preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 /* Creazione pulsanti */
-                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                     
                     /* Rientro dell'alert */
                     [AlertDelete dismissViewControllerAnimated:YES completion:nil];
@@ -594,49 +565,19 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
             
             else {
                 
-                /* Controllo connessione */
-                Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-                
-                if([networkReachability currentReachabilityStatus] == NotReachable) {
-                    
-                    AlertDelete= [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE_2 preferredStyle:UIAlertControllerStyleActionSheet];
-                    
-                    ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                        
-                        /* Rientro dell'alert */
-                        [AlertDelete dismissViewControllerAnimated:YES completion:nil];
-                        
-                    }];
-                    
-                    /* Aggiunta pulsanti all'alert */
-                    [AlertDelete addAction:ok];
-                    
-                    /* Uscita dell'alert */
-                    [self presentViewController:AlertDelete animated:YES completion:nil];
-                    
-                    [cell hideUtilityButtonsAnimated:YES];
-                    break;
-                    
-                }
-                
                 /* Alert eliminazione */
                 AlertDelete = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Sei sicuro di voler eliminare il sondaggio?" preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 /* Creazione pulsanti */
                 UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Elimina" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
                     
-                    /* Controllo connessione */
-                    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+                    ConnectionToServer *conn = [[ConnectionToServer alloc]init];
                     
-                    if(![networkReachability currentReachabilityStatus] == NotReachable) {
-                        
-                        /* Se c'è connessione, elimina il poll e ricarica la schermata */
-                        ConnectionToServer *conn = [[ConnectionToServer alloc]init];
-                        [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:[File getUDID]];
-                        [AlertDelete dismissViewControllerAnimated:YES completion:nil];
+                    if([conn deletePollWithPollId:[NSString stringWithFormat:@"%d",p.pollId] AndUserID:[File getUDID]]) {
                         
                         /* Dopo l'eliminazione è utile ricaricare i vari contenuti */
                         [self DownloadPolls];
+                        [AlertDelete dismissViewControllerAnimated:YES completion:nil];
                         searchResults = nil;
                         searchResults = [[NSArray alloc]init];
                         [self.searchDisplayController.searchResultsTableView reloadData];
@@ -646,25 +587,19 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                     else {
                         
                         /* Altrimenti notifica l'accaduto */
-                        UIAlertController *OkAlertReset = [UIAlertController alertControllerWithTitle:@"Errore!" message:SERVER_UNREACHABLE_2 preferredStyle:UIAlertControllerStyleActionSheet];
+                        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Errore!"
+                                                                     message:SERVER_UNREACHABLE_2
+                                                                    delegate:self
+                                                           cancelButtonTitle:nil
+                                                           otherButtonTitles:@"Ok",nil];
                         
-                        /* Uscita dell'alert */
-                        [self presentViewController:OkAlertReset animated:YES completion:nil];
-                        
-                        UIAlertAction *okreset = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                            
-                            /* Rientro dell'alert */
-                            [OkAlertReset dismissViewControllerAnimated:YES completion:nil];
-                            
-                        }];
-                        
-                        [OkAlertReset addAction:okreset];
+                        [av show];
                         
                     }
                     
                 }];
                 
-                UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Annulla" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
                     
                     /* Rientro dell'alert */
                     [AlertDelete dismissViewControllerAnimated:YES completion:nil];
@@ -720,8 +655,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
             else
                 p = [allMyPollsDetails objectAtIndex:cellIndexPath.row];
             
-            
-            /* Copia il link (TODO: generarlo correttamente, ora è una prova.) */
+            /* Copia il link */
             pasteboard.string = [LINK_TO_SEND stringByReplacingOccurrencesOfString:@"_ID_"
                                                                         withString:[NSString stringWithFormat:@"%d",p.pollId]];
             
@@ -759,9 +693,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                         pasteboard.string = oldClipboardContent;
 
                         /* Nel caso in cui non fosse installato */
-                        UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                        [alertError show];
+                        [self MissingAppAlert];
                         
                     }
                     
@@ -778,9 +710,8 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                         pasteboard.string = oldClipboardContent;
 
                         /* Nel caso in cui non fosse installato */
-                        UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                        [alertError show];
+                        [self MissingAppAlert];
+
                         
                     }
                     
@@ -797,9 +728,8 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                         pasteboard.string = oldClipboardContent;
 
                         /* Nel caso in cui non fosse installato */
-                        UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                        [alertError show];
+                        [self MissingAppAlert];
+
                         
                     }
                     
@@ -816,9 +746,8 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                         pasteboard.string = oldClipboardContent;
 
                         /* Nel caso in cui non fosse installato */
-                        UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                        [alertError show];
+                        [self MissingAppAlert];
+
                         
                     }
                     
@@ -835,9 +764,7 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
                         pasteboard.string = oldClipboardContent;
                         
                         /* Nel caso in cui non fosse installato */
-                        UIAlertView *alertError = [UIAlertView alloc];
-                        alertError = [alertError initWithTitle:@"Attenzione" message:@"Operazione non disponibile!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                        [alertError show];
+                        [self MissingAppAlert];
                         
                     }
                     
@@ -964,6 +891,25 @@ NSString *LINK_TO_SEND = @"Vota _POLLNAME_ su RankIT:\n rankit://it.sapienzaapps
         [File writeOnReload:@"0" ofFlags:FLAGS];
         
     }
+    
+}
+
+/* Alert in caso di App Social non installata sul telefono */
+- (void) MissingAppAlert {
+    
+    UIAlertController *Alert = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Operazione non disponibile!" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    /* Uscita dell'alert */
+    [self presentViewController:Alert animated:YES completion:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        /* Rientro dell'alert */
+        [Alert dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+    [Alert addAction:ok];
     
 }
 

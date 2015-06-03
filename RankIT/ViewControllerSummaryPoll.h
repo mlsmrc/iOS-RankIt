@@ -10,7 +10,7 @@
 
 @interface ViewControllerSummaryPoll : XLFormViewController
 
- /* Conterrà i dati ottenuti dalla compilazione del form della view precedente */
+/* Conterrà i dati ottenuti dalla compilazione del form della view precedente */
 @property (strong,nonatomic) NSMutableDictionary *summaryResult;
 
 /* Conterra i dati ottenuti dalla compilazione del form della view attuale */

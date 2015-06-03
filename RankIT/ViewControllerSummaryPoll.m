@@ -4,6 +4,7 @@
 #import "XLFormImageModSelectorCell.h"
 #import "ConnectionToServer.h"
 #import "Candidate.h"
+#import "Util.h"
 #import "File.h"
 
 @implementation ViewControllerSummaryPoll {
@@ -15,10 +16,12 @@
     NSArray *candWithChar;
     NSString *serverResult;
     
-    
-    
     /* Array di flag che permette il corretto ricaricamento delle view principali */
     NSMutableArray *FLAGS;
+    
+    /* Utile per il controllo della deadline prima dell'invio del poll */
+    NSString *auxDeadline;
+    
 }
 
 @synthesize summaryResult,pollDescResult,isModified,oldCandidates,pollId;
@@ -43,12 +46,11 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* determiniamo se ci troviamo in una modifica o in una aggiunta */
     
     NSString *imagePic ;
+    
     if(isModified)
-    {
-        
         imagePic = XLFormImageModSelectorCellCustom;
-       
-    }else
+    
+    else
         imagePic = XLFormImageSelectorCellCustom;
     
     candWithChar = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
@@ -128,21 +130,29 @@ NSString *const keyPollCandidates = @"textFieldRow";
 - (IBAction) send:(id)sender {
     
     /* Recuperiamo i dati dal form */
-    NSMutableDictionary *formValues =  [self getFormValues];
+    NSMutableDictionary *formValues = [self getFormValues];
     
     /* Creiamo un nuovo poll */
     Poll *newPoll = [self createPoll:formValues];
     
-    serverResult =  [self postPoll:newPoll];
+    /* Ci assicuriamo che nel frattempo non sia già scaduto */
+    if([Util compareDate:[[NSDate alloc]init] WithDate:(NSDate*)auxDeadline]==1)
+        [self AlertDeadline];
     
-    [self connectionHandler:self.isModified];
+    else {
+    
+        /* Se tutto è andato a buon fine inviamo il server */
+        serverResult = [self postPoll:newPoll];
+        [self connectionHandler:self.isModified];
+        
+    }
     
 }
 
 - (void) connectionHandler:(BOOL) modified {
     
-    NSString *addOk =@"Sondaggio creato con successo!";
-    NSString *modifiedOk=@"Sondaggio modificato correttamente!";
+    NSString *addOk = @"Sondaggio creato con successo!";
+    NSString *modifiedOk = @"Sondaggio modificato correttamente!";
     
     /* Popup per voto sottomesso */
     UIAlertView *alert = [UIAlertView alloc];
@@ -193,12 +203,11 @@ NSString *const keyPollCandidates = @"textFieldRow";
 /* Il metodo  si occupa di estrarre i dati dal form */
 - (NSMutableDictionary *) getFormValues {
     
-    pollDescResult =   [NSMutableDictionary dictionary];
+    pollDescResult = [NSMutableDictionary dictionary];
     
     for(XLFormSectionDescriptor * section in self.form.formSections) {
         
         if(!section.isMultivaluedSection) {
-            
             
             for(XLFormRowDescriptor * row in section.formRows) {
                 
@@ -222,13 +231,15 @@ NSString *const keyPollCandidates = @"textFieldRow";
     NSString *pollName = summaryResult[keyPollName];
     NSString *pollDesc = summaryResult[keyPollDesc];
     NSDate *deadLine = summaryResult[keyPollDeadLine];
+    NSDateFormatter *DF = [Util getDateFormatter];
+    auxDeadline = [DF stringFromDate:summaryResult[keyPollDeadLine]];
     BOOL private = false;
     
     if(summaryResult[keyPollPrivate] != (id)[NSNull null])
         private = [summaryResult[keyPollPrivate] boolValue];
     
     /* Creazione di un array di candidates del poll con CandName - CandDesc */
-    NSMutableArray *pollCand =  [self createCandidate:dataInput];
+    NSMutableArray *pollCand = [self createCandidate:dataInput];
     
     /* Creazione nuovo Poll */
     _poll = [[Poll alloc] initPollWithUserID:[File getUDID] withName:pollName withDescription:(pollDesc == (id)[NSNull null] ? @"" : pollDesc) withDeadline:deadLine withPrivate:private withCandidates:pollCand];
@@ -328,7 +339,6 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
 }
 
-
 /* Hiding done Bar */
 - (UIView *) inputAccessoryViewForRowDescriptor:(XLFormRowDescriptor *)rowDescriptor {
     
@@ -341,6 +351,26 @@ NSString *const keyPollCandidates = @"textFieldRow";
     
     ConnectionToServer *conn = [[ConnectionToServer alloc] init];
     return [conn deletePollWithPollId:[NSString stringWithFormat:@"%d",pollid] AndUserID:[File getUDID]];
+    
+}
+
+/* Alert Box deadline errata */
+- (void) AlertDeadline {
+    
+    /* Altrimenti notifica l'accaduto */
+    UIAlertController *AlertDeadline = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Stai creando un sondaggio già scaduto!\nRincontrolla la data." preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    /* Uscita dell'alert */
+    [self presentViewController:AlertDeadline animated:YES completion:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        /* Rientro dell'alert */
+        [AlertDeadline dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+    [AlertDeadline addAction:ok];
     
 }
 

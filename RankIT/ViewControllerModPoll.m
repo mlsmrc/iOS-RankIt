@@ -366,14 +366,20 @@ XLFormDescriptor *mFormDescriptor;
 /* Alert Box input errato */
 - (void) WrongInputAlert {
     
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                 message:@"Non stai rispettando i parametri di input richiesti!"
-                                                delegate:self
-                                       cancelButtonTitle:nil
-                                       otherButtonTitles:@"Ok",nil];
+    UIAlertController *AlertWrongInput = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Non stai rispettando i parametri di input richiesti!" preferredStyle:UIAlertControllerStyleActionSheet];
     
+    /* Uscita dell'alert */
+    [self presentViewController:AlertWrongInput animated:YES completion:nil];
     
-    [av show];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        /* Rientro dell'alert */
+        [AlertWrongInput dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+    [AlertWrongInput addAction:ok];
+    [self.tableView reloadData];
     
 }
 

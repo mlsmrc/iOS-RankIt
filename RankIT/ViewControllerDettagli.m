@@ -447,7 +447,7 @@
     AlertEdit = [UIAlertController alertControllerWithTitle:@"Impossibile modificare!" message:@"Questo sondaggio possiede dei voti.\nResettalo prima di modificarlo." preferredStyle:UIAlertControllerStyleActionSheet];
     
     /* Creazione pulsanti */
-    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         
         /* Rientro dell'alert */
         [AlertEdit dismissViewControllerAnimated:YES completion:nil];
