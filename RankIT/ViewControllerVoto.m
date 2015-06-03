@@ -147,16 +147,10 @@
     if([VotesPListKeys containsObject:[NSString stringWithFormat:@"%d",poll.pollId]] && poll.votes>0)
         FLAG_ALREADY_VOTES = 1;
     
-    if([Util compareDate:[NSDate new] WithDate:poll.deadline]==1) {
+    /* Ci assicuriamo che nel frattempo il poll non sia scaduto */ 
+    if([Util compareDate:[NSDate new] WithDate:poll.deadline]==1)
+        [self AlertDeadline];
         
-        /* Popup per voto sottomesso */
-        UIAlertView *alert = [UIAlertView alloc];
-        alert.tag = VOTO_SCADUTO;
-        alert = [alert initWithTitle:@"Esito Votazione" message:@"Sondaggio scaduto!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        [alert show];
-    
-    }
-    
     else {
         
         ConnectionToServer *conn = [[ConnectionToServer alloc]init];
@@ -213,6 +207,26 @@
         [self.navigationController popToRootViewControllerAnimated:TRUE];
     
     }
+    
+}
+
+/* Alert Box sondaggio scaduto (durante la votazione) */
+- (void) AlertDeadline {
+    
+    /* Altrimenti notifica l'accaduto */
+    UIAlertController *AlertDeadline = [UIAlertController alertControllerWithTitle:@"Attenzione" message:@"Sondaggio scaduto!" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    /* Uscita dell'alert */
+    [self presentViewController:AlertDeadline animated:YES completion:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        /* Rientro dell'alert */
+        [AlertDeadline dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+    [AlertDeadline addAction:ok];
     
 }
 

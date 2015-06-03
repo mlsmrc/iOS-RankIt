@@ -135,7 +135,7 @@ NSString *const keyPollCandidates = @"textFieldRow";
     /* Creiamo un nuovo poll */
     Poll *newPoll = [self createPoll:formValues];
     
-    /* Ci assicuriamo che nel frattempo non sia già scaduto */
+    /* Ci assicuriamo che nel frattempo il poll non sia scaduto */
     if([Util compareDate:[[NSDate alloc]init] WithDate:(NSDate*)auxDeadline]==1)
         [self AlertDeadline];
     
