@@ -1,6 +1,6 @@
 # RankIT
 
-## An iOS application to create and share pools
+## An iOS application to create and share polls
 
 This repository was used to share and store the code of an iOS application that allows you to create and share custom polls.
 
